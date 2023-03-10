@@ -9,5 +9,4 @@ public class SulnaeeumApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(SulnaeeumApplication.class, args);
 	}
-
 }
