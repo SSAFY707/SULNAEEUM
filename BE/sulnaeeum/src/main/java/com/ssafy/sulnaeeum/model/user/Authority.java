@@ -1,4 +1,4 @@
-package com.ssafy.sulnaeeum.model.entity;
+package com.ssafy.sulnaeeum.model.user;
 
 import lombok.*;
 
@@ -17,6 +17,6 @@ import javax.persistence.Table;
 public class Authority {
 
     @Id
-    @Column(name = "authority_name", length = 50)
+    @Column(name = "authority_name", nullable = false)
     private String authorityName;
 }
