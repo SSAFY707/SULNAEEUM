@@ -1,4 +1,4 @@
-package com.ssafy.sulnaeeum.controller;
+package com.ssafy.sulnaeeum.controller.jubti;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api/jubti")
 @Slf4j
-@Tag(name = "Jubti", description = "주비티아이 API")
-public class Jubti {
+@Tag(name = "JubtiController", description = "주비티아이 API")
+public class JubtiController {
 
     @PutMapping()
     @Operation(summary = "테스트", description = "테스트용 메서드")
