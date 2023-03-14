@@ -29,7 +29,7 @@ public class User {
     private String provideId;
 
     @JsonIgnore
-    @Column(name = "activated")
+    @Column(name = "activated",columnDefinition = "TINYINT")
     private boolean activated;
 
 //    @Column(name="age",nullable = false)

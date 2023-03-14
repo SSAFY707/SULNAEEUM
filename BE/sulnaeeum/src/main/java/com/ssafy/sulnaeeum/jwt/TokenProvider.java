@@ -37,7 +37,7 @@ public class TokenProvider implements InitializingBean {
 
     // Bean 생성 후, key 값 설정하기 위한 메서드
     @Override
-    public void afterPropertiesSet() throws Exception {
+    public void afterPropertiesSet()  throws Exception {
         byte[] keyBytes = Decoders.BASE64.decode(secret);
         this.key = Keys.hmacShaKeyFor(keyBytes);
     }
