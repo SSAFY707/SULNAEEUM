@@ -10,10 +10,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-@Tag(name = "JubtiController", description = "주비티아이 API")
 @RestController
 @RequestMapping("/api/jubti")
 @Slf4j
+@Tag(name = "JubtiController", description = "주비티아이 API")
 public class JubtiController {
 
     private static final String SUCCESS = "success";
@@ -26,7 +26,6 @@ public class JubtiController {
     @PostMapping("/save")
     public ResponseEntity<String> saveResult(@RequestBody JubtiResultDto jubtiResultDto) {
         try {
-            System.out.println("호출됨 !!!!!!!");
             jubtiService.saveResult(jubtiResultDto);
             return new ResponseEntity<>(SUCCESS, HttpStatus.OK);
         } catch (Exception e) {
