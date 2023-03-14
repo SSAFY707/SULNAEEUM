@@ -12,49 +12,42 @@ import javax.persistence.*;
 @SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name="jubti_answer")
-public class JubtiAnswer {
+@Table(name="jubti_result")
+public class JubtiResult {
 
     @Id
     @GeneratedValue
-    @Column(name = "jubti_answer_id")
-    private int jubtiAnswerId; // auto_increment PK
+    @Column(nullable = false)
+    private int jubtiResultId; // auto_increment PK
 
-    @Column(length = 3)
+    @Column(length = 3, nullable = false)
     private String age; // 나이
 
-    @Column(length = 2)
+    @Column(length = 2, nullable = false)
     private String sex; // 성별
 
+    @Column(nullable = false)
     private int level; // 도수
 
+    @Column(nullable = false)
     private int tasteRefresh; // 청량감
 
+    @Column(nullable = false)
     private int tasteBody; // 바디감
 
+    @Column(nullable = false)
     private int tasteSour; // 신맛
 
+    @Column(nullable = false)
     private int tasteSweet; // 단맛
 
-    @Column(length = 10)
+    @Column(length = 10, nullable = false)
     private String dish; // 안주
 
-    @Column(name = "mbti_first", length = 1)
-    private String mbtiFirst; // E or I
-
-    @Column(name = "mbti_second", length = 1)
-    private String mbtiSecond; // N or S
-
-    @Column(name = "mbti_third", length = 1)
-    private String mbtiThird; // F or T
-
-    @Column(name = "mbti_fourth", length = 1)
-    private String mbtiFourth; // J or P
-
     // Entity -> DTO 변환
-    public JubtiAnswerDto toDto() {
-        return JubtiAnswerDto.builder()
-                .jubtiAnswerId(this.jubtiAnswerId)
+    public JubtiResultDto toDto() {
+        return JubtiResultDto.builder()
+                .jubtiResultId(this.jubtiResultId)
                 .age(this.age)
                 .sex(this.sex)
                 .level(this.level)
@@ -62,10 +55,6 @@ public class JubtiAnswer {
                 .tasteBody(this.tasteBody)
                 .tasteSour(this.tasteSour)
                 .tasteSweet(this.tasteSweet)
-                .dish(this.dish)
-                .mbtiFirst(this.mbtiFirst)
-                .mbtiSecond(this.mbtiSecond)
-                .mbtiThird(this.mbtiThird)
-                .mbtiFourth(this.mbtiFourth).build();
+                .dish(this.dish).build();
     }
 }

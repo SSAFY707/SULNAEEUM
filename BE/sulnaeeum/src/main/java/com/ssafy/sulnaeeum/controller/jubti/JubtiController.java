@@ -1,23 +1,36 @@
 package com.ssafy.sulnaeeum.controller.jubti;
 
+import com.ssafy.sulnaeeum.model.jubti.JubtiResultDto;
+import com.ssafy.sulnaeeum.model.jubti.JubtiService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+@Tag(name = "JubtiController", description = "주비티아이 API")
 @RestController
 @RequestMapping("/api/jubti")
 @Slf4j
-@Tag(name = "JubtiController", description = "주비티아이 API")
 public class JubtiController {
 
-    @PutMapping()
-    @Operation(summary = "테스트", description = "테스트용 메서드")
-    public ResponseEntity<Integer> test() {
-        return new ResponseEntity<>(1, HttpStatus.OK);
+    private static final String SUCCESS = "success";
+    private static final String FAIL = "fail";
+
+    @Autowired
+    JubtiService jubtiService;
+
+    @Operation(summary = "응답 저장", description = "한 사용자의 jubti 응답 결과를 DB에 저장 (데이터 수집)")
+    @PostMapping("/save")
+    public ResponseEntity<String> saveResult(@RequestBody JubtiResultDto jubtiResultDto) {
+        try {
+            System.out.println("호출됨 !!!!!!!");
+            jubtiService.saveResult(jubtiResultDto);
+            return new ResponseEntity<>(SUCCESS, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(FAIL, HttpStatus.OK);
+        }
     }
 }
