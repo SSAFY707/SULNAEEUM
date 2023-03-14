@@ -22,11 +22,11 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long userId;
 
-    @Column(name = "email", nullable = false, unique = true)
-    private String email; // kakao
+    @Column(name = "kakaoId", nullable = false, unique = true)
+    private String kakaoId; // kakao
 
-    @Column(name = "provideId", nullable = false)
-    private String provideId;
+    @Column(name = "password", nullable = false)
+    private String password;
 
     @JsonIgnore
     @Column(name = "activated",columnDefinition = "TINYINT")

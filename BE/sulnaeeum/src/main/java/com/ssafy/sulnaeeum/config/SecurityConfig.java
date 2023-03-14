@@ -26,7 +26,8 @@ public class SecurityConfig {
 
     private static final String[] PERMIT_URL_ARRAY = {
             "/api/user/login",
-            "/api/user/signup"
+            "/api/user/signup",
+            "/api/user/kakao/callback"
     };
 
     @Bean

@@ -10,9 +10,7 @@ public class DuplicateMemberException extends RuntimeException {
         super(message, cause);
     }
 
-    public DuplicateMemberException(String message) {
-        super(message);
-    }
+    public DuplicateMemberException(String message) { super(message); }
 
     public DuplicateMemberException(Throwable cause) {
         super(cause);

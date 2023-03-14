@@ -19,7 +19,7 @@ public class UserDto {
         if(user == null) return null;
 
         return UserDto.builder()
-                .email(user.getEmail())
+                .email(user.getKakaoId())
                 .build();
     }
 }

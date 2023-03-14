@@ -24,7 +24,7 @@ public class CustomUserDetailsService implements UserDetailsService {
     @Transactional
     public UserDetails loadUserByUsername(final String email) {
 
-        return userRepo.findOneWithAuthoritiesByEmail(email)
+        return userRepo.findOneWithAuthoritiesByKakaoId(email)
                 .map(user -> createUser(email, user))
                 .orElseThrow(() -> new UsernameNotFoundException(email + " -> 데이터베이스에서 찾을 수 없습니다."));
     }
@@ -40,8 +40,8 @@ public class CustomUserDetailsService implements UserDetailsService {
                 .map(authority -> new SimpleGrantedAuthority(authority.getAuthorityName()))
                 .collect(Collectors.toList());
 
-        return new org.springframework.security.core.userdetails.User(user.getEmail(),
-                user.getProvideId(),
+        return new org.springframework.security.core.userdetails.User(user.getKakaoId(),
+                user.getPassword(),
                 grantedAuthorities);
     }
 }
