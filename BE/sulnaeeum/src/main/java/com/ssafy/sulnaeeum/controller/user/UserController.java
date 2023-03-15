@@ -36,16 +36,15 @@ public class UserController {
     }
 
     @PostMapping("/refresh")
-    public ResponseEntity refreshToken(@RequestBody TokenDto tokenRequestDto){
-        
-//        try {
-//            TokenDto newCreatedToken = userService.refreshToken(tokenRequestDto);
-//            return ResponseHandler.generateResponse("Refresh token 재발급에 성공하였습니다.",HttpStatus.OK,"token",newCreatedToken);
-//        } catch (Exception e) {
-//            return ResponseHandler.generateResponse("Refresh token 재발급에 실패하였습니다.", HttpStatus.BAD_REQUEST);
-//        }
-        return null;
+    @Operation(summary = "토큰 재발급", description = "토큰 재발급")
+    public ResponseEntity<TokenDto> refreshToken(@RequestBody TokenDto tokenRequestDto){
 
+        TokenDto tokenDto = userService.refreshToken(tokenRequestDto);
+
+        HttpHeaders httpHeaders = new HttpHeaders();
+        httpHeaders.add(JwtFilter.AUTHORIZATION_HEADER, "Bearer " + tokenDto.getAccessToken());
+
+        return new ResponseEntity<>(tokenDto, httpHeaders, HttpStatus.OK);
     }
 
 

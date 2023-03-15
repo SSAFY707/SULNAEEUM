@@ -41,8 +41,8 @@ public class SecurityConfig {
                         "/favicon.ico",
                         "/v3/api-docs/**",
                         "/swagger-ui/**",
-                        "/error",
-                        "/api/**"
+                        "/error"
+//                        "/api/**"
                 );
     }
     @Bean

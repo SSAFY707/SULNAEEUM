@@ -65,7 +65,9 @@ public class KakaoLoginService {
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
         String accessToken = tokenProvider.createAccessToken(authentication);
-        String refreshToken = tokenProvider.createRefreshToken(authentication);
+        String refreshToken = tokenProvider.createRefreshToken();
+
+        kakaoUser.updateToken(refreshToken);
 
         return TokenDto.builder().accessToken(accessToken).refreshToken(refreshToken).build();
     }

@@ -35,7 +35,7 @@ public class TokenProvider implements InitializingBean {
     public TokenProvider(@Value("${jwt.secret}") String secret, @Value("${jwt.token-validity-in-seconds}") long tokenValidityInSeconds) {
         this.secret = secret;
         this.accesstokenValidTime = tokenValidityInSeconds * 3 * 1000 ;
-        this.refreshtokenValidTime = tokenValidityInSeconds * 14 * 24 * 1000;
+        this.refreshtokenValidTime = tokenValidityInSeconds * 7 * 24 * 1000;
     }
 
     // Bean 생성 후, key 값 설정하기 위한 메서드
@@ -63,17 +63,12 @@ public class TokenProvider implements InitializingBean {
     }
 
     // authentication을 가져와 refreshToken을 생성하는 메서드
-    public String createRefreshToken(Authentication authentication) {
-        String authorities = authentication.getAuthorities().stream()
-                .map(GrantedAuthority::getAuthority)
-                .collect(Collectors.joining(","));
+    public String createRefreshToken() {
 
         long now = (new Date()).getTime();
         Date validity = new Date(now + this.refreshtokenValidTime);
 
         return Jwts.builder()
-                .setSubject(authentication.getName())
-                .claim(AUTHORITIES_KEY, authorities)
                 .signWith(key, SignatureAlgorithm.HS512)
                 .setExpiration(validity)
                 .compact();
