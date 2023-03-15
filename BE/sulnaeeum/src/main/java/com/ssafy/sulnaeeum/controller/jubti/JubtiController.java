@@ -1,7 +1,7 @@
 package com.ssafy.sulnaeeum.controller.jubti;
 
-import com.ssafy.sulnaeeum.model.jubti.JubtiResultDto;
-import com.ssafy.sulnaeeum.model.jubti.JubtiService;
+import com.ssafy.sulnaeeum.model.jubti.dto.JubtiResultDto;
+import com.ssafy.sulnaeeum.model.jubti.service.JubtiService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;

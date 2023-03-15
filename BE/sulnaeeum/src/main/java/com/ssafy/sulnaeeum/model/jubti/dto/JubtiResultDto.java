@@ -1,5 +1,6 @@
-package com.ssafy.sulnaeeum.model.jubti;
+package com.ssafy.sulnaeeum.model.jubti.dto;
 
+import com.ssafy.sulnaeeum.model.jubti.entity.JubtiResult;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Data;
