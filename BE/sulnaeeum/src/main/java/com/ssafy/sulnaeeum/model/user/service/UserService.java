@@ -46,4 +46,11 @@ public class UserService {
         return TokenDto.builder().accessToken(accessToken).refreshToken(refreshToken).build();
     }
 
+    @Transactional
+    public void logout(String kakaoId) {
+
+        User user = userRepository.findByKakaoId(kakaoId).orElseThrow(() -> new CustomException(CustomExceptionList.MEMBER_NOT_FOUND));
+
+        user.updateToken(null);
+    }
 }
