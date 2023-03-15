@@ -1,0 +1,65 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* 기본 세팅 */
+* {
+    font-family: preL
+}
+
+h1 {
+    font-size: 40px;
+    font-family: preB;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+/* 폰트 적용 */
+@font-face {
+    font-family: 'star';
+    src: url("../assets/fonts/Cafe24Shiningstar.ttf");
+}
+@font-face {
+    font-family: 'preBl';
+    src: url("../assets/fonts/Pretendard-Black.ttf");
+}
+@font-face {
+    font-family: 'preB';
+    src: url("../assets/fonts/Pretendard-Bold.ttf");
+}
+@font-face {
+    font-family: 'preEB';
+    src: url("../assets/fonts/Pretendard-ExtraBold.ttf");
+}
+@font-face {
+    font-family: 'preEL';
+    src: url("../assets/fonts/Pretendard-ExtraLight.ttf");
+}
+@font-face {
+    font-family: 'preL';
+    src: url("../assets/fonts/Pretendard-Light.ttf");
+}
+@font-face {
+    font-family: 'preM';
+    src: url("../assets/fonts/Pretendard-Medium.ttf");
+}
+@font-face {
+    font-family: 'preR';
+    src: url("../assets/fonts/Pretendard-Regular.ttf");
+}
+@font-face {
+    font-family: 'preSB';
+    src: url("../assets/fonts/Pretendard-SemiBold.ttf");
+}
+@font-face {
+    font-family: 'preT';
+    src: url("../assets/fonts/Pretendard-Thin.ttf");
+}
