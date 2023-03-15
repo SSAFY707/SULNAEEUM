@@ -1,7 +1,7 @@
 package com.ssafy.sulnaeeum.controller.jubti;
 
-import com.ssafy.sulnaeeum.model.jubti.JubtiResultDto;
-import com.ssafy.sulnaeeum.model.jubti.JubtiService;
+import com.ssafy.sulnaeeum.model.jubti.dto.JubtiResultDto;
+import com.ssafy.sulnaeeum.model.jubti.service.JubtiService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
@@ -25,11 +25,7 @@ public class JubtiController {
     @Operation(summary = "응답 저장", description = "한 사용자의 jubti 응답 결과를 DB에 저장 (데이터 수집)")
     @PostMapping("/save")
     public ResponseEntity<String> saveResult(@RequestBody JubtiResultDto jubtiResultDto) {
-        try {
-            jubtiService.saveResult(jubtiResultDto);
-            return new ResponseEntity<>(SUCCESS, HttpStatus.OK);
-        } catch (Exception e) {
-            return new ResponseEntity<>(FAIL, HttpStatus.OK);
-        }
+        jubtiService.saveResult(jubtiResultDto);
+        return new ResponseEntity<>(SUCCESS, HttpStatus.OK);
     }
 }
