@@ -2,6 +2,18 @@
 @tailwind components;
 @tailwind utilities;
 
+/* 기본 세팅 */
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: preL
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
 
 /* 폰트 적용 */
 @font-face {

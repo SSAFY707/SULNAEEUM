@@ -1,7 +1,11 @@
 import React from 'react'
 
-export default function index() {
+const Jubti: React.FC = () => {
   return (
-    <div>index</div>
+    <>
+        <div></div>
+    </>
   )
 }
+
+export default Jubti
