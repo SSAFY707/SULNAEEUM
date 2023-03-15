@@ -1,4 +1,4 @@
-package com.ssafy.sulnaeeum.model.user;
+package com.ssafy.sulnaeeum.model.user.dto;
 
 import lombok.*;
 

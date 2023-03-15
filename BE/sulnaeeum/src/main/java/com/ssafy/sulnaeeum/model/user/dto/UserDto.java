@@ -1,8 +1,7 @@
-package com.ssafy.sulnaeeum.model.user;
+package com.ssafy.sulnaeeum.model.user.dto;
 
+import com.ssafy.sulnaeeum.model.user.entity.User;
 import lombok.*;
-
-import javax.persistence.Column;
 
 @Getter
 @Setter

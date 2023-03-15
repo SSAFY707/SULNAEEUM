@@ -1,5 +1,6 @@
-package com.ssafy.sulnaeeum.model.user;
+package com.ssafy.sulnaeeum.model.user.dto;
 
+import com.ssafy.sulnaeeum.model.user.dto.TokenDto;
 import lombok.*;
 
 import javax.persistence.Column;

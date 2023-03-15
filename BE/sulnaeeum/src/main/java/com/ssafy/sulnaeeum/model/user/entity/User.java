@@ -1,9 +1,7 @@
-package com.ssafy.sulnaeeum.model.user;
+package com.ssafy.sulnaeeum.model.user.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.ssafy.sulnaeeum.model.user.Authority;
 import lombok.*;
-import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.*;
 import java.util.Set;
