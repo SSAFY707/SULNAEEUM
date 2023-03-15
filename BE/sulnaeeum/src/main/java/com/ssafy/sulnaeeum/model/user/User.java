@@ -15,6 +15,7 @@ import java.util.Set;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
+@ToString
 public class User {
 
     @Id
@@ -28,32 +29,34 @@ public class User {
     @Column(name = "password", nullable = false)
     private String password;
 
+    @Column(name="nickname",nullable = false)
+    private String nickname;
+
+    @Column(name="age",nullable = false)
+    private String age;
+
+    @Column(name="sex",nullable = false,columnDefinition = "TINYINT")
+    private boolean sex;
+
+    @Column(name="img",nullable = false)
+    private String img;
+
+
     @JsonIgnore
     @Column(name = "activated",columnDefinition = "TINYINT")
     private boolean activated;
 
-//    @Column(name="age",nullable = false)
-//    private String age;
-//
-//    @Column(name="sex",nullable = false)
-//    private boolean sex;
-//
-//    @Column(name="nickname",nullable = false)
-//    private String nickname;
-//
-//    @Column(name="img",nullable = false)
-//    private String img;
-//
-//    @Column(name="ranking",nullable = false)
-//    @ColumnDefault("0")
-//    private int ranking;
-//
-//    @Column(name="level",nullable = true)
-//    private int level;
-//
-//    @Column(name="finish",nullable = false)
-//    @ColumnDefault("0")
-//    private int finish;
+    @Column(name="ranking",nullable = false)
+    private int ranking;
+
+    @Column(name="level",nullable = false)
+    private int level;
+
+    @Column(name="finish",nullable = false, columnDefinition = "TINYINT")
+    private boolean finish;
+
+    @Column(name="token",nullable = true)
+    private String token;
 
     @ManyToMany
     @JoinTable(
@@ -61,4 +64,9 @@ public class User {
             joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "user_id")},
             inverseJoinColumns = {@JoinColumn(name = "authority_name", referencedColumnName = "authority_name")})
     private Set<Authority> authorities;
+
+    public void updateToken(String token){
+        this.token = token;
+    }
+
 }

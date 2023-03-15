@@ -22,18 +22,18 @@ public class CustomUserDetailsService implements UserDetailsService {
     // userId를 통해 유저 정보와 권한 정보를 함께 가져오는 메서드
     @Override
     @Transactional
-    public UserDetails loadUserByUsername(final String email) {
+    public UserDetails loadUserByUsername(final String kakaoId) {
 
-        return userRepo.findOneWithAuthoritiesByKakaoId(email)
-                .map(user -> createUser(email, user))
-                .orElseThrow(() -> new UsernameNotFoundException(email + " -> 데이터베이스에서 찾을 수 없습니다."));
+        return userRepo.findOneWithAuthoritiesByKakaoId(kakaoId)
+                .map(user -> createUser(kakaoId, user))
+                .orElseThrow(() -> new UsernameNotFoundException(kakaoId + " -> 데이터베이스에서 찾을 수 없습니다."));
     }
 
     // user가 활성화 상태라면, 권한 정보와
-    private org.springframework.security.core.userdetails.User createUser(String email, User user) {
+    private org.springframework.security.core.userdetails.User createUser(String kakaoId, User user) {
 
         if (!user.isActivated()) {
-            throw new RuntimeException(email + " -> 활성화되어 있지 않습니다.");
+            throw new RuntimeException(kakaoId + " -> 활성화되어 있지 않습니다.");
         }
 
         List<GrantedAuthority> grantedAuthorities = user.getAuthorities().stream()

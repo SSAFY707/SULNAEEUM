@@ -26,13 +26,16 @@ public class TokenProvider implements InitializingBean {
 
     private static final  String AUTHORITIES_KEY = "auth";
     private final String secret;
-    private final long tokenValidityInMilliseconds;
+    private final long accesstokenValidTime ;
+
+    private final long refreshtokenValidTime;
 
     private Key key;
 
     public TokenProvider(@Value("${jwt.secret}") String secret, @Value("${jwt.token-validity-in-seconds}") long tokenValidityInSeconds) {
         this.secret = secret;
-        this.tokenValidityInMilliseconds = tokenValidityInSeconds * 1000;
+        this.accesstokenValidTime = tokenValidityInSeconds * 3 * 1000 ;
+        this.refreshtokenValidTime = tokenValidityInSeconds * 14 * 24 * 1000;
     }
 
     // Bean 생성 후, key 값 설정하기 위한 메서드
@@ -42,14 +45,31 @@ public class TokenProvider implements InitializingBean {
         this.key = Keys.hmacShaKeyFor(keyBytes);
     }
 
-    // authentication을 가져와 token을 생성하는 메서드
-    public String createToken(Authentication authentication) {
+    // authentication을 가져와 accessToken을 생성하는 메서드
+    public String createAccessToken(Authentication authentication) {
         String authorities = authentication.getAuthorities().stream()
                 .map(GrantedAuthority::getAuthority)
                 .collect(Collectors.joining(","));
 
         long now = (new Date()).getTime();
-        Date validity = new Date(now + this.tokenValidityInMilliseconds);
+        Date validity = new Date(now + this.accesstokenValidTime);
+
+        return Jwts.builder()
+                .setSubject(authentication.getName())
+                .claim(AUTHORITIES_KEY, authorities)
+                .signWith(key, SignatureAlgorithm.HS512)
+                .setExpiration(validity)
+                .compact();
+    }
+
+    // authentication을 가져와 refreshToken을 생성하는 메서드
+    public String createRefreshToken(Authentication authentication) {
+        String authorities = authentication.getAuthorities().stream()
+                .map(GrantedAuthority::getAuthority)
+                .collect(Collectors.joining(","));
+
+        long now = (new Date()).getTime();
+        Date validity = new Date(now + this.refreshtokenValidTime);
 
         return Jwts.builder()
                 .setSubject(authentication.getName())

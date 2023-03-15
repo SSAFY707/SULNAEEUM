@@ -3,6 +3,7 @@ package com.ssafy.sulnaeeum.model.user;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.ssafy.sulnaeeum.jwt.TokenProvider;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -10,6 +11,10 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,37 +22,55 @@ import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.UUID;
+import java.util.Collections;
 
 @RequiredArgsConstructor
 @Service
 @Slf4j
-public class KakaoUserService {
+public class KakaoLoginService {
     private final PasswordEncoder passwordEncoder;
     private final UserRepo userRepository;
+    private final AuthenticationManagerBuilder authenticationManagerBuilder;
+    private final TokenProvider tokenProvider;
 
     @Value("${kakao.client.id}")
     private String clientId;
 
     @Transactional
-    public KakaoSocialDto kakaoLogin(String code) throws JsonProcessingException {
+    public KakaoLoginDto kakaoLogin(String code) throws JsonProcessingException {
+
         // 1. "인가 코드"로 "액세스 토큰" 요청
         String accessToken = getAccessToken(code, "http://localhost:3000/user/kakao/callback");
 
         // 2. 필요시에 회원가입
         User kakaoUser = registerKakaoUserIfNeeded(accessToken);
 
+        // 3. 로그인 JWT 토큰 발행
+        TokenDto tokenDto = createToken(kakaoUser);
 
-//        // 3. 로그인 JWT 토큰 발행
-//        String token = jwtTokenCreate(kakaoUser);
-//
-//        return SignupSocialDto.builder()
-//                .token(token)
-//                .userId(kakaoUser.getId())
-//                .build();
-        return null;
+        return KakaoLoginDto.builder()
+                .tokenDto(tokenDto)
+                .kakaoId(kakaoUser.getKakaoId())
+                .nickname(kakaoUser.getNickname())
+                .img(kakaoUser.getImg())
+                .build();
     }
 
+    // AccessToken & RefreshToken 발급 및 RefreshToken 저장하는 메서드
+    public TokenDto createToken(User kakaoUser) {
+        UsernamePasswordAuthenticationToken authenticationToken =
+                new UsernamePasswordAuthenticationToken(kakaoUser.getKakaoId(), kakaoUser.getKakaoId());
+
+        Authentication authentication = authenticationManagerBuilder.getObject().authenticate(authenticationToken);
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+
+        String accessToken = tokenProvider.createAccessToken(authentication);
+        String refreshToken = tokenProvider.createRefreshToken(authentication);
+
+        return TokenDto.builder().accessToken(accessToken).refreshToken(refreshToken).build();
+    }
+
+    // Kakao code로 Kakao token 발급
     private String getAccessToken(String code, String redirect_uri) throws JsonProcessingException {
         // HTTP Header 생성
         HttpHeaders headers = new HttpHeaders();
@@ -78,34 +101,57 @@ public class KakaoUserService {
     }
 
     // 처음 로그인 시, 회원 가입 진행
-    private User registerKakaoUserIfNeeded(String accessToken) throws JsonProcessingException {
+    public User registerKakaoUserIfNeeded(String accessToken) throws JsonProcessingException {
         JsonNode jsonNode = getKakaoUserInfo(accessToken);
-
-        log.info(jsonNode.toString());
 
         // DB 에 중복된 Kakao Id 가 있는지 확인
         String kakaoId = String.valueOf(jsonNode.get("id").asLong());
-        User kakaoUser = userRepository.findOneWithAuthoritiesByKakaoId(kakaoId).orElse(null);
+        User kakaoUser = userRepository.findByKakaoId(kakaoId).orElse(null);
 
         // 회원가입
-//        if (kakaoUser == null) {
-//            String nickname = jsonNode.get("properties").get("nickname").asText();
-//            String picture = jsonNode.get("properties").get("profile_image_url").asText();
-//            String nickname = jsonNode.get("properties").get("nickname").asText();
-//            String nickname = jsonNode.get("properties").get("nickname").asText();
-//
-//            // password: random UUID
-//            String password = UUID.randomUUID().toString();
-//            String encodedPassword = passwordEncoder.encode(password);
-//
-//            kakaoUser = new User(kakaoId, nickname, encodedPassword);
-//            userRepository.save(kakaoUser);
-//        }
+        if (kakaoUser == null) {
+            String nickname = jsonNode.get("properties").get("nickname").asText();
+            String img = jsonNode.get("properties").get("profile_image").asText();
+            String age = jsonNode.get("kakao_account").get("age_range").asText();
+            String gender = jsonNode.get("kakao_account").get("gender").asText();
+
+            if(age.equals("10~19")) age = "10S";
+            else if(age.equals("20~29")) age = "20S";
+            else if (age.equals("30~39")) age = "30S";
+            else if (age.equals("40~49")) age = "40S";
+            else if (age.equals("50~59")) age = "50S";
+            else if (age.equals("60~69")) age = "60S";
+
+            boolean sex = true;
+            if(gender.equals("female")) sex = false;
+
+            // password: kakaoId encoder
+            String encodedPassword = passwordEncoder.encode(kakaoId);
+
+            Authority authority = Authority.builder()
+                    .authorityName("ROLE_USER")
+                    .build();
+
+            kakaoUser = User.builder()
+                    .kakaoId(kakaoId)
+                    .password(encodedPassword)
+                    .nickname(nickname)
+                    .img(img)
+                    .age(age)
+                    .sex(sex)
+                    .activated(true)
+                    .ranking(0)
+                    .level(0)
+                    .finish(false)
+                    .authorities(Collections.singleton(authority)).build();
+
+            userRepository.save(kakaoUser);
+        }
 
         return kakaoUser;
     }
 
-    // 카카오 동의 항목 가져오기
+    // 발급받은 Kakao token을 통해 동의 항목 가져오기
     private JsonNode getKakaoUserInfo(String accessToken) throws JsonProcessingException {
 
         // HTTP Header 생성
@@ -127,18 +173,4 @@ public class KakaoUserService {
         ObjectMapper objectMapper = new ObjectMapper();
         return objectMapper.readTree(responseBody);
     }
-
-//    // JWT 토큰 생성
-//    private String jwtTokenCreate(User kakaoUser) {
-//        String TOKEN_TYPE = "BEARER";
-//
-//        UserDetails userDetails = new UserDetailsImpl(kakaoUser);
-//        Authentication authentication = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
-//        SecurityContextHolder.getContext().setAuthentication(authentication);
-//
-//        UserDetailsImpl userDetails1 = ((UserDetailsImpl) authentication.getPrincipal());
-//        final String token = JwtTokenUtils.generateJwtToken(userDetails1);
-//        return TOKEN_TYPE + " " + token;
-//    }
-
 }

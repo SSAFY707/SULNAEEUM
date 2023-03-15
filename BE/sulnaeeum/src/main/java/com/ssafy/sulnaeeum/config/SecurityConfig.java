@@ -4,7 +4,6 @@ import com.ssafy.sulnaeeum.jwt.JwtAccessDeniedHandler;
 import com.ssafy.sulnaeeum.jwt.JwtAuthenticationEntryPoint;
 import com.ssafy.sulnaeeum.jwt.TokenProvider;
 import lombok.RequiredArgsConstructor;
-import org.apache.catalina.filters.CorsFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
