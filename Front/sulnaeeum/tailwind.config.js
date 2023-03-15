@@ -4,7 +4,20 @@ module.exports = {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        star : ['star'],
+        preBl : ['preBl'],
+        preB : ['preB'],
+        preEB : ['preEB'],
+        preEL : ['preEL'],
+        preL : ['preL'],
+        preM : ['preM'],
+        preR : ['preR'],
+        preSB : ['preSB'],
+        preT : ['preT'],
+      }
+    },
   },
   plugins: [],
 }

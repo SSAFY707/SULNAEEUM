@@ -8,7 +8,6 @@ export default function Document() {
       </Head>
       <body>
         <Main />
-        <div className={'text-sky-400'}>이게 맞아..........?</div>
         <NextScript />
       </body>
     </Html>
