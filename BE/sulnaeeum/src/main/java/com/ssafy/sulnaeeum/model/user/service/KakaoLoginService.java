@@ -1,9 +1,14 @@
-package com.ssafy.sulnaeeum.model.user;
+package com.ssafy.sulnaeeum.model.user.service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ssafy.sulnaeeum.jwt.TokenProvider;
+import com.ssafy.sulnaeeum.model.user.dto.KakaoLoginDto;
+import com.ssafy.sulnaeeum.model.user.dto.TokenDto;
+import com.ssafy.sulnaeeum.model.user.entity.Authority;
+import com.ssafy.sulnaeeum.model.user.entity.User;
+import com.ssafy.sulnaeeum.model.user.repo.UserRepo;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;

@@ -1,5 +1,7 @@
-package com.ssafy.sulnaeeum.model.user;
+package com.ssafy.sulnaeeum.model.user.service;
 
+import com.ssafy.sulnaeeum.model.user.entity.User;
+import com.ssafy.sulnaeeum.model.user.repo.UserRepo;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.GrantedAuthority;
