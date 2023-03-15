@@ -18,7 +18,7 @@ public class DrinkType {
     @Id
     @GeneratedValue
     @Column(name = "drink_type_id")
-    private int drinkTypeId; // auto_increment PK
+    private Long drinkTypeId; // auto_increment PK
 
     private String drinkTypeName; // 주종 이름
 }

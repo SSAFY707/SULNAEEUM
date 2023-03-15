@@ -15,7 +15,7 @@ import lombok.experimental.SuperBuilder;
 public class DrinkInfoDto {
 
     @Schema(description = "아이디 (auto_increment)")
-    private int drinkId;
+    private Long drinkId;
 
     @Schema(description = "이름")
     private String drinkName;
