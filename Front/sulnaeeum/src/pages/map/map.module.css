@@ -1,0 +1,17 @@
+.container {
+    width: 100%;
+    height: 920px;
+    background-color: rgba(230,200,200,0.4);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-contents: center;
+}
+
+.lay {
+    outline: 1px dashed red;
+}
+
+.mapContainer {
+    margin-top: 40px;
+}
