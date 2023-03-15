@@ -37,7 +37,7 @@ public class DrinkService {
             if(drinkType.isPresent()) {
                 drinkList = drinkRepo.findByDrinkTypeId(drinkType.get().getDrinkTypeId()); // 카테고리별 조회 & 이름 순 정렬
             } else {
-                throw new CustomException(CustomExceptionList.RUNTIME_EXCEPTION); // 오류 변경 필요
+                throw new CustomException(CustomExceptionList.ROW_NOT_FOUND); // 존재하지 않는 주종일 경우
             }
         }
 
