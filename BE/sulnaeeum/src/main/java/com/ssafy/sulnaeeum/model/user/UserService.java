@@ -1,38 +1,46 @@
 package com.ssafy.sulnaeeum.model.user;
 
-import com.ssafy.sulnaeeum.exception.DuplicateMemberException;
-import com.ssafy.sulnaeeum.util.SecurityUtil;
+import com.ssafy.sulnaeeum.exception.CustomException;
+import com.ssafy.sulnaeeum.exception.CustomExceptionList;
+import com.ssafy.sulnaeeum.jwt.TokenProvider;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.crypto.password.PasswordEncoder;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Collections;
-
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class UserService {
     private final UserRepo userRepository;
-    private final PasswordEncoder passwordEncoder;
+    private final TokenProvider tokenProvider;
 
     @Transactional
-    public UserDto signup(UserDto userDto) {
+    public TokenDto refreshToken(TokenDto tokenRequestDto) {
 
-        if (userRepository.findOneWithAuthoritiesByEmail(userDto.getEmail()).orElse(null) != null) {
-            throw new DuplicateMemberException("이미 가입되어 있는 유저입니다.");
+        // refresh token 검증
+        if(!tokenProvider.validateToken(tokenRequestDto.getRefreshToken())){
+            throw new CustomException(CustomExceptionList.TOKEN_VALID_FAILED);
         }
 
-        Authority authority = Authority.builder()
-                .authorityName("ROLE_USER")
-                .build();
+        // access token에서 사용자 정보 가져오기
+        Authentication authentication = tokenProvider.getAuthentication(tokenRequestDto.getAccessToken());
 
-        User user = User.builder()
-                .email(userDto.getEmail())
-                .provideId(passwordEncoder.encode(userDto.getProvideId()))
-                .authorities(Collections.singleton(authority))
-                .activated(true)
-                .build();
+        User user = userRepository.findByKakaoId(authentication.getName()).orElseThrow(() -> new CustomException(CustomExceptionList.MEMBER_NOT_FOUND));
 
-        return UserDto.from(userRepository.save(user));
+        // 저장된 refresh token과 받은 token 비교
+        if(!user.getToken().equals(tokenRequestDto.getRefreshToken())) {
+            throw new CustomException(CustomExceptionList.TOKEN_VALID_FAILED);
+        }
+
+        // AccessToken, RefreshToken 재발급 및 RefreshToken 저장
+        String accessToken = tokenProvider.createAccessToken(authentication);
+        String refreshToken = tokenProvider.createRefreshToken();
+
+        user.updateToken(refreshToken);
+
+        return TokenDto.builder().accessToken(accessToken).refreshToken(refreshToken).build();
     }
+
 }

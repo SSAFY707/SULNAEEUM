@@ -4,7 +4,6 @@ import com.ssafy.sulnaeeum.jwt.JwtAccessDeniedHandler;
 import com.ssafy.sulnaeeum.jwt.JwtAuthenticationEntryPoint;
 import com.ssafy.sulnaeeum.jwt.TokenProvider;
 import lombok.RequiredArgsConstructor;
-import org.apache.catalina.filters.CorsFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -26,7 +25,8 @@ public class SecurityConfig {
 
     private static final String[] PERMIT_URL_ARRAY = {
             "/api/user/login",
-            "/api/user/signup"
+            "/api/user/signup",
+            "/api/user/kakao/callback"
     };
 
     @Bean
@@ -41,8 +41,8 @@ public class SecurityConfig {
                         "/favicon.ico",
                         "/v3/api-docs/**",
                         "/swagger-ui/**",
-                        "/error",
-                        "/api/**"
+                        "/error"
+//                        "/api/**"
                 );
     }
     @Bean

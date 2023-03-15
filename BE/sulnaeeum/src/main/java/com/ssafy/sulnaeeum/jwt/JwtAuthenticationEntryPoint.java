@@ -19,7 +19,7 @@ public class JwtAuthenticationEntryPoint implements AuthenticationEntryPoint {
     @Override
     public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authException) throws IOException, ServletException {
 
-        log.info("유효하지 않은 자격증명입니다.");
+        log.info("유효하지 않은 토큰입니다");
         response.sendError(HttpServletResponse.SC_UNAUTHORIZED);
     }
 }
