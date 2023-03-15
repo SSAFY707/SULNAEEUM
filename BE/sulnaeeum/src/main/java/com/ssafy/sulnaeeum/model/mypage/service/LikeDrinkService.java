@@ -31,7 +31,6 @@ public class LikeDrinkService {
     @Transactional
     public String switchLikeDrink(Long drinkId, String kakaoId) {
         Long userId;
-
         Optional<User> user = userRepo.findByKakaoId(kakaoId);
         if(!user.isPresent()) {
             throw new CustomException(CustomExceptionList.MEMBER_NOT_FOUND); // 해당하는 회원이 없을 경우
@@ -39,7 +38,8 @@ public class LikeDrinkService {
         userId = user.get().getUserId();
 
         Optional<LikeDrink> likeDrink = likeDrinkRepo.findLikeInfo(drinkId, userId);
-        if(!likeDrink.isPresent()) { // 이전에 좋아요 누르지 않았을 경우
+        if(!likeDrink.isPresent()) {
+            // 이전에 찜 하지 않았을 경우
              Optional<Drink> drinkTmp = drinkRepo.findByDrinkId(drinkId);
              Optional<User> userTmp = userRepo.findByKakaoId(kakaoId);
              if(!drinkTmp.isPresent()) {
@@ -47,11 +47,12 @@ public class LikeDrinkService {
              } else if(!userTmp.isPresent()) {
                  throw new CustomException(CustomExceptionList.MEMBER_NOT_FOUND);
              }
-
+             // DB에 찜 내용 저장 (찜 한 회원과 전통주)
              LikeDrinkDto likeDrinkDto = new LikeDrinkDto(drinkTmp.get(), userTmp.get());
              likeDrinkRepo.save(likeDrinkDto.toEntity());
              return "찜 성공";
         } else {
+            // 이전에 찜 했을 경우 기존에 저장되어있던 찜 내용 삭제
             likeDrinkRepo.deleteById(likeDrink.get().getLikeDrinkId());
             return "찜 취소";
         }

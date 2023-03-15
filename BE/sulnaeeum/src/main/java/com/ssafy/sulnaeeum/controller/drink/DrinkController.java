@@ -37,6 +37,8 @@ public class DrinkController {
 
     /***
      * [ 전통주 찜 ]
+     * - 기존에 찜 되어있지 않을 경우, DB에 찜 한 내용 저장 (찜 한 회원, 전통주)
+     * - 기존에 찜 되어있을 경우, DB에서 기존에 찜 했던 내용 삭제
      */
     @PostMapping("/like/{drinkId}/{kakaoId}")
     public ResponseEntity<String> switchLikeDrink(@PathVariable Long drinkId, @PathVariable String kakaoId) {
