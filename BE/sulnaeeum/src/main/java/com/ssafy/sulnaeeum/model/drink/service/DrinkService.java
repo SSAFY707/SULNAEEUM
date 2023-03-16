@@ -2,6 +2,7 @@ package com.ssafy.sulnaeeum.model.drink.service;
 
 import com.ssafy.sulnaeeum.exception.CustomException;
 import com.ssafy.sulnaeeum.exception.CustomExceptionList;
+import com.ssafy.sulnaeeum.model.drink.dto.DrinkDto;
 import com.ssafy.sulnaeeum.model.drink.dto.DrinkInfoDto;
 import com.ssafy.sulnaeeum.model.drink.entity.Drink;
 import com.ssafy.sulnaeeum.model.drink.entity.DrinkType;
@@ -92,5 +93,14 @@ public class DrinkService {
         }
 
         return drinkInfoDtoList; // 전체 술 정보 반환
+    }
+
+    // drinkId로 DrinkDto 가져오기
+    public DrinkDto findDrink(Long drinkId) {
+        Optional<Drink> drink = drinkRepo.findByDrinkId(drinkId);
+        if(!drink.isPresent()) {
+            throw new CustomException(CustomExceptionList.ROW_NOT_FOUND);
+        }
+        return drink.get().toDto();
     }
 }

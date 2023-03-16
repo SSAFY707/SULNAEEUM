@@ -1,5 +1,6 @@
 package com.ssafy.sulnaeeum.model.drink.entity;
 
+import com.ssafy.sulnaeeum.model.drink.dto.DrinkDto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -44,4 +45,20 @@ public class Drink {
     private int likeCnt; // 찜 개수
 
     private int reviewCnt; // 리뷰 개수
+
+    // Entity -> DTO 변환
+    public DrinkDto toDto() {
+        return DrinkDto.builder()
+                .drinkId(this.drinkId)
+                .drinkName(this.drinkName)
+                .drinkInfo(this.drinkInfo)
+                .drinkImage(this.drinkImage)
+                .drinkSaleUrl(this.drinkSaleUrl)
+                .drinkPrice(this.drinkPrice)
+                .drinkAmount(this.drinkAmount)
+                .drinkLevel(this.drinkLevel)
+                .drinkType(this.drinkType)
+                .likeCnt(this.likeCnt)
+                .reviewCnt(this.reviewCnt).build();
+    }
 }
