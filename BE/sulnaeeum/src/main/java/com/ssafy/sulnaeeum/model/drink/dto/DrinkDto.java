@@ -48,6 +48,21 @@ public class DrinkDto {
     @Schema(description = "리뷰 개수")
     private int reviewCnt;
 
+//    // 생성자 (List<Entity> -> List<DTO> 변환을 위함)
+//    public DrinkDto(Drink drink) {
+//        this.drinkId = drink.getDrinkId();
+//        this.drinkName = drink.getDrinkName();
+//        this.drinkInfo = drink.getDrinkInfo();
+//        this.drinkImage = drink.getDrinkImage();
+//        this.drinkSaleUrl = drink.getDrinkSaleUrl();
+//        this.drinkPrice = drink.getDrinkPrice();
+//        this.drinkAmount = drink.getDrinkAmount();
+//        this.drinkLevel = drink.getDrinkLevel();
+//        this.drinkType = drink.getDrinkType();
+//        this.likeCnt = drink.getLikeCnt();
+//        this.reviewCnt = drink.getReviewCnt();
+//    }
+
     // DTO -> Entity 변환
     public Drink toEntity() {
         return Drink.builder()

@@ -37,18 +37,18 @@ public class LikeDrinkService {
     public String switchLikeDrink(Long drinkId, String kakaoId) {
         Long userId;
         Optional<User> user = userRepo.findByKakaoId(kakaoId);
-        if(!user.isPresent()) {
+        if(user.isEmpty()) {
             throw new CustomException(CustomExceptionList.MEMBER_NOT_FOUND); // 해당하는 회원이 없을 경우
         }
         userId = user.get().getUserId();
 
         Optional<LikeDrink> likeDrink = likeDrinkRepo.findLikeInfo(drinkId, userId);
-        if(!likeDrink.isPresent()) { // 이전에 찜 하지 않았을 경우
+        if(likeDrink.isEmpty()) { // 이전에 찜 하지 않았을 경우
             Optional<Drink> drinkTmp = drinkRepo.findByDrinkId(drinkId);
             Optional<User> userTmp = userRepo.findByKakaoId(kakaoId);
-            if(!drinkTmp.isPresent()) {
+            if(drinkTmp.isEmpty()) {
                 throw new CustomException(CustomExceptionList.ROW_NOT_FOUND);
-            } else if(!userTmp.isPresent()) {
+            } else if(userTmp.isEmpty()) {
                 throw new CustomException(CustomExceptionList.MEMBER_NOT_FOUND);
             }
 

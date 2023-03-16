@@ -29,14 +29,14 @@ public class DrinkController {
     /***
      * [ 모든 전통주 조회 ]
      * - 조회한 내용을 필요한 데이터만 선별하여 반환 (id, 이름, 이미지, 양, 도수, 주종, 찜 여부)
-     * - 이름 순 정렬
+     * - 이름, 인기, 도수(높은 순, 낮은 순) 기준 정렬 (인기, 도수의 경우 같을 경우에는 이름으로 정렬)
      * - 카테고리 분류
      ***/
     @Operation(summary = "모든 전통주 조회", description = "전체 전통주를 데이터 가공하여 필요한 정보만 정렬 및 분류하여 제공")
     @GetMapping("/{drinkTypeName}")
-    public ResponseEntity<List<DrinkInfoDto>> getAllDrink(@PathVariable String drinkTypeName) {
+    public ResponseEntity<List<DrinkInfoDto>> getAllDrink(@PathVariable String drinkTypeName, @RequestParam String sortType) {
         String kakaoId = SecurityContextHolder.getContext().getAuthentication().getName();
-        return new ResponseEntity<>(drinkService.getAllDrink(drinkTypeName, kakaoId), HttpStatus.OK);
+        return new ResponseEntity<>(drinkService.getAllDrink(drinkTypeName, kakaoId, sortType), HttpStatus.OK);
     }
 
     /***
@@ -48,7 +48,6 @@ public class DrinkController {
     @PostMapping("/like/{drinkId}")
     public ResponseEntity<String> switchLikeDrink(@PathVariable Long drinkId) {
         String kakaoId = SecurityContextHolder.getContext().getAuthentication().getName();
-        System.out.println("kakaoId !!! : " + kakaoId);
         return new ResponseEntity<>(likeDrinkService.switchLikeDrink(drinkId, kakaoId), HttpStatus.OK);
     }
 }

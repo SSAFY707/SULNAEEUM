@@ -35,7 +35,10 @@ public class DrinkInfoDto {
     @Schema(description = "찜 여부")
     private boolean like;
 
-    // drink 테이블에서 전체 리스트 출력시 필요한 정보만 꺼내어 담기 위함
+    @Schema(description = "찜과 리뷰 개수 (인기)")
+    private int popularity;
+
+    // 생성자 (List 변환 및 drink 테이블에서 전체 리스트 출력시 필요한 정보만 꺼내어 담기 위함)
     public DrinkInfoDto(Drink drink) {
         this.drinkId = drink.getDrinkId();
         this.drinkName = drink.getDrinkName();
@@ -43,5 +46,6 @@ public class DrinkInfoDto {
         this.drinkAmount = drink.getDrinkAmount();
         this.drinkLevel = drink.getDrinkLevel();
         this.drinkType = drink.getDrinkType().getDrinkTypeName();
+        this.popularity = drink.getLikeCnt() + drink.getReviewCnt();
     }
 }
