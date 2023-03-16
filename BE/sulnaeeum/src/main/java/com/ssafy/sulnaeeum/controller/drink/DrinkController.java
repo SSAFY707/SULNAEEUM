@@ -6,6 +6,7 @@ import com.ssafy.sulnaeeum.model.mypage.service.LikeDrinkService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -19,8 +20,10 @@ import java.util.List;
 @Tag(name = "DrinkController", description = "전통주 페이지 API")
 public class DrinkController {
 
+    @Autowired
     DrinkService drinkService;
 
+    @Autowired
     LikeDrinkService likeDrinkService;
 
     /***
@@ -45,6 +48,7 @@ public class DrinkController {
     @PostMapping("/like/{drinkId}")
     public ResponseEntity<String> switchLikeDrink(@PathVariable Long drinkId) {
         String kakaoId = SecurityContextHolder.getContext().getAuthentication().getName();
+        System.out.println("kakaoId !!! : " + kakaoId);
         return new ResponseEntity<>(likeDrinkService.switchLikeDrink(drinkId, kakaoId), HttpStatus.OK);
     }
 }

@@ -10,9 +10,11 @@ import com.ssafy.sulnaeeum.model.drink.repo.DrinkTypeRepo;
 import com.ssafy.sulnaeeum.model.mypage.entity.LikeDrink;
 import com.ssafy.sulnaeeum.model.mypage.repo.LikeDrinkRepo;
 import com.ssafy.sulnaeeum.model.user.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -20,12 +22,16 @@ import java.util.Optional;
 @Service
 public class DrinkService {
 
+    @Autowired
     DrinkRepo drinkRepo;
 
+    @Autowired
     DrinkTypeRepo drinkTypeRepo;
 
+    @Autowired
     LikeDrinkRepo likeDrinkRepo;
 
+    @Autowired
     UserService userService;
 
     // 모든 전통주 조회
