@@ -4,6 +4,7 @@ import com.ssafy.sulnaeeum.exception.CustomException;
 import com.ssafy.sulnaeeum.exception.CustomExceptionList;
 import com.ssafy.sulnaeeum.model.drink.dto.DrinkDto;
 import com.ssafy.sulnaeeum.model.drink.dto.DrinkInfoDto;
+import com.ssafy.sulnaeeum.model.drink.dto.DrinkSearchDto;
 import com.ssafy.sulnaeeum.model.drink.entity.Drink;
 import com.ssafy.sulnaeeum.model.drink.entity.DrinkType;
 import com.ssafy.sulnaeeum.model.drink.repo.DrinkRepo;
@@ -63,6 +64,12 @@ public class DrinkService {
         }
 
         return drinkInfoDtoList;
+    }
+
+    // 키워드로 전통주 검색
+    public List<DrinkSearchDto> drinkSearch(String search) {
+        List<Drink> drinkList = drinkRepo.searchDrink(search);
+        return drinkList.stream().map(DrinkSearchDto::new).collect(Collectors.toList());
     }
 
     // drinkId로 DrinkDto 가져오기

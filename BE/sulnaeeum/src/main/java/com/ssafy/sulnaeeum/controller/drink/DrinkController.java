@@ -1,6 +1,7 @@
 package com.ssafy.sulnaeeum.controller.drink;
 
 import com.ssafy.sulnaeeum.model.drink.dto.DrinkInfoDto;
+import com.ssafy.sulnaeeum.model.drink.dto.DrinkSearchDto;
 import com.ssafy.sulnaeeum.model.drink.service.DrinkService;
 import com.ssafy.sulnaeeum.model.mypage.service.LikeDrinkService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -49,5 +50,16 @@ public class DrinkController {
     public ResponseEntity<String> switchLikeDrink(@PathVariable Long drinkId) {
         String kakaoId = SecurityContextHolder.getContext().getAuthentication().getName();
         return new ResponseEntity<>(likeDrinkService.switchLikeDrink(drinkId, kakaoId), HttpStatus.OK);
+    }
+
+    /***
+     * [ 전통주 검색 ]
+     * - 키워드로 전통주 검색
+     * - 검색 결과로 필요한 데이터만 선별하여 반환
+     */
+    @Operation(summary = "전통주 검색", description = "전통주를 키워드로 검색")
+    @PutMapping
+    public ResponseEntity<List<DrinkSearchDto>> searchDrink(@RequestParam String search) {
+        return new ResponseEntity<>(drinkService.drinkSearch(search), HttpStatus.OK);
     }
 }

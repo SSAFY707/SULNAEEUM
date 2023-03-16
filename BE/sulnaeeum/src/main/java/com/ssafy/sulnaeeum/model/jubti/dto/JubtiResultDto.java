@@ -47,22 +47,22 @@ public class JubtiResultDto {
     @Schema(description = "안주")
     private String dish;
 
-    // List<Entity> -> List<DTO> 변환을 위함
-    public JubtiResultDto(JubtiResult jubtiResult) {
-        this.jubtiResultId = jubtiResult.getJubtiResultId();
-        this.age = jubtiResult.getAge();
-        this.sex = jubtiResult.getSex();
-        this.level = jubtiResult.getLevel();
-
-        this.tasteRefresh = jubtiResult.getTasteRefresh();
-        this.tasteBody = jubtiResult.getTasteBody();
-        this.tasteThroat = jubtiResult.getTasteThroat();
-        this.tasteSour = jubtiResult.getTasteSour();
-        this.tasteSweet = jubtiResult.getTasteSweet();
-        this.tasteFlavor = jubtiResult.getTasteFlavor();
-
-        this.dish = jubtiResult.getDish();
-    }
+//    // 생성자 (List<Entity> -> List<DTO> 변환을 위함)
+//    public JubtiResultDto(JubtiResult jubtiResult) {
+//        this.jubtiResultId = jubtiResult.getJubtiResultId();
+//        this.age = jubtiResult.getAge();
+//        this.sex = jubtiResult.getSex();
+//        this.level = jubtiResult.getLevel();
+//
+//        this.tasteRefresh = jubtiResult.getTasteRefresh();
+//        this.tasteBody = jubtiResult.getTasteBody();
+//        this.tasteThroat = jubtiResult.getTasteThroat();
+//        this.tasteSour = jubtiResult.getTasteSour();
+//        this.tasteSweet = jubtiResult.getTasteSweet();
+//        this.tasteFlavor = jubtiResult.getTasteFlavor();
+//
+//        this.dish = jubtiResult.getDish();
+//    }
 
     // DTO -> Entity 변환을 위함
     public JubtiResult toEntity() {
