@@ -42,7 +42,7 @@ public class DrinkController {
      * - 기존에 찜 되어있을 경우, DB에서 기존에 찜 했던 내용 삭제
      */
     @Operation(summary = "전통주 찜", description = "찜하거나 찜을 취소")
-    @PostMapping("/like/{drinkId}/{kakaoId}")
+    @PostMapping("/like/{drinkId}")
     public ResponseEntity<String> switchLikeDrink(@PathVariable Long drinkId) {
         String kakaoId = SecurityContextHolder.getContext().getAuthentication().getName();
         return new ResponseEntity<>(likeDrinkService.switchLikeDrink(drinkId, kakaoId), HttpStatus.OK);

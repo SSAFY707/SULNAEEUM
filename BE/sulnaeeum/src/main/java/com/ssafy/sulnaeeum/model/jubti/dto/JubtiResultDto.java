@@ -32,11 +32,17 @@ public class JubtiResultDto {
     @Schema(description = "바디감")
     private int tasteBody;
 
+    @Schema(description = "목넘김")
+    private int tasteThroat;
+
     @Schema(description = "신맛")
     private int tasteSour;
 
     @Schema(description = "단맛")
     private int tasteSweet;
+
+    @Schema(description = "향")
+    private int tasteFlavor;
 
     @Schema(description = "안주")
     private String dish;
@@ -50,8 +56,10 @@ public class JubtiResultDto {
 
         this.tasteRefresh = jubtiResult.getTasteRefresh();
         this.tasteBody = jubtiResult.getTasteBody();
+        this.tasteThroat = jubtiResult.getTasteThroat();
         this.tasteSour = jubtiResult.getTasteSour();
         this.tasteSweet = jubtiResult.getTasteSweet();
+        this.tasteFlavor = jubtiResult.getTasteFlavor();
 
         this.dish = jubtiResult.getDish();
     }
@@ -65,8 +73,10 @@ public class JubtiResultDto {
                 .level(this.level)
                 .tasteRefresh(this.tasteRefresh)
                 .tasteBody(this.tasteBody)
+                .tasteThroat(this.tasteThroat)
                 .tasteSour(this.tasteSour)
                 .tasteSweet(this.tasteSweet)
+                .tasteFlavor(this.tasteFlavor)
                 .dish(this.dish).build();
     }
 }

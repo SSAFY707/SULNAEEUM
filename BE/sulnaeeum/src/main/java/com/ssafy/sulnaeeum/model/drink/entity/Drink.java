@@ -38,5 +38,10 @@ public class Drink {
     private int drinkLevel; // 도수
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "drink_type_id")
     private DrinkType drinkType; // 주종
+
+    private int likeCnt; // 찜 개수
+
+    private int reviewCnt; // 리뷰 개수
 }

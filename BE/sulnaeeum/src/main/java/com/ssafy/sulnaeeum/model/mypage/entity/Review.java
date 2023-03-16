@@ -1,6 +1,5 @@
 package com.ssafy.sulnaeeum.model.mypage.entity;
 
-import com.ssafy.sulnaeeum.model.drink.entity.Drink;
 import com.ssafy.sulnaeeum.model.user.entity.User;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -14,19 +13,23 @@ import javax.persistence.*;
 @SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name="like_drink")
-public class LikeDrink {
+@Table(name="review")
+public class Review {
 
     @Id
     @GeneratedValue
     @Column(nullable = false)
-    private Long likeDrinkId; // auto_increment PK
+    private Long reviewId; // auto_increment PK
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
-    private User user; // 찜한 회원
+    private User user; // 작성자
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "drink_id")
-    private Drink drink; // 찜한 술
+    private int taste1; // 첫 번째 맛 평가
+
+    private int taste2; // 두 번째 맛 평가
+
+    private int taste3; // 세 번째 맛 평가
+
+    private String content; // 내용
 }

@@ -19,6 +19,6 @@ public interface DrinkRepo extends JpaRepository<Drink, Integer> {
     List<Drink> findAll();
 
     // drink_type_drink_type_id로 분류하여 조회하고, drink_name으로 정렬
-    @Query(value = "select * from drink where drink_type_drink_type_id = ?1 order by drink_name", nativeQuery = true)
+    @Query(value = "select * from drink where drink_type_id = ?1 order by drink_name", nativeQuery = true)
     List<Drink> findByDrinkTypeId(Long drinkTypeId);
 }
