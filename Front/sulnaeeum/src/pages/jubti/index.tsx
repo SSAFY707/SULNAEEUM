@@ -103,33 +103,33 @@ const Jubti: React.FC = () => {
 
     
 
-  return (
-    <>
-      <div className={`${page == 0 ? 'block' : 'hidden'} flex flex-col items-center overflow-hidden`}>
+      return (
+        <>
+      <div className={`${page == 0 ? 'block' : 'hidden'} flex flex-col items-center w-full h-[1080px] overflow-hidden`}>
         <div className={'flex flex-col justify-center items-center h-[600px] md:h-[380px] w-full bg-[#AEA896] px-10'}>
           <div className={'flex items-center flex-col text-white mb-10 md:mt-16'}>
             <img className={'h-[14px] mb-2 md:h-[24px] md:mt-6 md:mb-8'} src="/images/jubti/pattern1.png" />
             <h1 className={'text-[40px] font-bold md:text-[50px]'}>전통주 유형검사</h1>
-            <div className={'text-[18px] font-preEL md:text-[24px] md:mb-6'}>간단한 질문으로 나의 酒BTI를 확인해보세요.</div>
+            <div className={'text-[18px] font-preEL md:text-[24px] md:my-4'}>간단한 질문으로 나의 酒BTI를 확인해보세요.</div>
             <img className={'w-[350px] mt-4 mb-6 md:w-[602px] md:mt-10'} src="/images/jubti/pattern2.png" />
           </div>
-          <div className={'flex flex-col items-center w-5/6 text-[16px] md:flex-row md:absolute md:top-[500px] md:items-start'}>
-            <div className={'flex items-center mb-5 pr-3 bg-zinc-300/50 h-[80px] w-full rounded-lg md:mx-4 md:w-1/3 md:h-[300px] md:flex-col'}>
-              <img className={'h-2/3 ml-3 mr-5 md:h-1/3'} src="/images/jubti/icon/1.png" />
-              <div>질문 문항은 10개, 검사 시간은 총 1분 내외입니다.</div>
+          <div className={'hidden md:flex w-[200px] h-[60px] absolute top-[360px] bg-white text-[#AEA896] rounded cursor-pointer justify-center items-center text-[20px] font-preM'}>시작하기</div>
+          <div className={'flex flex-col items-center w-5/6 md:w-11/12 text-[16px] md:flex-row md:absolute md:top-[500px] md:justify-center md:items-center'}>
+            <div className={'flex items-center mb-5 pr-3 bg-zinc-300/40 h-[90px] w-full rounded-lg md:mx-6 md:w-1/4 md:h-[300px] md:flex-col md:p-4'}>
+              <img className={'h-2/3 ml-3 mr-5 md:h-2/5 md:mb-8 md:mt-3'} src="/images/jubti/icon/1.png" />
+              <div className={'md:w-5/6 text-[16px] md:text-[22px] md:text-center'}>질문 문항은 10개, 검사 시간은 총 1분 내외입니다.</div>
             </div>
-            <div className={'flex items-center mb-5 p-3 bg-zinc-300/50 h-[80px] w-full rounded-lg md:mx-4 md:w-1/3 md:h-[300px] md:flex-col'}>
-              <img className={'h-2/3 ml-3 mr-5 md:h-1/3'} src="/images/jubti/icon/2.png" />
-              <div>친구와 공유하며 잘 맞는 전통주 유형을 찾아보세요.</div>
+            <div className={'flex items-center mb-5 p-3 bg-zinc-300/40 h-[90px] w-full rounded-lg md:mx-6 md:w-1/4 md:h-[300px] md:flex-col md:p-4'}>
+              <img className={'h-2/3 ml-3 mr-5 md:h-2/5 md:mb-8 md:mt-3'} src="/images/jubti/icon/2.png" />
+              <div className={'md:w-5/6 text-[16px] md:text-[22px] md:text-center'}>친구와 공유하며 잘 맞는 전통주 유형을 찾아보세요.</div>
             </div>
-            <div className={'flex items-center p-3 bg-zinc-300/50 h-[80px] w-full rounded-lg md:mx-4 md:w-1/3 md:h-[300px] md:flex-col'}>
-              <img className={'h-2/3 ml-3 mr-5 md:h-1/3'} src="/images/jubti/icon/3.png" />
-              <div>가능하면 답변 시 '중립'은 피해주세요.</div>
+            <div className={'flex items-center mb-5 p-3 bg-zinc-300/40 h-[90px] w-full rounded-lg md:mx-6 md:w-1/4 md:h-[300px] md:flex-col md:p-4'}>
+              <img className={'h-2/3 ml-3 mr-5 md:h-2/5 md:mb-8 md:mt-3'} src="/images/jubti/icon/3.png" />
+              <div className={'md:w-5/6 text-[16px] md:text-[22px] md:text-center'}>가능하면 답변 시 '중립'은 피해주세요.</div>
             </div>
           </div>
         </div>
-        <div className={'hidden md:flex w-full h-[200px] justify-center rounded-b-full bg-[#AEA896]'}>
-          <div className={'flex w-[200px] h-[60px] bg-white text-[#AEA896] rounded cursor-pointer justify-center items-center'}>시작하기</div>
+        <div className={'hidden md:flex relative w-[2700px] h-[1200px] justify-center rounded-b-full bg-[#AEA896] top-[-450px] z-[-10]'}>
         </div>
         <div className={'w-5/6 h-[80px] bg-[#AEA896] rounded text-white text-[20px] flex justify-center items-center mt-14 cursor-pointer md:hidden'}>시작하기</div>
       </div>
@@ -249,7 +249,7 @@ const Jubti: React.FC = () => {
         </div>
       </div>
       <div className={'flex justify-center'}>
-        <div className={'flex justify-center items-center w-[100px] h-[100px] rounded-full bg-gray-300/50 cursor-pointer'} onClick={()=>{setPage(page + 1)}}>
+        <div className={`flex ${page == 0 && 'hidden'} justify-center items-center w-[100px] h-[100px] rounded-full bg-gray-300/50 cursor-pointer`} onClick={()=>{setPage(page + 1)}}>
           {page == 5 ? '결과 제출하기' :'다음으로'}
         </div>
       </div>
