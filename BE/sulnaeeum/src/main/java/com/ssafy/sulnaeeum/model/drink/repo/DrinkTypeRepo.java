@@ -7,5 +7,6 @@ import java.util.Optional;
 
 public interface DrinkTypeRepo extends JpaRepository<DrinkType, Integer> {
 
-    public Optional<DrinkType> findByDrinkTypeName(String drinkTypeName);
+    // 주종이름으로 주종 정보 찾기
+    Optional<DrinkType> findByDrinkTypeName(String drinkTypeName);
 }

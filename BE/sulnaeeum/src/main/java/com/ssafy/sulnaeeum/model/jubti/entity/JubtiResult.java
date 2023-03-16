@@ -37,25 +37,33 @@ public class JubtiResult {
     private int tasteBody; // 바디감
 
     @Column(nullable = false)
+    private int tasteThroat; // 목넘김
+
+    @Column(nullable = false)
     private int tasteSour; // 신맛
 
     @Column(nullable = false)
     private int tasteSweet; // 단맛
 
+    @Column(nullable = false)
+    private int tasteFlavor; // 향
+
     @Column(length = 10, nullable = false)
     private String dish; // 안주
 
-    // Entity -> DTO 변환
-    public JubtiResultDto toDto() {
-        return JubtiResultDto.builder()
-                .jubtiResultId(this.jubtiResultId)
-                .age(this.age)
-                .sex(this.sex)
-                .level(this.level)
-                .tasteRefresh(this.tasteRefresh)
-                .tasteBody(this.tasteBody)
-                .tasteSour(this.tasteSour)
-                .tasteSweet(this.tasteSweet)
-                .dish(this.dish).build();
-    }
+//    // Entity -> DTO 변환
+//    public JubtiResultDto toDto() {
+//        return JubtiResultDto.builder()
+//                .jubtiResultId(this.jubtiResultId)
+//                .age(this.age)
+//                .sex(this.sex)
+//                .level(this.level)
+//                .tasteRefresh(this.tasteRefresh)
+//                .tasteBody(this.tasteBody)
+//                .tasteThroat(this.tasteThroat)
+//                .tasteSour(this.tasteSour)
+//                .tasteSweet(this.tasteSweet)
+//                .tasteFlavor(this.tasteFlavor)
+//                .dish(this.dish).build();
+//    }
 }

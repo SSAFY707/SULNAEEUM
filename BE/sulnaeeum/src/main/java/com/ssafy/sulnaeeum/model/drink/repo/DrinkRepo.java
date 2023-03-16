@@ -12,13 +12,12 @@ import java.util.Optional;
 public interface DrinkRepo extends JpaRepository<Drink, Integer> {
 
     // drink_id로 찾기
-    public Optional<Drink> findByDrinkId(Long drinkId);
+    Optional<Drink> findByDrinkId(Long drinkId);
 
-    // 모두 조회하고, drink_name 순으로 정렬
-    @Query(value = "select * from drink order by drink_name", nativeQuery = true)
-    public List<Drink> findAll();
+    // drink_type_id로 찾기
+    List<Drink> findByDrinkType(Long drinkTypeId);
 
-    // drink_type_drink_type_id로 분류하여 조회하고, drink_name으로 정렬
-    @Query(value = "select * from drink where drink_type_drink_type_id = ?1 order by drink_name", nativeQuery = true)
-    public List<Drink> findByDrinkTypeId(Long drinkTypeId);
+    // 키워드로 검색
+    @Query(value = "select * from drink where drink_name like %?1%", nativeQuery = true)
+    List<Drink> searchDrink(String keyword);
 }
