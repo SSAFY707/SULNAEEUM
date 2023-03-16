@@ -33,8 +33,9 @@ public class DrinkInfoDto {
     private String drinkType;
 
     @Schema(description = "찜 여부")
-    private boolean isMine;
+    private boolean like;
 
+    // drink 테이블에서 전체 리스트 출력시 필요한 정보만 꺼내어 담기 위함
     public DrinkInfoDto(Drink drink) {
         this.drinkId = drink.getDrinkId();
         this.drinkName = drink.getDrinkName();
