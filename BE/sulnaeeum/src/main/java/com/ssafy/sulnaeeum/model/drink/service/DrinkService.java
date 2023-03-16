@@ -14,7 +14,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -75,6 +74,7 @@ public class DrinkService {
     }
 
     // 전체 전통주 중 필요한 데이터만 선별
+    @Transactional
     public List<DrinkInfoDto> makeDrinkList(List<Drink> drinkList, String kakaoId) {
         List<DrinkInfoDto> drinkInfoDtoList = new ArrayList<>();
         for(Drink drink: drinkList) {
