@@ -8,16 +8,22 @@ import com.ssafy.sulnaeeum.model.user.dto.TokenDto;
 import com.ssafy.sulnaeeum.model.user.entity.User;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
 @Slf4j
 public class UserService {
+
     private final UserRepo userRepository;
     private final TokenProvider tokenProvider;
+
+    UserRepo userRepo;
 
     @Transactional
     public TokenDto refreshToken(TokenDto tokenRequestDto) {
@@ -52,5 +58,13 @@ public class UserService {
         User user = userRepository.findByKakaoId(kakaoId).orElseThrow(() -> new CustomException(CustomExceptionList.MEMBER_NOT_FOUND));
 
         user.updateToken(null);
+    }
+
+    public Long findUserId(String kakaoId) {
+        Optional<Long> userId = userRepo.findUserId(kakaoId);
+        if(!userId.isPresent()) {
+            throw new CustomException(CustomExceptionList.MEMBER_NOT_FOUND);
+        }
+        return userId.get();
     }
 }

@@ -13,6 +13,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
@@ -50,7 +51,7 @@ public class UserController {
         return new ResponseEntity<>(tokenDto, httpHeaders, HttpStatus.OK);
     }
 
-    @GetMapping("/logout")
+    @GetMapping("/kakao/logout")
     @Operation(summary = "로그아웃", description = "로그아웃")
     public ResponseEntity<String> logout(@Parameter String kakaoId){
 
