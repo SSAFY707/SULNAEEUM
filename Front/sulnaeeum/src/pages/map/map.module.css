@@ -1,17 +1,58 @@
 .container {
     width: 100%;
     height: 920px;
-    background-color: rgba(230,200,200,0.4);
+    //background-color: rgba(230,200,200,0.4);
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-contents: center;
 }
 
-.lay {
-    outline: 1px dashed red;
+.layout {
+    outline: 2px dashed red;
 }
-
 .mapContainer {
     margin-top: 40px;
+}
+
+.map1 {
+    position: relative;
+    z-index: 100000;
+    top: -470px;
+    left: 22px;
+}
+
+.map2 {
+    position: relative;
+    z-index: 100001;
+    top: -654px;
+    left: 104px;
+}
+
+.map3 {
+    position: relative;
+    z-index: 100000;
+    top: -674px;
+    left: 28px;
+}
+
+.map4 {
+    position: relative;
+    z-index: 100000;
+    top: -694px;
+    left: -2px;
+}
+
+.map5 {
+    position: relative;
+    z-index: 100000;
+    top: -474px;
+    left: 18px;
+}
+
+.map6 {
+    position: relative;
+    z-index: 100000;
+    top: -472px;
+    left: 18px;
 }
