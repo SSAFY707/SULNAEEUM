@@ -2,11 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-/* 기본 세팅 */
-* {
-    font-family: preL
-}
-
 h1 {
     font-size: 40px;
     font-family: preB;
@@ -15,6 +10,7 @@ h1 {
 body {
     margin: 0;
     padding: 0;
+    font-family: preL
 }
 
 a {
