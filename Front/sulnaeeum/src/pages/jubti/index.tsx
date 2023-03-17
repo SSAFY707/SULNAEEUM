@@ -1,7 +1,10 @@
 import { randomInt } from 'crypto';
 import React, { useState } from 'react'
+import { BsArrowLeftCircle } from 'react-icons/bs';
 
 const Jubti: React.FC = () => {
+
+  
 
   // 선택된 데이터 타입
   type SelData = {
@@ -93,6 +96,13 @@ const Jubti: React.FC = () => {
     setData(new_data)
   }
 
+  const select2 = (key1 : string, key2 : string, value: any) => {
+    const new_data : SelData = {...data}
+    new_data[key1] = value
+    new_data[key2] = 6 - value;
+    setData(new_data)
+  }
+
   const move_page = () => { 
     let flag = true;
     page_data[page-1].forEach(key => {
@@ -109,22 +119,20 @@ const Jubti: React.FC = () => {
   }
 
   const jubti = () => {
+    let mbti = ''
+    const arr : Array<string> = ['ie', 'ns', 'ft', 'jp']
     const check = (key : string, value: Number) => {
       if (value < 3) {
         return key[0]
       } else if (value > 3) {
         return key[1]
       } else {
-        const idx = randomInt(2)
+        // random으로 0 / 1 생성하기
+        const idx = Math.round(Math.random())
         return key[idx]
       }
     }
-    let mbti = ''
-    mbti += check('ie', data['ie'])
-    mbti += check('ns', data['ns'])
-    mbti += check('ft', data['ft'])
-    mbti += check('jp', data['jp'])
-
+    arr.map((a)=>{mbti += check(a, data[a] as Number)})
     return mbti
   }
 
@@ -138,7 +146,7 @@ const Jubti: React.FC = () => {
             <div className={'text-[18px] font-preEL md:text-[24px] md:my-4'}>간단한 질문으로 나의 酒BTI를 확인해보세요.</div>
             <img className={'w-[350px] mt-4 mb-6 md:w-[602px] md:mt-10'} src="/images/jubti/pattern2.png" />
           </div>
-          <div onClick={()=>{setPage(page + 1)}} className={'hidden md:flex w-[200px] h-[60px] absolute top-[360px] bg-white text-[#AEA896] rounded cursor-pointer justify-center items-center text-[20px] font-preM'}>시작하기</div>
+          <div onClick={()=>{setPage(page + 1)}} className={'hidden md:flex w-[200px] h-[60px] absolute top-[360px] bg-white text-[#AEA896] rounded cursor-pointer justify-center items-center text-[20px] font-preM hover:bg-gray-200'}>시작하기</div>
           <div className={'flex flex-col items-center w-5/6 md:w-11/12 text-[16px] md:flex-row md:absolute md:top-[500px] md:justify-center md:items-center'}>
             <div className={'flex items-center mb-5 pr-3 bg-zinc-300/40 h-[90px] w-full rounded-lg md:mx-6 md:w-1/4 md:h-[300px] md:flex-col md:p-4'}>
               <img className={'h-2/3 ml-3 mr-5 md:h-2/5 md:mb-8 md:mt-3'} src="/images/jubti/icon/1.png" />
@@ -156,16 +164,16 @@ const Jubti: React.FC = () => {
         </div>
         <div className={'hidden md:flex relative w-[2700px] h-[1200px] justify-center rounded-b-full bg-[#AEA896] top-[-450px] z-[-10]'}>
         </div>
-        <div onClick={()=>{setPage(page + 1)}} className={'w-5/6 h-[80px] bg-[#AEA896] rounded text-white text-[20px] flex justify-center items-center mt-14 cursor-pointer md:hidden'}>시작하기</div>
+        <div onClick={()=>{setPage(page + 1)}} className={'w-5/6 h-[70px] bg-[#AEA896] hover:bg-[#655442] rounded text-white text-[20px] flex justify-center items-center mt-14 cursor-pointer absolute bottom-[100px] md:hidden'}>시작하기</div>
       </div>
-      <div className={`${page != 0 ? 'block' : 'hidden'} cursor-pointer bg-sky-200`} onClick={()=>setPage(page - 1)}>이전으로</div>
+      <div className={`${page != 0 ? 'block' : 'hidden'} cursor-pointer absolute left-[40px] top-[60px] md:left-[240px] md:top-[80px]`} onClick={()=>setPage(page - 1)}><BsArrowLeftCircle className={'w-[34px] h-[34px] text-[#655442] md:w-[40px] md:h-[40px]'} /></div>
       <div className={`${page == 1 ? 'block' : 'hidden'}`}>
         <div className={'mt-40 mb-20 flex flex-col items-center w-full'}>
           <div className={'flex flex-col items-center w-5/6'}>
             <div className={'text-[24px] font-preM mb-8 md:text-[30px] md:mb-16'}>당신의 나이를 선택해주세요.</div>
             <div className={'grid grid-cols-2 gap-2 justify-center w-full md:flex md:gap-5'}>
                 {datas.age.map((age, index)=>{
-                    return (<div onClick={()=>{select('age',age.value)}} key={index} className={`flex justify-center items-center cursor-pointer w-full h-[50px] border border-[#AEA896] rounded md:w-[150px] md:h-[60px] md:text-[20px] ${age.value == '60s' && 'col-span-2 w-full md:w-[150px]'} ${age.value == data['age'] && 'text-white bg-[#AEA896]'}`}>{age.name}</div>)
+                    return (<div onClick={()=>{select('age',age.value)}} key={index} className={`flex justify-center items-center cursor-pointer w-full h-[50px] border border-[#AEA896] rounded md:w-[150px] md:h-[60px] md:text-[20px] ${age.value == '60s' && 'col-span-2 w-full md:w-[150px]'} ${age.value == data['age'] && 'text-white bg-[#999483]'}`}>{age.name}</div>)
                 })}
             </div>
           </div>
@@ -173,108 +181,108 @@ const Jubti: React.FC = () => {
             <div className={'text-[24px] font-preM mb-8 md:text-[30px] md:mb-16 md: mt-8'}>당신의 성별을 선택해주세요.</div>
             <div className={'flex justify-center w-full md:gap-3'}>
               {datas.sex.map((sex, index)=>{
-                return(<div onClick={()=>{select('sex', sex.value)}} key={index} className={`flex justify-center items-center cursor-pointer w-full h-[50px] border border-[#AEA896] m-1 rounded md:w-[150px] md:h-[60px] md:text-[20px] ${sex.value == data['sex'] && 'text-white bg-[#AEA896]'}`}>{sex.name}</div>)
+                return(<div onClick={()=>{select('sex', sex.value)}} key={index} className={`flex justify-center items-center cursor-pointer w-full h-[50px] border border-[#AEA896] m-1 rounded md:w-[150px] md:h-[60px] md:text-[20px] ${sex.value == data['sex'] && 'text-white bg-[#999483]'}`}>{sex.name}</div>)
               })}
             </div>
           </div>
         </div>
       </div>
       <div className={`${page == 2 ? 'block' : 'hidden'}`}>
-        <div className={'flex flex-col text-[24px] my-10 font-preM items-center'}>
+        <div className={'flex flex-col md:flex-row text-[24px] md:text-[30px] md:justify-center md:gap-3 my-10 md:mt-20 md:mb-8 font-preM items-center'}>
           <div className={''}>✔ 두 가지 선택지 중</div >
           <div className={''}>가까운 쪽을 선택해 주세요</div >
         </div>
         <div className={'flex flex-col items-center justify-center'}>
             {datas.question.slice(0,3).map((q, index)=>{
               return (
-              <div className={'w-5/6 my-6'} key={index}>
-                <div className={'flex w-full justify-between text-[20px] font-preL mb-8'}>
+              <div className={'w-5/6 px-2 my-6 md:flex md:flex-col md:items-center md:w-3/4 md:my-4'} key={index}>
+                <div className={'flex w-full justify-between text-[20px] font-preL mb-8 md:w-3/4 md:relative md:top-[70px] md:text-[22px]'}>
                   <div>{q.q1}</div>
                   <div>{q.q2}</div>
                 </div>
-                <div className={'flex justify-between items-center'}>
-                  <div onClick={()=>{{q.value2 && select(q.value2, 5)}; select(q.value, 1)}} className={`w-[50px] h-[50px] rounded-full border border-[#AEA896] ${data[q.value] == 1 && 'bg-[#AEA896]' }`}></div>
-                  <div onClick={()=>{{q.value2 && select(q.value2, 4)}; select(q.value, 2)}} className={`w-[40px] h-[40px] rounded-full border border-[#AEA896] ${data[q.value] == 2 && 'bg-[#AEA896]' }`}></div>
-                  <div onClick={()=>{{q.value2 && select(q.value2, 3)}; select(q.value, 3)}} className={`w-[30px] h-[30px] rounded-full border border-[#AEA896] ${data[q.value] == 3 && 'bg-[#AEA896]' }`}></div>
-                  <div onClick={()=>{{q.value2 && select(q.value2, 2)}; select(q.value, 4)}} className={`w-[40px] h-[40px] rounded-full border border-[#AEA896] ${data[q.value] == 4 && 'bg-[#AEA896]' }`}></div>
-                  <div onClick={()=>{{q.value2 && select(q.value2, 1)}; select(q.value, 5)}} className={`w-[50px] h-[50px] rounded-full border border-[#AEA896] ${data[q.value] == 5 && 'bg-[#AEA896]' }`}></div>
+                <div className={'flex justify-between items-center md:w-2/5 md:z-10'}>
+                  <div onClick={()=>{{q.value2 ? select2(q.value, q.value2, 1) : select(q.value, 1)}}} className={`w-[50px] h-[50px] rounded-full border border-[#999483] ${data[q.value] == 1 && 'bg-[#999483]' }`}></div>
+                  <div onClick={()=>{{q.value2 ? select2(q.value, q.value2, 2) : select(q.value, 2)}}} className={`w-[40px] h-[40px] rounded-full border border-[#999483] ${data[q.value] == 2 && 'bg-[#999483]' }`}></div>
+                  <div onClick={()=>{{q.value2 ? select2(q.value, q.value2, 3) : select(q.value, 3)}}} className={`w-[30px] h-[30px] rounded-full border border-[#999483] ${data[q.value] == 3 && 'bg-[#999483]' }`}></div>
+                  <div onClick={()=>{{q.value2 ? select2(q.value, q.value2, 4) : select(q.value, 4)}}} className={`w-[40px] h-[40px] rounded-full border border-[#999483] ${data[q.value] == 4 && 'bg-[#999483]' }`}></div>
+                  <div onClick={()=>{{q.value2 ? select2(q.value, q.value2, 5) : select(q.value, 5)}}} className={`w-[50px] h-[50px] rounded-full border border-[#999483] ${data[q.value] == 5 && 'bg-[#999483]' }`}></div>
                 </div>
-                <hr className={'border-xs border-[#AEA89699] mt-6'}></hr>
+                <hr className={'border-xs border-[#AEA89699] mt-6 md:w-3/4 md:mt-10'}></hr>
               </div>
               )
             })}
         </div>
       </div>
       <div className={`${page == 3 ? 'block' : 'hidden'}`}>
-        <div className={'flex flex-col text-[24px] my-10 font-preM items-center'}>
+        <div className={'flex flex-col md:flex-row text-[24px] my-10 font-preM items-center md:text-[30px] md:justify-center md:gap-3 my-10 md:mt-20 md:mb-8'}>
           <div className={''}>✔ 두 가지 선택지 중</div >
           <div className={''}>가까운 쪽을 선택해 주세요</div >
         </div>
         <div className={'flex flex-col items-center justify-center'}>
             {datas.question.slice(3,6).map((q, index)=>{
               return (
-              <div className={'w-5/6 my-6'} key={index}>
-                <div className={'flex w-full justify-between text-[20px] font-preL mb-8'}>
+                <div className={'w-5/6 px-2 my-6 md:flex md:flex-col md:items-center md:w-3/4 md:my-4'} key={index}>
+                <div className={'flex w-full justify-between text-[20px] font-preL mb-8 md:w-3/4 md:relative md:top-[70px] md:text-[22px]'}>
                   <div>{q.q1}</div>
                   <div>{q.q2}</div>
                 </div>
-                <div className={'flex justify-between items-center'}>
-                  <div onClick={()=>{{q.value2 && select(q.value2, 5)}; select(q.value, 1)}} className={`w-[50px] h-[50px] rounded-full border border-[#AEA896] ${data[q.value] == 1 && 'bg-[#AEA896]' }`}></div>
-                  <div onClick={()=>{{q.value2 && select(q.value2, 4)}; select(q.value, 2)}} className={`w-[40px] h-[40px] rounded-full border border-[#AEA896] ${data[q.value] == 2 && 'bg-[#AEA896]' }`}></div>
-                  <div onClick={()=>{{q.value2 && select(q.value2, 3)}; select(q.value, 3)}} className={`w-[30px] h-[30px] rounded-full border border-[#AEA896] ${data[q.value] == 3 && 'bg-[#AEA896]' }`}></div>
-                  <div onClick={()=>{{q.value2 && select(q.value2, 2)}; select(q.value, 4)}} className={`w-[40px] h-[40px] rounded-full border border-[#AEA896] ${data[q.value] == 4 && 'bg-[#AEA896]' }`}></div>
-                  <div onClick={()=>{{q.value2 && select(q.value2, 1)}; select(q.value, 5)}} className={`w-[50px] h-[50px] rounded-full border border-[#AEA896] ${data[q.value] == 5 && 'bg-[#AEA896]' }`}></div>
+                <div className={'flex justify-between items-center md:w-2/5 md:z-10'}>
+                  <div onClick={()=>{{q.value2 ? select2(q.value, q.value2, 1) : select(q.value, 1)}}} className={`w-[50px] h-[50px] rounded-full border border-[#999483] ${data[q.value] == 1 && 'bg-[#999483]' }`}></div>
+                  <div onClick={()=>{{q.value2 ? select2(q.value, q.value2, 2) : select(q.value, 2)}}} className={`w-[40px] h-[40px] rounded-full border border-[#999483] ${data[q.value] == 2 && 'bg-[#999483]' }`}></div>
+                  <div onClick={()=>{{q.value2 ? select2(q.value, q.value2, 3) : select(q.value, 3)}}} className={`w-[30px] h-[30px] rounded-full border border-[#999483] ${data[q.value] == 3 && 'bg-[#999483]' }`}></div>
+                  <div onClick={()=>{{q.value2 ? select2(q.value, q.value2, 4) : select(q.value, 4)}}} className={`w-[40px] h-[40px] rounded-full border border-[#999483] ${data[q.value] == 4 && 'bg-[#999483]' }`}></div>
+                  <div onClick={()=>{{q.value2 ? select2(q.value, q.value2, 5) : select(q.value, 5)}}} className={`w-[50px] h-[50px] rounded-full border border-[#999483] ${data[q.value] == 5 && 'bg-[#999483]' }`}></div>
                 </div>
-                <hr className={'border-xs border-[#AEA89699] mt-6'}></hr>
+                <hr className={'border-xs border-[#AEA89699] mt-6 md:w-3/4 md:mt-10'}></hr>
               </div>
               )
             })}
         </div>
       </div>
       <div className={`${page == 4 ? 'block' : 'hidden'}`}>
-        <div className={'flex flex-col text-[24px] my-10 font-preM items-center'}>
+        <div className={'flex flex-col md:flex-row text-[24px] my-10 font-preM items-center md:text-[30px] md:justify-center md:gap-3 my-10 md:mt-20 md:mb-8'}>
           <div className={''}>✔ 두 가지 선택지 중</div >
           <div className={''}>가까운 쪽을 선택해 주세요</div >
         </div>
         <div className={'flex flex-col items-center justify-center'}>
             {datas.question.slice(6,9).map((q, index)=>{
               return (
-              <div className={'w-5/6 my-6'} key={index}>
-                <div className={'flex w-full justify-between text-[20px] font-preL mb-8'}>
+                <div className={'w-5/6 px-2 my-6 md:flex md:flex-col md:items-center md:w-3/4 md:my-4'} key={index}>
+                <div className={'flex w-full justify-between text-[20px] font-preL mb-8 md:w-3/4 md:relative md:top-[70px] md:text-[22px]'}>
                   <div>{q.q1}</div>
                   <div>{q.q2}</div>
                 </div>
-                <div className={'flex justify-between items-center'}>
-                  <div onClick={()=>{{q.value2 && select(q.value2, 5)}; select(q.value, 1)}} className={`w-[50px] h-[50px] rounded-full border border-[#AEA896] ${data[q.value] == 1 && 'bg-[#AEA896]' }`}></div>
-                  <div onClick={()=>{{q.value2 && select(q.value2, 4)}; select(q.value, 2)}} className={`w-[40px] h-[40px] rounded-full border border-[#AEA896] ${data[q.value] == 2 && 'bg-[#AEA896]' }`}></div>
-                  <div onClick={()=>{{q.value2 && select(q.value2, 3)}; select(q.value, 3)}} className={`w-[30px] h-[30px] rounded-full border border-[#AEA896] ${data[q.value] == 3 && 'bg-[#AEA896]' }`}></div>
-                  <div onClick={()=>{{q.value2 && select(q.value2, 2)}; select(q.value, 4)}} className={`w-[40px] h-[40px] rounded-full border border-[#AEA896] ${data[q.value] == 4 && 'bg-[#AEA896]' }`}></div>
-                  <div onClick={()=>{{q.value2 && select(q.value2, 1)}; select(q.value, 5)}} className={`w-[50px] h-[50px] rounded-full border border-[#AEA896] ${data[q.value] == 5 && 'bg-[#AEA896]' }`}></div>
+                <div className={'flex justify-between items-center md:w-2/5 md:z-10'}>
+                  <div onClick={()=>{{q.value2 ? select2(q.value, q.value2, 1) : select(q.value, 1)}}} className={`w-[50px] h-[50px] rounded-full border border-[#999483] ${data[q.value] == 1 && 'bg-[#999483]' }`}></div>
+                  <div onClick={()=>{{q.value2 ? select2(q.value, q.value2, 2) : select(q.value, 2)}}} className={`w-[40px] h-[40px] rounded-full border border-[#999483] ${data[q.value] == 2 && 'bg-[#999483]' }`}></div>
+                  <div onClick={()=>{{q.value2 ? select2(q.value, q.value2, 3) : select(q.value, 3)}}} className={`w-[30px] h-[30px] rounded-full border border-[#999483] ${data[q.value] == 3 && 'bg-[#999483]' }`}></div>
+                  <div onClick={()=>{{q.value2 ? select2(q.value, q.value2, 4) : select(q.value, 4)}}} className={`w-[40px] h-[40px] rounded-full border border-[#999483] ${data[q.value] == 4 && 'bg-[#999483]' }`}></div>
+                  <div onClick={()=>{{q.value2 ? select2(q.value, q.value2, 5) : select(q.value, 5)}}} className={`w-[50px] h-[50px] rounded-full border border-[#999483] ${data[q.value] == 5 && 'bg-[#999483]' }`}></div>
                 </div>
-                <hr className={'border-xs border-[#AEA89699] mt-6'}></hr>
+                <hr className={'border-xs border-[#AEA89699] mt-6 md:w-3/4 md:mt-10'}></hr>
               </div>
               )
             })}
         </div>
       </div>
       <div className={`${page == 5 ? 'block' : 'hidden'} flex flex-col items-center`}>
-        <div className={'flex flex-col text-[24px] my-10 font-preM items-center'}>
+        <div className={'flex flex-col md:flex-row gap-2 text-[24px] md:text-[30px] my-10 md:my-20 font-preM items-center'}>
           <div className={''}>원하는 안주의 종류를</div >
           <div className={''}>선택해 주세요</div >
         </div>
-        <div className={'grid grid-cols-2 flex justify-center w-5/6 items-center justify-center'}>
+        <div className={'grid grid-cols-2 md:flex md:gap-16 justify-center w-5/6 items-center justify-center'}>
             {datas.dish.map((dish, index)=>{
               return (
-                <div onClick={()=>{select('dish', dish.value)}} className={`flex flex-col items-center ${data['dish'] == dish.value && 'brightness-50'}`}>
-                  <img className={'w-[130px]'} src={`/images/jubti/dish/${index + 1}.png`} />
-                  <div className={'text-[18px] mt-1 mb-4'}>{dish.name}</div>
+                <div onClick={()=>{select('dish', dish.value)}} className={`flex flex-col items-center md:h-[400px] md:justify-center ${data['dish'] == dish.value && 'brightness-50'}`}>
+                  <img className={'w-[130px] md:w-[200px]'} src={`/images/jubti/dish/${index + 1}.png`} />
+                  <div className={'text-[18px] mt-1 mb-4 md:text-[24px] md:mt-6'}>{dish.name}</div>
                 </div>
               )
             })}
         </div>
       </div>
       <div className={'flex justify-center'}>
-        <div className={`flex ${page == 0 && 'hidden'} justify-center items-center w-[100px] h-[100px] rounded-full bg-gray-300/50 cursor-pointer`} onClick={()=>{if(page == 5){console.log(data)} else move_page()}}>
+        <div className={`flex ${page == 0 && 'hidden'} justify-center items-center w-5/6 md:w-[400px] absolute bottom-[100px] md:bottom-[80px] text-[20px] md:text-xl h-[70px] bg-[#999483] hover:bg-[#655442] text-white rounded cursor-pointer`} onClick={()=>{if(page == 5){console.log(jubti())} else move_page()}}>
           {page == 5 ? '결과 제출하기' :'다음으로'}
         </div>
       </div>
