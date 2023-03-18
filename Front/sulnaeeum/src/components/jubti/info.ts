@@ -1,9 +1,9 @@
 import { type } from 'os'
 import React from 'react'
 
-export default function info() {
+export default function info(target : string) {
     type MbtiType = {
-        [index: string]: Object
+        [index: string]: any
     }
     const info : MbtiType = {
         infp : {drink: '아이싱 자몽', good: 'enfj', bad: 'isfp', color: '#F4BDBF'},
@@ -22,6 +22,18 @@ export default function info() {
         entj : {drink: '도깨비술 11', good: 'infp', bad: 'estj', color: '#F3ECE2'},
         istj : {drink: '단홍', good: 'esfp', bad: 'infj', color: '#DAB4B8'},
         estj : {drink: '서울의 밤', good: 'istp', bad: 'enfj', color: '#DFDFDF'},
-
     }
+
+    const target_data : any = info[target]
+
+    const data = {
+        name : target_data.drink,
+        color: target_data.color,
+        good_name : info[target_data.good].drink,
+        good_color : info[target_data.good].color,
+        bad_name : info[target_data.bad].drink,
+        bad_color : info[target_data.bad].color,
+    }
+
+    return data;
 }
