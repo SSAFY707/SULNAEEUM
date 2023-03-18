@@ -41,7 +41,7 @@ function Navbar() {
                         return (
                           // 각 페이지 URL 넣어야함
                           <Link href={"/"}>
-                            <li className=" text-neutral-500 font-preR text-[14px] mt-[12px]">
+                            <li className=" text-neutral-500 font-preR text-[14.2px] mt-[15px]">
                               {val}
                             </li>
                           </Link>
@@ -57,14 +57,14 @@ function Navbar() {
           })}
         </li>
         <li className="w-[200px] flex">
-          <div>검색</div>
+          <button>검색</button>
           <Link href={"/user"}>
             <div className="pl-[40px]">로그인</div>
           </Link>
         </li>
       </ul>
       {hover == "On" ? (
-        <div className="drop-shadow-lg absolute z-0 h-[225px] w-screen bg-white"></div>
+        <div className="drop-shadow-lg absolute z-0 h-[240px] w-screen bg-white"></div>
       ) : (
         ""
       )}
