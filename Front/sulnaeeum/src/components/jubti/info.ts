@@ -49,14 +49,15 @@ export default function info(target : string) {
     }
 
     const target_data : any = info[target]
+    // console.log(target_data)
 
     const data = {
-        name : target_data.drink,
-        color: target_data.color,
-        good_name : info[target_data.good].drink,
-        good_color : info[target_data.good].color,
-        bad_name : info[target_data.bad].drink,
-        bad_color : info[target_data.bad].color,
+        name : target_data['drink'],
+        color: target_data['color'],
+        good_name : info[target_data.good]['drink'],
+        good_color : info[target_data.good]['color'],
+        bad_name : info[target_data.bad]['drink'],
+        bad_color : info[target_data.bad]['color'],
         explain: explain[target],
     }
 
