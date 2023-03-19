@@ -17,7 +17,7 @@ function Navbar() {
 
   //
   return (
-    <nav className="absolute">
+    <nav className="fixed z-50">
       <ul className=" hover:border-b hover:pb-[1px] h-[50px] w-screen text-[16px] flex justify-between items-center border-b-2 bg-white">
         <li className="w-[300px] pl-[180px]">
           <Link href={"/"}>로고부분</Link>

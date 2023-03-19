@@ -1,0 +1,15 @@
+.image-wrapper {
+  position: relative;
+}
+
+.image-wrapper img {
+  z-index: 2;
+  position: absolute;
+  top: 300px;
+  transition: top 0.5s ease-out;
+  transition: right 0.5s ease-out;
+}
+
+.scrolled {
+  transition: transform 0s ease-in-out;
+}
