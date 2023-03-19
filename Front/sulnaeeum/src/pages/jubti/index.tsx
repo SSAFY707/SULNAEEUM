@@ -1,4 +1,5 @@
-import { randomInt } from 'crypto';
+import { useRouter } from 'next/router';
+
 import React, { useState } from 'react'
 import { BsArrowLeftCircle } from 'react-icons/bs';
 
@@ -84,6 +85,8 @@ const Jubti: React.FC = () => {
     ft: 0,
     jp: 0
   }
+
+  const router = useRouter()
   
   const [data, setData] = useState<SelData>(sel_data)
   const [page, setPage] = useState(0)
@@ -103,7 +106,7 @@ const Jubti: React.FC = () => {
     setData(new_data)
   }
 
-  const move_page = () => { 
+  const check_select = () => {
     let flag = true;
     page_data[page-1].forEach(key => {
       if(data[key] == ''){
@@ -111,7 +114,12 @@ const Jubti: React.FC = () => {
         return
       }
     });
-    if(!flag) {
+    if(!flag) return false
+    return true
+  }
+
+  const move_page = () => { 
+    if(!check_select()) {
       alert('질문을 모두 선택해 주세요 >.<')
       return
     } 
@@ -119,6 +127,10 @@ const Jubti: React.FC = () => {
   }
 
   const jubti = () => {
+    if(!check_select()) {
+      alert('안주를 선택해 주세요')
+      return
+    }
     let mbti = ''
     const arr : Array<string> = ['ie', 'ns', 'ft', 'jp']
     const check = (key : string, value: Number) => {
@@ -133,7 +145,9 @@ const Jubti: React.FC = () => {
       }
     }
     arr.map((a)=>{mbti += check(a, data[a] as Number)})
-    return mbti
+    console.log(`/jubti/result/${mbti}`);
+    console.log(router)
+    router.push(`/jubti/result/${mbti}`)
   }
 
   return (
@@ -166,7 +180,7 @@ const Jubti: React.FC = () => {
         </div>
         <div onClick={()=>{setPage(page + 1)}} className={'w-5/6 h-[70px] bg-[#AEA896] hover:bg-[#655442] rounded text-white text-[20px] flex justify-center items-center mt-14 cursor-pointer absolute bottom-[100px] md:hidden'}>시작하기</div>
       </div>
-      <div className={`${page != 0 ? 'block' : 'hidden'} cursor-pointer absolute left-[40px] top-[60px] md:left-[240px] md:top-[80px]`} onClick={()=>setPage(page - 1)}><BsArrowLeftCircle className={'w-[34px] h-[34px] text-[#655442] md:w-[40px] md:h-[40px]'} /></div>
+      <div className={`${page != 0 ? 'block' : 'hidden'} cursor-pointer absolute left-[40px] top-[60px] md:left-[10%] md:top-[80px]`} onClick={()=>setPage(page - 1)}><BsArrowLeftCircle className={'w-[34px] h-[34px] text-[#655442] md:w-[40px] md:h-[40px]'} /></div>
       <div className={`${page == 1 ? 'block' : 'hidden'}`}>
         <div className={'mt-40 mb-20 flex flex-col items-center w-full'}>
           <div className={'flex flex-col items-center w-5/6'}>
@@ -282,8 +296,13 @@ const Jubti: React.FC = () => {
         </div>
       </div>
       <div className={'flex justify-center'}>
-        <div className={`flex ${page == 0 && 'hidden'} justify-center items-center w-5/6 md:w-[400px] absolute bottom-[100px] md:bottom-[80px] text-[20px] md:text-xl h-[70px] bg-[#999483] hover:bg-[#655442] text-white rounded cursor-pointer`} onClick={()=>{if(page == 5){console.log(jubti())} else move_page()}}>
-          {page == 5 ? '결과 제출하기' :'다음으로'}
+        <div className={`flex ${(page == 0 || page == 5) && 'hidden'} justify-center items-center w-5/6 md:w-[400px] absolute bottom-[100px] md:bottom-[80px] text-[20px] md:text-xl h-[70px] bg-[#999483] hover:bg-[#655442] text-white rounded cursor-pointer`} onClick={()=>{if(page == 5){console.log(jubti())} else move_page()}}>
+          다음으로
+        </div>
+      </div>
+      <div className={'flex justify-center'}>
+        <div onClick={()=>jubti()} className={`flex ${page != 5 && 'hidden'} justify-center items-center w-5/6 md:w-[400px] absolute bottom-[100px] md:bottom-[80px] text-[20px] md:text-xl h-[70px] bg-[#999483] hover:bg-[#655442] text-white rounded cursor-pointer`}>
+          결과 제출하기
         </div>
       </div>
     </>
