@@ -17,9 +17,9 @@ function Navbar() {
 
   //
   return (
-    <nav>
-      <ul className="hover:border-b h-[50px] text-[15px] flex justify-between items-center border-b-2  ">
-        <li className="w-[200px] pl-[120px]">
+    <nav className="absolute">
+      <ul className=" hover:border-b hover:pb-[1px] h-[50px] w-screen text-[16px] flex justify-between items-center border-b-2 bg-white">
+        <li className="w-[300px] pl-[180px]">
           <Link href={"/"}>로고부분</Link>
           {hover == "On" ? <div></div> : ""}
         </li>
@@ -27,21 +27,21 @@ function Navbar() {
           onMouseEnter={() => setHover("On")}
           onMouseLeave={() => setHover("")}
           className={`${
-            hover == "On" ? "z-10" : ""
-          } flex justify-around w-[700px] mt-[130px] h-[170px]`}
+            hover == "On" ? "z-10 h-[330px] mt-[419px]" : ""
+          } flex justify-around w-[700px] mt-[130px] mb-[127px]`}
         >
           {menu.map((v, i) => {
             return (
               <Link href={url[i] + ""}>
-                <div className="hover:border-b-2 hover:border-[#B58269] text-neutral-600 hover:font-preEB font-preM w-[100px] pt-[9px] h-[42px] text-center">
+                <div className="hover:border-b-2 hover:border-[#B58269] text-neutral-600 hover:font-preEB font-preM w-[110px] pt-[9px] h-[42px] text-center">
                   {v}
                   {hover == "On" ? (
-                    <ul className="items-center text-center mt-[28px]">
+                    <ul className="items-center text-center pt-[18px]">
                       {menuTab[i].map((val, idx) => {
                         return (
                           // 각 페이지 URL 넣어야함
                           <Link href={"/"}>
-                            <li className=" text-neutral-500 font-preR text-[14.2px] mt-[15px]">
+                            <li className="hover:font-preB text-neutral-500 font-preR text-[16px] mt-[17px] ">
                               {val}
                             </li>
                           </Link>
@@ -56,7 +56,7 @@ function Navbar() {
             );
           })}
         </li>
-        <li className="w-[200px] flex">
+        <li className="w-[300px] pl-[20px] flex">
           <button>검색</button>
           <Link href={"/user"}>
             <div className="pl-[40px]">로그인</div>
@@ -64,7 +64,7 @@ function Navbar() {
         </li>
       </ul>
       {hover == "On" ? (
-        <div className="drop-shadow-lg absolute z-0 h-[240px] w-screen bg-white"></div>
+        <div className="drop-shadow-lg absolute z-0 h-[280px] w-screen bg-white"></div>
       ) : (
         ""
       )}

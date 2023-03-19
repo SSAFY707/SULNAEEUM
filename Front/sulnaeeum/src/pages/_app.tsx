@@ -11,7 +11,7 @@ export default function App({ Component, pageProps }: AppProps) {
         <title>SULNAEEUM | 술내음</title>
       </Head>
       {/* <NavBar /> */}
-      <TestNav />
+      <TestNav className={"absolute"} />
       <Component {...pageProps} />
     </>
   );
