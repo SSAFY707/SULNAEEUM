@@ -5,7 +5,9 @@ import { BsArrowLeftCircle } from 'react-icons/bs';
 
 const Jubti: React.FC = () => {
 
-  
+  type MbtiType = {
+    [index : string] : string
+  }
 
   // 선택된 데이터 타입
   type SelData = {
@@ -126,6 +128,25 @@ const Jubti: React.FC = () => {
     return setPage(page + 1)
   }
 
+  const mbti_to_drink : MbtiType = {
+    infp: '아이싱 자몽',
+    enfp: '얼떨결에',
+    infj: '제주 낭만',
+    enfj: '뱅꼬레 더감',
+    intj: '남산애 레드와인',
+    entj: '도깨비술 11',
+    intp: '배꽃 필 무렵',
+    entp: '여포의 꿈(화이트)',
+    isfp: '호산춘',
+    esfp: '키위술',
+    istp: '볼빨간 미자',
+    estp: '호랑이 배꼽',
+    isfj: '토끼 소주',
+    esfj: '소호',
+    istj: '단홍',
+    estj: '서울의 밤'
+  }
+
   const jubti = () => {
     if(!check_select()) {
       alert('안주를 선택해 주세요')
@@ -145,9 +166,9 @@ const Jubti: React.FC = () => {
       }
     }
     arr.map((a)=>{mbti += check(a, data[a] as Number)})
-    console.log(`/jubti/result/${mbti}`);
-    console.log(router)
-    router.push(`/jubti/result/${mbti}`)
+    const drink = mbti_to_drink[mbti]
+    console.log(drink)
+    router.push(`/jubti/result/${drink}`)
   }
 
   return (
