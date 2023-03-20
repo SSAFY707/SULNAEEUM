@@ -34,7 +34,6 @@ export default function Result (props: any) {
                 name: result.name,
             }
         })
-        Kakao.Link.de
     }
   return (
     <>
