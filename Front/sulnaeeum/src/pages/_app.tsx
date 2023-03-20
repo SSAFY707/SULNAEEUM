@@ -2,7 +2,7 @@ import "@/styles/globals.css";
 import type { AppProps } from "next/app";
 import Head from "next/head";
 import NavBar from "../components/NavBar";
-import TestNav from "../components/TestNav";
+import TestNav from "../components/testNav";
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
@@ -11,7 +11,7 @@ export default function App({ Component, pageProps }: AppProps) {
         <title>SULNAEEUM | 술내음</title>
       </Head>
       {/* <NavBar /> */}
-      <TestNav className={"absolute"} />
+      <TestNav/>
       <Component {...pageProps} />
     </>
   );
