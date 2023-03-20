@@ -13,6 +13,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
@@ -26,7 +27,7 @@ public class UserController {
     private final UserService userService;
     private final KakaoLoginService kakaoUserService;
 
-    @GetMapping("/kakao/callback")
+    @GetMapping("/kakao/login")
     @Operation(summary = "KAKAO 회원가입", description = "KAKAO 회원가입")
     public ResponseEntity<KakaoLoginDto> kakaoLogin(@Parameter(name = "code", description = "카카오 서버로부터 받은 인가 코드") @RequestParam String code, HttpServletResponse response) throws JsonProcessingException {
 
@@ -48,6 +49,15 @@ public class UserController {
         httpHeaders.add(JwtFilter.AUTHORIZATION_HEADER, "Bearer " + tokenDto.getAccessToken());
 
         return new ResponseEntity<>(tokenDto, httpHeaders, HttpStatus.OK);
+    }
+
+    @GetMapping("/kakao/logout")
+    @Operation(summary = "로그아웃", description = "로그아웃")
+    public ResponseEntity<String> logout(@Parameter String kakaoId){
+
+        userService.logout(kakaoId);
+
+        return new ResponseEntity<>("Logout", HttpStatus.OK);
     }
 
 

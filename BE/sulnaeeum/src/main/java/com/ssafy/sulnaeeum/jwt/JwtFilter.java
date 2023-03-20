@@ -15,6 +15,7 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 
+
 @Slf4j
 @RequiredArgsConstructor
 public class JwtFilter extends GenericFilterBean {
@@ -51,3 +52,5 @@ public class JwtFilter extends GenericFilterBean {
         return null;
     }
 }
+
+

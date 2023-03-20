@@ -119,18 +119,23 @@ public class KakaoLoginService {
         if (kakaoUser == null) {
             String nickname = jsonNode.get("properties").get("nickname").asText();
             String img = jsonNode.get("properties").get("profile_image").asText();
-            String age = jsonNode.get("kakao_account").get("age_range").asText();
-            String gender = jsonNode.get("kakao_account").get("gender").asText();
+            String age = null;
+            String gender = null;
 
-            if(age.equals("10~19")) age = "10S";
-            else if(age.equals("20~29")) age = "20S";
-            else if (age.equals("30~39")) age = "30S";
-            else if (age.equals("40~49")) age = "40S";
-            else if (age.equals("50~59")) age = "50S";
-            else if (age.equals("60~69")) age = "60S";
+            if(jsonNode.get("kakao_account").has("age_range")) {
+                age = jsonNode.get("kakao_account").get("age_range").asText();
 
-            boolean sex = true;
-            if(gender.equals("female")) sex = false;
+                if(age.equals("10~19")) age = "10S";
+                else if(age.equals("20~29")) age = "20S";
+                else if (age.equals("30~39")) age = "30S";
+                else if (age.equals("40~49")) age = "40S";
+                else if (age.equals("50~59")) age = "50S";
+                else if (age.equals("60~69")) age = "60S";
+            }
+
+            if(jsonNode.get("kakao_account").has("gender")) {
+                gender = jsonNode.get("kakao_account").get("gender").asText();
+            }
 
             // password: kakaoId encoder
             String encodedPassword = passwordEncoder.encode(kakaoId);
@@ -145,7 +150,7 @@ public class KakaoLoginService {
                     .nickname(nickname)
                     .img(img)
                     .age(age)
-                    .sex(sex)
+                    .sex(gender)
                     .activated(true)
                     .ranking(0)
                     .level(0)
