@@ -15,19 +15,22 @@ export default function App() {
           <Link href="/">로고 부분 </Link>
         </div>
         <div
-          onClick={() => setHover("on")}
+          onMouseEnter={() =>
+            
+            setHover("on")
+          }
           onMouseLeave={() => setHover("")}
           className=" basis-1/2 flex justify-between items-center hover:h-[520px] hover:bg-sky-300"
         >
           <Link href="/list">
-            <div className=" hover:bg-sky-500 flex justify-center hover_box w-[130px] h-[60px] flex items-center hover:h-[520px]">
+            <div className=" relative z-10 hover:bg-sky-500 flex justify-center hover_box w-[130px] h-[60px] flex items-center hover:h-[520px]">
               <div className="pt-[3px] text-center h-[40px]  w-[150px] border-b-4 border-[#FFFFFF] hover:border-b-4 hover:border-[#B58269] hover:text-[#541F1D] hover:font-semibold hover:text-[19.5px]">
                 전통주
               </div>
             </div>
           </Link>
           <Link href="/map">
-            <div className="z-1 hover:bg-sky-500 flex justify-center hover_box w-[130px] h-[60px] flex items-center hover:h-[520px]">
+            <div className="relative z-10 hover:bg-sky-500 flex justify-center hover_box w-[130px] h-[60px] flex items-center hover:h-[520px]">
               <div
                 className={
                   "pt-[3px] text-center h-[40px]  w-[150px] border-b-4 border-[#FFFFFF] hover:border-b-4 hover:border-[#B58269] hover:text-[#541F1D] hover:font-semibold hover:text-[19.5px]"
@@ -38,7 +41,7 @@ export default function App() {
             </div>
           </Link>
           <Link href="/rank">
-            <div className="hover:bg-sky-500 flex justify-center hover_box w-[130px] h-[60px] flex items-center hover:h-[520px]">
+            <div className="relative z-10 hover:bg-sky-500 flex justify-center hover_box w-[130px] h-[60px] flex items-center hover:h-[520px]">
               <div
                 className={
                   "pt-[3px] text-center h-[40px] w-[150px] border-b-4 border-[#FFFFFF] hover:border-b-4 hover:border-[#B58269] hover:text-[#541F1D] hover:font-semibold hover:text-[19.5px]"
@@ -49,14 +52,14 @@ export default function App() {
             </div>
           </Link>
           <Link href="/recommend">
-            <div className="hover:bg-sky-500 flex justify-center w-[130px] h-[60px] flex items-center hover:h-[520px]">
+            <div className="relative z-10 hover:bg-sky-500 flex justify-center w-[130px] h-[60px] flex items-center hover:h-[520px]">
               <div className="pt-[3px] text-center h-[40px]  w-[150px] border-b-4 border-[#FFFFFF] hover:border-b-4 hover:border-[#B58269] hover:text-[#541F1D] hover:font-semibold hover:text-[19.5px]">
                 추천
               </div>
             </div>
           </Link>
           <Link href="/jubti">
-            <div className="hover:bg-sky-500 flex justify-center w-[130px] h-[60px] flex items-center hover:h-[520px]">
+            <div className="relative z-10 hover:bg-sky-500 flex justify-center w-[130px] h-[60px] flex items-center hover:h-[520px]">
               <div className="pt-[3px] text-center h-[40px] w-[150px] border-b-4 border-[#FFFFFF] hover:border-b-4 hover:border-[#B58269] hover:text-[#541F1D] hover:font-semibold hover:text-[19.5px]">
                 전통주 유형검사
               </div>
@@ -74,7 +77,9 @@ export default function App() {
             className={
               "absolute z-0 w-[1920px] h-[219px] bg-[#FFFFFF] border-b-2 "
             }
-          ></div>
+          >
+             <div>안녕하세요?</div>
+          </div>
         ) : (
           ""
         )}
