@@ -6,8 +6,8 @@ import { useRef, useEffect, useState} from 'react';
 
 export default function Home() {
   const scroll = useScroll();
-  const isScrolled: boolean = scroll > 1100;
-  const translateY = isScrolled ? `${scroll - 1100}px` : "0px";
+  const isScrolled: boolean = scroll > 1250;
+  const translateY = isScrolled ? `${scroll - 1250}px` : "0px";
   const [scrollY, setScrollY] = useState(0);
 
   useEffect(() => {
@@ -15,7 +15,7 @@ export default function Home() {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
-  const imageX = (scrollY / 5)>195?195:(scrollY / 5);
+  const imageX = (scrollY / 5)>185?185:(scrollY / 5);
 
 
   return (
@@ -30,23 +30,19 @@ export default function Home() {
           <p>image : {imageX}</p>
         </div>
       
-      
         {/*흰 텍스트1 */}
-        <div className={ `w-[4500px] ${isScrolled?"absolute z-30":"fixed"}  z-20 w-[3000px]`} style={{ top:`${isScrolled?"1150px":"50px"}`,  left: `${-imageX*14}px`}}> 
-          <Image src="/white_txt1.png" alt="" width={6000} height={920} />
+        <div className={ `${styles.scrolled} w-[4500px] ${isScrolled?"absolute z-30":"fixed"}  z-20 w-[3000px]`} style={{ top:`${isScrolled?"1250px":"10px"}`,  left: `${-imageX*14}px`}}> 
+          <Image src="/white_txt_1.png" alt="" width={6000} height={920} />
         </div>
-        {/*흰 텍스트2  */}
-        {/* <div className={`${isScrolled ? " absolute z-30 top-[1850px]" : "absolute z-30 top-[1850px]"}`}> 
-          <Image src="/white_txt2.png" alt="" width={1920} height={0} />
-        </div>  */}
+
         {/*전통주 배경화면 */}
-        <div className={`w-[4000px] h-[300px] ${isScrolled ? " absolute z-10 top-[1100px]" : "fixed"}`}>
+        <div  className={` w-[4000px] h-[300px] ${isScrolled ? " absolute z-10 top-[1250px]" : "fixed"}`}>
           <Image className="z-20" src="/main_1.jpg" alt="" width={1920} height={0} />
-            <div className=" absolute z-40 top-[730px]">
-              <Image src="/white_txt2.png" alt="" width={1920} height={0} />
+            <div className=" absolute z-40 top-[650px]">
+              <Image src="/white_txt_2.png" alt="" width={1920} height={0} />
             </div>
         </div>
-        <div className="mt-[2180px] bg-sky-400 w-[1920px] h-[908px]"></div>
+        <div className="mt-[280px] bg-sky-400 w-[1920px] h-[1008px]"></div>
       </div>
     </>
   );

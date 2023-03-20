@@ -10,13 +10,18 @@
 }
 
 .scrolled {
-  transition: transform 0s ease-in-out;
+  transition: left 0.5s ease-out;
 }
 .container {
   position: relative;
   width: 100%;
   height: 100vh;
   overflow: hidden;
+}
+
+.main-container{
+  width:1920px;
+  height:
 }
 
 .imageWrapper {
