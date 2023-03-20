@@ -30,11 +30,11 @@ public class User {
     @Column(name="nickname",nullable = false)
     private String nickname;
 
-    @Column(name="age",nullable = false)
+    @Column(name="age",nullable = true)
     private String age;
 
-    @Column(name="sex",nullable = false,columnDefinition = "TINYINT")
-    private boolean sex;
+    @Column(name="sex",nullable = true)
+    private String sex;
 
     @Column(name="img",nullable = false)
     private String img;
