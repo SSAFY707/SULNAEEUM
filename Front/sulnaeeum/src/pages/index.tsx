@@ -22,7 +22,7 @@ export default function Home() {
       <Head>
         <title>SULNAEEUM | 술내음</title>
       </Head>
-      <div className="h-[7000px] overflow-hidden">
+      <div className="h-[7000px] overflow-hidden scroll-smooth">
         <div className="text-red-600 fixed z-30 right-1/2 top-1/2">
           <p>Scroll Value : {scroll}</p>
           <p>translateY :{translateY}</p>
@@ -33,7 +33,7 @@ export default function Home() {
         <div
           className={`${styles.scrolled} w-[4500px] ${
             isScrolled ? "absolute z-30" : "fixed"
-          }  z-20 w-[3000px]`}
+          }  z-20 overflow-hidden `}
           style={{
             top: `${isScrolled ? "1250px" : "10px"}`,
             left: `${-imageX * 14}px`,
@@ -58,6 +58,10 @@ export default function Home() {
           <div className=" absolute z-40 top-[650px]">
             <Image src="/white_txt_2.png" alt="" width={1920} height={0} />
           </div>
+        </div>
+        {/* 한국 전통주 정의 */}
+        <div className="absolute left-[220px] top-[2500px]">
+          <Image src="/main_2.png" alt="" width={1500} height={0} />
         </div>
       </div>
     </>
