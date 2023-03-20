@@ -23,6 +23,7 @@ public class UserService {
     private final UserRepo userRepository;
     private final TokenProvider tokenProvider;
 
+    @Autowired
     UserRepo userRepo;
 
     @Transactional
@@ -60,6 +61,7 @@ public class UserService {
         user.updateToken(null);
     }
 
+    // kakaoId로 userId 찾기
     public Long findUserId(String kakaoId) {
         Optional<Long> userId = userRepo.findUserId(kakaoId);
         if(!userId.isPresent()) {

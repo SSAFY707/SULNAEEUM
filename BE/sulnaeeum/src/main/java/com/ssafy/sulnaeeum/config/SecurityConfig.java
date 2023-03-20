@@ -26,7 +26,8 @@ public class SecurityConfig {
     private static final String[] PERMIT_URL_ARRAY = {
             "/api/user/login",
             "/api/user/signup",
-            "/api/user/kakao/login"
+            "/api/user/kakao/login",
+            "/user/kakao/login"
     };
 
     @Bean
@@ -41,7 +42,10 @@ public class SecurityConfig {
                         "/favicon.ico",
                         "/v3/api-docs/**",
                         "/swagger-ui/**",
-                        "/error"
+                        "/error",
+                        "/api/v3/api-docs/**",
+                        "/api/swagger-ui/**",
+                        "/api/error"
 //                        "/api/**"
                 );
     }
