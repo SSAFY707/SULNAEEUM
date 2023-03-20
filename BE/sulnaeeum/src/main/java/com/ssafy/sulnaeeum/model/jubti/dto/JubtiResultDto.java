@@ -32,29 +32,37 @@ public class JubtiResultDto {
     @Schema(description = "바디감")
     private int tasteBody;
 
+    @Schema(description = "목넘김")
+    private int tasteThroat;
+
     @Schema(description = "신맛")
     private int tasteSour;
 
     @Schema(description = "단맛")
     private int tasteSweet;
 
+    @Schema(description = "향")
+    private int tasteFlavor;
+
     @Schema(description = "안주")
     private String dish;
 
-    // List<Entity> -> List<DTO> 변환을 위함
-    public JubtiResultDto(JubtiResult jubtiResult) {
-        this.jubtiResultId = jubtiResult.getJubtiResultId();
-        this.age = jubtiResult.getAge();
-        this.sex = jubtiResult.getSex();
-        this.level = jubtiResult.getLevel();
-
-        this.tasteRefresh = jubtiResult.getTasteRefresh();
-        this.tasteBody = jubtiResult.getTasteBody();
-        this.tasteSour = jubtiResult.getTasteSour();
-        this.tasteSweet = jubtiResult.getTasteSweet();
-
-        this.dish = jubtiResult.getDish();
-    }
+//    // 생성자 (List<Entity> -> List<DTO> 변환을 위함)
+//    public JubtiResultDto(JubtiResult jubtiResult) {
+//        this.jubtiResultId = jubtiResult.getJubtiResultId();
+//        this.age = jubtiResult.getAge();
+//        this.sex = jubtiResult.getSex();
+//        this.level = jubtiResult.getLevel();
+//
+//        this.tasteRefresh = jubtiResult.getTasteRefresh();
+//        this.tasteBody = jubtiResult.getTasteBody();
+//        this.tasteThroat = jubtiResult.getTasteThroat();
+//        this.tasteSour = jubtiResult.getTasteSour();
+//        this.tasteSweet = jubtiResult.getTasteSweet();
+//        this.tasteFlavor = jubtiResult.getTasteFlavor();
+//
+//        this.dish = jubtiResult.getDish();
+//    }
 
     // DTO -> Entity 변환을 위함
     public JubtiResult toEntity() {
@@ -65,8 +73,10 @@ public class JubtiResultDto {
                 .level(this.level)
                 .tasteRefresh(this.tasteRefresh)
                 .tasteBody(this.tasteBody)
+                .tasteThroat(this.tasteThroat)
                 .tasteSour(this.tasteSour)
                 .tasteSweet(this.tasteSweet)
+                .tasteFlavor(this.tasteFlavor)
                 .dish(this.dish).build();
     }
 }

@@ -22,7 +22,11 @@ public class JubtiController {
     @Autowired
     JubtiService jubtiService;
 
-    @Operation(summary = "응답 저장", description = "한 사용자의 jubti 응답 결과를 DB에 저장 (데이터 수집)")
+    /***
+     * [ 응답 저장 ]
+     * - 응답 결과를 db에 저장 (데이터 수집)
+     */
+    @Operation(summary = "응답 저장", description = "jubti 응답 결과를 DB에 저장")
     @PostMapping("/save")
     public ResponseEntity<String> saveResult(@RequestBody JubtiResultDto jubtiResultDto) {
         jubtiService.saveResult(jubtiResultDto);

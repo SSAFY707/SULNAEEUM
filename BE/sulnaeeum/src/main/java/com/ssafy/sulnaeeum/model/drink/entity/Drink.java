@@ -1,0 +1,64 @@
+package com.ssafy.sulnaeeum.model.drink.entity;
+
+import com.ssafy.sulnaeeum.model.drink.dto.DrinkDto;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
+
+import javax.persistence.*;
+
+@Entity
+@Data
+@SuperBuilder
+@NoArgsConstructor
+@AllArgsConstructor
+@Table(name="drink")
+public class Drink {
+
+    @Id
+    @GeneratedValue
+    @Column(nullable = false)
+    private Long drinkId; // auto_increment PK
+
+    @Column(length = 25)
+    private String drinkName; // 이름
+
+    private String drinkInfo; // 정보
+
+    private String drinkImage; // 이미지
+
+    private String drinkSaleUrl; // 판매 사이트
+
+    @Column(length = 10)
+    private String drinkPrice; // 가격 (won)
+
+    @Column(length = 10)
+    private String drinkAmount; // 양 (ml)
+
+    private int drinkLevel; // 도수
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "drink_type_id")
+    private DrinkType drinkType; // 주종
+
+    private int likeCnt; // 찜 개수
+
+    private int reviewCnt; // 리뷰 개수
+
+    // Entity -> DTO 변환
+    public DrinkDto toDto() {
+        return DrinkDto.builder()
+                .drinkId(this.drinkId)
+                .drinkName(this.drinkName)
+                .drinkInfo(this.drinkInfo)
+                .drinkImage(this.drinkImage)
+                .drinkSaleUrl(this.drinkSaleUrl)
+                .drinkPrice(this.drinkPrice)
+                .drinkAmount(this.drinkAmount)
+                .drinkLevel(this.drinkLevel)
+                .drinkType(this.drinkType)
+                .likeCnt(this.likeCnt)
+                .reviewCnt(this.reviewCnt).build();
+    }
+}
