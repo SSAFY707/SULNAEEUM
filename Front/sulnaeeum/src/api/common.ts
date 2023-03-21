@@ -1,6 +1,6 @@
 import axios, { AxiosInstance } from 'axios';
 
-const SERVER_URL = 'http://localhost:9090/'
+const SERVER_URL = 'http://localhost:9090/api/'
 
 // 로그인 후 사용할 axios (-> 토큰이 필요한 경우)
 export const authAxios: AxiosInstance = axios.create({
