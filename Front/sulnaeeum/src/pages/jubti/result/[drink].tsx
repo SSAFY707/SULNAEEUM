@@ -100,8 +100,8 @@ export default function Result (props: any) {
                     <div className={'text-[26px] font-preM mt-14'}>결과 공유하기</div>
                     <img onClick={share} className={'h-[50px] mt-5 mb-16 cursor-pointer'} src="/images/kakao.png" alt="" />
                 </div>
-                <div className={'flex justify-center items-center cursor-pointer text-[20px] w-3/4 h-[60px] rounded bg-[#999483] text-white'}>{result.name} 더 알아보러 가기</div>
-                <div className={'flex justify-center items-center cursor-pointer text-[20px] font-preR w-3/4 h-[60px] rounded border border-[#999483] mt-4 bg-white text-[#191919] mb-16'}>테스트 다시하기</div>
+                <div onClick={()=>{alert('서비스 준비중입니다 😇')}} className={'flex justify-center items-center cursor-pointer text-[20px] w-3/4 h-[60px] rounded bg-[#999483] text-white'}>{result.name} 더 알아보러 가기</div>
+                <div onClick={()=>{window.location.href = '/jubti'}} className={'flex justify-center items-center cursor-pointer text-[20px] font-preR w-3/4 h-[60px] rounded border border-[#999483] mt-4 bg-white text-[#191919] mb-16'}>테스트 다시하기</div>
             </div>
         </div>
     </div>
