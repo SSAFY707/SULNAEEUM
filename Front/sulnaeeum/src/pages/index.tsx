@@ -31,7 +31,7 @@ export default function Home() {
 
         {/*흰 텍스트1 */}
         <div
-          className={`${styles.scrolled} w-[4500px] ${
+          className={` ${styles.scrolled} w-[4500px] ${
             isScrolled ? "absolute z-30" : "fixed"
           }  z-20 overflow-hidden `}
           style={{
@@ -39,7 +39,12 @@ export default function Home() {
             left: `${-imageX * 14}px`,
           }}
         >
-          <Image src="/main/part1/white_txt_1.png" alt="" width={6000} height={920} />
+          <Image
+            src="/main/part1/white_txt_1.png"
+            alt=""
+            width={6000}
+            height={920}
+          />
         </div>
 
         {/*전통주 배경화면 */}
@@ -56,7 +61,12 @@ export default function Home() {
             height={0}
           />
           <div className=" absolute z-40 top-[650px]">
-            <Image src="/main/part1/white_txt_2.png" alt="" width={1920} height={0} />
+            <Image
+              src="/main/part1/white_txt_2.png"
+              alt=""
+              width={1920}
+              height={0}
+            />
           </div>
         </div>
         {/* 한국 전통주 정의 */}
