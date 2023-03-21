@@ -39,7 +39,7 @@ export default function Home() {
             left: `${-imageX * 14}px`,
           }}
         >
-          <Image src="/white_txt_1.png" alt="" width={6000} height={920} />
+          <Image src="/main/part1/white_txt_1.png" alt="" width={6000} height={920} />
         </div>
 
         {/*전통주 배경화면 */}
@@ -50,18 +50,18 @@ export default function Home() {
         >
           <Image
             className="z-20"
-            src="/main_1.jpg"
+            src="/main/part1/main_1.jpg"
             alt=""
             width={1920}
             height={0}
           />
           <div className=" absolute z-40 top-[650px]">
-            <Image src="/white_txt_2.png" alt="" width={1920} height={0} />
+            <Image src="/main/part1/white_txt_2.png" alt="" width={1920} height={0} />
           </div>
         </div>
         {/* 한국 전통주 정의 */}
         <div className="absolute left-[220px] top-[2500px]">
-          <Image src="/main_2.png" alt="" width={1500} height={0} />
+          <Image src="/main/part2/main_2.png" alt="" width={1500} height={0} />
         </div>
       </div>
     </>
