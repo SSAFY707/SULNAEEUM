@@ -19,7 +19,7 @@ public class BreweryDrinkType {
     @Id
     @GeneratedValue
     @Column(nullable = false)
-    private Long breweryId; // auto_increment PK
+    private Long breweryDrinkTypeId; // auto_increment PK
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "drink_type_id")
