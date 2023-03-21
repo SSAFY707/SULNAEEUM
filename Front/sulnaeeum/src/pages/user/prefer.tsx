@@ -1,6 +1,23 @@
 import React, { useState } from 'react'
 
 export default function index() {
+  type ObjType = {
+    [index: string] : string | boolean
+  }
+  type DataType = {
+    [index: string] : Array<ObjType>
+  }
+  const data : DataType = {
+    gender: [{name: '남성', value: true}, {name: '여성', value: false}],
+    age: [
+      {name: '20대', value: '20s'},
+      {name: '30대', value: '30s'},
+      {name: '40대', value: '40s'},
+      {name: '50대', value: '50s'},
+      {name: '60대 이상', value: '60s'},
+    ]
+  }
+
   const [page, setPage] = useState(1);
   return (
     <>
@@ -23,14 +40,26 @@ export default function index() {
                 <div className={'w-1/3 h-full bg-[#655442] rounded-2xl'}></div>
               </div>
             </div>
-            <div className={'h-2/3 w-5/6'}>
-              <div>
-                <div>성별</div>
-                <div></div>
+            <div className={'h-2/3 w-5/6 p-2'}>
+              <div className={'mb-16'}>
+                <div className={'font-preR text-[24px] mb-4'}>성별</div>
+                <div className={'grid grid-cols-2 gap-2 w-full'}>
+                  {data.gender.map((g, index)=>{
+                    return (
+                      <div className={'w-full h-[50px] flex justify-center items-center cursor-pointer border rounded'} key={index}>{g.name}</div>
+                    )
+                  })}
+                </div>
               </div>
               <div>
-                <div>나이</div>
-                <div></div>
+                <div className={'font-preR text-[24px] mb-4'}>나이</div>
+                <div className={'grid grid-cols-3 gap-2'}>
+                  {data.age.map((age, index)=>{
+                    return (
+                      <div className={'w-full h-[50px] flex justify-center items-center cursor-pointer border rounded'} key={index}>{age.name}</div>
+                    )
+                  })}
+                </div>
               </div>
             </div>
             <div className={'flex justify-center items-center rounded w-2/3 h-[60px] text-[20px] text-white font-preL bg-[#847260] hover:bg-[#655442] cursor-pointer'}>다음 단계</div>
