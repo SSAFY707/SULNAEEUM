@@ -1,7 +1,6 @@
 package com.ssafy.sulnaeeum.controller.drink;
 
 import com.ssafy.sulnaeeum.model.drink.dto.DrinkInfoDto;
-import com.ssafy.sulnaeeum.model.drink.dto.DrinkSearchDto;
 import com.ssafy.sulnaeeum.model.drink.service.DrinkService;
 import com.ssafy.sulnaeeum.model.mypage.service.LikeDrinkService;
 import io.swagger.v3.oas.annotations.Operation;
