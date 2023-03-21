@@ -4,15 +4,7 @@ import React, { useEffect } from 'react'
 export default function Result (props: any) {
     const router = useRouter()
     const { result, mbti } = props
-    // console.log(result)
-
-    // console.log(process.env.NEXT_PUBLIC_KAKAO_API_KEY);
-    // if ( !window.Kakao.isIntitialized() ) {
-    //     window.Kakao.init(process.env.NEXT_PUBLIC_KAKAO_API_KEY);
-    // }
-    // useEffect(() => {
-    //     window.Kakao.init(process.env.NEXT_PUBLIC_KAKAO_API_KEY);
-    // }, []);
+    
     useEffect(()=>{
         initialize()
     }, [])
