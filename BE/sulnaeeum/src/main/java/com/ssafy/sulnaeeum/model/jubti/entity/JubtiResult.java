@@ -1,6 +1,5 @@
 package com.ssafy.sulnaeeum.model.jubti.entity;
 
-import com.ssafy.sulnaeeum.model.jubti.dto.JubtiResultDto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
