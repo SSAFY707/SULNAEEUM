@@ -9,6 +9,8 @@ const Jubti: React.FC = () => {
     [index : string] : string
   }
 
+  const tmp = '??'
+
   // 선택된 데이터 타입
   type SelData = {
     [index: string]: string | Number 
