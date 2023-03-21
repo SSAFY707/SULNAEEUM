@@ -1,8 +1,8 @@
-drop database all_test;
-create database all_test;
+drop database sulnaeeum;
+create database sulnaeeum;
 
 
-use all_test;
+use sulnaeeum;
 
 
 create table drink_type(
@@ -96,21 +96,6 @@ create table taste(
     primary key(taste_id)
 );
 
-
--- select * from drink_type;
-
--- select * from drink;
-
--- select * from ingredient_type;
-
--- select * from dish;
-
--- select * from dish_drink;
-
--- select * from taste_type;
-
--- select * from taste;
-
 # 술 전체 맛
 -- dic_all_taste = {"단맛":1, "신맛":2, "바디감":3, "청량감":4, "향":5, "목넘김":6}
 insert into taste_type (taste_name) values ("단맛");
@@ -136,4 +121,16 @@ ALTER TABLE taste_type AUTO_INCREMENT = 1;
 
 ALTER TABLE taste AUTO_INCREMENT = 1;
 
+select * from drink_type;
 
+select * from drink;
+
+select * from ingredient_type;
+
+select * from dish;
+
+select * from dish_drink;
+
+select * from taste_type;
+
+select * from taste;

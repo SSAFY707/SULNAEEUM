@@ -5,7 +5,7 @@ import pymysql
 conn = pymysql.connect(host='localhost',
                        user='root',
                        password='a710&soez&mtc',
-                       db='all_test',
+                       db='sulnaeeum',
                        charset='utf8')
 
 # 술 추가
