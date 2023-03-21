@@ -1,12 +1,9 @@
-import '@/styles/globals.css'
-import type { AppProps } from 'next/app'
-import Head from 'next/head'
 
-declare global {
-  interface Window {
-    Kakao: any;
-  }
-}
+import "@/styles/globals.css";
+import type { AppProps } from "next/app";
+import Head from "next/head";
+import NavBar from "../components/NavBar";
+
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
@@ -14,7 +11,8 @@ export default function App({ Component, pageProps }: AppProps) {
       <Head>
         <title>SULNAEEUM | 술내음</title>
       </Head>
-      <Component {...pageProps} /> 
+      <NavBar />
+      <Component {...pageProps} />
     </>
-  )
+  );
 }

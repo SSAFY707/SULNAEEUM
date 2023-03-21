@@ -4,6 +4,13 @@
 
 /* 기본 세팅 */
 
+
+h1 {
+    font-size: 40px;
+    font-family: preB;
+}
+
+
 body {
     margin: 0;
     padding: 0;

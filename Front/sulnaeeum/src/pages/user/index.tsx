@@ -2,6 +2,6 @@ import React from 'react'
 
 export default function index() {
   return (
-    <div>랭킹 페이지입니다</div>
+    <div>로그인페이지 입니다</div>
   )
 }

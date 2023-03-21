@@ -2,6 +2,6 @@ import React from 'react'
 
 export default function index() {
   return (
-    <div>index</div>
+    <div>지도페이지입니다</div>
   )
 }
