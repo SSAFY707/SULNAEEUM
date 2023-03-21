@@ -5,7 +5,15 @@ module.exports = {
   ],
   theme: {
     extend: {
-
+      keyframes: {
+        jump: {
+          from: { top: '0px' },
+          to: { top: '-4px' }
+        }
+      },
+      animation: {
+        jump: 'jump 0.4s ease-in-out Infinite Alternate'
+      },
       fontFamily: {
         star : ['star'],
         preBl : ['preBl'],
@@ -22,3 +30,4 @@ module.exports = {
   },
   plugins: [],
 }
+
