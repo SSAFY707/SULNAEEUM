@@ -9,7 +9,7 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <>
       <Head>
-        <title>SULNAEEUM | 술내음</title>
+        <title>SULNAEEUM | 술내음음</title>
       </Head>
       <NavBar />
       <Component {...pageProps} />
