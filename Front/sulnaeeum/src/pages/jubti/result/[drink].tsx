@@ -38,7 +38,7 @@ export default function Result (props: any) {
   return (
     <>
         <div className={'flex flex-col items-center mb-14 md:flex-row md:items-start md:mb-1'}>
-            <div className={'flex md:hidden flex-col items-center h-[300px] w-full'} style={{backgroundColor : result.color}}>
+            <div className={'flex md:hidden flex-col items-center pt-16 h-[360px] w-full'} style={{backgroundColor : result.color}}>
                 <div className={'mt-4 text-[20px]'}>{result.summary}</div>
                 <div className={'text-[30px] font-preM'}>{result.name}</div>
                 <img className={'mt-6 h-[220px]'} src={`/images/jubti/drink/${result.name}.png`} alt="" />
@@ -47,9 +47,9 @@ export default function Result (props: any) {
                 <div className={'w-[200px] h-[200px] rounded-full z-[-10] absolute top-[100px]'} style={{backgroundColor : result.color}}></div>
                 <img className={'mt-6 h-[220px]'} src={`/images/jubti/drink/${result.name}.png`} alt="" />
                 <div className={'text-[30px] font-preM mt-4'}>{result.name}</div>
-                <div className={'mt-4 text-[20px]'}>{result.summary}</div>
+                <div className={'mt-2 text-[20px]'}>{result.summary}</div>
             </div>
-            <ul className={'mt-[100px] px-8 text-[20px] md:w-1/2 md:mt-[100px]'}>
+            <ul className={'mt-[100px] px-8 text-[20px] md:w-1/2 md:mt-[130px]'}>
                 {result.explain.map((e : string, index: number)=>{
                     return ( <li className={'mb-6'} key={index}>◾ {e}</li> )
                 })}
@@ -85,7 +85,7 @@ export default function Result (props: any) {
                     <path d="M205.545 6.61936L200.386 11.8555L195.271 6.57668L200.43 1.34057L205.545 6.61936Z" stroke="#4F4F4F" stroke-width="0.5" stroke-miterlimit="10"/>
                     <path d="M210.475 6.64084L205.316 11.877L200.201 6.59816L205.36 1.36205L210.475 6.64084Z" stroke="#4F4F4F" stroke-width="0.5" stroke-miterlimit="10"/>
                 </svg>
-                <div className={'flex justify-center mt-10'}>
+                <div className={'flex justify-center mt-10 md:mt-4'}>
                     <div className={'flex flex-col items-center mx-6'}>
                         <div className={'text-[20px] mb-4 font-preR'}>최고의 궁합</div>
                         <div className={'flex justify-center w-[160px] h-[160px] rounded-full'} style={{backgroundColor : result.good_color}}>

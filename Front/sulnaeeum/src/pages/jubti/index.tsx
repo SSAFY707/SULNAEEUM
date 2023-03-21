@@ -175,10 +175,10 @@ export default function Jubti () {
       <div className={`${page == 0 ? 'block' : 'hidden'} flex flex-col items-center w-full h-[1080px] overflow-hidden`}>
         <div className={'flex flex-col justify-center items-center h-[600px] md:h-[380px] w-full bg-[#AEA896] px-10'}>
           <div className={'flex items-center flex-col text-white mb-10 md:mt-16'}>
-            <img className={'h-[14px] mb-2 md:h-[24px] md:mt-6 md:mb-8'} src="/images/jubti/pattern1.png" />
+            <img className={'h-[14px] mb-2 md:h-[20px] md:mt-14 md:mb-8'} src="/images/jubti/pattern1.png" />
             <h1 className={'text-[40px] font-bold md:text-[50px]'}>전통주 유형검사</h1>
-            <div className={'text-[18px] font-preEL md:text-[24px] md:my-4'}>간단한 질문으로 나의 酒BTI를 확인해보세요.</div>
-            <img className={'w-[350px] mt-4 mb-6 md:w-[602px] md:mt-10'} src="/images/jubti/pattern2.png" />
+            <div className={'text-[18px] font-preEL md:text-[24px] md:my-2'}>간단한 질문으로 나의 酒BTI를 확인해보세요.</div>
+            <img className={'w-[350px] mt-4 mb-6 md:w-[502px] md:mt-8'} src="/images/jubti/pattern2.png" />
           </div>
           <div onClick={()=>{setPage(page + 1)}} className={'hidden md:flex w-[200px] h-[60px] absolute top-[360px] bg-white text-[#AEA896] rounded cursor-pointer justify-center items-center text-[20px] font-preM hover:bg-gray-200'}>시작하기</div>
           <div className={'flex flex-col items-center w-5/6 md:w-11/12 text-[16px] md:flex-row md:absolute md:top-[500px] md:justify-center md:items-center'}>
@@ -200,7 +200,7 @@ export default function Jubti () {
         </div>
         <div onClick={()=>{setPage(page + 1)}} className={'w-5/6 h-[70px] bg-[#AEA896] hover:bg-[#655442] rounded text-white text-[20px] flex justify-center items-center mt-14 cursor-pointer absolute bottom-[100px] md:hidden'}>시작하기</div>
       </div>
-      <div className={`${page != 0 ? 'block' : 'hidden'} cursor-pointer absolute left-[40px] top-[60px] md:left-[10%] md:top-[80px]`} onClick={()=>setPage(page - 1)}><BsArrowLeftCircle className={'w-[34px] h-[34px] text-[#655442] md:w-[40px] md:h-[40px]'} /></div>
+      <div className={`${page != 0 ? 'block' : 'hidden'} cursor-pointer relative left-[40px] top-[100px] md:left-[10%] md:top-[120px]`} onClick={()=>setPage(page - 1)}><BsArrowLeftCircle className={'w-[34px] h-[34px] text-[#655442] md:w-[40px] md:h-[40px]'} /></div>
       <div className={`${page == 1 ? 'block' : 'hidden'}`}>
         <div className={'mt-40 mb-20 flex flex-col items-center w-full'}>
           <div className={'flex flex-col items-center w-5/6'}>
@@ -222,7 +222,7 @@ export default function Jubti () {
         </div>
       </div>
       <div className={`${page == 2 ? 'block' : 'hidden'}`}>
-        <div className={'flex flex-col md:flex-row text-[24px] md:text-[30px] md:justify-center md:gap-3 my-10 md:mt-20 md:mb-8 font-preM items-center'}>
+        <div className={'flex flex-col md:flex-row text-[24px] md:text-[30px] md:justify-center md:gap-3 mb-8 mt-12 md:mt-20 md:mb-8 font-preM items-center'}>
           <div className={''}>✔ 두 가지 선택지 중</div >
           <div className={''}>가까운 쪽을 선택해 주세요</div >
         </div>
@@ -248,7 +248,7 @@ export default function Jubti () {
         </div>
       </div>
       <div className={`${page == 3 ? 'block' : 'hidden'}`}>
-        <div className={'flex flex-col md:flex-row text-[24px] my-10 font-preM items-center md:text-[30px] md:justify-center md:gap-3 my-10 md:mt-20 md:mb-8'}>
+        <div className={'flex flex-col md:flex-row text-[24px] mb-18 mt-12 font-preM items-center md:text-[30px] md:justify-center md:gap-3 my-10 md:mt-20 md:mb-8'}>
           <div className={''}>✔ 두 가지 선택지 중</div >
           <div className={''}>가까운 쪽을 선택해 주세요</div >
         </div>
@@ -274,7 +274,7 @@ export default function Jubti () {
         </div>
       </div>
       <div className={`${page == 4 ? 'block' : 'hidden'}`}>
-        <div className={'flex flex-col md:flex-row text-[24px] my-10 font-preM items-center md:text-[30px] md:justify-center md:gap-3 my-10 md:mt-20 md:mb-8'}>
+        <div className={'flex flex-col md:flex-row text-[24px] mt-12 mb-8 font-preM items-center md:text-[30px] md:justify-center md:gap-3 my-10 md:mt-20 md:mb-8'}>
           <div className={''}>✔ 두 가지 선택지 중</div >
           <div className={''}>가까운 쪽을 선택해 주세요</div >
         </div>
@@ -300,7 +300,7 @@ export default function Jubti () {
         </div>
       </div>
       <div className={`${page == 5 ? 'block' : 'hidden'} flex flex-col items-center`}>
-        <div className={'flex flex-col md:flex-row gap-2 text-[24px] md:text-[30px] my-10 md:my-20 font-preM items-center'}>
+        <div className={'flex flex-col md:flex-row md:gap-2 text-[24px] md:text-[30px] mt-12 mb-8 md:my-20 font-preM items-center'}>
           <div className={''}>원하는 안주의 종류를</div >
           <div className={''}>선택해 주세요</div >
         </div>
@@ -316,12 +316,12 @@ export default function Jubti () {
         </div>
       </div>
       <div className={'flex justify-center'}>
-        <div className={`flex ${(page == 0 || page == 5) && 'hidden'} justify-center items-center w-5/6 md:w-[400px] absolute bottom-[100px] md:bottom-[80px] text-[20px] md:text-xl h-[70px] bg-[#999483] hover:bg-[#655442] text-white rounded cursor-pointer`} onClick={()=>{if(page == 5){console.log(jubti())} else move_page()}}>
+        <div className={`flex ${(page == 0 || page == 5) && 'hidden'} justify-center items-center w-5/6 md:w-[400px] absolute bottom-[80px] md:bottom-[80px] text-[20px] md:text-xl h-[70px] bg-[#999483] hover:bg-[#655442] text-white rounded cursor-pointer`} onClick={()=>{if(page == 5){console.log(jubti())} else move_page()}}>
           다음으로
         </div>
       </div>
       <div className={'flex justify-center'}>
-        <div onClick={()=>jubti()} className={`flex ${page != 5 && 'hidden'} justify-center items-center w-5/6 md:w-[400px] absolute bottom-[100px] md:bottom-[80px] text-[20px] md:text-xl h-[70px] bg-[#999483] hover:bg-[#655442] text-white rounded cursor-pointer`}>
+        <div onClick={()=>jubti()} className={`flex ${page != 5 && 'hidden'} justify-center items-center w-5/6 md:w-[400px] absolute bottom-[80px] md:bottom-[80px] text-[20px] md:text-xl h-[70px] bg-[#999483] hover:bg-[#655442] text-white rounded cursor-pointer`}>
           결과 제출하기
         </div>
       </div>
