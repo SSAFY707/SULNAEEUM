@@ -29,7 +29,7 @@ export default function Result (props: any) {
     }
   return (
     <>
-    <div className={'no-scrollbar'}>
+    <div className={'scroll font-preL'}>
         <div className={'flex flex-col items-center mb-14 md:flex-row md:items-start md:mb-1'}>
             <div className={'flex md:hidden flex-col items-center pt-16 h-[360px] w-full'} style={{backgroundColor : result.color}}>
                 <div className={'mt-4 text-[20px] font-preR text-[#333333]'}>{result.summary}</div>
@@ -49,7 +49,7 @@ export default function Result (props: any) {
             </ul>
         </div>
         <div className={'md:flex md:bg-zinc-200 md:justify-between md:px-40'}>
-            <div className={'flex flex-col items-center mb-20 w-full bg-zinc-200 md:w-1/4 md:mb-1 overflow-hidden'}>
+            <div className={'flex flex-col items-center mb-20 w-full bg-zinc-200 md:w-1/3 md:mb-1 overflow-hidden'}>
                 <div className={'flex items-center text-[20px] my-6 text-[#333333] md:mt-10'}><div className={'font-preM text-[30px] mr-2 md:text-[26px] text-[#191919]'}>{result.name}</div>와(과) 어울리는 안주</div>
                 <svg width="403" height="13" viewBox="0 0 403 13" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M1 7.11523C61.0543 6.9735 121.114 6.84323 181.168 6.70149" stroke="#4F4F4F" stroke-width="0.5" stroke-miterlimit="10" stroke-linecap="round"/>
@@ -66,7 +66,7 @@ export default function Result (props: any) {
                     <div className={'text-[20px] mt-4 mb-6'}>{result.dish}</div>
                 </div>
             </div>
-            <div className={'flex flex-col items-center mb-20 md:w-1/4 overflow-hidden'}>
+            <div className={'flex flex-col items-center mb-20 md:w-1/3 overflow-hidden'}>
                 <div className={'flex items-center text-[20px] mb-6 md:mt-10 text-fontED'}><div className={'font-preM text-[30px] mr-2 md:text-[26px] text-fontD'}>{result.name}</div>와(과)의 궁합</div>
                 <svg width="403" height="13" viewBox="0 0 403 13" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M1 7.11523C61.0543 6.9735 121.114 6.84323 181.168 6.70149" stroke="#4F4F4F" stroke-width="0.5" stroke-miterlimit="10" stroke-linecap="round"/>
@@ -95,7 +95,7 @@ export default function Result (props: any) {
                     </div>
                 </div>
             </div>
-            <div className={'flex flex-col items-center w-full bg-zinc-200 md:w-1/4'}>
+            <div className={'flex flex-col items-center w-full bg-zinc-200 md:w-1/3'}>
                 <div className={'flex flex-col items-center'}>
                     <div className={'text-[26px] font-preM mt-14 text-fontD'}>결과 공유하기</div>
                     <img onClick={share} className={'h-[50px] mt-5 mb-16 cursor-pointer'} src="/images/kakao.png" alt="" />
