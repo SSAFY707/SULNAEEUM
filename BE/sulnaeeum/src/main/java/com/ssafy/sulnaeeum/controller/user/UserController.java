@@ -4,6 +4,8 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.ssafy.sulnaeeum.jwt.JwtFilter;
 import com.ssafy.sulnaeeum.model.user.dto.KakaoLoginDto;
 import com.ssafy.sulnaeeum.model.user.dto.TokenDto;
+import com.ssafy.sulnaeeum.model.user.dto.UserPreferenceDto;
+import com.ssafy.sulnaeeum.model.user.entity.User;
 import com.ssafy.sulnaeeum.model.user.service.KakaoLoginService;
 import com.ssafy.sulnaeeum.model.user.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -27,8 +29,11 @@ public class UserController {
     private final UserService userService;
     private final KakaoLoginService kakaoUserService;
 
+    /***
+     * KAKAO 회원가입 및 로그인
+     ***/
     @GetMapping("/kakao/login")
-    @Operation(summary = "KAKAO 회원가입", description = "KAKAO 회원가입")
+    @Operation(summary = "KAKAO 회원가입 및 로그인", description = "KAKAO에서 받아온 code값 넣어주기")
     public ResponseEntity<KakaoLoginDto> kakaoLogin(@Parameter(name = "code", description = "카카오 서버로부터 받은 인가 코드") @RequestParam String code, HttpServletResponse response) throws JsonProcessingException {
 
         KakaoLoginDto kakaoSocialDto = kakaoUserService.kakaoLogin(code);
@@ -39,8 +44,11 @@ public class UserController {
         return new ResponseEntity<>(kakaoSocialDto, httpHeaders, HttpStatus.OK);
     }
 
+    /***
+     * 토큰 재발급
+     ***/
     @PostMapping("/refresh")
-    @Operation(summary = "토큰 재발급", description = "토큰 재발급")
+    @Operation(summary = "토큰 재발급", description = "Refresh & Access Token 보내주기")
     public ResponseEntity<TokenDto> refreshToken(@RequestBody TokenDto tokenRequestDto){
 
         TokenDto tokenDto = userService.refreshToken(tokenRequestDto);
@@ -51,14 +59,31 @@ public class UserController {
         return new ResponseEntity<>(tokenDto, httpHeaders, HttpStatus.OK);
     }
 
+    /***
+     * 로그아웃
+     ***/
     @GetMapping("/kakao/logout")
     @Operation(summary = "로그아웃", description = "로그아웃")
-    public ResponseEntity<String> logout(@Parameter String kakaoId){
+    public ResponseEntity<String> logout(){
+
+        String kakaoId = SecurityContextHolder.getContext().getAuthentication().getName();
 
         userService.logout(kakaoId);
-
         return new ResponseEntity<>("Logout", HttpStatus.OK);
     }
 
+    /***
+     * 회원 취향조사
+     ***/
+    @PostMapping("/preference")
+    @Operation(summary = "유저 취향 조사", description = "유저 취향 조사")
+    public ResponseEntity<String> preference(@RequestBody UserPreferenceDto userPreferenceDto){
+
+        String kakaoId = SecurityContextHolder.getContext().getAuthentication().getName();
+
+        userService.preference(kakaoId, userPreferenceDto);
+
+        return new ResponseEntity<>("취향 조사 완료   ", HttpStatus.OK);
+    }
 
 }
