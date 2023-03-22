@@ -4,7 +4,7 @@ import useScroll from "../assets/useScroll";
 import styles from "./styles.module.css";
 import { useEffect, useState } from "react";
 import { Button, ButtonGroup, useColorModeValue } from '@chakra-ui/react'
-import { AiOutlineArrowRight } from 'react-icons/Ai'
+import { AiOutlineArrowRight } from 'react-icons/ai'
 export default function Home() {
   const scroll = useScroll();
   const isScrolled: boolean = scroll > 1250;
