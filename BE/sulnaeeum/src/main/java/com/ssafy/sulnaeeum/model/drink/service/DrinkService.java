@@ -4,11 +4,11 @@ import com.ssafy.sulnaeeum.exception.CustomException;
 import com.ssafy.sulnaeeum.exception.CustomExceptionList;
 import com.ssafy.sulnaeeum.model.drink.dto.DrinkDto;
 import com.ssafy.sulnaeeum.model.drink.dto.DrinkInfoDto;
-import com.ssafy.sulnaeeum.model.drink.dto.DrinkSearchDto;
 import com.ssafy.sulnaeeum.model.drink.entity.Drink;
 import com.ssafy.sulnaeeum.model.drink.entity.DrinkType;
 import com.ssafy.sulnaeeum.model.drink.repo.DrinkRepo;
 import com.ssafy.sulnaeeum.model.drink.repo.DrinkTypeRepo;
+import com.ssafy.sulnaeeum.model.mypage.entity.LikeDrink;
 import com.ssafy.sulnaeeum.model.mypage.repo.LikeDrinkRepo;
 import com.ssafy.sulnaeeum.model.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -63,13 +63,18 @@ public class DrinkService {
             drinkInfoDtoList = drinkInfoDtoList.stream().sorted(Comparator.comparing(DrinkInfoDto::getDrinkLevel, Comparator.reverseOrder()).thenComparing(DrinkInfoDto::getDrinkName)).collect(Collectors.toList());
         }
 
-        return drinkInfoDtoList;
-    }
+        // 회원 접근일 때 (찜 여부 확인)
+        if(kakaoId != null) {
+            for(DrinkInfoDto drinkInfoDto: drinkInfoDtoList) {
+                Long userId = userService.findUserId(kakaoId);
+                Optional<LikeDrink> likeDrink = likeDrinkRepo.findLikeInfo(drinkInfoDto.getDrinkId(), userId);
+                if(likeDrink.isPresent()) {
+                    drinkInfoDto.setLike(true);
+                }
+            }
+        }
 
-    // 키워드로 전통주 검색
-    public List<DrinkSearchDto> drinkSearch(String search) {
-        List<Drink> drinkList = drinkRepo.searchDrink(search);
-        return drinkList.stream().map(DrinkSearchDto::new).collect(Collectors.toList());
+        return drinkInfoDtoList;
     }
 
     // drinkId로 DrinkDto 가져오기

@@ -16,8 +16,4 @@ public interface DrinkRepo extends JpaRepository<Drink, Integer> {
 
     // drink_type_id로 찾기
     List<Drink> findByDrinkType(Long drinkTypeId);
-
-    // 키워드로 검색
-    @Query(value = "select * from drink where drink_name like %?1%", nativeQuery = true)
-    List<Drink> searchDrink(String keyword);
 }
