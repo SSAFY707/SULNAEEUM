@@ -27,7 +27,7 @@ public class JubtiController {
      * - 응답 결과를 db에 저장 (데이터 수집)
      */
     @Operation(summary = "응답 저장", description = "jubti 응답 결과를 DB에 저장")
-    @PostMapping("/save")
+    @PostMapping("/n/save")
     public ResponseEntity<String> saveResult(@RequestBody JubtiResultDto jubtiResultDto) {
         jubtiService.saveResult(jubtiResultDto);
         return new ResponseEntity<>(SUCCESS, HttpStatus.OK);
