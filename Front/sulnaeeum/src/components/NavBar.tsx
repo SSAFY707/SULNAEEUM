@@ -1,17 +1,7 @@
 import Link from "next/link";
 import { useState } from "react";
 import React from "react";
-import {
-  Drawer,
-  DrawerBody,
-  DrawerFooter,
-  DrawerHeader,
-  DrawerOverlay,
-  DrawerContent,
-  DrawerCloseButton,
-  Button,
-  Input,
-} from "@chakra-ui/react";
+
 import { useDisclosure } from "@chakra-ui/react";
 import { useRef } from "react";
 
@@ -26,7 +16,7 @@ function Navbar() {
     ["탁주", "약주/청주", "과실주", "증류주", "기타 주류"],
     ["경기도", "강원도", "충청도", "전라도", "경상도", "제주도"],
     ["랭킹"],
-    ["나만의 전통주 추천"],
+    ["나만의 전통주"],
     ["선물하기"],
     ["검사하기"],
   ];
@@ -35,7 +25,7 @@ function Navbar() {
   return (
     <nav className="fixed z-50">
       <ul className="hover:border-b hover:pb-[1px] h-[50px] w-screen text-[16px] flex justify-between items-center border-b-2 bg-white">
-        <li className="max-[990px]:w-[200px] max-[990px]:pl-[60px] w-[270px] pl-[165px]">
+        <li className="max-[990px]:w-[200px] max-[990px]:pl-[30px] w-[270px] pl-[165px]">
           <Link href={"/"}>로고부분</Link>
 
           {hover == "On" ? <div></div> : ""}
@@ -78,35 +68,6 @@ function Navbar() {
           <Link href={"/user"}>
             <div className="pl-[40px]">로그인</div>
           </Link>
-        </li>
-        {/* 탭창 */}
-        <li className="min-[900px]:hidden pr-[60px]">
-          <Button ref={btnRef} colorScheme="teal" onClick={onOpen}>
-            열어보슈
-          </Button>
-          <Drawer
-            isOpen={isOpen}
-            placement="right"
-            onClose={onClose}
-            finalFocusRef={btnRef}
-          >
-            <DrawerOverlay />
-            <DrawerContent>
-              <DrawerCloseButton />
-              <DrawerHeader>Create your account</DrawerHeader>
-
-              <DrawerBody>
-                <Input placeholder="Type here..." />
-              </DrawerBody>
-
-              <DrawerFooter>
-                <Button variant="outline" mr={3} onClick={onClose}>
-                  Cancel
-                </Button>
-                <Button colorScheme="blue">Save</Button>
-              </DrawerFooter>
-            </DrawerContent>
-          </Drawer>
         </li>
       </ul>
       {hover == "On" ? (
