@@ -1,3 +1,5 @@
+import { sendJubti } from '@/api/dafault';
+import { JubtiType } from '@/types/DataTypes';
 import { useRouter } from 'next/router';
 import React, { useState } from 'react'
 import { BsArrowLeftCircle } from 'react-icons/bs';
@@ -10,21 +12,21 @@ export default function Jubti () {
 
   // 선택된 데이터 타입
   type SelData = {
-    [index: string]: string | Number 
+    [index: string]: string | number
     age : string;
     sex: string;
-    level: Number;
-    tasteRefresh: Number;
-    tasteBody: Number;
-    tasteThroat: Number;
-    tasteSour: Number;
-    tasteSweet: Number;
-    tasteFlavor: Number;
+    level: number;
+    tasteRefresh: number;
+    tasteBody: number;
+    tasteThroat: number;
+    tasteSour: number;
+    tasteSweet: number;
+    tasteFlavor: number;
     dish: string;
-    ie: Number;
-    ns: Number;
-    ft: Number;
-    jp: Number;
+    ie: number;
+    ns: number;
+    ft: number;
+    jp: number;
   } 
 
   // JBTI 질문지 데이터
@@ -151,9 +153,27 @@ export default function Jubti () {
       alert('안주를 선택해 주세요 😋')
       return
     }
+
+    // 보낼 데이터만 가공
+    const payload : JubtiType = {
+      age: data.age,
+      sex: data.sex,
+      level: data.level,
+      tasteRefresh: data.tasteRefresh,
+      tasteBody: data.tasteBody,
+      tasteThroat: data.tasteThroat,
+      tasteSour: data.tasteSour,
+      tasteSweet: data.tasteSweet,
+      tasteFlavor: data.tasteFlavor,
+      dish: data.dish,
+    }
+
+    // back에게 데이터 보내는 과정
+    sendJubti(payload);
+
     let mbti = ''
     const arr : Array<string> = ['ie', 'ns', 'ft', 'jp']
-    const check = (key : string, value: Number) => {
+    const check = (key : string, value: number) => {
       if (value < 3) {
         return key[0]
       } else if (value > 3) {
@@ -164,7 +184,7 @@ export default function Jubti () {
         return key[idx]
       }
     }
-    arr.map((a)=>{mbti += check(a, data[a] as Number)})
+    arr.map((a)=>{mbti += check(a, data[a] as number)})
     const drink = mbti_to_drink[mbti]
     console.log(drink)
     router.push(`/jubti/result/${drink}`)
@@ -256,7 +276,7 @@ export default function Jubti () {
             {datas.question.slice(3,6).map((q, index)=>{
               return (
                 <div className={'w-5/6 px-2 my-4 md:flex md:flex-col md:items-center md:w-3/4 md:my-4'} key={index}>
-                <div className={'flex w-full justify-between text-[16px] font-preL mb-4 md:w-3/4 md:relative md:top-[70px] md:text-[22px]'}>
+                <div className={'flex w-full justify-between text-[16px] font-preL mb-4 md:mb-8 md:w-3/4 md:relative md:top-[70px] md:text-[22px]'}>
                   <div>{q.q1}</div>
                   <div>{q.q2}</div>
                 </div>
@@ -282,7 +302,7 @@ export default function Jubti () {
             {datas.question.slice(6,9).map((q, index)=>{
               return (
                 <div className={'w-5/6 px-2 my-4 md:flex md:flex-col md:items-center md:w-3/4 md:my-4'} key={index}>
-                <div className={'flex w-full justify-between text-[16px] font-preL mb-4 md:w-3/4 md:relative md:top-[70px] md:text-[22px]'}>
+                <div className={'flex w-full justify-between text-[16px] font-preL mb-4 md:mb-8 md:w-3/4 md:relative md:top-[70px] md:text-[22px]'}>
                   <div>{q.q1}</div>
                   <div>{q.q2}</div>
                 </div>
