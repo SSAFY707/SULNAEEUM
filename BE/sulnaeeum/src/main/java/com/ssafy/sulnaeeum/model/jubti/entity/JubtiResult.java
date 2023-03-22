@@ -1,6 +1,5 @@
 package com.ssafy.sulnaeeum.model.jubti.entity;
 
-import com.ssafy.sulnaeeum.model.jubti.dto.JubtiResultDto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -21,10 +20,10 @@ public class JubtiResult {
     @Column(nullable = false)
     private int jubtiResultId; // auto_increment PK
 
-    @Column(length = 3, nullable = false)
+    @Column(length = 5, nullable = false)
     private String age; // 나이
 
-    @Column(length = 2, nullable = false)
+    @Column(length = 10, nullable = false)
     private String sex; // 성별
 
     @Column(nullable = false)
@@ -50,20 +49,4 @@ public class JubtiResult {
 
     @Column(length = 10, nullable = false)
     private String dish; // 안주
-
-//    // Entity -> DTO 변환
-//    public JubtiResultDto toDto() {
-//        return JubtiResultDto.builder()
-//                .jubtiResultId(this.jubtiResultId)
-//                .age(this.age)
-//                .sex(this.sex)
-//                .level(this.level)
-//                .tasteRefresh(this.tasteRefresh)
-//                .tasteBody(this.tasteBody)
-//                .tasteThroat(this.tasteThroat)
-//                .tasteSour(this.tasteSour)
-//                .tasteSweet(this.tasteSweet)
-//                .tasteFlavor(this.tasteFlavor)
-//                .dish(this.dish).build();
-//    }
 }
