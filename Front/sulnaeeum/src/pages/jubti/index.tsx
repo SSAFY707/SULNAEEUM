@@ -39,8 +39,8 @@ export default function Jubti () {
       { name: '60대 이상', value: '60s' }
       ],
     sex : [
-      {name: '남성', value: 'man'},
-      {name: '여성', value: 'woman'},
+      {name: '남성', value: '남성'},
+      {name: '여성', value: '여성'},
     ],
     dish : [
       {name: '육류', value: 'meat'},
@@ -167,6 +167,8 @@ export default function Jubti () {
       tasteFlavor: data.tasteFlavor,
       dish: data.dish,
     }
+
+    // console.log(payload)
 
     // back에게 데이터 보내는 과정
     sendJubti(payload);
