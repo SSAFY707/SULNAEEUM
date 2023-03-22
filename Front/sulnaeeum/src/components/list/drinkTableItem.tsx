@@ -1,6 +1,8 @@
 import { Drink } from '@/types/DataTypes'
+import { RxMagnifyingGlass } from 'react-icons/rx'
 import { FaRegBookmark, FaBookmark } from 'react-icons/fa'
 import React, { useState } from 'react'
+import { ClearBtn, ClearFalse, ClearTrue } from './clearBtn'
 
 export const DrinkTableElement = (props: {drink : Drink}) => {
   const {drink} = props
@@ -12,13 +14,14 @@ export const DrinkTableElement = (props: {drink : Drink}) => {
   }
 
   return (
-    <div className={'flex py-4 cursor-pointer w-11/12 h-[200px] border rounded-xl hover:w-full hover:h-[210px] hover:shadow-md'}>
-      <div className={'w-2/5 flex justify-center items-center'}><img className={'h-[160px]'} src={item.drinkImage} /></div>
-      <div className={'w-2/5 flex flex-col mt-10 items-end'}>
-        <div className={'text-[26px] font-preR text-end'}>{item.drinkName}</div>
-        <div>{item.drinkLevel}% | {item.drinkAmount}</div>
+    <div className={'group flex flex-col items-center bg-white p-4 cursor-pointer w-[95%] h-[350px] border rounded-xl hover:w-full hover:h-[360px] shadow-sm hover:shadow-lg'}>
+      <div className={'w-full flex justify-end'}>
+        {item.like ? <FaBookmark onClick={like} className={'cursor-pointer text-[20px] text-[#655422]'} /> : <FaRegBookmark onClick={like} className={'cursor-pointer text-[20px] text-[#655422]'} />}
       </div>
-      {item.like ? <FaBookmark onClick={like} className={'ml-10 mt-4 cursor-pointer text-[20px] text-[#655422]'} /> : <FaRegBookmark onClick={like} className={'ml-10 mt-4 cursor-pointer text-[20px] text-[#655422]'} />}
+      <div className={'w-full h-1/2 flex justify-center items-center mb-4'}><img className={'h-full'} src={item.drinkImage} /></div>
+      <div className={'flex items-center text-[24px] font-preR group-hover:font-preM'}>{item.drinkName}<RxMagnifyingGlass className={'ml-2 text-[#B3B3B3] group-hover:text-[#665442]'} /></div>
+      <div className={'mb-4'}>{item.drinkLevel}% | {item.drinkAmount}</div>
+      {item.like ? <ClearBtn /> : <ClearFalse />}
     </div>
   )
 }
