@@ -18,7 +18,7 @@ export default function index() {
     ]
   }
 
-  const [page, setPage] = useState(1);
+  const [page, setPage] = useState(2);
   return (
     <>
       <div className={"bg-[url('/images/login_back.png')] bg-cover w-full h-full"}>
@@ -62,22 +62,55 @@ export default function index() {
                 </div>
               </div>
             </div>
-            <div className={'flex justify-center items-center rounded w-2/3 h-[60px] text-[20px] text-white font-preL bg-[#847260] hover:bg-[#655442] cursor-pointer'}>다음 단계</div>
+            <div onClick={()=>{setPage(page + 1)}} className={'flex justify-center items-center rounded w-5/6 h-[60px] text-[20px] text-white font-preL bg-[#847260] hover:bg-[#655442] cursor-pointer'}>다음 단계</div>
           </div>
-          <div className={`${page != 2 && 'hidden'} flex flex-col items-center w-[500px] h-[600px] rounded-xl bg-white/70`}>
-            <div className={'w-5/6 mt-10'}>
-              <div className={'font-preM mb-2'}>2 / 3 단계</div>
+          <div className={`${page != 2 && 'hidden'} flex flex-col items-center w-[500px] h-[650px] rounded-xl bg-white/70`}>
+            <div className={'w-5/6 mt-10 mb-6'}>
+              <div className={'font-preM mb-2 text-[#655442]'}>2 / 3 단계</div>
               <div className={'w-full h-2 bg-zinc-200 rounded-2xl'}>
                 <div className={'w-2/3 h-full bg-[#655442] rounded-2xl'}></div>
               </div>
             </div>
+            <div className={'h-2/3 w-5/6 p-2'}>
+              <div className={'mb-16'}>
+                <div className={'font-preR text-[24px] mb-4'}>성별</div>
+                <div className={'grid grid-cols-2 gap-2 w-full'}>
+                  {data.gender.map((g, index)=>{
+                    return (
+                      <div className={'w-full h-[50px] flex justify-center items-center cursor-pointer border rounded'} key={index}>{g.name}</div>
+                    )
+                  })}
+                </div>
+              </div>
+              <div>
+                <div className={'font-preR text-[24px] mb-4'}>나이</div>
+                <div className={'grid grid-cols-3 gap-2'}>
+                  {data.age.map((age, index)=>{
+                    return (
+                      <div className={'w-full h-[50px] flex justify-center items-center cursor-pointer border rounded'} key={index}>{age.name}</div>
+                    )
+                  })}
+                </div>
+              </div>
+            </div>
+            <div className={'flex w-5/6 gap-2'}>
+              <div onClick={()=>{setPage(page - 1)}} className={'flex justify-center items-center rounded w-full h-[60px] text-[20px] text-white font-preL bg-[#847260] hover:bg-[#655442] cursor-pointer'}>이전 단계</div>
+              <div onClick={()=>{setPage(page + 1)}} className={'flex justify-center items-center rounded w-full h-[60px] text-[20px] text-white font-preL bg-[#847260] hover:bg-[#655442] cursor-pointer'}>다음 단계</div>
+            </div>
           </div>
-          <div className={`${page != 3 && 'hidden'} flex flex-col items-center w-[500px] h-[600px] rounded-xl bg-white/70`}>
-            <div className={'w-5/6 mt-10'}>
+          <div className={`${page != 3 && 'hidden'} flex flex-col items-center w-[500px] h-[650px] rounded-xl bg-white/70`}>
+            <div className={'w-5/6 mt-10 mb-6'}>
               <div className={'font-preM mb-2'}>3 / 3 단계</div>
               <div className={'w-full h-2 bg-zinc-200 rounded-2xl'}>
                 <div className={'w-full h-full bg-[#655442] rounded-2xl'}></div>
               </div>
+            </div>
+            <div className={'h-2/3 w-5/6 p-2'}>
+              <div>?</div>
+            </div>
+            <div className={'flex w-5/6 gap-2'}>
+              <div onClick={()=>{setPage(page - 1)}} className={'flex justify-center items-center rounded w-full h-[60px] text-[20px] text-white font-preL bg-[#847260] hover:bg-[#655442] cursor-pointer'}>이전 단계</div>
+              <div onClick={()=>{setPage(page + 1)}} className={'flex justify-center items-center rounded w-full h-[60px] text-[20px] text-white font-preL bg-[#847260] hover:bg-[#655442] cursor-pointer'}>다음 단계</div>
             </div>
           </div>
         </div>
