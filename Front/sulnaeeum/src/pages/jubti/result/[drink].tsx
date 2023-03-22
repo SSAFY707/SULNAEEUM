@@ -42,13 +42,13 @@ export default function Result (props: any) {
                 <div className={'text-[30px] font-preM mt-4'}>{result.name}</div>
                 <div className={'mt-2 text-[20px]'}>{result.summary}</div>
             </div>
-            <ul className={'mt-[100px] px-8 text-[18px] md:text-[20px] md:w-1/2 md:mt-[130px]'}>
+            <ul className={'mt-[100px] px-8 text-[18px] md:text-[20px] md:w-1/2 md:mt-[130px] font-preL'}>
                 {result.explain.map((e : string, index: number)=>{
                     return ( <li className={'mb-6'} key={index}>▪ {e}</li> )
                 })}
             </ul>
         </div>
-        <div className={'md:flex md:bg-zinc-200 md:justify-between md:px-20'}>
+        <div className={'md:flex md:bg-zinc-200 md:justify-between md:px-40'}>
             <div className={'flex flex-col items-center mb-20 w-full bg-zinc-200 md:w-1/4 md:mb-1 overflow-hidden'}>
                 <div className={'flex items-center text-[20px] my-6 text-[#333333] md:mt-10'}><div className={'font-preM text-[30px] mr-2 md:text-[26px] text-[#191919]'}>{result.name}</div>와(과) 어울리는 안주</div>
                 <svg width="403" height="13" viewBox="0 0 403 13" fill="none" xmlns="http://www.w3.org/2000/svg">
