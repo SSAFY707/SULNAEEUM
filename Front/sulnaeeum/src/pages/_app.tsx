@@ -2,7 +2,12 @@ import "@/styles/globals.css";
 import type { AppProps } from "next/app";
 import Head from "next/head";
 import NavBar from "../components/NavBar";
-import TestNav from "../components/testNav";
+
+declare global {
+  interface Window {
+    Kakao: any;
+  }
+}
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
@@ -10,8 +15,7 @@ export default function App({ Component, pageProps }: AppProps) {
       <Head>
         <title>SULNAEEUM | 술내음</title>
       </Head>
-      {/* <NavBar /> */}
-      <TestNav/>
+      <NavBar />
       <Component {...pageProps} />
     </>
   );

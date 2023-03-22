@@ -3,8 +3,11 @@
 @tailwind utilities;
 
 /* 기본 세팅 */
-* {
-    font-family: preL
+
+
+// 스크롤바 none.......
+body::-webkit-scrollbar {
+    display: none;
 }
 
 h1 {
@@ -15,6 +18,7 @@ h1 {
 body {
     margin: 0;
     padding: 0;
+    font-family: preL
 }
 
 a {

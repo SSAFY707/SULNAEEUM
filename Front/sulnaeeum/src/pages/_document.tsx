@@ -5,7 +5,7 @@ export default function Document() {
   return (
     <Html lang="en">
       <Head>
-        <title>SULNAEEUM | 술내음</title>
+      <script defer src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
       </Head>
       <body>
         <Main />

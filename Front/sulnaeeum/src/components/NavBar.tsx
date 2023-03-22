@@ -17,52 +17,57 @@ function Navbar() {
 
   //
   return (
-    <nav>
-      <ul className="h-[50px] text-[15px] flex justify-between items-center border-b-2  ">
-        <li className="w-[200px] pl-[120px]">
+    <nav className="fixed z-50">
+      <ul className=" hover:border-b hover:pb-[1px] h-[50px] w-screen text-[16px] flex justify-between items-center border-b-2 bg-white">
+        <li className="w-[300px] pl-[180px]">
           <Link href={"/"}>로고부분</Link>
+          {hover == "On" ? <div></div> : ""}
         </li>
         <li
-          onMouseEnter={() => setHover("menuOn")}
+          onMouseEnter={() => setHover("On")}
           onMouseLeave={() => setHover("")}
-          className="flex justify-around w-[700px] "
+          className={`${
+            hover == "On" ? "z-10 h-[330px] mt-[419px]" : ""
+          } flex justify-around w-[700px] mt-[130px] mb-[127px]`}
         >
           {menu.map((v, i) => {
             return (
-              <Link href={url[i] + ""}>
-                {/* 배경색 흰색으로 하면 안돼나요...... 끄윽 ㅠ-ㅠ */}
-                <div className=" hover:bg-sky-300 hover:h-[220px] hover:mt-[170px] ">
-                  <div className="hover:border-b-2 hover:border-[#B58269]  w-[100px] pt-[7px] h-[42px] text-center">
-                    {v}
-                    {hover == "menuOn" ? (
-                      <ul className="items-center text-center mt-[25px]">
-                        {menuTab[i].map((val, idx) => {
-                          return <li className="mt-[10px]">{val}</li>;
-                        })}
-                      </ul>
-                    ) : (
-                      ""
-                    )}
-                  </div>
+              <Link href={url[i] + ""} key={i}>
+                <div className="hover:border-b-2 hover:border-[#B58269] text-neutral-600 hover:font-preEB font-preM w-[110px] pt-[9px] h-[42px] text-center">
+                  {v}
+                  {hover == "On" ? (
+                    <ul className="items-center text-center pt-[18px]">
+                      {menuTab[i].map((val, idx) => {
+                        return (
+                          // 각 페이지 URL 넣어야함
+                          <Link href={"/"}>
+                            <li className="hover:font-preB text-neutral-500 font-preR text-[16px] mt-[17px] ">
+                              {val}
+                            </li>
+                          </Link>
+                        );
+                      })}
+                    </ul>
+                  ) : (
+                    ""
+                  )}
                 </div>
               </Link>
             );
           })}
         </li>
-        <li className="w-[200px] flex">
-          <div>검색</div>
+        <li className="w-[300px] pl-[20px] flex">
+          <button>검색</button>
           <Link href={"/user"}>
             <div className="pl-[40px]">로그인</div>
           </Link>
         </li>
       </ul>
-      {/* {hover == "menuOn" ? (
-        <div className="flex justify-center h-[170px] w-screen bg-sky-400">
-          <div className="bg-red-300 w-[660px]"></div>
-        </div>
+      {hover == "On" ? (
+        <div className="drop-shadow-lg absolute z-0 h-[280px] w-screen bg-white"></div>
       ) : (
         ""
-      )} */}
+      )}
     </nav>
   );
 }
