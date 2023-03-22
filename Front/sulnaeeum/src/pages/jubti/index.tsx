@@ -174,7 +174,7 @@ export default function Jubti () {
     <>
       <div className={`${page == 0 ? 'block' : 'hidden'} flex flex-col items-center w-full h-[1080px] overflow-hidden`}>
         <div className={'flex flex-col justify-center items-center h-[660px] md:h-[380px] w-full bg-[#AEA896] px-10'}>
-          <div className={'flex items-center flex-col text-white mb-10 md:mt-16'}>
+          <div className={'flex w-full items-center flex-col text-white mb-10 md:mt-16'}>
             <img className={'h-[16px] mt-14 mb-2 md:h-[20px] md:mt-14 md:mb-8'} src="/images/jubti/pattern1.png" />
             <h1 className={'text-[36px] font-bold md:text-[50px]'}>전통주 유형검사</h1>
             <div className={'text-[16px] font-preEL md:text-[24px] md:my-2'}>간단한 질문으로 나의 酒BTI를 확인해보세요.</div>
@@ -200,8 +200,8 @@ export default function Jubti () {
         </div>
         <div onClick={()=>{setPage(page + 1)}} className={'w-5/6 h-[70px] bg-[#AEA896] hover:bg-[#655442] rounded text-white text-[20px] flex justify-center items-center mt-14 cursor-pointer relative md:hidden'}>시작하기</div>
       </div>
-      <div className={`${page != 0 ? 'block' : 'hidden'} cursor-pointer relative left-[40px] top-[100px] md:left-[10%] md:top-[120px]`} onClick={()=>setPage(page - 1)}><BsArrowLeftCircle className={'w-[34px] h-[34px] text-[#655442] md:w-[40px] md:h-[40px]'} /></div>
-      <div className={`${page == 1 ? 'block' : 'hidden'}`}>
+      <div className={`${page != 0 ? 'block' : 'hidden'} cursor-pointer relative ml-[30px] top-[100px] md:left-[10%] md:top-[120px]`} onClick={()=>setPage(page - 1)}><BsArrowLeftCircle className={'w-[34px] h-[34px] text-[#655442] md:w-[40px] md:h-[40px]'} /></div>
+      <div className={`${page == 1 ? 'block' : 'hidden'} w-full overflow-hidden`}>
         <div className={'mt-40 mb-14 flex flex-col items-center w-full'}>
           <div className={'flex flex-col items-center w-5/6'}>
             <div className={'text-[20px] font-preM mb-8 md:text-[30px] md:mb-16'}>당신의 나이를 선택해주세요.</div>
