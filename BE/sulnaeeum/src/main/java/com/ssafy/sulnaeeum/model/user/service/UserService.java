@@ -3,6 +3,9 @@ package com.ssafy.sulnaeeum.model.user.service;
 import com.ssafy.sulnaeeum.exception.CustomException;
 import com.ssafy.sulnaeeum.exception.CustomExceptionList;
 import com.ssafy.sulnaeeum.jwt.TokenProvider;
+import com.ssafy.sulnaeeum.model.user.dto.UserPreferenceDto;
+import com.ssafy.sulnaeeum.model.user.entity.UserPreference;
+import com.ssafy.sulnaeeum.model.user.repo.UserPreferenceRepo;
 import com.ssafy.sulnaeeum.model.user.repo.UserRepo;
 import com.ssafy.sulnaeeum.model.user.dto.TokenDto;
 import com.ssafy.sulnaeeum.model.user.entity.User;
@@ -21,6 +24,7 @@ import java.util.Optional;
 public class UserService {
 
     private final UserRepo userRepository;
+    private final UserPreferenceRepo userPreferenceRepo;
     private final TokenProvider tokenProvider;
 
     @Autowired
@@ -59,6 +63,16 @@ public class UserService {
         User user = userRepository.findByKakaoId(kakaoId).orElseThrow(() -> new CustomException(CustomExceptionList.MEMBER_NOT_FOUND));
 
         user.updateToken(null);
+    }
+
+    @Transactional
+    public void preference(String kakaoId, UserPreferenceDto userPreferenceDto) {
+
+        User user = userRepository.findByKakaoId(kakaoId).orElseThrow(() -> new CustomException(CustomExceptionList.MEMBER_NOT_FOUND));
+        UserPreference userPreference = userPreferenceDto.toEntity();
+        userPreference.setUser(user);
+
+        userPreferenceRepo.save(userPreference);
     }
 
     // kakaoId로 userId 찾기
