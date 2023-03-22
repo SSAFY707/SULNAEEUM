@@ -26,6 +26,8 @@ import javax.servlet.http.HttpServletResponse;
 @Slf4j
 public class UserController {
 
+    private static final String SUCCESS = "success";
+    private static final String FAIL = "fail";
     private final UserService userService;
     private final KakaoLoginService kakaoUserService;
 
@@ -69,7 +71,7 @@ public class UserController {
         String kakaoId = SecurityContextHolder.getContext().getAuthentication().getName();
 
         userService.logout(kakaoId);
-        return new ResponseEntity<>("Logout", HttpStatus.OK);
+        return new ResponseEntity<>(SUCCESS, HttpStatus.OK);
     }
 
     /***
@@ -83,7 +85,7 @@ public class UserController {
 
         userService.preference(kakaoId, userPreferenceDto);
 
-        return new ResponseEntity<>("취향 조사 완료   ", HttpStatus.OK);
+        return new ResponseEntity<>(SUCCESS , HttpStatus.OK);
     }
 
 }
