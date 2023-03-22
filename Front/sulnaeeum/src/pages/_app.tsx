@@ -2,6 +2,7 @@ import "@/styles/globals.css";
 import type { AppProps } from "next/app";
 import Head from "next/head";
 import NavBar from "../components/NavBar";
+import { ChakraProvider } from "@chakra-ui/react";
 
 declare global {
   interface Window {
@@ -15,8 +16,10 @@ export default function App({ Component, pageProps }: AppProps) {
       <Head>
         <title>SULNAEEUM | 술내음</title>
       </Head>
-      <NavBar />
-      <Component {...pageProps} />
+      <ChakraProvider>
+        <NavBar />
+        <Component {...pageProps} />
+      </ChakraProvider>
     </>
   );
 }
