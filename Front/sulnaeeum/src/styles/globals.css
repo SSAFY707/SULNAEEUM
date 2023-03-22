@@ -3,7 +3,9 @@
 @tailwind utilities;
 
 /* 기본 세팅 */
-
+html {
+    height: -webkit-fill-available;
+}
 
 // 스크롤바 none.......
 body::-webkit-scrollbar {
@@ -15,10 +17,13 @@ h1 {
     font-family: preB;
 }
 
+
 body {
+    width:100%;
+    overflow-x:hidden;
     margin: 0;
     padding: 0;
-    font-family: preL
+    font-family: preL;
 }
 
 a {
@@ -66,4 +71,16 @@ a {
 @font-face {
     font-family: 'preT';
     src: url("../assets/fonts/Pretendard-Thin.ttf");
+}
+
+.scroll::-webkit-scrollbar {
+    width: 10px;
+}
+
+.scroll::-webkit-scrollbar-thumb {
+    background-color: #D5D5D5;
+    border-radius: 10px;
+}
+.scroll::-webkit-scrollbar-track {
+    display: none;
 }
