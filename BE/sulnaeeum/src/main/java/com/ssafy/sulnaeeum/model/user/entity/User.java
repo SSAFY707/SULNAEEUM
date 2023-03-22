@@ -21,7 +21,7 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long userId;
 
-    @Column(name = "kakaoId", nullable = false, unique = true)
+    @Column(name = "kakao_id", nullable = false, unique = true)
     private String kakaoId; // kakao
 
     @Column(name = "password", nullable = false)
@@ -46,9 +46,6 @@ public class User {
 
     @Column(name="ranking",nullable = false)
     private int ranking;
-
-    @Column(name="level",nullable = false)
-    private int level;
 
     @Column(name="finish",nullable = false, columnDefinition = "TINYINT")
     private boolean finish;

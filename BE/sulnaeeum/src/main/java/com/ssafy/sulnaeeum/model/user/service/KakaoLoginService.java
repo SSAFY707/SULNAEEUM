@@ -153,7 +153,6 @@ public class KakaoLoginService {
                     .sex(gender)
                     .activated(true)
                     .ranking(0)
-                    .level(0)
                     .finish(false)
                     .authorities(Collections.singleton(authority)).build();
 
