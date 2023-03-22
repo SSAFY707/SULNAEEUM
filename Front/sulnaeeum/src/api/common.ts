@@ -1,12 +1,15 @@
 import axios, { AxiosInstance } from 'axios';
 
-const SERVER_URL = 'http://localhost:9090/api/'
+// const SERVER_URL = 'http://localhost:9090/api/'
+
+const SERVER_URL = 'https://j8a707.p.ssafy.io/api/'
+const accessToken = typeof window !== 'undefined' ? sessionStorage.getItem('accessToken') : null;
 
 // 로그인 후 사용할 axios (-> 토큰이 필요한 경우)
 export const authAxios: AxiosInstance = axios.create({
     baseURL: `${SERVER_URL}`,
     headers: {
-        Authorization: 'Bearer ' + localStorage.getItem('access_token') || '',
+        Authorization: 'Bearer ' + accessToken || '',
     },
 });
 

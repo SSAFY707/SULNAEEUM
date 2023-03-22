@@ -13,9 +13,11 @@ export default function List() {
             return ( <div onClick={()=>{setType(index)}} className={`${type == index && 'text-[40px] font-preEB text-[#655442]'} flex items-center cursor-pointer h-[70px] hover:text-[40px] hover:font-preEB hover:text-[#655442]`} key={index}>{a}</div> )
           })}
         </div>
-        <div className={'w-[66%] ml-20'}>
-          <div className={'flex items-center justify-end px-10 h-[100px]'}>정렬이 들어갈 곳</div>
-          <DrinkList drinkType={typeArr[type]} sortType={sort}></DrinkList>
+        <div className={'w-[65%] ml-20'}>
+          <div className={'flex items-center justify-end px-10 h-[70px]'}>정렬이 들어갈 곳</div>
+          <div className={'h-[700px] overflow-y-scroll scroll'}>
+            <DrinkList drinkType={typeArr[type]} sortType={sort}></DrinkList>
+          </div>
         </div>
       </div>
     </>
