@@ -32,8 +32,8 @@ export default function Result (props: any) {
     <div className={'no-scrollbar'}>
         <div className={'flex flex-col items-center mb-14 md:flex-row md:items-start md:mb-1'}>
             <div className={'flex md:hidden flex-col items-center pt-16 h-[360px] w-full'} style={{backgroundColor : result.color}}>
-                <div className={'mt-4 text-[20px]'}>{result.summary}</div>
-                <div className={'text-[30px] font-preM'}>{result.name}</div>
+                <div className={'mt-4 text-[20px] font-preR text-[#333333]'}>{result.summary}</div>
+                <div className={'text-[30px] font-preM  text-[#191919]'}>{result.name}</div>
                 <img className={'mt-6 h-[220px]'} src={`/images/jubti/drink/${result.name}.png`} alt="" />
             </div>
             <div className={'hidden md:flex flex-col items-center h-[400px] w-2/5 mt-20 ml-20'}>
@@ -50,7 +50,7 @@ export default function Result (props: any) {
         </div>
         <div className={'md:flex md:bg-zinc-200 md:justify-between md:px-20'}>
             <div className={'flex flex-col items-center mb-20 w-full bg-zinc-200 md:w-1/4 md:mb-1 overflow-hidden'}>
-                <div className={'flex items-center text-[20px] my-6 md:mt-10'}><div className={'font-preM text-[30px] mr-2 md:text-[26px]'}>{result.name}</div>와(과) 어울리는 안주</div>
+                <div className={'flex items-center text-[20px] my-6 text-[#333333] md:mt-10'}><div className={'font-preM text-[30px] mr-2 md:text-[26px] text-[#191919]'}>{result.name}</div>와(과) 어울리는 안주</div>
                 <svg width="403" height="13" viewBox="0 0 403 13" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M1 7.11523C61.0543 6.9735 121.114 6.84323 181.168 6.70149" stroke="#4F4F4F" stroke-width="0.5" stroke-miterlimit="10" stroke-linecap="round"/>
                     <path d="M183.575 4.46056C184.742 4.46541 185.685 5.43765 185.68 6.63212C185.675 7.82659 184.724 8.79097 183.557 8.78612C182.39 8.78127 181.448 7.80903 181.453 6.61456C181.458 5.42009 182.408 4.45571 183.575 4.46056Z" stroke="#4F4F4F" stroke-width="0.5" stroke-miterlimit="10"/>
@@ -67,7 +67,7 @@ export default function Result (props: any) {
                 </div>
             </div>
             <div className={'flex flex-col items-center mb-20 md:w-1/4 overflow-hidden'}>
-                <div className={'flex items-center text-[20px] mb-6 md:mt-10'}><div className={'font-preM text-[30px] mr-2 md:text-[26px]'}>{result.name}</div>와(과)의 궁합</div>
+                <div className={'flex items-center text-[20px] mb-6 md:mt-10 text-fontED'}><div className={'font-preM text-[30px] mr-2 md:text-[26px] text-fontD'}>{result.name}</div>와(과)의 궁합</div>
                 <svg width="403" height="13" viewBox="0 0 403 13" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M1 7.11523C61.0543 6.9735 121.114 6.84323 181.168 6.70149" stroke="#4F4F4F" stroke-width="0.5" stroke-miterlimit="10" stroke-linecap="round"/>
                     <path d="M183.575 4.46056C184.742 4.46541 185.685 5.43765 185.68 6.63212C185.675 7.82659 184.724 8.79097 183.557 8.78612C182.39 8.78127 181.448 7.80903 181.453 6.61456C181.458 5.42009 182.408 4.45571 183.575 4.46056Z" stroke="#4F4F4F" stroke-width="0.5" stroke-miterlimit="10"/>
@@ -79,14 +79,14 @@ export default function Result (props: any) {
                     <path d="M210.475 6.64084L205.316 11.877L200.201 6.59816L205.36 1.36205L210.475 6.64084Z" stroke="#4F4F4F" stroke-width="0.5" stroke-miterlimit="10"/>
                 </svg>
                 <div className={'flex justify-center mt-10 md:mt-4'}>
-                    <div className={'flex flex-col items-center mx-6'}>
+                    <div className={'flex flex-col items-center ml-6'}>
                         <div className={'text-[20px] mb-4 font-preR'}>최고의 궁합</div>
                         <div className={'flex justify-center w-[160px] h-[160px] rounded-full'} style={{backgroundColor : result.good_color}}>
                             <img className={'mt-4 h-[160px]'} src={`/images/jubti/drink/${result.good_name}.png`} alt="" />
                         </div>
                         <div className={'mt-8'}>{result.good_name}</div>
                     </div>
-                    <div className={'flex flex-col items-center mx-6'}>
+                    <div className={'flex flex-col items-center mx-6 text-fontD'}>
                         <div className={'text-[20px] mb-4 font-preR'}>최악의 궁합</div>
                         <div className={'flex justify-center w-[160px] h-[160px] rounded-full'} style={{backgroundColor : result.bad_color}}>
                             <img className={'mt-4 h-[160px]'} src={`/images/jubti/drink/${result.bad_name}.png`} alt="" />
@@ -97,7 +97,7 @@ export default function Result (props: any) {
             </div>
             <div className={'flex flex-col items-center w-full bg-zinc-200 md:w-1/4'}>
                 <div className={'flex flex-col items-center'}>
-                    <div className={'text-[26px] font-preM mt-14'}>결과 공유하기</div>
+                    <div className={'text-[26px] font-preM mt-14 text-fontD'}>결과 공유하기</div>
                     <img onClick={share} className={'h-[50px] mt-5 mb-16 cursor-pointer'} src="/images/kakao.png" alt="" />
                 </div>
                 <div onClick={()=>{alert('서비스 준비중입니다 😇')}} className={'flex justify-center items-center cursor-pointer text-[20px] w-3/4 h-[60px] rounded bg-[#999483] text-white'}>{result.name} 더 알아보러 가기</div>

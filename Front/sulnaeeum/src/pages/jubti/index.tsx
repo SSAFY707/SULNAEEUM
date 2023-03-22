@@ -202,7 +202,7 @@ export default function Jubti () {
       </div>
       <div className={`${page != 0 ? 'block' : 'hidden'} cursor-pointer relative ml-[30px] top-[100px] md:left-[10%] md:top-[120px]`} onClick={()=>setPage(page - 1)}><BsArrowLeftCircle className={'w-[34px] h-[34px] text-[#655442] md:w-[40px] md:h-[40px]'} /></div>
       <div className={`${page == 1 ? 'block' : 'hidden'} w-full overflow-hidden`}>
-        <div className={'mt-40 mb-14 flex flex-col items-center w-full'}>
+        <div className={'mt-32 mb-[73px] flex flex-col items-center w-full md:mt-40'}>
           <div className={'flex flex-col items-center w-5/6'}>
             <div className={'text-[20px] font-preM mb-8 md:text-[30px] md:mb-16'}>당신의 나이를 선택해주세요.</div>
             <div className={'grid grid-cols-2 gap-2 justify-center w-full md:flex md:gap-5'}>
@@ -211,7 +211,7 @@ export default function Jubti () {
                 })}
             </div>
           </div>
-          <div className={'flex flex-col items-center mt-20 w-5/6'}>
+          <div className={'flex flex-col items-center mt-2 w-5/6 md:mt-20'}>
             <div className={'text-[20px] font-preM mb-8 md:text-[30px] md:mb-16 md: mt-8'}>당신의 성별을 선택해주세요.</div>
             <div className={'flex justify-center w-full md:gap-3'}>
               {datas.sex.map((sex, index)=>{
@@ -222,15 +222,15 @@ export default function Jubti () {
         </div>
       </div>
       <div className={`${page == 2 ? 'block' : 'hidden'}`}>
-        <div className={'flex flex-col md:flex-row text-[20px] md:text-[30px] md:justify-center md:gap-3 mb-8 mt-12 md:mt-20 md:mb-8 font-preM items-center'}>
+        <div className={'flex flex-col md:flex-row text-[20px] md:text-[30px] md:justify-center md:gap-3 mb-10 mt-12 md:mt-20 md:mb-8 font-preM items-center'}>
           <div className={''}>✔ 두 가지 선택지 중</div >
           <div className={''}>가까운 쪽을 선택해 주세요</div >
         </div>
         <div className={'flex flex-col items-center justify-center'}>
             {datas.question.slice(0,3).map((q, index)=>{
               return (
-              <div className={'w-5/6 px-2 my-6 md:flex md:flex-col md:items-center md:w-3/4 md:my-4'} key={index}>
-                <div className={'flex w-full justify-between text-[16px] font-preL mb-8 md:w-3/4 md:relative md:top-[70px] md:text-[22px]'}>
+              <div className={'w-5/6 px-2 my-4 md:flex md:flex-col md:items-center md:w-3/4 md:my-4'} key={index}>
+                <div className={'flex w-full justify-between text-[16px] font-preL mb-4 md:mb-8 md:w-3/4 md:relative md:top-[70px] md:text-[22px]'}>
                   <div>{q.q1}</div>
                   <div>{q.q2}</div>
                 </div>
@@ -248,15 +248,15 @@ export default function Jubti () {
         </div>
       </div>
       <div className={`${page == 3 ? 'block' : 'hidden'}`}>
-        <div className={'flex flex-col md:flex-row text-[20px] mb-8 mt-12 font-preM items-center md:text-[30px] md:justify-center md:gap-3 my-10 md:mt-20 md:mb-8'}>
+        <div className={'flex flex-col md:flex-row text-[20px] mb-10 mt-12 font-preM items-center md:text-[30px] md:justify-center md:gap-3 my-10 md:mt-20 md:mb-8'}>
           <div className={''}>✔ 두 가지 선택지 중</div >
           <div className={''}>가까운 쪽을 선택해 주세요</div >
         </div>
         <div className={'flex flex-col items-center justify-center'}>
             {datas.question.slice(3,6).map((q, index)=>{
               return (
-                <div className={'w-5/6 px-2 my-6 md:flex md:flex-col md:items-center md:w-3/4 md:my-4'} key={index}>
-                <div className={'flex w-full justify-between text-[16px] font-preL mb-8 md:w-3/4 md:relative md:top-[70px] md:text-[22px]'}>
+                <div className={'w-5/6 px-2 my-4 md:flex md:flex-col md:items-center md:w-3/4 md:my-4'} key={index}>
+                <div className={'flex w-full justify-between text-[16px] font-preL mb-4 md:w-3/4 md:relative md:top-[70px] md:text-[22px]'}>
                   <div>{q.q1}</div>
                   <div>{q.q2}</div>
                 </div>
@@ -274,15 +274,15 @@ export default function Jubti () {
         </div>
       </div>
       <div className={`${page == 4 ? 'block' : 'hidden'}`}>
-        <div className={'flex flex-col md:flex-row text-[20px] mt-12 mb-8 font-preM items-center md:text-[30px] md:justify-center md:gap-3 my-10 md:mt-20 md:mb-8'}>
+        <div className={'flex flex-col md:flex-row text-[20px] mt-12 mb-10 font-preM items-center md:text-[30px] md:justify-center md:gap-3 my-10 md:mt-20 md:mb-8'}>
           <div className={''}>✔ 두 가지 선택지 중</div >
           <div className={''}>가까운 쪽을 선택해 주세요</div >
         </div>
         <div className={'flex flex-col items-center justify-center'}>
             {datas.question.slice(6,9).map((q, index)=>{
               return (
-                <div className={'w-5/6 px-2 my-6 md:flex md:flex-col md:items-center md:w-3/4 md:my-4'} key={index}>
-                <div className={'flex w-full justify-between text-[16px] font-preL mb-8 md:w-3/4 md:relative md:top-[70px] md:text-[22px]'}>
+                <div className={'w-5/6 px-2 my-4 md:flex md:flex-col md:items-center md:w-3/4 md:my-4'} key={index}>
+                <div className={'flex w-full justify-between text-[16px] font-preL mb-4 md:w-3/4 md:relative md:top-[70px] md:text-[22px]'}>
                   <div>{q.q1}</div>
                   <div>{q.q2}</div>
                 </div>
