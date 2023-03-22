@@ -1,7 +1,7 @@
 import Link from "next/link";
-import { useState } from "react";
 import React from "react";
-
+import Image from "next/image";
+import { useState } from "react";
 import { useDisclosure } from "@chakra-ui/react";
 import { useRef } from "react";
 
@@ -24,11 +24,13 @@ function Navbar() {
   //
   return (
     <nav className="fixed z-50">
-      <ul className="hover:border-b hover:pb-[1px] h-[50px] w-screen text-[16px] flex justify-between items-center border-b-2 bg-white">
+      <ul className="hover:border-b hover:pb-[1px] h-[62px] w-screen text-[17px] flex justify-between items-center border-b-2 bg-white">
         <li className="max-[990px]:w-[200px] max-[990px]:pl-[30px] w-[270px] pl-[165px]">
-          <Link href={"/"}>로고부분</Link>
-
-          {hover == "On" ? <div></div> : ""}
+          <Link href={"/"}>
+            <div>
+              <Image src="/logo_1.png" alt="" width={90} height={50}></Image>
+            </div>
+          </Link>
         </li>
         <li
           onMouseEnter={() => setHover("On")}

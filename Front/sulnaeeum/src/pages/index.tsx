@@ -3,8 +3,8 @@ import Image from "next/image";
 import useScroll from "../assets/useScroll";
 import styles from "./styles.module.css";
 import { useEffect, useState } from "react";
-import { Button, ButtonGroup } from '@chakra-ui/react'
-import { MdBuild } from 'react-icons/md'
+import { Button, ButtonGroup, useColorModeValue } from '@chakra-ui/react'
+import { AiOutlineArrowRight } from 'react-icons/Ai'
 export default function Home() {
   const scroll = useScroll();
   const isScrolled: boolean = scroll > 1250;
@@ -67,36 +67,87 @@ export default function Home() {
         
 
       {/* PART 2 */}
-        <div className="absolute top-[2440px] w-screen h-[1000px] bg-blue-200 flex">
+        <div className="absolute  top-[2420px] w-screen h-[1000px]  flex">
           {/* 미리보기 */}
           <div className="absolute">
           {/* <Image src="/main/part2/main2_bg.png" alt="" width={1910} height={100}></Image> */}
           </div>
-          <div className="absolute top-[305px] left-[430px] w-[700px] h-[400px]">
+          <div className="absolute  top-[305px] left-[430px] w-[700px] h-[400px]">
             <div className="absolute text-4xl font-preB text-[#977857]">
               Korea Traditional liquor
             </div>
-            <div className="absolute top-[38px] text-[66px] font-preEL text-[#3E3E3E]">
+            <div className="absolute top-[38px] text-[66px] font-preR text-[#3E3E3E]">
               <div className="">한국</div>
-              <div className="mt-[-20px] font-preM">전통주</div>
+              <div className="mt-[-20px] font-preEB">전통주</div>
               <div className="mt-[-20px]">정의</div>
             </div>
-            <div className="absolute top-[310px] text-[25px] font-preM text-[#5E5E5E]">
+            <div className="absolute top-[310px] text-[23px] font-preR text-[#7F7F7F]">
               <p>
                 한 나라나 지역 등에 과거에서부터 이어져오는 양조법으로 만든 술로,
                 <br></br>
                 전통적인 양조법을 계승 및 보존하여 빚는 술을 칭한다.
               </p>
             </div>
-            <div>
-            <Button leftIcon={<MdBuild />} colorScheme='pink' variant='solid'>
-              Settings
-            </Button>
+            <div className="absolute left-[420px] top-[410px]">
+ 
+              <Button size='lg' fontFamily={'preT'} bg="#969696" rightIcon={<AiOutlineArrowRight />} color="#ffffff">
+                전통주 둘러보기
+              </Button>
             </div>
           </div>
-          <div className="absolute right-0 top-[230px]">
+          <div className="absolute right-0 z-30 top-[200px]">
             <Image src="/main/part2/main2_4.png" alt="" width={800} height={0} />
           </div>
+          {/* 스크롤 애니메이션 */}
+          <div className="absolute top-[200px] w-screen h-[300px] ">
+            <Image className="absolute z-20 ml-[-10px]" src="/main/part2/main2_1.png" alt="" width={400} height={0}></Image>
+            <Image className="absolute z-10 right-0 mt-[-100px]" src="/main/part2/main2_2.png" alt="" width={750} height={ 0}></Image>
+            <div className="">
+              <Image className="absolute opacity-5 z-0" src="/main/part2/main2_3.png" alt="" width={400} height={0} />
+              <Image className="absolute top-[500px] left-[1200px] opacity-5 z-0" src="/main/part2/main2_3.png" alt="" width={300} height={ 0}/>
+            </div>
+          </div>
+        </div>
+
+        
+        {/* PART 3 */}
+        <div className="absolute  top-[3500px] w-screen h-[1000px]  flex ">
+          {/* <Image src="/main/part3/main3_bg.png" alt="" width={1800} height={200}></Image> */}
+          <div className="absolute left-[163px] top-[170px] w-[1000px] h-[300px]">
+            <div className="absolute text-[66px] font-preB text-[#977857]">
+               전통주 랭킹 서비스를 제공합니다
+            </div>
+            <div className="absolute top-[110px] font-preR text-[28px] text-[#7F7F7F] ">
+              <p>
+                최근 가장 인기있는 전통주가 무엇인지 궁금한가요?
+                <br></br>
+                내가 고른 전통주의 선호도가 궁금한가요?
+              </p>
+            </div>
+            <div className="absolute top-[220px] font-preR text-[28px] text-[#7F7F7F]">
+              <p>
+                실제 고객들의 리뷰와 별 점수를 바탕으로 한
+                <br></br>
+                전통주 랭킹 서비스를 사용해보세요.
+              </p>
+            </div>
+          </div>
+          {/* 스크롤 애니메이션 */}
+          <div className="absolute left-[770px] top-[340px] w-[1000px] h-[410px] bg-red-300"> 
+            <Image className="absolute z-10 left-[300px] " src="/main/part3/main3_1.png" alt="" width={420} height={200}></Image>
+            <Image className="absolute z-0 top-[20px]" src="/main/part3/main3_2.png" alt="" width={370} height={200}></Image>
+            <Image className="absolute z-0  top-[20px] left-[600px]" src="/main/part3/main3_3.png" alt="" width={370} height={200}></Image>
+          </div>
+        </div>
+
+        {/* PART 4 */}
+        <div className="absolute  top-[4500px] w-screen h-[1000px]  flex bg-red-200">
+
+        </div>
+
+        {/* PART 5 */}
+        <div className="absolute  top-[5500px] w-screen h-[1000px]  flex bg-green-200" > 
+
         </div>
       </div>
     </>
