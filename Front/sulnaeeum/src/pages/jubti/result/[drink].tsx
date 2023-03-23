@@ -4,15 +4,7 @@ import React, { useEffect } from 'react'
 export default function Result (props: any) {
     const router = useRouter()
     const { result, mbti } = props
-    // console.log(result)
-
-    // console.log(process.env.NEXT_PUBLIC_KAKAO_API_KEY);
-    // if ( !window.Kakao.isIntitialized() ) {
-    //     window.Kakao.init(process.env.NEXT_PUBLIC_KAKAO_API_KEY);
-    // }
-    // useEffect(() => {
-    //     window.Kakao.init(process.env.NEXT_PUBLIC_KAKAO_API_KEY);
-    // }, []);
+    
     useEffect(()=>{
         initialize()
     }, [])
@@ -37,27 +29,28 @@ export default function Result (props: any) {
     }
   return (
     <>
+    <div className={'scroll font-preL'}>
         <div className={'flex flex-col items-center mb-14 md:flex-row md:items-start md:mb-1'}>
-            <div className={'flex md:hidden flex-col items-center h-[300px] w-full'} style={{backgroundColor : result.color}}>
-                <div className={'mt-4 text-[20px]'}>{result.summary}</div>
-                <div className={'text-[30px] font-preM'}>{result.name}</div>
+            <div className={'flex md:hidden flex-col items-center pt-16 h-[360px] w-full'} style={{backgroundColor : result.color}}>
+                <div className={'mt-4 text-[20px] font-preR text-[#333333]'}>{result.summary}</div>
+                <div className={'text-[30px] font-preM  text-[#191919]'}>{result.name}</div>
                 <img className={'mt-6 h-[220px]'} src={`/images/jubti/drink/${result.name}.png`} alt="" />
             </div>
             <div className={'hidden md:flex flex-col items-center h-[400px] w-2/5 mt-20 ml-20'}>
                 <div className={'w-[200px] h-[200px] rounded-full z-[-10] absolute top-[100px]'} style={{backgroundColor : result.color}}></div>
                 <img className={'mt-6 h-[220px]'} src={`/images/jubti/drink/${result.name}.png`} alt="" />
                 <div className={'text-[30px] font-preM mt-4'}>{result.name}</div>
-                <div className={'mt-4 text-[20px]'}>{result.summary}</div>
+                <div className={'mt-2 text-[20px]'}>{result.summary}</div>
             </div>
-            <ul className={'mt-[100px] px-8 text-[20px] md:w-1/2 md:mt-[100px]'}>
+            <ul className={'mt-[100px] px-8 text-[18px] md:text-[20px] md:w-1/2 md:mt-[130px] font-preL'}>
                 {result.explain.map((e : string, index: number)=>{
-                    return ( <li className={'mb-6'} key={index}>◾ {e}</li> )
+                    return ( <li className={'mb-6'} key={index}>▪ {e}</li> )
                 })}
             </ul>
         </div>
-        <div className={'md:flex md:bg-zinc-200 md:justify-between md:px-20'}>
-            <div className={'flex flex-col items-center mb-20 w-full bg-zinc-200 md:w-1/4 md:mb-1'}>
-                <div className={'flex items-center text-[20px] my-6 md:mt-10'}><div className={'font-preM text-[30px] mr-2 md:text-[26px]'}>{result.name}</div>와(과) 어울리는 안주</div>
+        <div className={'md:flex md:bg-zinc-200 md:justify-between md:px-40'}>
+            <div className={'flex flex-col items-center mb-20 w-full bg-zinc-200 md:w-1/3 md:mb-1 overflow-hidden'}>
+                <div className={'flex items-center text-[20px] my-6 text-[#333333] md:mt-10'}><div className={'font-preM text-[30px] mr-2 md:text-[26px] text-[#191919]'}>{result.name}</div>와(과) 어울리는 안주</div>
                 <svg width="403" height="13" viewBox="0 0 403 13" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M1 7.11523C61.0543 6.9735 121.114 6.84323 181.168 6.70149" stroke="#4F4F4F" stroke-width="0.5" stroke-miterlimit="10" stroke-linecap="round"/>
                     <path d="M183.575 4.46056C184.742 4.46541 185.685 5.43765 185.68 6.63212C185.675 7.82659 184.724 8.79097 183.557 8.78612C182.39 8.78127 181.448 7.80903 181.453 6.61456C181.458 5.42009 182.408 4.45571 183.575 4.46056Z" stroke="#4F4F4F" stroke-width="0.5" stroke-miterlimit="10"/>
@@ -73,8 +66,8 @@ export default function Result (props: any) {
                     <div className={'text-[20px] mt-4 mb-6'}>{result.dish}</div>
                 </div>
             </div>
-            <div className={'flex flex-col items-center mb-20 md:w-1/4'}>
-                <div className={'flex items-center text-[20px] mb-6 md:mt-10'}><div className={'font-preM text-[30px] mr-2 md:text-[26px]'}>{result.name}</div>와(과)의 궁합</div>
+            <div className={'flex flex-col items-center mb-20 md:w-1/3 overflow-hidden'}>
+                <div className={'flex items-center text-[20px] mb-6 md:mt-10 text-fontED'}><div className={'font-preM text-[30px] mr-2 md:text-[26px] text-fontD'}>{result.name}</div>와(과)의 궁합</div>
                 <svg width="403" height="13" viewBox="0 0 403 13" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M1 7.11523C61.0543 6.9735 121.114 6.84323 181.168 6.70149" stroke="#4F4F4F" stroke-width="0.5" stroke-miterlimit="10" stroke-linecap="round"/>
                     <path d="M183.575 4.46056C184.742 4.46541 185.685 5.43765 185.68 6.63212C185.675 7.82659 184.724 8.79097 183.557 8.78612C182.39 8.78127 181.448 7.80903 181.453 6.61456C181.458 5.42009 182.408 4.45571 183.575 4.46056Z" stroke="#4F4F4F" stroke-width="0.5" stroke-miterlimit="10"/>
@@ -85,15 +78,15 @@ export default function Result (props: any) {
                     <path d="M205.545 6.61936L200.386 11.8555L195.271 6.57668L200.43 1.34057L205.545 6.61936Z" stroke="#4F4F4F" stroke-width="0.5" stroke-miterlimit="10"/>
                     <path d="M210.475 6.64084L205.316 11.877L200.201 6.59816L205.36 1.36205L210.475 6.64084Z" stroke="#4F4F4F" stroke-width="0.5" stroke-miterlimit="10"/>
                 </svg>
-                <div className={'flex justify-center mt-10'}>
-                    <div className={'flex flex-col items-center mx-6'}>
+                <div className={'flex justify-center mt-10 md:mt-4'}>
+                    <div className={'flex flex-col items-center ml-6'}>
                         <div className={'text-[20px] mb-4 font-preR'}>최고의 궁합</div>
                         <div className={'flex justify-center w-[160px] h-[160px] rounded-full'} style={{backgroundColor : result.good_color}}>
                             <img className={'mt-4 h-[160px]'} src={`/images/jubti/drink/${result.good_name}.png`} alt="" />
                         </div>
                         <div className={'mt-8'}>{result.good_name}</div>
                     </div>
-                    <div className={'flex flex-col items-center mx-6'}>
+                    <div className={'flex flex-col items-center mx-6 text-fontD'}>
                         <div className={'text-[20px] mb-4 font-preR'}>최악의 궁합</div>
                         <div className={'flex justify-center w-[160px] h-[160px] rounded-full'} style={{backgroundColor : result.bad_color}}>
                             <img className={'mt-4 h-[160px]'} src={`/images/jubti/drink/${result.bad_name}.png`} alt="" />
@@ -102,15 +95,16 @@ export default function Result (props: any) {
                     </div>
                 </div>
             </div>
-            <div className={'flex flex-col items-center w-full bg-zinc-200 md:w-1/4'}>
+            <div className={'flex flex-col items-center w-full bg-zinc-200 md:w-1/3'}>
                 <div className={'flex flex-col items-center'}>
-                    <div className={'text-[26px] font-preM mt-14'}>결과 공유하기</div>
+                    <div className={'text-[26px] font-preM mt-14 text-fontD'}>결과 공유하기</div>
                     <img onClick={share} className={'h-[50px] mt-5 mb-16 cursor-pointer'} src="/images/kakao.png" alt="" />
                 </div>
-                <div className={'flex justify-center items-center cursor-pointer text-[20px] w-3/4 h-[60px] rounded bg-[#999483] text-white'}>{result.name} 더 알아보러 가기</div>
-                <div className={'flex justify-center items-center cursor-pointer text-[20px] font-preR w-3/4 h-[60px] rounded border border-[#999483] mt-4 bg-white text-[#191919] mb-16'}>테스트 다시하기</div>
+                <div onClick={()=>{alert('서비스 준비중입니다 😇')}} className={'flex justify-center items-center cursor-pointer text-[20px] w-3/4 h-[60px] rounded bg-[#999483] text-white'}>{result.name} 더 알아보러 가기</div>
+                <div onClick={()=>{window.location.href = '/jubti'}} className={'flex justify-center items-center cursor-pointer text-[20px] font-preR w-3/4 h-[60px] rounded border border-[#999483] mt-4 bg-white text-[#191919] mb-16'}>테스트 다시하기</div>
             </div>
         </div>
+    </div>
     </>
   )
 }
@@ -126,19 +120,19 @@ type ExplainType = {
 const info : MbtiType = {
     infp : {dish: '케이크', summary: '혼술러에게 딱! 새콤 달콤 자몽맛', drink: '아이싱 자몽', good: 'enfj', bad: 'isfp', color: '#F4BDBF'},
     enfp : {dish: '치킨', summary: '태생부터 탄산 가득, 톡톡 튀는 스파클링', drink: '얼떨결에', good: 'infj', bad: 'esfp', color: '#CFEAEF'},
-    infj : {dish: '오리주물럭', summary: '찰랑이는 별빛 하늘처럼, 은은한 백도라지향', drink: '제주 낭만', good: 'enfp', bad: 'istp', color: '#E1CFE8'},
-    enfj : {dish: '치즈', summary: '열대 과일과 꽃 향기가 느껴지는 우아한 감 와인', drink: '뱅꼬레 더감', good: 'isfp', bad: 'isfj', color: '#FFECD7'},
+    infj : {dish: '오리주물럭', summary: '찰랑이는 별빛 하늘처럼, 은은한 향', drink: '제주 낭만', good: 'enfp', bad: 'istp', color: '#E1CFE8'},
+    enfj : {dish: '치즈', summary: '과일과 꽃 향기가 느껴지는 우아한 감 와인', drink: '뱅꼬레 더감', good: 'isfp', bad: 'isfj', color: '#FFECD7'},
     intj : {dish: '샐러드', summary: '탁하지만 우아한, 긴 여운의 진한 포도향', drink: '남산애 레드와인', good: 'entp', bad: 'istj', color: '#B9C0D0'},
     entj : {dish: '보쌈', summary: '묵직하고 깊은, 달콤하고 고소한', drink: '도깨비술 11', good: 'infp', bad: 'estj', color: '#F3ECE2'},
     intp : {dish: '쿠키', summary: '배꽃이 필 때 빚는 희고, 된 이화주', drink: '배꽃 필 무렵', good: 'entj', bad: 'esfj', color: '#E7D6C4'},
     entp : {dish: '조기찜', summary: '달콤하고 부드러운 연한 살구빛의 매력', drink: '여포의 꿈(화이트)', good: 'intj', bad: 'istj', color: '#FFF8C2'},
-    isfp : {dish: '갈비찜', summary: '담황생의 고운 빛깔로 풀어내는 진한 풀향과 과실향', drink: '호산춘', good: 'esfj', bad: 'enfp', color: '#D1F8C7'},
+    isfp : {dish: '갈비찜', summary: '담황색으로 풀어내는 진한 풀향과 과실향', drink: '호산춘', good: 'esfj', bad: 'enfp', color: '#D1F8C7'},
     esfp : {dish: '회', summary: '누구에게나 부담없이, 상큼한 맛을 자랑하는', drink: '키위술', good: 'istj', bad: 'infp', color: '#EAEAEA'},
     istp : {dish: '피자', summary: '한 모금에 진하게 퍼지는 오미자향', drink: '볼빨간 미자', good: 'estj', bad: 'infp', color: '#E7BFA8'},
     estp : {dish: '바게트', summary: '풍성하게 다가오는 특유의 구수함', drink: '호랑이 배꼽', good: 'isfj', bad: 'enfp', color: '#EEDDC8'},
-    isfj : {dish: '매운탕', summary: '단 맛 뒤에 느껴지는 매운 후추향과 씁쓸한 곡물향', drink: '토끼 소주', good: 'estp', bad: 'enfp', color: '#DAD1CA'},
+    isfj : {dish: '매운탕', summary: '단 맛 뒤에 느껴지는 씁쓸한 곡물향', drink: '토끼 소주', good: 'estp', bad: 'enfp', color: '#DAD1CA'},
     esfj : {dish: '김치전', summary: '도수가 높아도 부드럽고 산뜻하게', drink: '소호', good: 'isfp', bad: 'infj', color: '#BED1E9'},
-    istj : {dish: '연어', summary: '화려한 히비스커스와 새콤 달콤 화자오까지', drink: '단홍', good: 'esfp', bad: 'infj', color: '#DAB4B8'},
+    istj : {dish: '연어', summary: '화려한 히비스커스와 새콤달콤 화자오까지', drink: '단홍', good: 'esfp', bad: 'infj', color: '#DAB4B8'},
     estj : {dish: '홍어삼합', summary: '완숙한 향매의 뛰어난 향미', drink: '서울의 밤', good: 'istp', bad: 'enfj', color: '#DFDFDF'},
 }
 

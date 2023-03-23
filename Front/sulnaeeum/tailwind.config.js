@@ -5,6 +5,10 @@ module.exports = {
   ],
   theme: {
     extend: {
+      colors: {
+        fontD: '#191919',
+        fontED: '#333333'
+      },
       keyframes: {
         jump: {
           from: { top: '0px' },
@@ -28,6 +32,8 @@ module.exports = {
       }
     },
   },
-  plugins: [],
+  plugins: [
+    require('tailwind-scrollbar-hide')
+  ],
 }
 
