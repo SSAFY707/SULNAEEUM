@@ -11,7 +11,7 @@ function Navbar() {
   const btnRef = useRef();
 
   const menu: string[] = ["전통주", "지도", "랭킹", "추천", "전통주 유형검사"];
-  const url: string[] = ["/list", "/map", "/rank", "/recommend", "/jubti"];
+  const url: string[] = ["/test", "/test", "/test", "/test", "/test"];
   const menuTab = [
     ["탁주", "약주/청주", "과실주", "증류주", "기타 주류"],
     ["경기도", "강원도", "충청도", "전라도", "경상도", "제주도"],
@@ -26,7 +26,7 @@ function Navbar() {
     <nav className="fixed z-50">
       <ul className="hover:border-b hover:pb-[1px] h-[62px] w-screen text-[17px] flex justify-between items-center border-b-2 bg-white">
         <li className="max-[990px]:w-[200px] max-[990px]:pl-[30px] w-[270px] pl-[165px]">
-          <Link href={"/"}>
+          <Link href={"/test"}>
             <div>
               <Image src="/logo_1.png" alt="" width={90} height={50}></Image>
             </div>
