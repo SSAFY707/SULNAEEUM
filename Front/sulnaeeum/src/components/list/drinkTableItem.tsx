@@ -21,7 +21,7 @@ export const DrinkTableElement = (props: {drink : Drink}) => {
       <div className={'w-full h-1/2 flex justify-center items-center mb-4'}><img className={'h-full'} src={item.drinkImage} /></div>
       <div className={'flex items-center text-[24px] font-preR group-hover:font-preM'}>{item.drinkName}<RxMagnifyingGlass className={'ml-2 text-[#B3B3B3] group-hover:text-[#665442]'} /></div>
       <div className={'mb-4'}>{item.drinkLevel}% | {item.drinkAmount}</div>
-      {item.like ? <ClearBtn /> : <ClearFalse />}
+      {item.like ? <ClearTrue /> : <ClearFalse />}
     </div>
   )
 }

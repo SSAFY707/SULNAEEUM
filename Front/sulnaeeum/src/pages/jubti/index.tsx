@@ -220,7 +220,7 @@ export default function Jubti () {
         </div>
         <div className={'hidden md:flex relative w-[2700px] h-[1200px] justify-center rounded-b-full bg-[#AEA896] top-[-450px] z-[-10]'}>
         </div>
-        <div onClick={()=>{setPage(page + 1)}} className={'w-5/6 h-[70px] bg-[#AEA896] hover:bg-[#655442] rounded text-white text-[20px] flex justify-center items-center mt-14 cursor-pointer relative md:hidden'}>시작하기</div>
+        <div onClick={()=>{setPage(page + 1)}} className={'w-5/6 h-[70px] bg-[#AEA896] hover:bg-[#655442] rounded text-white text-[20px] font-preL flex justify-center items-center mt-14 cursor-pointer relative md:hidden'}>시작하기</div>
       </div>
       <div className={`${page != 0 ? 'block' : 'hidden'} cursor-pointer relative ml-[30px] top-[100px] md:left-[10%] md:top-[120px]`} onClick={()=>setPage(page - 1)}><BsArrowLeftCircle className={'w-[34px] h-[34px] text-[#655442] md:w-[40px] md:h-[40px]'} /></div>
       <div className={`${page == 1 ? 'block' : 'hidden'} w-full overflow-hidden`}>
@@ -229,7 +229,7 @@ export default function Jubti () {
             <div className={'text-[20px] font-preM mb-8 md:text-[30px] md:mb-16'}>당신의 나이를 선택해주세요.</div>
             <div className={'grid grid-cols-2 gap-2 justify-center w-full md:flex md:gap-5'}>
                 {datas.age.map((age, index)=>{
-                    return (<div onClick={()=>{select('age',age.value)}} key={index} className={`flex justify-center items-center cursor-pointer w-full h-[50px] border border-[#AEA896] rounded md:w-[150px] md:h-[60px] md:text-[20px] ${age.value == '60s' && 'col-span-2 w-full md:w-[150px]'} ${age.value == data['age'] && 'text-white bg-[#655442]'}`}>{age.name}</div>)
+                    return (<div onClick={()=>{select('age',age.value)}} key={index} className={`flex font-preL justify-center items-center cursor-pointer w-full h-[50px] border border-[#AEA896] rounded md:w-[150px] md:h-[60px] md:text-[20px] ${age.value == '60s' && 'col-span-2 w-full md:w-[150px]'} ${age.value == data['age'] && 'text-white bg-[#655442]'}`}>{age.name}</div>)
                 })}
             </div>
           </div>
@@ -237,7 +237,7 @@ export default function Jubti () {
             <div className={'text-[20px] font-preM mb-8 md:text-[30px] md:mb-16 md: mt-8'}>당신의 성별을 선택해주세요.</div>
             <div className={'flex justify-center w-full md:gap-3'}>
               {datas.sex.map((sex, index)=>{
-                return(<div onClick={()=>{select('sex', sex.value)}} key={index} className={`flex justify-center items-center cursor-pointer w-full h-[50px] border border-[#AEA896] m-1 rounded md:w-[150px] md:h-[60px] md:text-[20px] ${sex.value == data['sex'] && 'text-white bg-[#655442]'}`}>{sex.name}</div>)
+                return(<div onClick={()=>{select('sex', sex.value)}} key={index} className={`flex font-preL justify-center items-center cursor-pointer w-full h-[50px] border border-[#AEA896] m-1 rounded md:w-[150px] md:h-[60px] md:text-[20px] ${sex.value == data['sex'] && 'text-white bg-[#655442]'}`}>{sex.name}</div>)
               })}
             </div>
           </div>
@@ -338,12 +338,12 @@ export default function Jubti () {
         </div>
       </div>
       <div className={'flex justify-center'}>
-        <div className={`flex ${(page == 0 || page == 5) && 'hidden'} justify-center items-center w-5/6 md:w-[400px] relative text-[20px] md:text-xl h-[70px] bg-[#655442] hover:bg-[#504336] text-white rounded cursor-pointer`} onClick={()=>{if(page == 5){console.log(jubti())} else move_page()}}>
+        <div className={`flex ${(page == 0 || page == 5) && 'hidden'} font-preL justify-center items-center w-5/6 md:w-[400px] relative text-[20px] md:text-xl h-[70px] bg-[#655442] hover:bg-[#504336] text-white rounded cursor-pointer`} onClick={()=>{if(page == 5){console.log(jubti())} else move_page()}}>
           다음으로
         </div>
       </div>
       <div className={'flex justify-center'}>
-        <div onClick={()=>jubti()} className={`flex ${page != 5 && 'hidden'} justify-center items-center w-5/6 md:w-[400px] relative mt-9 md:bottom-[-80px] text-[20px] md:text-xl h-[70px] bg-[#655442] hover:bg-[#504336] text-white rounded cursor-pointer`}>
+        <div onClick={()=>jubti()} className={`flex ${page != 5 && 'hidden'} font-preL justify-center items-center w-5/6 md:w-[400px] relative mt-9 md:bottom-[-80px] text-[20px] md:text-xl h-[70px] bg-[#655442] hover:bg-[#504336] text-white rounded cursor-pointer`}>
           결과 제출하기
         </div>
       </div>
