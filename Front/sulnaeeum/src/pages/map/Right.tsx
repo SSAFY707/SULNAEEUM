@@ -1,184 +1,105 @@
 import React from 'react'
 import style from './map.module.css'
-import {FaBookmark} from 'react-icons/fa'
-import {useState} from 'react';
+import { useState } from 'react';
+import Brewery from './Brewery';
+import Festival from './Festival';
+import Program from './Program';
 
-export default function Right(props:any) {
-  
-  const {tab, setTab} = props
 
+
+
+
+export default function Right(props: any) {
+
+  const { tab, setTab, res, mode } = props
+
+
+  console.log('선택된 지도 id')
+
+  let tabContents = <Brewery mode={mode} res={res} tab={tab}></Brewery>
+
+  if (tab === '양조장') {
+    tabContents = <Brewery mode={mode} res={res} tab={tab}></Brewery>
+  } else if (tab === '전통주 축제') {
+    tabContents = <Festival mode={mode} res={res} tab={tab}></Festival>
+  } else if (tab === '체험 프로그램') {
+    tabContents = <Program mode={mode} res={res} tab={tab}></Program>
+  }
 
 
   return (<>
-          <h1>{tab}</h1>
-          <div className={`${style.right_box} ${style.layout}`} id="right_box">
-            <div className='flex justify-between h-[54px] mb-[14px]'>
-              <div className={`${style.tab_box} ${style.selected_tab}`}
-                onClick={()=> {
-                  setTab('양조장')
-                }}
-              ><h3>양조장</h3></div>
-              <div className={`${style.tab_box}`}
-                onClick={()=> {
-                  setTab('전통주 축제')
-                }}><h3>전통주 축제</h3></div>
-              <div className={`${style.tab_box}`}
-                onClick={()=> {
-                  setTab('체험 프로그램')
-                }}
-              ><h3>체험 프로그램</h3></div>
-            </div>
-            <div className='w-full scroll h-[680px] overflow-y-scroll'>
+    {/* <div className="absolute top-[40px] left-[20px] z-[100]">
+      <h1>map_id : {mode}</h1>
+      <h1>양조장</h1>
+      {res[mode - 1].list.brewery.map((v: any, index: number) => {
+        return <>
+          <h3>{v.brewery_name}</h3>
+          <h3>{v.brewery_location}</h3>
+          <h3>{v.img}</h3>
+        </>
+      })}
+      <h1>체험프로그램</h1>
+      {res[mode - 1].list.program.map((v: any, index: number) => {
+        return <>
+          <h3>{v.program_id}</h3>
+          <h3>{v.program_name}</h3>
+          <h3>{v.program_location}</h3>
+          <h3>{v.always_visit}</h3>
+        </>
+      })}
+    </div> */}
+
+    <div className={`${style.right_box} ${style.layout}`} id="right_box">
+      <div className='flex justify-between h-[54px] mb-[14px]'>
+        <div id='brewery' className={`${style.tab_box} ${style.selected_tab} ${style.hover_cursor}`}
+          onClick={() => {
+            setTab('양조장')
+            const removeList: any = document.getElementsByClassName('map_tab_box__6t4lt')
+            const target: any = document.getElementById('brewery')
+
+            for (let i = 0; i < removeList.length; i++) {
+              removeList[i].style.border = 'none'
+              removeList[i].style.borderBottom = '1px solid #ADA7A3'
+            }
+            target.style.border = '1px solid #ADA7A3'
+
+          }}
+        ><h3>양조장</h3></div>
+        <div id='festival' className={`${style.tab_box} ${style.hover_cursor}`}
+          onClick={(event) => {
+            setTab('전통주 축제')
+            const removeList: any = document.getElementsByClassName('map_tab_box__6t4lt')
+            const target: any = document.getElementById('festival')
 
 
-              <div className={`${style.item_box}`}>
-                <div className={`${style.item_up}`}>
-                  <img src='/images/map/items/04.png' alt='이미지' className='w-[140px] h-[140px] object-cover'></img>  
-                  <div className={`${style.text_area}`}>
-                    <div className='flex w-full h-[50px] justify-between items-center'>
-                      <h3 className='text-[26px] font-bold'>산머루 농원</h3>
-                      <FaBookmark className='text-[#ADA7A3] text-[22px]'/>
-                    </div>
-                    <div className='w-full h-[110px]'>
-                      <div className='flex w-full h-[110px]'>
-                        <div className={`${style.text_left}`}>
-                          <p>주소</p>
-                          <p>주종</p>
-                          <p>연락처</p>
-                        </div>
-                        <div className={`${style.text_right}`}>
-                          <p>동대문구 장안동 444-2</p>
-                          <p>탁주, 증류주, 과실주</p>
-                          <p>02-256-1423</p>
-                        </div>  
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className={`${style.item_down}`}>
-                  <img src='/images/line.png'></img>
-                </div>
-              </div>
-              {/* 반복문으로 만들 부분 */}
+            for (let i = 0; i < removeList.length; i++) {
+              removeList[i].style.border = 'none'
+              removeList[i].style.borderBottom = '1px solid #ADA7A3'
+            }
+            target.style.border = '1px solid #ADA7A3'
 
-              <div className={`${style.item_box}`}>
-                <div className={`${style.item_up}`}>
-                  <img src='/images/map/items/04.png' alt='이미지' className='w-[140px] h-[140px] object-cover'></img>  
-                  <div className={`${style.text_area}`}>
-                    <div className='flex w-full h-[50px] justify-between items-center'>
-                      <h3 className='text-[26px] font-bold'>산머루 농원</h3>
-                      <FaBookmark className='text-[#ADA7A3] text-[22px]'/>
-                    </div>
-                    <div className='w-full h-[110px]'>
-                      <div className='flex w-full h-[110px]'>
-                        <div className={`${style.text_left}`}>
-                          <p>주소</p>
-                          <p>주종</p>
-                          <p>연락처</p>
-                        </div>
-                        <div className={`${style.text_right}`}>
-                          <p>동대문구 장안동 444-2</p>
-                          <p>탁주, 증류주, 과실주</p>
-                          <p>02-256-1423</p>
-                        </div>  
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className={`${style.item_down}`}>
-                  <img src='/images/line.png'></img>
-                </div>
-              </div>
-              <div className={`${style.item_box}`}>
-                <div className={`${style.item_up}`}>
-                  <img src='/images/map/items/04.png' alt='이미지' className='w-[140px] h-[140px] object-cover'></img>  
-                  <div className={`${style.text_area}`}>
-                    <div className='flex w-full h-[50px] justify-between items-center'>
-                      <h3 className='text-[26px] font-bold'>산머루 농원</h3>
-                      <FaBookmark className='text-[#ADA7A3] text-[22px]'/>
-                    </div>
-                    <div className='w-full h-[110px]'>
-                      <div className='flex w-full h-[110px]'>
-                        <div className={`${style.text_left}`}>
-                          <p>주소</p>
-                          <p>주종</p>
-                          <p>연락처</p>
-                        </div>
-                        <div className={`${style.text_right}`}>
-                          <p>동대문구 장안동 444-2</p>
-                          <p>탁주, 증류주, 과실주</p>
-                          <p>02-256-1423</p>
-                        </div>  
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className={`${style.item_down}`}>
-                  <img src='/images/line.png'></img>
-                </div>
-              </div>
-              <div className={`${style.item_box}`}>
-                <div className={`${style.item_up}`}>
-                  <img src='/images/map/items/04.png' alt='이미지' className='w-[140px] h-[140px] object-cover'></img>  
-                  <div className={`${style.text_area}`}>
-                    <div className='flex w-full h-[50px] justify-between items-center'>
-                      <h3 className='text-[26px] font-bold'>산머루 농원</h3>
-                      <FaBookmark className='text-[#ADA7A3] text-[22px]'/>
-                    </div>
-                    <div className='w-full h-[110px]'>
-                      <div className='flex w-full h-[110px]'>
-                        <div className={`${style.text_left}`}>
-                          <p>주소</p>
-                          <p>주종</p>
-                          <p>연락처</p>
-                        </div>
-                        <div className={`${style.text_right}`}>
-                          <p>동대문구 장안동 444-2</p>
-                          <p>탁주, 증류주, 과실주</p>
-                          <p>02-256-1423</p>
-                        </div>  
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className={`${style.item_down}`}>
-                  <img src='/images/line.png'></img>
-                </div>
-              </div>
-              <div className={`${style.item_box}`}>
-                <div className={`${style.item_up}`}>
-                  <img src='/images/map/items/04.png' alt='이미지' className='w-[140px] h-[140px] object-cover'></img>  
-                  <div className={`${style.text_area}`}>
-                    <div className='flex w-full h-[50px] justify-between items-center'>
-                      <h3 className='text-[26px] font-bold'>산머루 농원</h3>
-                      <FaBookmark className='text-[#ADA7A3] text-[22px]'/>
-                    </div>
-                    <div className='w-full h-[110px]'>
-                      <div className='flex w-full h-[110px]'>
-                        <div className={`${style.text_left}`}>
-                          <p>주소</p>
-                          <p>주종</p>
-                          <p>연락처</p>
-                        </div>
-                        <div className={`${style.text_right}`}>
-                          <p>동대문구 장안동 444-2</p>
-                          <p>탁주, 증류주, 과실주</p>
-                          <p>02-256-1423</p>
-                        </div>  
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className={`${style.item_down}`}>
-                  <img src='/images/line.png'></img>
-                </div>
-              </div>
+          }}><h3>전통주 축제</h3></div>
+        <div id='program' className={`${style.tab_box} ${style.hover_cursor}`}
+          onClick={() => {
+            setTab('체험 프로그램')
+            const removeList: any = document.getElementsByClassName('map_tab_box__6t4lt')
+            const target: any = document.getElementById('program')
 
 
+            for (let i = 0; i < removeList.length; i++) {
+              removeList[i].style.border = 'none'
+              removeList[i].style.borderBottom = '1px solid #ADA7A3'
+            }
+            target.style.border = '1px solid #ADA7A3'
+          }}
+        ><h3>체험 프로그램</h3></div>
+      </div>
 
-            </div>
-          </div>
+      {tabContents}
+
+
+    </div>
   </>
-    
+
   )
 }

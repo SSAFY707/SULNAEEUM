@@ -165,8 +165,8 @@
 
 .mark_box {
     position: absolute;
-    left: -300px;
-    bottom: -400px;
+    left: -200px;
+    bottom: -100px;
     width: 600px;
 }
 
@@ -183,10 +183,12 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    border-bottom: 1px solid #ADA7A3;    
+    border-bottom: 1px solid #ADA7A3;   
+    z-index: 20; 
 }
 .tab_box h3 {
     font-size: 18px;
+    z-index: 10;
 }
 
 .selected_tab {
@@ -194,6 +196,7 @@
 }
 .item_box {
     margin-top: 20px;
+    width: 560px;
     height: 200px;
     display: flex;
     flex-direction: column;
