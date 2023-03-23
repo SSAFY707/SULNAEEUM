@@ -41,14 +41,14 @@
   object-fit: cover;
 }
 
-.hide{
-opacity:0;
+.hide {
+  opacity: 0;
 }
 
-.show1{
-opacity:1;
-transition:opacity 0.5s ease-out;
-animation-name: fadeInUp;
+.show1 {
+  opacity: 1;
+  transition: opacity 0.5s ease-out;
+  animation-name: fadeInUp;
   animation-duration: 1.5s;
   animation-delay: 0s;
   animation-fill-mode: forwards;
@@ -66,11 +66,11 @@ animation-name: fadeInUp;
   }
 }
 
-.show2{
-  opacity:1;
-  transition:opacity 0.5s ease-out;
+.show2 {
+  opacity: 1;
+  transition: opacity 0.5s ease-out;
   animation-name: fadeInLeft;
-  animation-duration: 1.5s;
+  animation-duration: 1s;
   animation-delay: 0s;
   animation-fill-mode: forwards;
 }
@@ -85,14 +85,58 @@ animation-name: fadeInUp;
     opacity: 1;
     transform: translateX(0);
   }
-  
 }
-.opacity{
-  opacity:1;
-  transition:opacity 1s ease-out;
-}
-.opacity2{
-  opacity:1;
-  transition:opacity 0.4s ease-in;
+.show3 {
+  opacity: 1;
+  transition: opacity 0.5s ease-out;
+  animation-name: fadeInRight;
+  animation-duration: 1s;
+  animation-delay: 0s;
+  animation-fill-mode: forwards;
 }
 
+@keyframes fadeInRight {
+  from {
+    opacity: 0;
+    transform: translateX(-80px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.show4 {
+  opacity: 1;
+  transition: opacity 0.5s ease-out;
+  animation-name: fadeInDown;
+  animation-duration: 1s;
+  animation-delay: 0s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(0px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(140px);
+  }
+}
+
+.opacity {
+  opacity: 1;
+  transition: opacity 1s ease-out;
+}
+.opacity2 {
+  opacity: 1;
+  transition: opacity 0.4s ease-in;
+}
+.opacity3 {
+  opacity: 0;
+  transition: opacity 0.4s ease-out;
+}

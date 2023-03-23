@@ -1,4 +1,5 @@
 import Link from "next/link";
+import styles from "../pages/styles.module.css";
 import React from "react";
 import Image from "next/image";
 import { useState } from "react";
@@ -11,14 +12,15 @@ function Navbar() {
   const btnRef = useRef();
 
   const menu: string[] = ["전통주", "지도", "랭킹", "추천", "전통주 유형검사"];
-  const url: string[] = ["/test", "/test", "/test", "/test", "/jubti"];
+  const url: string[] = ["/list", "/map", "/rank", "/recommend", "/jubti"];
   const menuTab = [
     ["탁주", "약주/청주", "과실주", "증류주", "기타 주류"],
     ["경기도", "강원도", "충청도", "전라도", "경상도", "제주도"],
     ["랭킹"],
-    ["나만의 전통주","선물하기"],
+    ["나만의 전통주", "선물하기"],
     ["검사하기"],
   ];
+  const menuTabUrl = [];
 
   //
   return (
@@ -27,7 +29,15 @@ function Navbar() {
         <li className="max-[990px]:w-[200px] max-[990px]:pl-[30px] w-[270px] pl-[165px]">
           <Link href={"/"}>
             <div>
-              <Image src="/logo_1.png" alt="" width={90} height={50}></Image>
+              <Image
+                className={`${
+                  hover == "On" ? styles.show4 : ""
+                } absolute z-10 top-[10px]`}
+                src="/logo_1.png"
+                alt=""
+                width={90}
+                height={50}
+              ></Image>
             </div>
           </Link>
         </li>
@@ -48,7 +58,7 @@ function Navbar() {
                       {menuTab[i].map((val, idx) => {
                         return (
                           // 각 페이지 URL 넣어야함
-                          <Link href={"/"} key={idx}>
+                          <Link href={`${url[i]}/${idx}`} key={idx}>
                             <li className="hover:font-preB text-neutral-500 font-preR text-[16px] mt-[17px] ">
                               {val}
                             </li>
@@ -66,7 +76,7 @@ function Navbar() {
         </li>
         <li className="max-[900px]:hidden w-[290px] pl-[20px] flex font-preL">
           <button>검색</button>
-          <Link href={"/"}>
+          <Link href={"/user"}>
             <div className="pl-[40px]">로그인</div>
           </Link>
         </li>
