@@ -154,11 +154,11 @@
 .map_title {
     font-family: 'star';
     font-weight: 500;
-    font-size: 60px;
+    font-size: 80px;
     color: #3C97A5;
     position: absolute;
-    top: 90px;
-    left: 130px;
+    top: 120px;
+    left: 200px;
     z-index: 14;
 
 }
