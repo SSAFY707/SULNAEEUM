@@ -112,7 +112,7 @@ export const DrinkList = (props: {drinkType: string, sortType : string}) => {
  
   // useEffect(()=>{
   //   getList()
-  // },[sortType])
+  // },[drinkType, sortType])
 
   return (
     <>

@@ -16,6 +16,16 @@ export type JubtiType = {
     dish: string,
 }
 
+export type DrinkTasteType = {
+    [index: string] : number,
+    tasteRefresh: number,
+    tasteBody: number,
+    tasteSweet: number,
+    tasteSour: number,
+    tasteThroat: number,
+    tasteFlavor: number,
+}
+
 export type Drink = {
     [index: string] : number | string | boolean,
     drinkId: number,
@@ -28,7 +38,7 @@ export type Drink = {
 }
 
 export type DrinkDetailType = {
-    [index: string] : string | number | ReviewType,
+    [index: string] : string | number | ReviewType[],
     drinkId: number,
     drinkName: string,
     drinkInfo: string,
@@ -38,9 +48,22 @@ export type DrinkDetailType = {
     drinkAmount: string,
     drinkLevel: number,
     drinkType: any,
-    drinkReviews: ReviewType,
+    drinkReviews: ReviewType[],
+}
+
+export const DrinkDetailTypeFirst = {
+    drinkId: 0,
+    drinkName: '',
+    drinkInfo: '',
+    drinkImage: '',
+    drinkSaleUrl: '',
+    drinkPrice: '',
+    drinkAmount: '',
+    drinkLevel: 0,
+    drinkType: '',
+    drinkReviews: [],
 }
 
 export type ReviewType = {
-    [index : string] : string
+    [index : string] : string | number
 }

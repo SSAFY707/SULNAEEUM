@@ -15,7 +15,7 @@ export default function List() {
           })}
         </div>
         <div className={'w-[60%] ml-20'}>
-          <div className={'flex items-center justify-end px-10 h-[70px]'}>
+          <div className={'flex items-center justify-end h-[70px]'}>
             {sortArr.map((item, index)=>{
               return (<div onClick={()=>{setSort(item)}} key={index} className={`mx-2 cursor-pointer ${sort == item ? 'text-[18px] font-preM text-[#665442]' : 'text-[16px] font-preL'}`}>{item}순</div>)
             })}
