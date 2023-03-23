@@ -1,8 +1,11 @@
 package com.ssafy.sulnaeeum.model.user.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.ssafy.sulnaeeum.model.user.entity.User;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
+
+import javax.persistence.Column;
 
 @Schema(description = "유저 조회")
 @Getter
@@ -12,15 +15,24 @@ import lombok.*;
 @NoArgsConstructor
 public class UserDto {
 
-    private String email; // kakao
+    @Schema(description = "kakaoId")
+    private String kakaoId; // kakao
 
-    private String provideId;
+    @Schema(description = "nickname")
+    private String nickname;
 
-    public static UserDto from(User user) {
-        if(user == null) return null;
+    @Schema(description = "age")
+    private String age;
 
-        return UserDto.builder()
-                .email(user.getKakaoId())
-                .build();
-    }
+    @Schema(description = "sex")
+    private String sex;
+
+    @Schema(description = "img")
+    private String img;
+
+    @Schema(description = "ranking")
+    private int ranking;
+
+    @Schema(description = "finish")
+    private boolean finish;
 }
