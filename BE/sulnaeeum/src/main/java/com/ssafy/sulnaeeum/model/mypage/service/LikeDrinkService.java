@@ -53,7 +53,7 @@ public class LikeDrinkService {
             }
 
             // DB에 찜 내용 저장 (찜 한 회원과 전통주)
-            LikeDrinkDto likeDrinkDto = new LikeDrinkDto(drinkTmp.get(), userTmp.get());
+            LikeDrinkDto likeDrinkDto = new LikeDrinkDto(drinkTmp.get().toDto(), userTmp.get().toDto());
             likeDrinkRepo.save(likeDrinkDto.toEntity());
 
             // 해당 술의 찜 수 증가
