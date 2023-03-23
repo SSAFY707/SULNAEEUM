@@ -3,15 +3,6 @@
 @tailwind utilities;
 
 /* 기본 세팅 */
-html {
-    height: -webkit-fill-available;
-}
-
-// 스크롤바 none.......
-body::-webkit-scrollbar {
-    display: none;
-}
-
 h1 {
     font-size: 40px;
     font-family: preB;
