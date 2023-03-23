@@ -1,0 +1,245 @@
+/* .layout {
+    outline: 2px dashed red;
+} */
+.container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 50px;
+}
+
+
+
+
+.mapContainer {
+    width: 600px;
+    height: 800px;
+    margin-top: 0px;
+    display: flex;
+    flex-direction: column;
+    padding-left: 20px;
+}
+
+.mapContainer2 {
+    position:relative;
+    top: -960px;
+    width: 600px;
+    height: 800px;
+    margin-top: 160px;
+    display: flex;
+    flex-direction: column;
+    padding-left: 20px;
+}
+
+.myMap {
+    visibility: hidden;
+}
+
+.map1 {
+    position: relative;
+    z-index: 10;
+    top: 100px;
+    left: 120px;
+    border-radius: 50px;
+    width: 180px;
+}
+.map01 {
+    position: relative;
+    z-index: 10;
+    top: 82px;
+    left: 104px;
+    border-radius: 50px;
+    width: 200px;
+    
+}
+.map2 {
+    position: relative;
+    z-index: 8;
+    top: -140px;
+    left: 217px;
+    border-radius: 20px;
+    width: 260px;
+}
+.map02 {
+    position: relative;
+    z-index: 12;
+    top: -184px;
+    left: 200px;
+    border-radius: 20px;
+    width: 280px;
+}
+.map3 {
+    position: relative;
+    z-index: 10;
+    top: -170px;
+    left: 110px;
+    border-radius: 30px;
+    width: 254px;
+}
+.map03 {
+    position: relative;
+    z-index: 10;
+    top: -220px;
+    left: 94px;
+    border-radius: 30px;
+    width: 280px;
+}
+.map4 {
+    position: relative;
+    z-index: 10;
+    top: -196px;
+    left: 56px;
+    border-radius: 34px;
+    width: 250px;
+}
+.map04 {
+    position: relative;
+    z-index: 10;
+    top: -276px;
+    left: 26px;
+    border-radius: 34px;
+    width: 284px;
+}
+
+.map5 {
+    position: relative;
+    z-index: 10;
+    top: -590px;
+    left: 262px;
+    border-radius: 40px;
+    width: 230px;
+}
+.map05 {
+    position: relative;
+    z-index: 12;
+    top: -696px;
+    left: 254px;
+    border-radius: 40px;
+    width: 246px;
+}
+
+.map6 {
+    position: relative;
+    z-index: 10;
+    top: -524px;
+    left: 80px;
+    border-radius: 20px;
+    width: 130px;
+}
+.map06 {
+    position: relative;
+    z-index: 12;
+    top: -668px;
+    left: 70px;
+    border-radius: 20px;
+    width: 154px;
+}
+
+.hover_cursor {
+    cursor: pointer;
+}
+
+
+.map_box {
+    position: relative;
+    width: 600px;
+    height: 800px;
+    left: 0px;
+    margin-left: 60px;
+}
+
+
+.map_title {
+    font-family: 'star';
+    font-weight: 500;
+    font-size: 60px;
+    color: #3C97A5;
+    position: absolute;
+    top: 90px;
+    left: 130px;
+    z-index: 14;
+
+}
+
+.mark_box {
+    position: absolute;
+    left: -200px;
+    bottom: -100px;
+    width: 600px;
+}
+
+.right_box {
+    margin-left: 100px;
+    width: 560px;
+    height: 800px;
+    display: none;
+}
+
+.tab_box {
+    width: 168px;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 1px solid #ADA7A3;   
+    z-index: 20; 
+}
+.tab_box h3 {
+    font-size: 18px;
+    z-index: 10;
+}
+
+.selected_tab {
+    border: 1px solid #ADA7A3;
+}
+.item_box {
+    margin-top: 20px;
+    width: 560px;
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+}
+.item_up {
+    width: 100%;
+    height: 180px;
+    display: flex;
+    align-items: center;
+}
+.item_down {
+    wdith: 100%;
+    height: 20px;
+    display: flex;
+    align-items: end;
+}
+.text_area {
+    width: 400px;
+    height: 160px;
+    margin-left: 20px;
+}
+.text_left {
+    display: flex;
+    flex-direction: column;
+    width: 80px;
+    height: 100%;
+
+}   
+.text_left p {
+    margin-top: 6px;
+    font-size: 18px;
+}
+.text_right {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+}   
+.text_right p {
+    margin-top: 6px;
+    font-size: 18px;
+    width: 100%;
+}
+.visible {
+    visibility: 'visible'!important;
+}
