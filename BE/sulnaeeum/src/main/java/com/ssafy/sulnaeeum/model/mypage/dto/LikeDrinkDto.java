@@ -1,8 +1,8 @@
 package com.ssafy.sulnaeeum.model.mypage.dto;
 
-import com.ssafy.sulnaeeum.model.drink.entity.Drink;
+import com.ssafy.sulnaeeum.model.drink.dto.DrinkDto;
 import com.ssafy.sulnaeeum.model.mypage.entity.LikeDrink;
-import com.ssafy.sulnaeeum.model.user.entity.User;
+import com.ssafy.sulnaeeum.model.user.dto.UserDto;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -20,22 +20,22 @@ public class LikeDrinkDto {
     private Long likeDrinkId;
 
     @Schema(description = "전통주")
-    private Drink drink;
+    private DrinkDto drinkDto;
 
     @Schema(description = "회원")
-    private User user;
+    private UserDto userDto;
 
     // 생성자
-    public LikeDrinkDto(Drink drink, User user) {
-        this.user = user;
-        this.drink = drink;
+    public LikeDrinkDto(DrinkDto drinkDto, UserDto userDto) {
+        this.drinkDto = drinkDto;
+        this.userDto = userDto;
     }
 
     // DTO -> Entity 변환
     public LikeDrink toEntity() {
         return LikeDrink.builder()
                 .likeDrinkId(this.likeDrinkId)
-                .user(this.user)
-                .drink(this.drink).build();
+                .user(this.userDto.toEntity())
+                .drink(this.drinkDto.toEntity()).build();
     }
 }

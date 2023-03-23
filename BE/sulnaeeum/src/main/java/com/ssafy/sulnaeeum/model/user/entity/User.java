@@ -1,6 +1,7 @@
 package com.ssafy.sulnaeeum.model.user.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.ssafy.sulnaeeum.model.user.dto.UserDto;
 import lombok.*;
 
 import javax.persistence.*;
@@ -39,7 +40,6 @@ public class User {
     @Column(name="img",nullable = false)
     private String img;
 
-
     @JsonIgnore
     @Column(name = "activated",columnDefinition = "TINYINT")
     private boolean activated;
@@ -64,4 +64,15 @@ public class User {
         this.token = token;
     }
 
+    // Entity -> DTO 변환
+    public UserDto toDto() {
+        return UserDto.builder()
+                .kakaoId(this.kakaoId)
+                .nickname(this.nickname)
+                .age(this.age)
+                .sex(this.sex)
+                .img(this.img)
+                .ranking(this.ranking)
+                .finish(this.finish).build();
+    }
 }
