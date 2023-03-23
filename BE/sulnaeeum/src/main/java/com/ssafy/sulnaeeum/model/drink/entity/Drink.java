@@ -24,16 +24,17 @@ public class Drink {
     @Column(length = 25)
     private String drinkName; // 이름
 
+    @Column(length = 2000)
     private String drinkInfo; // 정보
 
     private String drinkImage; // 이미지
 
     private String drinkSaleUrl; // 판매 사이트
 
-    @Column(length = 10)
+    @Column(length = 100)
     private String drinkPrice; // 가격 (won)
 
-    @Column(length = 10)
+    @Column(length = 100)
     private String drinkAmount; // 양 (ml)
 
     private int drinkLevel; // 도수
