@@ -160,7 +160,7 @@ export default function Home() {
               height={0}
             ></Image>
             <Image
-              className="absolute z-10 right-0 mt-[-100px]"
+              className={`${scroll>2} absolute z-10 right-0 mt-[-100px]`}
               src="/main/part2/main2_2.png"
               alt=""
               width={750}
@@ -194,19 +194,21 @@ export default function Home() {
             <div className="absolute left-[10px] top-[135px] text-[23px] font-preR text-[#7F7F7F]">선호하는 술, 재료 등을 바탕으로 개인의 취향에 맞는 전통주를 추천받아 보세요.</div>
           </div>
           <div className="absolute top-[330px] left-[305px] w-[1300px] h-[450px] flex">
-            { 
-              image5.map((v, i) => { 
-              return (
-                <Image key={i} className={`${styles.part3} mr-[30px] drop-shadow-[3px_10px_10px_rgba(0,0,0,0.12)]`} src={v} alt="" width={300} height={60}  ></Image>
-              )
-              })
-              }
+            {
+              image5.map((v, i) => {
+                return (
+                  <Image key={i} className={`${scroll > 3150 ? styles.show1 :styles.hide} ${styles.part3} mr-[30px] drop-shadow-[3px_10px_10px_rgba(0,0,0,0.12)]`} src={v} alt="" width={300} height={60}  ></Image>
+              
+                )
+                })
+            }
           </div>
         </div>
 
         {/* PART 4 */}
         <div className="absolute  top-[4500px] w-screen h-[1000px]  flex">
-          <div className="absolute top-[100px] w-[600px] h-[620px] left-[320px]  ">
+          <div className={`${scroll>4000?styles.show2:styles.hide} absolute top-[100px] w-[600px] h-[620px] left-[320px]  `}>
+
             <Image className="absolute top-[50px] left-[60px]" src="/main/part4/main4_1s.png" alt="" width={210} height={300}></Image>
             <Image className="absolute top-[50px] left-[370px]" src="/main/part4/main4_2s.png" alt="" width={220} height={300 }></Image>
             <Image className="absolute top-[350px] left-[60px]" src="/main/part4/main4_3s.png" alt="" width={215} height={300 }></Image>
@@ -219,7 +221,7 @@ export default function Home() {
             width={1920}
             height={200}
           ></Image> */}
-          <div className="absolute top-[315px] w-[700px] h-[300px] left-[1010px] text-[#393939]  ">
+          <div className={` ${scroll>3700?styles.opacity:styles.hide} absolute top-[315px] w-[700px] h-[300px] left-[1010px] text-[#393939] ` }>
             <div className="absolute text-[50px] font-preB">
               간단한 유형검사를 통해
             </div>
@@ -243,7 +245,7 @@ export default function Home() {
         <div className="absolute  top-[5500px] w-screen h-[1000px]  flex ">
           {/* <Image className="opacity-30" src="/main/part5/main5_sample.PNG" alt="" width={1900} height={300}></Image> */}
                {/* <Image src="/main/part3/main3_bg.png" alt="" width={1800} height={200}></Image> */}
-               <div className="absolute left-[260px] top-[170px] w-[1000px] h-[300px]">
+          <div className={`${scroll>4600?styles.opacity:styles.hide} absolute left-[260px] top-[170px] w-[1000px] h-[300px]`}>
             <div className="absolute text-[50px] font-preB text-[#977857]">
               전통주 랭킹 서비스
             </div>
@@ -267,21 +269,21 @@ export default function Home() {
           {/* 스크롤 애니메이션 */}
           <div className="absolute left-[790px] top-[350px] w-[1000px] h-[410px]">
             <Image
-              className="absolute z-10 left-[260px] drop-shadow-[3px_10px_10px_rgba(0,0,0,0.12)]"
+              className={`${scroll>5000? styles.opacity2:styles.hide}  absolute z-10 left-[260px] drop-shadow-[3px_10px_10px_rgba(0,0,0,0.12)]`}
               src="/main/part3/main3_1.png"
               alt=""
               width={360}
               height={200}
             ></Image>
             <Image
-              className="absolute z-0 top-[25px] drop-shadow-[3px_10px_10px_rgba(0,0,0,0.12)]"
+              className={`${scroll>5100? styles.opacity2:styles.hide}  absolute z-0 top-[25px] drop-shadow-[3px_10px_10px_rgba(0,0,0,0.12)]`}
               src="/main/part3/main3_2.png"
               alt=""
               width={310}
               height={200}
             ></Image>
             <Image
-              className="absolute z-0  top-[25px] left-[570px] drop-shadow-[3px_10px_10px_rgba(0,0,0,0.12)]"
+              className={`${scroll>5250? styles.opacity2:styles.hide} absolute z-0  top-[25px] left-[570px] drop-shadow-[3px_10px_10px_rgba(0,0,0,0.12)]`}
               src="/main/part3/main3_3.png"
               alt=""
               width={310}
