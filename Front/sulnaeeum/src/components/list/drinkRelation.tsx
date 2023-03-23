@@ -1,6 +1,7 @@
 import React from 'react'
 
 export default function DrinkRelation() {
+  
   return (
     <div className={'flex w-7/12'}>
         <div className={'flex w-1/2 flex-col items-center mx-10'}>
