@@ -31,9 +31,12 @@ public class LikeDrink {
     @JoinColumn(name = "drink_id")
     private Drink drink; // 찜한 술
 
+    // Entity -> DTO 변환
     public LikeDrinkDto toDto() {
-        return LikeDrinkDto.builder().
-
-                build();
+        return LikeDrinkDto.builder()
+                .likeDrinkId(this.likeDrinkId)
+                .userDto(this.user.toDto())
+                .drinkDto(this.drink.toDto())
+                .build();
     }
 }
