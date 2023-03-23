@@ -1,6 +1,7 @@
 package com.ssafy.sulnaeeum.model.mypage.entity;
 
 import com.ssafy.sulnaeeum.model.drink.entity.Drink;
+import com.ssafy.sulnaeeum.model.mypage.dto.LikeDrinkDto;
 import com.ssafy.sulnaeeum.model.user.entity.User;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -29,4 +30,10 @@ public class LikeDrink {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "drink_id")
     private Drink drink; // 찜한 술
+
+    public LikeDrinkDto toDto() {
+        return LikeDrinkDto.builder().
+
+                build();
+    }
 }

@@ -81,4 +81,14 @@ public class LikeDrinkService {
         }
         drinkRepo.save(drinkDto.toEntity());
     }
+
+    // 찜한 전통주 조회
+    @Transactional
+    public LikeDrinkDto getLikeDrink (String kakaoId) {
+
+        User user = userRepo.findByKakaoId(kakaoId).orElseThrow(() -> new CustomException(CustomExceptionList.MEMBER_NOT_FOUND));
+        LikeDrink likeDrink = likeDrinkRepo.findByUser(user.getUserId()).orElse(null);
+
+        return null;
+    }
 }
