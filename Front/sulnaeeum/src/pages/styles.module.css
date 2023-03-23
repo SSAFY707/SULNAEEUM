@@ -1,7 +1,15 @@
 .image-wrapper {
   position: relative;
 }
+.image-container {
+  height: 0;
+  overflow: hidden;
+  transition: height 0.5s ease-in-out;
+}
 
+.image-container.show {
+  height: auto;
+}
 .image-wrapper img {
   z-index: 2;
   position: absolute;
@@ -31,4 +39,8 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+
+.part3 {
+  transition: 'opacity 0.5s ease-in-out',
 }

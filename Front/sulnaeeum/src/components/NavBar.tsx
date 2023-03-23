@@ -25,7 +25,7 @@ function Navbar() {
     <nav className="fixed z-50">
       <ul className="hover:border-b hover:pb-[1px] h-[62px] w-screen text-[17px] flex justify-between items-center border-b-2 bg-white">
         <li className="max-[990px]:w-[200px] max-[990px]:pl-[30px] w-[270px] pl-[165px]">
-          <Link href={"/test"}>
+          <Link href={"/"}>
             <div>
               <Image src="/logo_1.png" alt="" width={90} height={50}></Image>
             </div>
@@ -48,7 +48,7 @@ function Navbar() {
                       {menuTab[i].map((val, idx) => {
                         return (
                           // 각 페이지 URL 넣어야함
-                          <Link href={"/test"} key={idx}>
+                          <Link href={"/"} key={idx}>
                             <li className="hover:font-preB text-neutral-500 font-preR text-[16px] mt-[17px] ">
                               {val}
                             </li>
@@ -66,7 +66,7 @@ function Navbar() {
         </li>
         <li className="max-[900px]:hidden w-[290px] pl-[20px] flex font-preL">
           <button>검색</button>
-          <Link href={"/test"}>
+          <Link href={"/"}>
             <div className="pl-[40px]">로그인</div>
           </Link>
         </li>
