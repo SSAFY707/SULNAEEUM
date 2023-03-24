@@ -110,6 +110,7 @@ export const DrinkList = (props: {drinkType: string, sortType : string}) => {
   //   }
   // }
  
+
   // useEffect(()=>{
   //   getList()
   // },[drinkType, sortType])
