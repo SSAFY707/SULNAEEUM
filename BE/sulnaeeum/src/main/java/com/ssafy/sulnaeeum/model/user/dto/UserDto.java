@@ -12,15 +12,41 @@ import lombok.*;
 @NoArgsConstructor
 public class UserDto {
 
-    private String email; // kakao
+    @Schema(description = "userId")
+    private Long userId; // kakao
 
-    private String provideId;
+    @Schema(description = "kakaoId")
+    private String kakaoId; // kakao
 
-    public static UserDto from(User user) {
-        if(user == null) return null;
+    @Schema(description = "nickname")
+    private String nickname;
 
-        return UserDto.builder()
-                .email(user.getKakaoId())
+    @Schema(description = "age")
+    private String age;
+
+    @Schema(description = "sex")
+    private String sex;
+
+    @Schema(description = "img")
+    private String img;
+
+    @Schema(description = "ranking")
+    private int ranking;
+
+    @Schema(description = "finish")
+    private boolean finish;
+
+    // DTO -> Entity 변환
+    public User toEntity() {
+        return User.builder()
+                .userId(this.userId)
+                .kakaoId(this.kakaoId)
+                .nickname(this.nickname)
+                .age(this.age)
+                .sex(this.sex)
+                .img(this.img)
+                .ranking(this.ranking)
+                .finish(this.finish)
                 .build();
     }
 }

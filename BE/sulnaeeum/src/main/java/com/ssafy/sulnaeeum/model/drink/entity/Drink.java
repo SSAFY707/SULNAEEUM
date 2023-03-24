@@ -24,16 +24,17 @@ public class Drink {
     @Column(length = 25)
     private String drinkName; // 이름
 
+    @Column(length = 2000)
     private String drinkInfo; // 정보
 
     private String drinkImage; // 이미지
 
     private String drinkSaleUrl; // 판매 사이트
 
-    @Column(length = 10)
+    @Column(length = 100)
     private String drinkPrice; // 가격 (won)
 
-    @Column(length = 10)
+    @Column(length = 100)
     private String drinkAmount; // 양 (ml)
 
     private int drinkLevel; // 도수
@@ -57,7 +58,7 @@ public class Drink {
                 .drinkPrice(this.drinkPrice)
                 .drinkAmount(this.drinkAmount)
                 .drinkLevel(this.drinkLevel)
-                .drinkType(this.drinkType)
+                .drinkTypeDto(this.drinkType.toDto())
                 .likeCnt(this.likeCnt)
                 .reviewCnt(this.reviewCnt).build();
     }

@@ -24,15 +24,18 @@ public class Brewery {
     @JoinColumn(name = "map_id")
     private Map map; // 지역
 
-    @Column(length = 10, nullable = false)
+    @Column(length = 20, nullable = false)
     private String breweryName; // 양조장 이름
 
-    @Column(length = 30, nullable = false)
+    @Column(length = 50, nullable = false)
     private String breweryLocation; // 주소
 
-    @Column(length = 50, nullable = false)
+    @Column(nullable = false)
     private String breweryUrl; // 양조장 사이트 주소
 
     @Column(length = 12, nullable = false)
     private String contact; // 연락처
+
+    @Column(nullable = false)
+    private String breweryImg; // 양조장 이미지
 }

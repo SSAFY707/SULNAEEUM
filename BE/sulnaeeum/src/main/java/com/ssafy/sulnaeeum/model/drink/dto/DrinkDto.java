@@ -40,7 +40,7 @@ public class DrinkDto {
     private int drinkLevel;
 
     @Schema(description = "주종")
-    private DrinkType drinkType;
+    private DrinkTypeDto drinkTypeDto;
 
     @Schema(description = "찜 개수")
     private int likeCnt;
@@ -74,7 +74,7 @@ public class DrinkDto {
                 .drinkPrice(this.drinkPrice)
                 .drinkAmount(this.drinkAmount)
                 .drinkLevel(this.drinkLevel)
-                .drinkType(this.drinkType)
+                .drinkType(this.drinkTypeDto.toEntity())
                 .likeCnt(this.likeCnt)
                 .reviewCnt(this.reviewCnt).build();
     }
