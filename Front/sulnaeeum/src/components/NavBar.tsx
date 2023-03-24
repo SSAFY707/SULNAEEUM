@@ -11,12 +11,12 @@ function Navbar() {
   const btnRef = useRef();
 
   const menu: string[] = ["전통주", "지도", "랭킹", "추천", "전통주 유형검사"];
-  const url: string[] = ["/test", "/test", "/test", "/test", "/jubti"];
+  const url: string[] = ["/list", "/map", "/rank", "/recommend", "/jubti"];
   const menuTab = [
     ["탁주", "약주/청주", "과실주", "증류주", "기타 주류"],
     ["경기도", "강원도", "충청도", "전라도", "경상도", "제주도"],
     ["랭킹"],
-    ["나만의 전통주","선물하기"],
+    ["나만의 전통주", "선물하기"],
     ["검사하기"],
   ];
 
@@ -34,9 +34,8 @@ function Navbar() {
         <li
           onMouseEnter={() => setHover("On")}
           onMouseLeave={() => setHover("")}
-          className={`max-[900px]:hidden ${
-            hover == "On" ? "z-10 h-[330px] mt-[419px]" : ""
-          } flex justify-around w-[700px] mt-[130px] mb-[127px]`}
+          className={`max-[900px]:hidden ${hover == "On" ? "z-10 h-[330px] mt-[419px]" : ""
+            } flex justify-around w-[700px] mt-[130px] mb-[127px]`}
         >
           {menu.map((v, i) => {
             return (

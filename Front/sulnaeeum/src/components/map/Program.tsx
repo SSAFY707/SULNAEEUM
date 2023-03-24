@@ -1,6 +1,5 @@
 import React from 'react'
-import style from './map.module.css'
-import { FaBookmark } from 'react-icons/fa'
+import style from '@/pages/map/map.module.css'
 import { useState } from 'react';
 
 
@@ -19,17 +18,17 @@ export default function Program(props: any) {
               <img className='w-[240px] h-[280px] object-cover' src='/images/map/items/04.png' alt='이미지'></img>
               <div className='w-[300px] h-[280px] ml-[20px]'>
                 <p className='text-[28px] font-bold'>{v.program_name}</p>
-                <div className='h-[40px] '>
-                  <span className='text-[18px]'>{v.program_location}</span>
+                <div className='h-[34px] '>
+                  <span className='text-[16px]'>{v.program_location}</span>
                 </div>
-                <div className='h-[40px] '>
+                <div className='h-[34px] '>
                   <span className='text-[18px]'>{v.always_visit == 1 ? '상시 방문' : ''}, {v.reserve_visit == 1 ? '예약 방문' : ''} </span>
                 </div>
-                <div className='h-[116px] '>
-                  <span className='text-[18px]'>{v.content.substr(0, 88)} ...</span>
+                <div className='h-[130px] '>
+                  <span className='text-[18px]'>{v.content.substr(0, 90)}</span>
                 </div>
                 <a href={v.program_url}>
-                  <div className='cursor-pointer ml-[160px] text-white w-[140px] py-2 px-8 rounded-[6px] bg-[#ADA7A3]'>더 알아보기</div>
+                  <div className='cursor-pointer ml-[160px] text-white w-[140px] py-2 px-8 rounded-[4px] bg-[#5CABB7] hover:bg-[#3C97A5]'>더 알아보기</div>
                 </a>
               </div>
             </div>

@@ -1,5 +1,5 @@
 import React from 'react'
-import style from './map.module.css'
+import style from '@/pages/map/map.module.css'
 import { useState } from 'react';
 
 export default function Map2(props: any) {
