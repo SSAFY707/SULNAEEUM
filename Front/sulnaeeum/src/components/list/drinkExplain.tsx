@@ -12,11 +12,11 @@ export const DrinkExplain = (props: {drink : DrinkDetailType}) => {
   return (
     <div className={'w-7/12'}>
         <Modal w={500} h={600} open={open} modalOpen={modalOpen}>
-          <div className='flex justify-center items-center h-full font-preM text-[30px]'>안녕하세요?</div>
+          <div className='flex justify-center items-center h-full font-preM text-[30px]'>여기에 술 클리어하는 창 만들거에여</div>
         </Modal>
         <div className={'flex justify-between items-center pl-8 pr-4'}>
             <div className={'flex items-end text-[16px] font-preEL'}>
-              <div className={'mr-4 text-[28px] font-preR'}>{drink.drinkName}</div>
+              <div className={'mr-4 text-[34px] font-preR'}>{drink.drinkName}</div>
               {drink.drinkLevel}% | {drink.drinkAmount} 
             </div>
             <div onClick={modalOpen}>

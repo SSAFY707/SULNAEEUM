@@ -9,7 +9,9 @@ import { useRouter } from 'next/router'
 export const DrinkTableElement = (props: {drink : Drink}) => {
   const {drink} = props
   const [item, setItem] = useState<Drink>(drink)
-  const like = () => {
+  const like = (event) => {
+    // 이벤트 버블링을 막는 코드
+    event.stopPropagation() 
     const copy = {...item}
     copy.like = !copy.like
     setItem(copy)

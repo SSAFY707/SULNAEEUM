@@ -5,6 +5,8 @@ import { DrinkDetailType } from '@/types/DataTypes'
 import { Modal } from '@/components/common/modal'
 import React, { useState, useEffect } from 'react'
 import DrinkRelation from '@/components/list/drinkRelation'
+import DrinkReviews from '@/components/list/drinkReviews'
+import DrinkJumak from '@/components/list/drinkJumak'
 
 export default function Detail(props: {drinkId : number}) {
   const { drinkId } = props
@@ -20,10 +22,12 @@ export default function Detail(props: {drinkId : number}) {
     drinkLevel: 16,
     drinkType: 1,
     drinkReviews: [
-      {id: '나현짱', rate: 5, content: '키키키키키키좋아라'},
-      {id: '미히짱', rate: 5, content: '맛있어여'},
-      {id: '하늘짱', rate: 5, content: '뀨우ㅜ우우우우ㅜ우ㅜㅅ'},
-      {id: '설히짱', rate: 5, content: '우와앙아ㅏ앙'},
+      {id: '설히짱', userImage: '/images/kakao.png', rate: 5, content: '키키키키키키좋아키키키키키좋아키키키키키좋아키키키키키좋아키키키키키좋아키키키키키좋아키키키키키좋아키키키키키좋아키키키키키좋아키키키키키좋아키키키키키좋아키키키키키좋아키키키키키좋아키키키키키좋아키키키키키좋아키키키키키좋아키키키키키좋아키키키키키좋아키키키키키좋아키키키키키좋아키키키키키좋아키키키키키좋아키키키키'},
+      {id: '미히짱', userImage: '/images/kakao.png', rate: 2, content: '맛있어여'},
+      {id: '하늘짱', userImage: '/images/kakao.png', rate: 3, content: '뀨우ㅜ우우우우ㅜ우ㅜㅅ'},
+      {id: '나현짱', userImage: '/images/kakao.png', rate: 5, content: '우와앙아ㅏ앙'},
+      {id: '성훙짱', userImage: '/images/kakao.png', rate: 5, content: '우와앙아ㅏ앙'},
+      {id: '웡규짱', userImage: '/images/kakao.png', rate: 5, content: '우와앙아ㅏ앙'},
     ]
   }
   const [drink, setDrink] = useState<DrinkDetailType>(data)
@@ -54,7 +58,12 @@ export default function Detail(props: {drinkId : number}) {
         <div className={'flex mt-4 p-10 justify-center h-[500px]'}>
           <DrinkRelation />
         </div>
-        <div className={'h-[600px] bg-zinc-200/50'}></div>
+        <div className={'flex justify-center items-center h-[500px] bg-zinc-200/50'}>
+          <DrinkReviews reviews={drink.drinkReviews} />
+        </div>
+        <div className={'flex justify-center h-[800px]'}>
+          <DrinkJumak drink={drink} />
+        </div>
       </div>
     </>
   )
