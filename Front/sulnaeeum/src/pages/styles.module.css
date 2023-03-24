@@ -124,9 +124,78 @@
 
   to {
     opacity: 1;
-    transform: translateY(140px);
+    transform: translateY(130px);
   }
 }
+
+.slowDown {
+  opacity: 1;
+  transition: opacity 0.5s ease-out;
+  animation-name: fadeInSlowDown;
+  animation-duration: 1s;
+  animation-delay: 0s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes fadeInSlowDown {
+  from {
+    opacity: 0;
+    transform: translateY(0px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(60px);
+  }
+}
+
+.Down {
+  opacity: 1;
+  transition: opacity 0.5s ease-out;
+  animation-name: fadeInDown2;
+  animation-duration: 1s;
+  animation-delay: 0.00001s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes fadeInDown2 {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(90px);
+  }
+}
+
+
+
+.rapidDown {
+  opacity: 1;
+  transition: opacity 0.5s ease-out;
+  animation-name: fadeInRapidDown;
+  animation-duration: 1s;
+  animation-delay: 0.00001s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes fadeInRapidDown {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(118px);
+  }
+}
+
+
+
+
 
 .opacity {
   opacity: 1;

@@ -11,7 +11,7 @@ export default function Home() {
   const isScrolled: boolean = scroll > 1250;
   const translateY = isScrolled ? `${scroll - 1250}px` : "0px";
   const [scrollY, setScrollY] = useState(0);
-  const imageX = scrollY / 5 > 185 ? 185 : scrollY / 5;
+  const imageX = scrollY / 5 > 166 ? 166 : scrollY / 5;
   const [isVisible, setIsVisible] = useState(false);
 
   const image5: string[] = [
@@ -62,17 +62,18 @@ export default function Home() {
         <div
           className={` ${styles.scrolled} w-[4500px] ${
             isScrolled ? "absolute z-30" : "fixed"
-          }  z-20 overflow-hidden `}
+          }  z-20 overflow-hidden left-[-30px] ml-[-180px] mt-[-50px]`}
           style={{
+
             top: `${isScrolled ? "1250px" : "10px"}`,
             left: `${-imageX * 14}px`,
           }}
         >
           <Image
-            src="/main/part1/white_txt_1.png"
+            src="/main/part1/main1_text1.png"
             alt=""
             width={6000}
-            height={920}
+            height={1000}
           />
         </div>
         {/*전통주 배경화면 */}
@@ -88,11 +89,11 @@ export default function Home() {
             width={1920}
             height={0}
           />
-          <div className=" absolute z-40 top-[650px]">
+          <div className=" absolute z-40 top-[640px] left-[-110px]">
             <Image
-              src="/main/part1/white_txt_2.png"
+              src="/main/part1/main1_txt2.png"
               alt=""
-              width={1920}
+              width={2700}
               height={0}
             />
           </div>
