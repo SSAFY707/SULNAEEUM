@@ -24,19 +24,22 @@ public class Program {
     @JoinColumn(name = "map_id")
     private Map map; // 지역
 
-    @Column(length = 10, nullable = false)
+    @Column(length = 20, nullable = false)
     private String programName; // 프로그램 이름
 
-    @Column(length = 20, nullable = false)
+    @Column(length = 30, nullable = false)
     private String programLocation; // 체험 장소
 
     private boolean alwaysVisit; // 상시 방문 가능 여부
 
     private boolean reserveVisit; // 예약 방문 가능 여부
 
-    @Column(length = 50, nullable = false)
+    @Column(nullable = false)
     private String programUrl; // 체험 프로그램 사이트 주소
 
     @Column(nullable = false)
     private String content; // 내용
+
+    @Column(nullable = false)
+    private String programImg; // 체험 프로그램 이미지
 }
