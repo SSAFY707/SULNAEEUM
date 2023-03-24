@@ -40,7 +40,7 @@ function Navbar() {
             <div className={`${hover=="On"?"":"hidden"}`}> 
                   <Image className={`${styles.slowDown} absolute z-10 left-[200px] top-[50px]`} src="/logo/술.png" alt="" width={60} height={50}></Image>
                   <Image className={`${styles.Down} transition absolute z-10 left-[170px] top-[80px]`} src="/logo/내.png" alt="" width={60} height={50}></Image>
-                  <Image className={`${styles.rapidDown} absolute z-10 delay-1000 left-[229px] top-[60px]`} src="/logo/음.png" alt="" width={60} height={50}></Image>
+                  <Image className={`${styles.rapidDown} absolute z-10 delay-1000 left-[229px] top-[80px]`} src="/logo/음.png" alt="" width={60} height={50}></Image>
                 </div>
             
           </Link>
@@ -62,7 +62,7 @@ function Navbar() {
                       {menuTab[i].map((val, idx) => {
                         return (
                           // 각 페이지 URL 넣어야함
-                          <Link href={`${url[i]}/${idx}`} key={idx}>
+                          <Link href={`${url[i]}?tab=${val}`} key={idx}>
                             <li className="hover:font-preB text-neutral-500 font-preR text-[16px] mt-[17px] ">
                               {val}
                             </li>

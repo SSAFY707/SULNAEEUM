@@ -83,7 +83,7 @@ export default function Home() {
           }`}
         >
           <Image
-            className="z-20"
+            className={`z-20`}
             src="/main/part1/main_1.jpg"
             alt=""
             width={1920}
@@ -171,14 +171,14 @@ export default function Home() {
             ></Image>
             <div className="">
               <Image
-                className="absolute opacity-5 z-0"
+                className={`${scroll>2290?styles.opacity4:styles.hide} absolute opacity-5 z-0`}
                 src="/main/part2/main2_3.png"
                 alt=""
                 width={400}
                 height={0}
               />
               <Image
-                className="absolute top-[500px] left-[1200px] opacity-5 z-0"
+                className={`${scroll>2290?styles.opacity4:styles.hide} absolute top-[500px] left-[1200px] opacity-5 z-0`}
                 src="/main/part2/main2_3.png"
                 alt=""
                 width={300}

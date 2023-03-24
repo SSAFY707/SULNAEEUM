@@ -189,7 +189,7 @@
 
   to {
     opacity: 1;
-    transform: translateY(118px);
+    transform: translateY(100px);
   }
 }
 
@@ -207,5 +207,9 @@
 }
 .opacity3 {
   opacity: 0;
+  transition: opacity 0.4s ease-out;
+}
+.opacity4{
+  opacity:0.1;
   transition: opacity 0.4s ease-out;
 }
