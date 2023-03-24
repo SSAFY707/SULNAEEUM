@@ -1,5 +1,18 @@
 import csv
 import pymysql
+import boto3
+
+AWS_ACCESS_KEY_ID ="AKIA5LR33YUVXC3XRBVF"
+AWS_SECRET_ACCESS_KEY = "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"
+AWS_DEFAULT_REGION = "ap-northeast-2"
+BUCKET_NAME = "sulnaeeum"
+
+# S3 설정
+client = boto3.client('s3',
+                      aws_access_key_id=AWS_ACCESS_KEY_ID,
+                      aws_secret_access_key=AWS_SECRET_ACCESS_KEY,
+                      region_name=AWS_DEFAULT_REGION
+                      )
 
 # DB 설정
 conn = pymysql.connect(host='localhost',
@@ -29,6 +42,9 @@ insert_drink_dish = "INSERT INTO dish_drink (drink_id, dish_id) VALUES (%s, %s)"
 # 술-맛 추가
 insert_taste = "INSERT INTO taste (drink_id, taste_type_id, score) VALUES (%s, %s, %s)"
 
+# 술 이미지 추가
+insert_img = "UPDATE drink SET drink_image = %s where drink_id = %s"
+
  
 # CSV 파일 읽기
 drink_file = open('../data_1.csv', 'r', encoding='cp949')
@@ -48,7 +64,7 @@ dic_all_dish = {}
 dic_all_taste = {"단맛":1, "신맛":2, "바디감":3, "청량감":4, "향":5, "목넘김":6}
 
 # 술 전체 종류
-dic_all_type = {}
+dic_all_type = {"탁주":1, "양주/청주":2, "과실주":3, "증류주":4, "기타":5}
 
 # 술에 들어간 재료
 dic_ingredient = {}
@@ -72,6 +88,7 @@ dish_id = 1
 # 술 종류 ID
 drink_type_id = 1
 
+cur = conn.cursor()
 
 # 데이터 입력
 for line in drink_rdr:
@@ -81,8 +98,6 @@ for line in drink_rdr:
     # 첫줄은 pass
     if drink_name == "전통주명":
         continue
-    
-    cur = conn.cursor()
 
     # 재료
     ingredient = line[3]
@@ -168,13 +183,17 @@ for line in drink_rdr:
                 all_dish_list.append(s)
 
 
-    # 술 종류 추가
-    if not drink_type in dic_all_type:
-        dic_all_type[drink_type] = drink_type_id
-        cur.execute(insert_drink_type, drink_type)
-        drink_type_id += 1
-        
-    conn.commit()
+    # 술 종류 분류
+    if drink_type == '탁주' or drink_type == '생탁주' or drink_type == '살균탁주' or drink_type == '종류탁주' or drink_type == '전통 수제 탁주':
+        drink_type = '탁주'
+    elif drink_id == '약주, 청주' or drink_id == '약주' or drink_id == '청주' or drink_id == '살균 약주':
+        drink_type = '약주/청주'
+    elif drink_type == '과실주':
+        drink_type = '과실주'
+    elif drink_type == '증류주' or drink_type == '일반증류주' or drink_type == '증류식소주' or drink_type == '증류식 소주':
+        drink_type = '증류주'
+    else:
+        drink_type = '기타'
 
 
     # 술 추가
@@ -216,7 +235,19 @@ for line in drink_rdr:
         cur.execute(insert_taste, (drink_id, dic_all_taste[t], taste_type[t]))
         print(drink_id, " ", drink_name, " - ", t, " : 입력 완료")
 
-    drink_id += 1
+    # 술 이미지 S3 url 등록
+    this_path = "drink/" + str(drink_id) + ".jpg"
+    res = client.list_objects_v2(Bucket=BUCKET_NAME, Prefix=this_path, MaxKeys=1)
+    
+    if 'Contents' in res:
+        img_url = "https://sulnaeeum.s3.ap-northeast-2.amazonaws.com/drink/" + str(drink_id) + ".jpg"
+        cur.execute(insert_img, (img_url, str(drink_id)))
+        print(drink_id, img_url, " : 입력 완료")
+
+
+    conn.commit()
+    drink_id += 1 
+
 
 conn.close()
 drink_file.close()

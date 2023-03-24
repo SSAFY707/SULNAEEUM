@@ -58,6 +58,7 @@ public class KakaoLoginService {
                 .kakaoId(kakaoUser.getKakaoId())
                 .nickname(kakaoUser.getNickname())
                 .img(kakaoUser.getImg())
+                .finish(kakaoUser.isFinish())
                 .build();
     }
 

@@ -1,5 +1,6 @@
 package com.ssafy.sulnaeeum.model.drink.entity;
 
+import com.ssafy.sulnaeeum.model.drink.dto.DrinkTypeDto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -21,4 +22,11 @@ public class DrinkType {
     private Long drinkTypeId; // auto_increment PK
 
     private String drinkTypeName; // 주종 이름
+
+    public DrinkTypeDto toDto(){
+        return DrinkTypeDto.builder()
+                .drinkTypeId(this.drinkTypeId)
+                .drinkTypeName(this.drinkTypeName)
+                .build();
+    }
 }

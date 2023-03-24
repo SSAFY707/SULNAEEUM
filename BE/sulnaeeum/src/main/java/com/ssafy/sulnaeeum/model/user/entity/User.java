@@ -64,9 +64,14 @@ public class User {
         this.token = token;
     }
 
+    public void updateFinish(boolean finish){
+        this.finish = finish;
+    }
+
     // Entity -> DTO 변환
     public UserDto toDto() {
         return UserDto.builder()
+                .userId(this.userId)
                 .kakaoId(this.kakaoId)
                 .nickname(this.nickname)
                 .age(this.age)

@@ -3,6 +3,7 @@ package com.ssafy.sulnaeeum.model.user.service;
 import com.ssafy.sulnaeeum.exception.CustomException;
 import com.ssafy.sulnaeeum.exception.CustomExceptionList;
 import com.ssafy.sulnaeeum.jwt.TokenProvider;
+import com.ssafy.sulnaeeum.model.user.dto.UserDto;
 import com.ssafy.sulnaeeum.model.user.dto.UserPreferenceDto;
 import com.ssafy.sulnaeeum.model.user.entity.UserPreference;
 import com.ssafy.sulnaeeum.model.user.repo.UserPreferenceRepo;
@@ -69,10 +70,12 @@ public class UserService {
     public void preference(String kakaoId, UserPreferenceDto userPreferenceDto) {
 
         User user = userRepository.findByKakaoId(kakaoId).orElseThrow(() -> new CustomException(CustomExceptionList.MEMBER_NOT_FOUND));
+
         UserPreference userPreference = userPreferenceDto.toEntity();
         userPreference.setUser(user);
 
         userPreferenceRepo.save(userPreference);
+        user.updateFinish(true);
     }
 
     // kakaoId로 userId 찾기

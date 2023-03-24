@@ -24,6 +24,8 @@ public class KakaoLoginDto {
     private String nickname;
 
     @Schema(description = "프로필")
-    @Column(name="img",nullable = false)
     private String img;
+
+    @Schema(description = "취향 조사 여부")
+    private boolean finish;
 }
