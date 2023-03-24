@@ -6,16 +6,16 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
-@Schema(description = "양조장 및 체험 프로그램에 대한 모든 정보")
+@Schema(description = "지도 전체 정보")
 @Data
 @SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
 public class MapInfoDto {
 
-    @Schema(description = "양조장")
-    private BreweryDto breweryDto;
+    @Schema(description = "지역 번호")
+    private Long mapId;
 
-    @Schema(description = "체험 프로그램")
-    private ProgramDto programDto;
+    @Schema(description = "양조장 및 축제")
+    private ListDto listDto;
 }

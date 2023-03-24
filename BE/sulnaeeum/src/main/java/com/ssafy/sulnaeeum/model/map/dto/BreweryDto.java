@@ -35,6 +35,17 @@ public class BreweryDto {
     @Schema(description = "양조장 이미지")
     private String breweryImg;
 
+    // 생성자 (List<Entity> -> List<DTO> 변환을 위함)
+    public BreweryDto(Brewery brewery) {
+        this.breweryId = brewery.getBreweryId();
+        this.mapDto = brewery.getMap().toDto();
+        this.breweryName = brewery.getBreweryName();
+        this.breweryLocation = brewery.getBreweryLocation();
+        this.breweryUrl = brewery.getBreweryUrl();
+        this.contact = brewery.getContact();
+        this.breweryImg = brewery.getBreweryImg();
+    }
+
     // DTO -> Entity 변환
     public Brewery toEntity() {
         return Brewery.builder()

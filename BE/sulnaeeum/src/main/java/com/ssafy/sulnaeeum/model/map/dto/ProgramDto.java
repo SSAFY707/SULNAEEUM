@@ -1,5 +1,6 @@
 package com.ssafy.sulnaeeum.model.map.dto;
 
+import com.ssafy.sulnaeeum.model.map.entity.Brewery;
 import com.ssafy.sulnaeeum.model.map.entity.Program;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
@@ -40,6 +41,19 @@ public class ProgramDto {
 
     @Schema(description = "체험 프로그램 이미지")
     private String programImg;
+
+    // 생성자 (List<Entity> -> List<DTO> 변환을 위함)
+    public ProgramDto(Program program) {
+        this.programId = program.getProgramId();
+        this.mapDto = program.getMap().toDto();
+        this.programName = program.getProgramName();
+        this.programLocation = program.getProgramLocation();
+        this.alwaysVisit = program.isAlwaysVisit();
+        this.reserveVisit = program.isReserveVisit();
+        this.programUrl = program.getProgramUrl();
+        this.content = program.getContent();
+        this.programImg = program.getProgramImg();
+    }
 
     // DTO -> Entity 변환
     public Program toEntity() {

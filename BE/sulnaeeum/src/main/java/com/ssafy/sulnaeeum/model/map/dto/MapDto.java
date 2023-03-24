@@ -20,6 +20,12 @@ public class MapDto {
     @Schema(description = "지역명")
     private String mapName;
 
+    // 생성자 (List<Entity> -> List<DTO> 변환을 위함)
+    public MapDto(Map map) {
+        this.mapId = map.getMapId();
+        this.mapName = map.getMapName();
+    }
+
     // DTO -> Entity 변환
     public Map toEntity() {
         return Map.builder()
