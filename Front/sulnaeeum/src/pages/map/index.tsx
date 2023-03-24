@@ -2,10 +2,10 @@ import React from 'react'
 import style from './map.module.css'
 import { FaBookmark } from 'react-icons/fa'
 import { useState } from 'react';
-import Map1 from './Map1';
-import Map2 from './Map2';
-import Title from './Title';
-import Right from './Right';
+import Map1 from '@/components/map/Map1';
+import Map2 from '@/components/map/Map2';
+import Title from '@/components/map/Title';
+import Right from '@/components/map/Right';
 
 
 
