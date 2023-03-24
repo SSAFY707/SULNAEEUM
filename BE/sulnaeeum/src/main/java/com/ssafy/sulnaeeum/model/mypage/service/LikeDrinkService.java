@@ -7,6 +7,7 @@ import com.ssafy.sulnaeeum.model.drink.entity.Drink;
 import com.ssafy.sulnaeeum.model.drink.repo.DrinkRepo;
 import com.ssafy.sulnaeeum.model.drink.service.DrinkService;
 import com.ssafy.sulnaeeum.model.mypage.dto.LikeDrinkDto;
+import com.ssafy.sulnaeeum.model.mypage.dto.LikeDrinkListDto;
 import com.ssafy.sulnaeeum.model.mypage.entity.LikeDrink;
 import com.ssafy.sulnaeeum.model.mypage.repo.LikeDrinkRepo;
 import com.ssafy.sulnaeeum.model.user.entity.User;
@@ -15,6 +16,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -84,11 +87,16 @@ public class LikeDrinkService {
 
     // 찜한 전통주 조회
     @Transactional
-    public LikeDrinkDto getLikeDrink (String kakaoId) {
+    public LikeDrinkListDto getLikeDrink (String kakaoId) {
 
         User user = userRepo.findByKakaoId(kakaoId).orElseThrow(() -> new CustomException(CustomExceptionList.MEMBER_NOT_FOUND));
-        LikeDrink likeDrink = likeDrinkRepo.findByUser(user.getUserId()).orElse(null);
+        List<LikeDrink> likeDrinks = likeDrinkRepo.findByUserId(user.getUserId());
 
-        return null;
+        List<DrinkDto> likeDrinkList = new ArrayList<>();
+        for (LikeDrink likeDrink : likeDrinks) {
+            likeDrinkList.add(likeDrink.getDrink().toDto());
+        }
+
+        return LikeDrinkListDto.builder().likeDrinkList(likeDrinkList).build();
     }
 }

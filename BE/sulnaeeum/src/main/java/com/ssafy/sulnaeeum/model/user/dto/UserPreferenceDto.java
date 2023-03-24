@@ -39,6 +39,9 @@ public class UserPreferenceDto {
     @Schema(description = "안주")
     private String dish; // 안주
 
+    @Schema(description = "가중치")
+    private String weight; // 가중치
+
     public UserPreference toEntity() {
 
         return UserPreference.builder()
@@ -50,6 +53,7 @@ public class UserPreferenceDto {
                 .tasteBody(tasteBody)
                 .level(level)
                 .dish(dish)
+                .weight(weight)
                 .build();
     }
 }

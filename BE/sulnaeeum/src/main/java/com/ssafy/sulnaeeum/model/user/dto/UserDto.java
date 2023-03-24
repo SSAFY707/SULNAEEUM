@@ -12,6 +12,9 @@ import lombok.*;
 @NoArgsConstructor
 public class UserDto {
 
+    @Schema(description = "userId")
+    private Long userId; // kakao
+
     @Schema(description = "kakaoId")
     private String kakaoId; // kakao
 
@@ -36,6 +39,7 @@ public class UserDto {
     // DTO -> Entity 변환
     public User toEntity() {
         return User.builder()
+                .userId(this.userId)
                 .kakaoId(this.kakaoId)
                 .nickname(this.nickname)
                 .age(this.age)

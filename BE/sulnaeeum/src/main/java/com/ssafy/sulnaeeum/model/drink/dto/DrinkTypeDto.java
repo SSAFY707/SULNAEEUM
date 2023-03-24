@@ -20,10 +20,10 @@ public class DrinkTypeDto {
     @Schema(description = "주종")
     private String drinkTypeName;
 
-//    // DTO -> Entity 변환
-//    public DrinkType toEntity() {
-//        return DrinkType.builder()
-//                .drinkTypeId(this.drinkTypeId)
-//                .drinkTypeName(this.drinkTypeName).build();
-//    }
+    // DTO -> Entity 변환
+    public DrinkType toEntity() {
+        return DrinkType.builder()
+                .drinkTypeId(this.drinkTypeId)
+                .drinkTypeName(this.drinkTypeName).build();
+    }
 }

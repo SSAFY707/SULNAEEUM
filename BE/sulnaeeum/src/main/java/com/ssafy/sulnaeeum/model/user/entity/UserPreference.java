@@ -44,6 +44,10 @@ public class UserPreference {
 
     @Column(nullable = false)
     private int level; // 도수
-    @Column(length = 10, nullable = false)
+
+    @Column(length = 20, nullable = false)
     private String dish; // 안주
+
+    @Column(length = 20, nullable = false)
+    private String weight; // 가중치
 }

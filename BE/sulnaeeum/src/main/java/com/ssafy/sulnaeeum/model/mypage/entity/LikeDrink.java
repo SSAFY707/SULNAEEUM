@@ -39,4 +39,5 @@ public class LikeDrink {
                 .drinkDto(this.drink.toDto())
                 .build();
     }
+
 }

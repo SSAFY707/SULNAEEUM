@@ -58,7 +58,7 @@ public class Drink {
                 .drinkPrice(this.drinkPrice)
                 .drinkAmount(this.drinkAmount)
                 .drinkLevel(this.drinkLevel)
-                .drinkType(this.drinkType)
+                .drinkTypeDto(this.drinkType.toDto())
                 .likeCnt(this.likeCnt)
                 .reviewCnt(this.reviewCnt).build();
     }
