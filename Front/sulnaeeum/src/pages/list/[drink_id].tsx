@@ -1,8 +1,6 @@
 import { getDrinkDetail, getDrinkDetailForUser } from '@/api/auth'
-import { ClearBtn, ClearFalse, ClearTrue } from '@/components/list/clearBtn'
 import { DrinkExplain } from '@/components/list/drinkExplain'
 import { DrinkDetailType } from '@/types/DataTypes'
-import { Modal } from '@/components/common/modal'
 import React, { useState, useEffect } from 'react'
 import DrinkRelation from '@/components/list/drinkRelation'
 import DrinkReviews from '@/components/list/drinkReviews'
