@@ -2,6 +2,7 @@ import { DrinkDetailType } from '@/types/DataTypes'
 import React, { useState } from 'react'
 import { ClearBtn } from './clearBtn'
 import { Modal } from '../common/modal'
+import DrinkClear from './modal/drinkClear'
 
 export const DrinkExplain = (props: {drink : DrinkDetailType}) => {
     const {drink} = props
@@ -12,7 +13,8 @@ export const DrinkExplain = (props: {drink : DrinkDetailType}) => {
   return (
     <div className={'w-7/12'}>
         <Modal w={500} h={600} open={open} modalOpen={modalOpen}>
-          <div className='flex justify-center items-center h-full font-preM text-[30px]'>여기에 술 클리어하는 창 만들거에여</div>
+          <DrinkClear modalOpen={modalOpen}/>
+          
         </Modal>
         <div className={'flex justify-between items-center pl-8 pr-4'}>
             <div className={'flex items-end text-[16px] font-preEL'}>

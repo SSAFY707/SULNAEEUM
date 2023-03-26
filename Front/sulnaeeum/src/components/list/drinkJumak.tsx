@@ -68,7 +68,7 @@ export default function DrinkJumak(props: {drink: DrinkDetailType}) {
                             <MapMarker key={index}
                             position={a.latlng}
                             image={{
-                                src: "/images/list/marker_o.png", // 마커이미지의 주소입니다
+                                src: "/images/list/marker_o.png", 
                                     size: {
                                         width: 60,
                                         height: 54

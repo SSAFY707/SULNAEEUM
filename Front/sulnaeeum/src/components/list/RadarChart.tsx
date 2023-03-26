@@ -2,22 +2,22 @@ import { DrinkDetailType, DrinkTasteType } from '@/types/DataTypes';
 import React from 'react';
 import { Radar, RadarChart, PolarGrid, PolarAngleAxis, ResponsiveContainer } from 'recharts';
 
-export default function DrinkChart(props: {drink: DrinkTasteType}) {
+export default function f(props: {drink: DrinkTasteType}) {
     const {drink} = props
     const data = [
-      { subject: '청량감', value: drink.tasteRefresh },
-      { subject: '신맛', value: drink.tasteSour },
-      { subject: '바디맛', value: drink.tasteBody },
-      { subject: '향', value: drink.tasteFlavor },
-      { subject: '목넘김', value: drink.tasteThroat },
-      { subject: '단맛', value: drink.tasteSweet },
+      { subject: '청량감', value: drink.tasteRefresh * 4 },
+      { subject: '신맛', value: drink.tasteSour * 4 },
+      { subject: '바디맛', value: drink.tasteBody * 4 },
+      { subject: '향', value: drink.tasteFlavor * 4 },
+      { subject: '목넘김', value: drink.tasteThroat * 4 },
+      { subject: '단맛', value: drink.tasteSweet * 4 },
     ];
     return (
       <ResponsiveContainer width="100%" height="100%">
         <RadarChart cx="50%" cy="50%" outerRadius="80%" data={data}>
           <PolarGrid />
-          <PolarAngleAxis dataKey="subject" />
-          <Radar style={{border: '2px'}} name="Mike" dataKey="A" stroke="#d3d3d3" fill="#d3d3d3" fillOpacity={0.5} />
+          <PolarAngleAxis dataKey="subject" className={''}/>
+          <Radar style={{border: '2px'}} name="Mike" dataKey="value" stroke="#78C3DC" fill="#78C3DC" fillOpacity={0.5} />
         </RadarChart>
       </ResponsiveContainer>
     );
