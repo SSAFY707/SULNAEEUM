@@ -1,0 +1,10 @@
+{
+    "development": {
+        "BACKEND_URL" : "https://j8a707.p.ssafy.io/api/",
+        "REDIRECT_URL" : "http://localhost:3000"
+    },
+    "production": {
+        "BACKEND_URL" : "https://j8a707.p.ssafy.io/api/",
+        "REDIRECT_URL" : "http://localhost:3000"
+    }
+}
