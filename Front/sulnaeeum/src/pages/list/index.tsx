@@ -1,17 +1,27 @@
 import React, { useState } from 'react'
+import { useRouter } from 'next/router'
 import { DrinkList } from '@/components/list/drinkTable'
 
-export default function List() {
+export default function List(props: {type: string}) {
+  const {type} = props
+  const router = useRouter()
+
   const typeArr : Array<string> = ['전체', '약주 / 청주', '탁주', '과실주', '증류주', '기타']
   const sortArr : string[] = ['이름', '인기', '높은도수', '낮은도수']
-  const [type, setType] = useState(0)
+  // const [type, setType] = useState(0)
   const [sort, setSort] = useState<string>('이름')
+  const setType = (t : string) => {
+    router.push({
+      pathname: '/list',
+      query: {type: t}
+    })
+  }
   return (
     <>
       <div className={'py-20 w-full flex bg-[url("/images/pattern1.png")] bg-no-repeat bg-[left_-17rem_bottom_-17rem]'}>
         <div className={'w-1/5 mt-20 mx-10 flex flex-col items-end font-preM text-[24px] text-zinc-400'}>
           {typeArr.map((a, index)=>{
-            return ( <div onClick={()=>{setType(index)}} className={`${type == index && 'text-[36px] font-preEB text-[#655442]'} flex items-center cursor-pointer h-[60px] hover:text-[36px] hover:font-preEB hover:text-[#655442]`} key={index}>{a}</div> )
+            return ( <div onClick={()=>setType(a)} className={`${type == typeArr[index] && 'text-[36px] font-preEB text-[#655442]'} flex items-center cursor-pointer h-[60px] hover:text-[36px] hover:font-preEB hover:text-[#655442]`} key={index}>{a}</div> )
           })}
         </div>
         <div className={'w-[60%] ml-20'}>
@@ -21,10 +31,19 @@ export default function List() {
             })}
           </div>
           <div className={'h-[750px] overflow-y-scroll bg-[#F5F5F5]/70 scroll'}>
-            <DrinkList drinkType={typeArr[type]} sortType={sort}></DrinkList>
+            <DrinkList drinkType={type} sortType={sort}></DrinkList>
           </div>
         </div>
       </div>
     </>
   )
+}
+
+export async function getServerSideProps(context : any) {
+  const type = context.query.type
+  return {
+    props: {
+      type: type
+    }
+  }
 }
