@@ -47,6 +47,8 @@ public class Drink {
 
     private int reviewCnt; // 리뷰 개수
 
+    private double avgScore; // 평점 평균
+
     // Entity -> DTO 변환
     public DrinkDto toDto() {
         return DrinkDto.builder()
@@ -60,6 +62,7 @@ public class Drink {
                 .drinkLevel(this.drinkLevel)
                 .drinkTypeDto(this.drinkType.toDto())
                 .likeCnt(this.likeCnt)
-                .reviewCnt(this.reviewCnt).build();
+                .reviewCnt(this.reviewCnt)
+                .avgScore(this.avgScore).build();
     }
 }

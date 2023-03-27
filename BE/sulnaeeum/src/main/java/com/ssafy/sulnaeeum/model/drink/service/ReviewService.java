@@ -49,23 +49,22 @@ public class ReviewService {
         String result;
         Long userId = userService.findUserId(kakaoId);
 
+        Optional<User> user = userRepo.findByKakaoId(kakaoId);
+        Optional<Drink> drink = drinkRepo.findByDrinkId(drinkId);
+        if(user.isEmpty() || drink.isEmpty()) {
+            throw new CustomException(CustomExceptionList.ROW_NOT_FOUND);
+        }
+        DrinkDto drinkDto = drink.get().toDto();
+
         // 해당 전통주를 해당 회원이 이미 클리어한 경우 - 수정 / 아직 클리어하지 않은 경우 - 작성
         Optional<Review> review = reviewRepo.findMyReview(userId, drinkId);
-        Review resultReview;
+        Review resultReview = reviewRequestDto.toEntity(user.get().toDto(), drink.get().toDto());
         if(review.isPresent()) {
-            resultReview = review.get();
             result = "update";
+            updateAvg(1, drinkId, drinkDto.getReviewCnt(), drinkDto.getAvgScore(), resultReview.getScore(), review.get().getScore());
         } else {
-            Optional<User> user = userRepo.findByKakaoId(kakaoId);
-            Optional<Drink> drink = drinkRepo.findByDrinkId(drinkId);
-            if(user.isEmpty() || drink.isEmpty()) {
-                throw new CustomException(CustomExceptionList.ROW_NOT_FOUND);
-            }
-
-            resultReview = reviewRequestDto.toEntity(user.get().toDto(), drink.get().toDto());
             result = "insert";
-
-            // 리뷰 개수 +1
+            updateAvg(0, drinkId, drinkDto.getReviewCnt(), drinkDto.getAvgScore(), resultReview.getScore(), 0);
             cntReview(true, drinkId);
         }
 
@@ -84,10 +83,16 @@ public class ReviewService {
             throw new CustomException(CustomExceptionList.ROW_NOT_FOUND);
         }
 
-        Review reviewResult = review.get();
-        reviewRepo.delete(reviewResult);
+        Review resultReview = review.get();
+        reviewRepo.delete(resultReview);
 
-        // 리뷰 개수 -1
+        Optional<Drink> drink = drinkRepo.findByDrinkId(drinkId);
+        if(drink.isEmpty()) {
+            throw new CustomException(CustomExceptionList.ROW_NOT_FOUND);
+        }
+        DrinkDto drinkDto = drink.get().toDto();
+
+        updateAvg(2, drinkId, drinkDto.getReviewCnt(), drinkDto.getAvgScore(), resultReview.getScore(), review.get().getScore());
         cntReview(false, drinkId);
 
         return "review delete success";
@@ -102,6 +107,32 @@ public class ReviewService {
         } else {
             drinkDto.setReviewCnt(drinkDto.getReviewCnt() - 1);
         }
+        drinkRepo.save(drinkDto.toEntity());
+    }
+
+    // 전통주 평균 평점 업데이트
+    @Transactional
+    public void updateAvg(int request, Long drinkId, int cnt, double avgScore, int myScore, int preMyScore) {
+        double result = 0;
+        if(request == 0) { // 리뷰 작성
+            System.out.println("cnt : " + cnt + " avgScore : " + avgScore + " myScore : " + myScore + " preMyScore : " + preMyScore);
+            System.out.println("[1] " + cnt * avgScore);
+            System.out.println("[2] " + (cnt * avgScore / (cnt + 1)));
+            result = (cnt * avgScore + myScore) / (cnt + 1);
+        } else if(request == 1) { // 리뷰 수정
+            result = (cnt * avgScore - preMyScore + myScore) / cnt;
+        } else { // 리뷰 삭제
+            result = (cnt * avgScore - preMyScore) / (cnt - 1);
+        }
+
+        Optional<Drink> drink = drinkRepo.findByDrinkId(drinkId);
+        if(drink.isEmpty()) {
+            throw new CustomException(CustomExceptionList.ROW_NOT_FOUND);
+        }
+
+        DrinkDto drinkDto = drink.get().toDto();
+        System.out.println("@@@@@@@@@@@@@ This is result : " + result); // insert 시 3.0으로 잘 나왔음
+        drinkDto.setAvgScore(result);
         drinkRepo.save(drinkDto.toEntity());
     }
 
