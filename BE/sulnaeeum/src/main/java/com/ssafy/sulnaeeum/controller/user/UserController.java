@@ -7,6 +7,7 @@ import com.ssafy.sulnaeeum.model.user.dto.TokenDto;
 import com.ssafy.sulnaeeum.model.user.dto.UserPreferenceDto;
 import com.ssafy.sulnaeeum.model.user.entity.User;
 import com.ssafy.sulnaeeum.model.user.service.KakaoLoginService;
+import com.ssafy.sulnaeeum.model.user.service.UserPreferenceService;
 import com.ssafy.sulnaeeum.model.user.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -20,6 +21,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/user")
@@ -32,6 +34,7 @@ public class UserController {
     private static final String FAIL = "fail";
     private final UserService userService;
     private final KakaoLoginService kakaoUserService;
+    private final UserPreferenceService userPreferenceService;
 
     /***
      * [KAKAO 회원가입 및 로그인]
@@ -81,13 +84,15 @@ public class UserController {
      ***/
     @PostMapping("/preference")
     @Operation(summary = "유저 취향 조사", description = "유저 취향 조사")
-    public ResponseEntity<String> preference(@RequestBody UserPreferenceDto userPreferenceDto){
+    public ResponseEntity<Map<String, Map<String, String>>> preference(@RequestBody UserPreferenceDto userPreferenceDto){
 
         String kakaoId = SecurityContextHolder.getContext().getAuthentication().getName();
 
-        userService.preference(kakaoId, userPreferenceDto);
+//        userPreferenceService.preference(kakaoId, userPreferenceDto);
 
-        return new ResponseEntity<>(SUCCESS , HttpStatus.OK);
+        Map<String, Map<String, String>> recommend = userPreferenceService.recommendUserDrink(userPreferenceDto);
+
+        return new ResponseEntity<>(recommend, HttpStatus.OK);
     }
 
 }
