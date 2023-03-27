@@ -65,7 +65,11 @@ export const DrinkDetailTypeFirst = {
 }
 
 export type ReviewType = {
-    [index : string] : string | number
+    [index : string] : string | number,
+    userName: string,
+    userImage: string,
+    rate : number,
+    content: string
 }
 
 export type tasteType = {

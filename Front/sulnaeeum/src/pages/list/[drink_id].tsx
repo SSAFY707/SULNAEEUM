@@ -23,12 +23,12 @@ export default function Detail(props: {drinkId : number}) {
     drinkLevel: 16,
     drinkType: 1,
     drinkReviews: [
-      {id: '설히짱', userImage: '/images/kakao.png', rate: 5, content: '키키키키키키좋아키키키키키좋아키키키키키좋아키키키키키좋아키키키키키좋아키키키키키좋아키키키키키좋아키키키키키좋아키키키키키좋아키키키키키좋아키키키키키좋아키키키키키좋아키키키키키좋아키키키키키좋아키키키키키좋아키키키키키좋아키키키키키좋아키키키키키좋아키키키키키좋아키키키키키좋아키키키키키좋아키키키키키좋아키키키키'},
-      {id: '미히짱', userImage: '/images/kakao.png', rate: 2, content: '맛있어여'},
-      {id: '하늘짱', userImage: '/images/kakao.png', rate: 3, content: '뀨우ㅜ우우우우ㅜ우ㅜㅅ'},
-      {id: '나현짱', userImage: '/images/kakao.png', rate: 5, content: '우와앙아ㅏ앙'},
-      {id: '성훙짱', userImage: '/images/kakao.png', rate: 5, content: '우와앙아ㅏ앙'},
-      {id: '웡규짱', userImage: '/images/kakao.png', rate: 5, content: '우와앙아ㅏ앙'},
+      {userName: '설히짱', userImage: '/images/kakao.png', rate: 5, content: '키키키키키키좋아키키키키키좋아키키키키키좋아키키키키키좋아키키키키키좋아키키키키키좋아키키키키키좋아키키키키키좋아키키키키키좋아키키키키키좋아키키키키키좋아키키키키키좋아키키키키키좋아키키키키키좋아키키키키키좋아키키키키키좋아키키키키키좋아키키키키키좋아키키키키키좋아키키키키키좋아키키키키키좋아키키키키키좋아키키키키'},
+      {userName: '미히짱', userImage: '/images/kakao.png', rate: 2, content: '맛있어여'},
+      {userName: '하늘짱', userImage: '/images/kakao.png', rate: 3, content: '뀨우ㅜ우우우우ㅜ우ㅜㅅ'},
+      {userName: '나현짱', userImage: '/images/kakao.png', rate: 5, content: '우와앙아ㅏ앙'},
+      {userName: '성훙짱', userImage: '/images/kakao.png', rate: 5, content: '우와앙아ㅏ앙'},
+      {userName: '웡규짱', userImage: '/images/kakao.png', rate: 5, content: '우와앙아ㅏ앙'},
     ]
   }
   const [drink, setDrink] = useState<DrinkDetailType>(data)

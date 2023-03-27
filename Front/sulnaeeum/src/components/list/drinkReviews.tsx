@@ -13,7 +13,7 @@ export default function DrinkReviews(props: {reviews: ReviewType[]}) {
   return (
     <div className={'flex flex-col justify-center w-7/12 h-4/5'}>
       <Modal w='700px' h='800px' modalOpen={modalOpen} open={open}>
-        < AllReview modalOpen={modalOpen} />
+        < AllReview reviews={reviews} modalOpen={modalOpen} />
       </ Modal>
       <div onClick={modalOpen} className={'flex justify-end h-[20px] underline decoration-1 mb-4 mr-4 cursor-pointer hover:text-[18px]'}>더보기</div>
       <div className={'flex h-[300px]'}>
