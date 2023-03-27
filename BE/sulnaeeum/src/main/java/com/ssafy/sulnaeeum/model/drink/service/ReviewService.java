@@ -3,7 +3,6 @@ package com.ssafy.sulnaeeum.model.drink.service;
 import com.ssafy.sulnaeeum.exception.CustomException;
 import com.ssafy.sulnaeeum.exception.CustomExceptionList;
 import com.ssafy.sulnaeeum.model.drink.dto.DrinkDto;
-import com.ssafy.sulnaeeum.model.drink.dto.ReviewDto;
 import com.ssafy.sulnaeeum.model.drink.dto.ReviewRequestDto;
 import com.ssafy.sulnaeeum.model.drink.dto.ReviewResponseDto;
 import com.ssafy.sulnaeeum.model.drink.entity.Drink;
@@ -62,6 +61,7 @@ public class ReviewService {
         if(review.isPresent()) {
             result = "update";
             updateAvg(1, drinkId, drinkDto.getReviewCnt(), drinkDto.getAvgScore(), resultReview.getScore(), review.get().getScore());
+            resultReview.setReviewId(review.get().getReviewId());
         } else {
             result = "insert";
             updateAvg(0, drinkId, drinkDto.getReviewCnt(), drinkDto.getAvgScore(), resultReview.getScore(), 0);
@@ -115,14 +115,11 @@ public class ReviewService {
     public void updateAvg(int request, Long drinkId, int cnt, double avgScore, int myScore, int preMyScore) {
         double result = 0;
         if(request == 0) { // 리뷰 작성
-            System.out.println("cnt : " + cnt + " avgScore : " + avgScore + " myScore : " + myScore + " preMyScore : " + preMyScore);
-            System.out.println("[1] " + cnt * avgScore);
-            System.out.println("[2] " + (cnt * avgScore / (cnt + 1)));
             result = (cnt * avgScore + myScore) / (cnt + 1);
         } else if(request == 1) { // 리뷰 수정
             result = (cnt * avgScore - preMyScore + myScore) / cnt;
         } else { // 리뷰 삭제
-            result = (cnt * avgScore - preMyScore) / (cnt - 1);
+            result = (cnt * avgScore - preMyScore) / cnt;
         }
 
         Optional<Drink> drink = drinkRepo.findByDrinkId(drinkId);
@@ -131,7 +128,6 @@ public class ReviewService {
         }
 
         DrinkDto drinkDto = drink.get().toDto();
-        System.out.println("@@@@@@@@@@@@@ This is result : " + result); // insert 시 3.0으로 잘 나왔음
         drinkDto.setAvgScore(result);
         drinkRepo.save(drinkDto.toEntity());
     }
