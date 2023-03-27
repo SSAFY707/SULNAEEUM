@@ -88,7 +88,7 @@ public class UserController {
 
         String kakaoId = SecurityContextHolder.getContext().getAuthentication().getName();
 
-//        userPreferenceService.preference(kakaoId, userPreferenceDto);
+        userPreferenceService.preference(kakaoId, userPreferenceDto);
 
         Map<String, Map<String, String>> recommend = userPreferenceService.recommendUserDrink(userPreferenceDto);
 

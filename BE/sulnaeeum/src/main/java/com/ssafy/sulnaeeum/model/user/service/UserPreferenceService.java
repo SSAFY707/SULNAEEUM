@@ -33,6 +33,9 @@ public class UserPreferenceService {
     private final UserPreferenceRepo userPreferenceRepo;
     private final UserRepo userRepository;
 
+    /***
+     * 회원 가입 시 회원 취향을 저장
+     ***/
     @Transactional
     public void preference(String kakaoId, UserPreferenceDto userPreferenceDto) {
 
@@ -45,6 +48,9 @@ public class UserPreferenceService {
         user.updateFinish(true);
     }
 
+    /***
+     * 회원 취향을 활용하여 Flask 에게 컨텐츠 기반 추천 API 요청
+     ***/
     @Transactional
     public Map<String, Map<String, String>> recommendUserDrink(UserPreferenceDto userPreferenceDto) {
 
@@ -65,15 +71,15 @@ public class UserPreferenceService {
         String dish = userPreferenceDto.getDish();
         int[] dish_arr = null;
 
-        if(dish == "전/무침"){
+        if(dish.equals("전/무침")){
             dish_arr = new int[] {3, 0, 0, 0, 0, 0};
-        }else if(dish == "육류"){
+        }else if(dish.equals("육류")){
             dish_arr = new int[] {0, 3, 0, 0, 0, 0};
-        }else if(dish == "해산물"){
+        }else if(dish.equals("해산물")){
             dish_arr = new int[] {0, 0, 3, 0, 0, 0};
-        }else if(dish == "탕/전골"){
+        }else if(dish.equals("탕/전골")){
             dish_arr = new int[] {0, 0, 0, 3, 0, 0};
-        }else if(dish == "양식"){
+        }else if(dish.equals("양식")){
             dish_arr = new int[] {0, 0, 0, 0, 3, 0};
         }else{
             dish_arr = new int[] {0, 0, 0, 0, 0, 3};
