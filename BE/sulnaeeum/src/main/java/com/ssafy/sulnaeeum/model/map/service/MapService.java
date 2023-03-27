@@ -2,10 +2,12 @@ package com.ssafy.sulnaeeum.model.map.service;
 
 import com.ssafy.sulnaeeum.exception.CustomException;
 import com.ssafy.sulnaeeum.exception.CustomExceptionList;
+import com.ssafy.sulnaeeum.model.drink.repo.DrinkTypeRepo;
 import com.ssafy.sulnaeeum.model.map.dto.*;
 import com.ssafy.sulnaeeum.model.map.entity.Brewery;
 import com.ssafy.sulnaeeum.model.map.entity.Map;
 import com.ssafy.sulnaeeum.model.map.entity.Program;
+import com.ssafy.sulnaeeum.model.map.repo.BreweryDrinkTypeRepo;
 import com.ssafy.sulnaeeum.model.map.repo.BreweryRepo;
 import com.ssafy.sulnaeeum.model.map.repo.MapRepo;
 import com.ssafy.sulnaeeum.model.map.repo.ProgramRepo;
@@ -15,6 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -28,6 +31,12 @@ public class MapService {
 
     @Autowired
     ProgramRepo programRepo;
+
+    @Autowired
+    BreweryDrinkTypeRepo breweryDrinkTypeRepo;
+
+    @Autowired
+    DrinkTypeRepo drinkTypeRepo;
 
     // 모든 양조장 및 체험 프로그램의 정보를 가공하여 제공
     @Transactional
@@ -63,6 +72,22 @@ public class MapService {
         List<BreweryDto> breweryDtoList = breweryList.stream().map(BreweryDto::new).collect(Collectors.toList());
         if(breweryDtoList.isEmpty()) {
             throw new CustomException(CustomExceptionList.ROW_NOT_FOUND);
+        }
+
+        // 양조장별 주종 찾아서 추가
+        for(BreweryDto breweryDto: breweryDtoList) {
+            Long breweryId = breweryDto.getBreweryId();
+            List<Integer> drinkTypeIdList = breweryDrinkTypeRepo.findByBreweryId(breweryId);
+
+            List<String> drinkTypeList = new ArrayList<>();
+            for(int drinkTypeId: drinkTypeIdList) {
+                Optional<String> drinkTypeName = drinkTypeRepo.findByDrinkTypeId((long)drinkTypeId);
+                if(drinkTypeName.isEmpty()) {
+                    throw new CustomException(CustomExceptionList.ROW_NOT_FOUND);
+                }
+                drinkTypeList.add(drinkTypeName.get());
+            }
+            breweryDto.setDrinkTypeList(drinkTypeList);
         }
 
         return breweryDtoList;
