@@ -55,6 +55,17 @@ public class DrinkController {
         return new ResponseEntity<>(likeDrinkService.switchLikeDrink(drinkId, kakaoId), HttpStatus.OK);
     }
 
+//    /***
+//     * [ 전통주 클리어 ]
+//     * - 기존에 클리어 되어있지 않을 경우, DB에 클리어한 내용 저장 (클리어한 회원, 전통주)
+//     * - 기존에 클리어되어있을 경우, DB에서 기존에 찜 했던 내용 삭제
+//     ***/
+//    @Operation(summary = "전통주 클리어 - 회원", description = "전통주를 클리어하거나 클리어 취소")
+//    @PostMapping("/clear/{drinkId}")
+//    public ResponseEntity<String> switchClearDrinkForUser(@PathVariable Long drinkId) {
+//        return new ResponseEntity<>()
+//    }
+
     // =================================================================================================================
     // ----------------------------------------------   [ 비회원 ]   ----------------------------------------------------
     // =================================================================================================================
