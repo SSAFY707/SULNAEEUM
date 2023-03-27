@@ -1,4 +1,3 @@
-import { url } from 'inspector'
 import { toast } from 'react-toastify'
 
 export const toastError = (content: string, icon : string) => {

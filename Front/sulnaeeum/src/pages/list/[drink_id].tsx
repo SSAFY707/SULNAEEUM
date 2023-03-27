@@ -5,10 +5,13 @@ import React, { useState, useEffect } from 'react'
 import DrinkRelation from '@/components/list/drinkRelation'
 import DrinkReviews from '@/components/list/drinkReviews'
 import DrinkJumak from '@/components/list/drinkJumak'
+import { BsArrowLeftCircle } from 'react-icons/bs'
+import { useRouter } from 'next/router'
 
 export default function Detail(props: {drinkId : number}) {
   const { drinkId } = props
-  
+  const router = useRouter()
+
   const data : DrinkDetailType = {
     drinkId: 0,
     drinkName: '단홍',
@@ -41,17 +44,14 @@ export default function Detail(props: {drinkId : number}) {
   // useEffect(() => {
   //   getDrinkInfo()
   // }, [])
-  // const [open, setOpen] = useState<boolean>(false)
-  // const modalOpen = () => {
-  //   setOpen(!open) 
-  // };
 
   
   return (
     <>
       <div className={'bg-[url("/images/pattern1.png")] bg-no-repeat bg-[left_-17rem_bottom_20rem] h-[1500px]'}>
         <div className={'flex pt-[100px] justify-center'}>
-          <DrinkExplain drink={drink} />  
+          <BsArrowLeftCircle onClick={()=>{router.back()}} className={'text-[34px] text-[#655443] cursor-pointer mt-2 mr-4'} />
+          <DrinkExplain drink={drink} /> 
         </div>
         <div className={'flex mt-4 p-10 justify-center h-[500px]'}>
           <DrinkRelation />
