@@ -1,6 +1,5 @@
 import React from 'react'
 import style from '@/pages/map/map.module.css'
-import { useState } from 'react';
 
 
 export default function Brewery(props: any) {
@@ -10,14 +9,15 @@ export default function Brewery(props: any) {
   return (<>
     <div className='w-[584px] scroll h-[680px] overflow-y-scroll'>
 
-      {res[mode - 1].list.brewery.map((v: any, index: number) => {
+
+      {res.length > 0 && res[mode - 1].listDto.breweryDtoList.map((v: any, index: number) => {
         return <>
-          <a href={v.brewery_url} key={index} className={`${style.item_box}`}>
+          <a href={v.breweryUrl} key={index} className={`${style.item_box}`} target='_blank'>
             <div className={`${style.item_up}`}>
-              <img src='/images/map/items/04.png' alt='이미지' className='w-[140px] h-[140px] object-cover'></img>
+              <img src={v.breweryImg} alt='이미지' className='w-[140px] h-[140px] object-cover'></img>
               <div className={`${style.text_area}`}>
                 <div className='flex w-full h-[50px] justify-between items-center'>
-                  <h3 className='text-[26px] font-bold'>{v.brewery_name}</h3>
+                  <h3 className='text-[26px] font-bold'>{v.breweryName}</h3>
                 </div>
                 <div className='w-full h-[110px]'>
                   <div className='flex w-full h-[110px]'>
@@ -27,9 +27,9 @@ export default function Brewery(props: any) {
                       <p>주종</p>
                     </div>
                     <div className={`${style.text_right}`}>
-                      <p>{v.brewery_location}</p>
+                      <p>{v.breweryLocation}</p>
                       <p>{v.contact}</p>
-                      <div className='flex '>{v.drink_type.map((i: any, index: number) => {
+                      <div className='flex '>{v.drinkTypeList.map((i: any, index: number) => {
                         return <>
                           <div key={index} className='cursor-pointer hover:bg-gray-300 py-1 px-4 mr-[14px] rounded-[20px] bg-gray-200 border'>#{i}</div>
                         </>

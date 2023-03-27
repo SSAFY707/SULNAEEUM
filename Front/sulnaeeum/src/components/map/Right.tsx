@@ -1,6 +1,5 @@
 import React from 'react'
 import style from '@/pages/map/map.module.css'
-import { useState } from 'react';
 import Brewery from './Brewery';
 import Festival from './Festival';
 import Program from './Program';
@@ -12,11 +11,10 @@ import Program from './Program';
 export default function Right(props: any) {
 
   const { tab, setTab, res, mode, fest } = props
+  // console.log('==========================')
+  // console.log(data)
+  // console.log('==========================')
 
-  console.log('선택된 map_id: ')
-  console.log(mode)
-  console.log('fest : ')
-  console.log(fest)
   let tabContents = <Brewery mode={mode} res={res} tab={tab}></Brewery>
 
   if (tab === '양조장') {
@@ -29,7 +27,6 @@ export default function Right(props: any) {
 
 
   return (<>
-
 
     <div className={`${style.right_box} ${style.layout}`} id="right_box">
       <div className='flex justify-between h-[54px] mb-[14px]'>
