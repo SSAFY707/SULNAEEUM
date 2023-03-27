@@ -7,6 +7,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
+import java.util.List;
+
 @Schema(description = "양조장 정보")
 @Data
 @SuperBuilder
@@ -34,6 +36,9 @@ public class BreweryDto {
 
     @Schema(description = "양조장 이미지")
     private String breweryImg;
+
+    @Schema(description = "양조장별 주종")
+    private List<String> drinkTypeList;
 
     // 생성자 (List<Entity> -> List<DTO> 변환을 위함)
     public BreweryDto(Brewery brewery) {
