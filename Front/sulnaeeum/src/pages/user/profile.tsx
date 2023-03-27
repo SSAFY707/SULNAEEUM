@@ -1,17 +1,36 @@
 import React from "react";
+import Link from "next/link";
 import Head from "next/head";
 import Image from "next/image";
 import { Divider } from "@chakra-ui/react";
-import { Tabs, TabList, TabPanels, Tab, TabPanel } from "@chakra-ui/react";
+import UserTabBtn from '@/components/profile/userTabBtn';
+import UserTextMining from "@/components/profile/userTextMining";
+
 export default function profile() {
-  const userName: string = "";
-  const userEmail: string = "";
+
+  // API 통신해서 사용자 가져오기 => Slice에서 가져오면 될 거 같음..?
+  interface userInfo {
+    name: string;
+    
+  }
+
+
   const menuName: string[] = [
     "내가 클리어 한 전통주",
     "내가 찜 한 전통주",
     "내가 찜 한 전통주 가게",
   ];
-  const menuData: number[] = [100, 2000, 10];
+  // API 통신해서 menuData에 담아두기 => Slice에서 가져오면 될 거 같음..?
+  const menuData: string[] = [
+    "100병",
+    "100병",
+    "100곳"
+  ]
+  const tabInfo = {
+    menuName,
+    menuData,
+  }
+
   return (
     <>
       <Head>
@@ -59,69 +78,20 @@ export default function profile() {
             <div className="absolute top-[15px] text-[25px] font-preEB w-[840px] h-[440px] left-[15px] bg-red-300">
               나의 맞춤형 키워드
               <div className="absolute w-[840px]">
-                <Tabs>
-                  <TabList>
-                    <Tab>One</Tab>
-                    <Tab>Two</Tab>
-                    <Tab>Three</Tab>
-                  </TabList>
-
-                  <TabPanels>
-                    <TabPanel>
-                      <div className="flex justify-center">
-                        <Image
-                          src="/images/profile/sample_text_mining_1.PNG"
-                          alt=""
-                          width={700}
-                          height={700}
-                        ></Image>
-                      </div>
-                    </TabPanel>
-                    <TabPanel>
-                      <p>two!</p>
-                    </TabPanel>
-                    <TabPanel>
-                      <p>three!</p>
-                    </TabPanel>
-                  </TabPanels>
-                </Tabs>
+                <UserTextMining ></UserTextMining>
               </div>
             </div>
           </div>
           {/* 사용자 찜 정보 */}
           <div className="absolute w-[870px] h-[215px] rounded-lg left-[690px] top-[650px] bg-orange-300 flex justify-between ">
-            <div className="w-[278px] h-[215px] rounded-lg mb-3 bg-yellow-200 opacity-60 flex flex-col">
-              <Image
-                src="/images/profile/profile_image_1.PNG"
-                alt=""
-                width={50}
-                height={50}
-              ></Image>
-              <div>내가 찜한 전통주 가게</div>
-              <div>1000곳</div>
-            </div>
-            <div className="w-[278px] h-[215px] rounded-lg mb-3 bg-yellow-200 opacity-60 flex flex-col">
-              <Image
-                src="/images/profile/profile_image_1.PNG"
-                alt=""
-                width={50}
-                height={50}
-              ></Image>
-              <div>내가 찜한 전통주 가게</div>
-              <div>1000곳</div>
-            </div>
-            <div className="w-[278px] h-[215px] rounded-lg  bg-yellow-200 opacity-60 flex flex-col">
-              <Image
-                src="/images/profile/profile_image_1.PNG"
-                alt=""
-                width={50}
-                height={50}
-              ></Image>
-              <div>내가 찜한 전통주 가게</div>
-              <div>1000곳</div>
-            </div>
+            {menuName.map((menuName, idx) => {
+              return (
+                <Link href={`/user/detail/${idx}?name=${idx}`}>
+                  <UserTabBtn tabInfo={tabInfo} id={idx + 1}></UserTabBtn>
+                </Link>
+              )
+            })}
           </div>
-          {/* 자세히 알아보기 */}
         </div>
       </div>
     </>
