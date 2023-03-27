@@ -9,7 +9,7 @@ import com.ssafy.sulnaeeum.model.drink.entity.Drink;
 import com.ssafy.sulnaeeum.model.drink.entity.Review;
 import com.ssafy.sulnaeeum.model.drink.repo.DrinkRepo;
 import com.ssafy.sulnaeeum.model.drink.repo.ReviewRepo;
-import com.ssafy.sulnaeeum.model.mypage.repo.MyDrinkRepo;
+import com.ssafy.sulnaeeum.model.drink.repo.MyDrinkRepo;
 import com.ssafy.sulnaeeum.model.user.entity.User;
 import com.ssafy.sulnaeeum.model.user.repo.UserRepo;
 import com.ssafy.sulnaeeum.model.user.service.UserService;

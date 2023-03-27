@@ -1,4 +1,4 @@
-package com.ssafy.sulnaeeum.model.mypage.entity;
+package com.ssafy.sulnaeeum.model.drink.entity;
 
 import com.ssafy.sulnaeeum.model.drink.entity.Drink;
 import com.ssafy.sulnaeeum.model.user.entity.User;

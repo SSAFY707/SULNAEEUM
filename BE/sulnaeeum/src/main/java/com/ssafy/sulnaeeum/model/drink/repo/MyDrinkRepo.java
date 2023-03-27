@@ -1,7 +1,6 @@
-package com.ssafy.sulnaeeum.model.mypage.repo;
+package com.ssafy.sulnaeeum.model.drink.repo;
 
-import com.ssafy.sulnaeeum.model.mypage.entity.LikeDrink;
-import com.ssafy.sulnaeeum.model.mypage.entity.MyDrink;
+import com.ssafy.sulnaeeum.model.drink.entity.MyDrink;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;

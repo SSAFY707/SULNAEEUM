@@ -5,7 +5,7 @@ import com.ssafy.sulnaeeum.model.drink.dto.ReviewRequestDto;
 import com.ssafy.sulnaeeum.model.drink.dto.ReviewResponseDto;
 import com.ssafy.sulnaeeum.model.drink.service.DrinkService;
 import com.ssafy.sulnaeeum.model.drink.service.ReviewService;
-import com.ssafy.sulnaeeum.model.mypage.service.LikeDrinkService;
+import com.ssafy.sulnaeeum.model.drink.service.LikeDrinkService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;

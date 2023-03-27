@@ -1,15 +1,14 @@
-package com.ssafy.sulnaeeum.model.mypage.service;
+package com.ssafy.sulnaeeum.model.drink.service;
 
 import com.ssafy.sulnaeeum.exception.CustomException;
 import com.ssafy.sulnaeeum.exception.CustomExceptionList;
 import com.ssafy.sulnaeeum.model.drink.dto.DrinkDto;
 import com.ssafy.sulnaeeum.model.drink.entity.Drink;
 import com.ssafy.sulnaeeum.model.drink.repo.DrinkRepo;
-import com.ssafy.sulnaeeum.model.drink.service.DrinkService;
-import com.ssafy.sulnaeeum.model.mypage.dto.LikeDrinkDto;
-import com.ssafy.sulnaeeum.model.mypage.dto.LikeDrinkListDto;
-import com.ssafy.sulnaeeum.model.mypage.entity.LikeDrink;
-import com.ssafy.sulnaeeum.model.mypage.repo.LikeDrinkRepo;
+import com.ssafy.sulnaeeum.model.drink.dto.LikeDrinkDto;
+import com.ssafy.sulnaeeum.model.drink.dto.LikeDrinkListDto;
+import com.ssafy.sulnaeeum.model.drink.entity.LikeDrink;
+import com.ssafy.sulnaeeum.model.drink.repo.LikeDrinkRepo;
 import com.ssafy.sulnaeeum.model.user.entity.User;
 import com.ssafy.sulnaeeum.model.user.repo.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
