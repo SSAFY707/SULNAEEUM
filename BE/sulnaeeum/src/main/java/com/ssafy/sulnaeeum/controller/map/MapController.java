@@ -27,7 +27,7 @@ public class MapController {
      * [지도 정보 조회]
      * - 지역별 양조장, 체험 프로그램 정보 가공
      ***/
-    @Operation(summary = "프로필 조회", description = "프로필 조회")
+    @Operation(summary = "전통주 지도 조회", description = "전통주 지도 조회")
     @GetMapping("/n")
     public ResponseEntity<List<MapInfoDto>> getMapInfo() {
         return new ResponseEntity<>(mapService.getMapInfo(), HttpStatus.OK);
