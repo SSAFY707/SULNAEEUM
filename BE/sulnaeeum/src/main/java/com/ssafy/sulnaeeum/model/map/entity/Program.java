@@ -1,5 +1,6 @@
 package com.ssafy.sulnaeeum.model.map.entity;
 
+import com.ssafy.sulnaeeum.model.map.dto.ProgramDto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -42,4 +43,18 @@ public class Program {
 
     @Column(nullable = false)
     private String programImg; // 체험 프로그램 이미지
+
+    // Entity -> DTO 변환
+    public ProgramDto toDto() {
+        return ProgramDto.builder()
+                .programId(this.programId)
+                .mapDto(this.map.toDto())
+                .programName(this.programName)
+                .programLocation(this.programLocation)
+                .alwaysVisit(this.alwaysVisit)
+                .reserveVisit(this.reserveVisit)
+                .programUrl(this.programUrl)
+                .content(this.content)
+                .programImg(this.programImg).build();
+    }
 }
