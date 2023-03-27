@@ -12,9 +12,8 @@ export const DrinkExplain = (props: {drink : DrinkDetailType}) => {
     };
   return (
     <div className={'w-7/12'}>
-        <Modal w={500} h={600} open={open} modalOpen={modalOpen}>
-          <DrinkClear modalOpen={modalOpen}/>
-          
+        <Modal w='500px' h='auto' open={open} modalOpen={modalOpen}>
+          <DrinkClear drinkName={drink.drinkName} modalOpen={modalOpen}/>
         </Modal>
         <div className={'flex justify-between items-center pl-8 pr-4'}>
             <div className={'flex items-end text-[16px] font-preEL'}>
