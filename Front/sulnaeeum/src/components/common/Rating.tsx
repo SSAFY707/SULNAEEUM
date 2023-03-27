@@ -31,3 +31,25 @@ export const StarRate = (props: {rate: number, size: string}) => {
         </div>
     )
 }
+
+export const DetailRate = (props: {rate: number, size: string}) => {
+    const {rate, size} = props
+    return (
+        <div className={'relative max-w-max'} style={{fontSize: size}}>
+            <div className={'text-yellow-300 absolute z-[1] flex top-0 left-0 overflow-hidden'} style={{width: `${rate}%`}}>
+                <div>★</div>
+                <div>★</div>
+                <div>★</div>
+                <div>★</div>
+                <div>★</div>
+            </div>
+            <div className={'flex z-[0] p-0 text-gray-300'}>
+                <div>★</div>
+                <div>★</div>
+                <div>★</div>
+                <div>★</div>
+                <div>★</div>
+            </div>
+        </div>
+    )
+}

@@ -5,8 +5,8 @@ import React, { useState } from 'react'
 
 export default function DrinkClear(props: {drinkName: string, modalOpen}) {
     const {drinkName, modalOpen} = props
-    const [rate, setRate] = useState()
-    const [content, setContent] = useState<string>('')
+    const [rate, setRate] = useState<number>()
+    const [content, setContent] = useState<string | null>(null)
 
     const drinkTaste = [
         {idx: 'tasteFlavor', value: '향', q1: '향이 약해요', q2: '향이 적당해요', q3: '향이 강해요'},
@@ -29,19 +29,41 @@ export default function DrinkClear(props: {drinkName: string, modalOpen}) {
     const [taste, setTaste] = useState<tasteType>(tasteInit)
 
     const clickRadio = (e : any) => {
-        setRate(e.target.value)
+        setRate(parseInt(e.target.value))
     }
 
     const clickTasteRadio = (e: any) => {
         const newTaste = {...taste}
         const idx = e.target.id.slice(0,-1)
         newTaste[idx] = parseInt(e.target.value)
-        console.log(typeof(parseInt(e.target.value)))
         setTaste(newTaste)
     }
 
     const submit = () => {
-        toastOK('별점을 등록해 주세요', "📌")
+        if(!rate){
+            toastError('별점을 등록해 주세요', "📌")
+            return
+        }
+        const arr = ['tasteFlavor', 'tasteSweet', 'tasteSour', 'tasteThroat', 'tasteBody', 'tasteRefresh']
+        let flag = true
+        arr.forEach(e => {
+            if(taste[e] == 2) {
+                flag = false
+                return
+            }
+        });
+        if(!flag){
+            toastError('상세 항목을 모두 선택해주세요', "📌")
+            return
+        }
+        const data = {
+            taste: taste,
+            rate : rate,
+            content : content,
+        }
+        console.log(data)
+        toastOK('리뷰가 등록되었습니다.', '✨')
+        modalOpen()
     }
   return (
     <div className={'flex flex-col items-center w-full h-full p-4'}>

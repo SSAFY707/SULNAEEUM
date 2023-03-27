@@ -7,14 +7,22 @@ import { Map, MapMarker } from 'react-kakao-maps-sdk'
 
 
 export default function DrinkJumak(props: {drink: DrinkDetailType}) {
+    type jumakType = {
+        name: string,
+        num: string,
+        address: string,
+    }
     type markerType = {
         name: string,
         latlng : {
             lat : number,
             lng : number
-        }
+        },
+        address: string,
+        num : string
     }
     const {drink} = props
+
     const jumaks = [
         {name: '피곤해죽어식당', num: '010-1234-5678', address: '서울 동대문구 왕산로 91'},
         {name: '쉬폰케익가게', num: '010-1111-2222', address: '서울 동대문구 천호대로27길 35'},
@@ -26,7 +34,7 @@ export default function DrinkJumak(props: {drink: DrinkDetailType}) {
     const [center, setCenter] = useState({lat: 33.450701, lng: 126.570667})
     const [array, setArray] = useState<markerType[]>([])
 
-    const add_to_latlng = (name: string, add: string) => {
+    const add_to_latlng = async (jumak : jumakType) => {
         const geocoder = new kakao.maps.services.Geocoder();
         let callback = (res, status) => {
             if (status === kakao.maps.services.Status.OK) {
@@ -35,16 +43,18 @@ export default function DrinkJumak(props: {drink: DrinkDetailType}) {
                     lng: res[0].x
                 }
                 const new_array = array
-                array.push({name : name, latlng: latlng})
+                array.push({name : jumak.name, latlng: latlng, address: jumak.address, num: jumak.num})
                 setArray([...new_array])
+                return latlng;
             }
         }
-        geocoder.addressSearch(add, callback)
+        geocoder.addressSearch(jumak.address, callback)
     }
 
     useEffect(()=>{
         for(let i=0; i<jumaks.length; i++){
-            add_to_latlng(jumaks[i].name, jumaks[i].address)
+            const data = add_to_latlng(jumaks[i])
+            console.log(data)
         }
     },[])
     useEffect(()=>{
@@ -80,9 +90,9 @@ export default function DrinkJumak(props: {drink: DrinkDetailType}) {
                 </Map>
             </div>
             <div className={'w-1/2 ml-4 h-[500px] overflow-y-scroll pr-4 scroll'}>
-                {jumaks.map((v, i)=>{
+                {array.map((v, i)=>{
                     return (
-                        <div onClick={()=>setCenter(array[i].latlng)} key={i} className={'w-full h-[140px] bg-zinc-100/70 rounded-lg p-5 mb-4 text-[#393939] hover:bg-zinc-100 cursor-pointer'}>
+                        <div onClick={()=>setCenter(v.latlng)} key={i} className={'w-full h-[140px] bg-zinc-100/70 rounded-lg p-5 mb-4 text-[#393939] hover:bg-zinc-100 cursor-pointer'}>
                             <div className={'flex justify-between'}>
                                 <div className={'font-preM text-[24px] mb-2'}>{v.name}</div>
                                 <FaRegBookmark className={'text-[20px] text-[#655442] cursor-pointer'}/>
