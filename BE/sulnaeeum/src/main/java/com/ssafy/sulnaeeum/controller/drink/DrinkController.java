@@ -1,7 +1,6 @@
 package com.ssafy.sulnaeeum.controller.drink;
 
 import com.ssafy.sulnaeeum.model.drink.dto.DrinkInfoDto;
-import com.ssafy.sulnaeeum.model.drink.dto.ReviewDto;
 import com.ssafy.sulnaeeum.model.drink.dto.ReviewRequestDto;
 import com.ssafy.sulnaeeum.model.drink.dto.ReviewResponseDto;
 import com.ssafy.sulnaeeum.model.drink.service.DrinkService;

@@ -48,19 +48,19 @@ public class ReviewDto {
     @Schema(description = "내용")
     private String content;
 
-    // 생성자 (List<Entity> -> List<DTO> 변환을 위함)
-    public ReviewDto(Review review) {
-        this.reviewId = review.getReviewId();
-        this.userDto = review.getUser().toDto();
-        this.drinkDto = review.getDrink().toDto();
-        this.sweetScore = review.getSweetScore();
-        this.sourScore = review.getSourScore();
-        this.flavorScore = review.getFlavorScore();
-        this.throatScore = review.getThroatScore();
-        this.bodyScore = review.getBodyScore();
-        this.refreshScore = review.getRefreshScore();
-        this.content = review.getContent();
-    }
+//    // 생성자 (List<Entity> -> List<DTO> 변환을 위함)
+//    public ReviewDto(Review review) {
+//        this.reviewId = review.getReviewId();
+//        this.userDto = review.getUser().toDto();
+//        this.drinkDto = review.getDrink().toDto();
+//        this.sweetScore = review.getSweetScore();
+//        this.sourScore = review.getSourScore();
+//        this.flavorScore = review.getFlavorScore();
+//        this.throatScore = review.getThroatScore();
+//        this.bodyScore = review.getBodyScore();
+//        this.refreshScore = review.getRefreshScore();
+//        this.content = review.getContent();
+//    }
 
     // DTO -> Entity 변환
     public Review toEntity() {
