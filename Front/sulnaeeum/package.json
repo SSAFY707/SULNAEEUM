@@ -26,6 +26,7 @@
     "react-dom": "18.2.0",
     "react-icons": "^4.8.0",
     "react-kakao-maps-sdk": "^1.1.6",
+    "react-toastify": "^9.1.2",
     "recharts": "^2.5.0",
     "redux": "^4.2.1",
     "tailwind-scrollbar-hide": "^1.1.7",

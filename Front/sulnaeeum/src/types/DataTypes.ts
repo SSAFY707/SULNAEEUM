@@ -67,3 +67,13 @@ export const DrinkDetailTypeFirst = {
 export type ReviewType = {
     [index : string] : string | number
 }
+
+export type tasteType = {
+    [index: string] : number,
+    tasteFlavor: number,
+    tasteSweet: number,
+    tasteSour: number,
+    tasteThroat: number,
+    tasteBody: number,
+    tasteRefresh: number,
+}

@@ -3,6 +3,8 @@ import type { AppProps } from "next/app";
 import Head from "next/head";
 import NavBar from "../components/NavBar";
 import { ChakraProvider } from "@chakra-ui/react";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 declare global {
   interface Window {
@@ -19,6 +21,7 @@ export default function App({ Component, pageProps }: AppProps) {
       <ChakraProvider>
         <NavBar />
         <Component {...pageProps} />
+        <ToastContainer />
       </ChakraProvider>
     </>
   );

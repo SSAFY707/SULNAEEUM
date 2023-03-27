@@ -1,4 +1,6 @@
 import { Rating } from '@/components/common/Rating'
+import { toastError, toastOK } from '@/components/common/toast'
+import { tasteType } from '@/types/DataTypes'
 import React, { useState } from 'react'
 
 export default function DrinkClear(props: {drinkName: string, modalOpen}) {
@@ -7,19 +9,39 @@ export default function DrinkClear(props: {drinkName: string, modalOpen}) {
     const [content, setContent] = useState<string>('')
 
     const drinkTaste = [
-        {value: '향', q1: '향이 약해요', q2: '향이 적당해요', q3: '향이 강해요'},
-        {value: '단맛', q1: '달지 않아요', q2: '적당히 달아요', q3: '아주 달아요'},
-        {value: '신맛', q1: '시지 않아요', q2: '적당히 셔요', q3: '아주 셔요'},
-        {value: '목넘김', q1: '부드럽지 않아요', q2: '보통이에요', q3: '부드러워요'},
-        {value: '바디감', q1: '가벼워요', q2: '보통이에요', q3: '무거워요'},
-        {value: '청량함', q1: '탄산이 없어요', q2: '보통이에요', q3: '탄산이 강해요'},
+        {idx: 'tasteFlavor', value: '향', q1: '향이 약해요', q2: '향이 적당해요', q3: '향이 강해요'},
+        {idx: 'tasteSweet', value: '단맛', q1: '달지 않아요', q2: '적당히 달아요', q3: '아주 달아요'},
+        {idx: 'tasteSour', value: '신맛', q1: '시지 않아요', q2: '적당히 셔요', q3: '아주 셔요'},
+        {idx: 'tasteThroat', value: '목넘김', q1: '부드럽지 않아요', q2: '보통이에요', q3: '부드러워요'},
+        {idx: 'tasteBody', value: '바디감', q1: '가벼워요', q2: '보통이에요', q3: '무거워요'},
+        {idx: 'tasteRefresh', value: '청량함', q1: '탄산이 없어요', q2: '보통이에요', q3: '탄산이 강해요'},
     ]
+
+    const tasteInit : tasteType = {
+        tasteFlavor: 2,
+        tasteSweet: 2,
+        tasteSour: 2,
+        tasteThroat: 2,
+        tasteBody: 2,
+        tasteRefresh: 2,
+    }
+
+    const [taste, setTaste] = useState<tasteType>(tasteInit)
 
     const clickRadio = (e : any) => {
         setRate(e.target.value)
     }
+
+    const clickTasteRadio = (e: any) => {
+        const newTaste = {...taste}
+        const idx = e.target.id.slice(0,-1)
+        newTaste[idx] = parseInt(e.target.value)
+        console.log(typeof(parseInt(e.target.value)))
+        setTaste(newTaste)
+    }
+
     const submit = () => {
-        alert(`${rate} ${content}`)
+        toastOK('별점을 등록해 주세요', "📌")
     }
   return (
     <div className={'flex flex-col items-center w-full h-full p-4'}>
@@ -38,12 +60,12 @@ export default function DrinkClear(props: {drinkName: string, modalOpen}) {
                         <>
                             <div key={i} className={'font-preM mt-4'}>{t.value}에 대해 평가해주세요</div>
                             <div>
-                                <input className={'mx-1 checked:text-zinc-700'} type="radio" id={`${t.value}1`} name={t.value} value={-1}/>
-                                <label className={'mx-1'} htmlFor={`${t.value}1`}>{t.q1}</label>
-                                <input className={'mx-1 checked:bg-zinc-700'} type="radio" id={`${t.value}2`} name={t.value} value={0}/>
-                                <label className={'mx-1'} htmlFor={`${t.value}2`}>{t.q2}</label>
-                                <input className={'mx-1 checked:bg-zinc-700'} type="radio" id={`${t.value}3`} name={t.value} value={1}/>
-                                <label className={'mx-1'} htmlFor={`${t.value}3`}>{t.q3}</label>
+                                <input onChange={clickTasteRadio} className={'mx-1 checked:text-zinc-700'} type="radio" id={`${t.idx}1`} name={t.value} value={-1}/>
+                                <label className={'mx-1'} htmlFor={`${t.idx}1`}>{t.q1}</label>
+                                <input onChange={clickTasteRadio} className={'mx-1 checked:bg-zinc-700'} type="radio" id={`${t.idx}2`} name={t.value} value={0}/>
+                                <label className={'mx-1'} htmlFor={`${t.idx}2`}>{t.q2}</label>
+                                <input onChange={clickTasteRadio} className={'mx-1 checked:bg-zinc-700'} type="radio" id={`${t.idx}3`} name={t.value} value={1}/>
+                                <label className={'mx-1'} htmlFor={`${t.idx}3`}>{t.q3}</label>
                             </div>
                         </>
                     )
