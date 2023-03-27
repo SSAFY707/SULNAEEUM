@@ -1,6 +1,5 @@
 package com.ssafy.sulnaeeum.model.drink.dto;
 
-import com.ssafy.sulnaeeum.model.drink.entity.Drink;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -22,11 +21,4 @@ public class DrinkSearchDto {
 
     @Schema(description = "이미지")
     private String drinkImage;
-
-    // 생성자 ()
-    public DrinkSearchDto(Drink drink) {
-        this.drinkId = drink.getDrinkId();
-        this.drinkName = drink.getDrinkName();
-        this.drinkImage = drink.getDrinkImage();
-    }
 }
