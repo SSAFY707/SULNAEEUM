@@ -1,7 +1,6 @@
 package com.ssafy.sulnaeeum.model.drink.dto;
 
 import com.ssafy.sulnaeeum.model.drink.entity.Drink;
-import com.ssafy.sulnaeeum.model.drink.entity.DrinkType;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Data;
