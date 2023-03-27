@@ -64,12 +64,10 @@ export interface UserPreferenceDrink {
   drinkType: string;
 }
 
-// export type userPreferenceStore{
-//     [index:string] : string|number,
-//     storeId: number;
-//     storeName: string;
-//     storeImage: string;
-//     storeAddress: string;
-//     storeDrink: string;
-
-// }
+export interface UserPreferenceStore {
+  storeId: number;
+  storeName: string;
+  storeImage: string;
+  storeAddress: string;
+  storeDrink: string;
+}

@@ -8,8 +8,6 @@ import { useRouter } from "next/router";
 import { UserClear } from "@/types/DataTypes";
 
 export default function Detail(props: { idx: number }) {
-  const router = useRouter();
-  const [page, setPage] = useState<number>(0);
   const { idx } = props;
   const menuName = [
     "내가 클리어 한 전통주",
@@ -196,10 +194,7 @@ export default function Detail(props: { idx: number }) {
               idx={idx}
             ></UserDetailDrink>
           ) : (
-            <UserDetailStore
-              userData={userPreferenceStore}
-              idx={idx}
-            ></UserDetailStore>
+            <UserDetailStore userData={userPreferenceStore}></UserDetailStore>
           )
         }
       </div>
