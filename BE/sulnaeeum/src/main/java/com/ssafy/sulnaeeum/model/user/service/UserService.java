@@ -28,9 +28,6 @@ public class UserService {
     private final UserPreferenceRepo userPreferenceRepo;
     private final TokenProvider tokenProvider;
 
-    @Autowired
-    UserRepo userRepo;
-
     @Transactional
     public TokenDto refreshToken(TokenDto tokenRequestDto) {
 
@@ -80,7 +77,7 @@ public class UserService {
 
     // kakaoId로 userId 찾기
     public Long findUserId(String kakaoId) {
-        Optional<Long> userId = userRepo.findUserId(kakaoId);
+        Optional<Long> userId = userRepository.findUserId(kakaoId);
         if(!userId.isPresent()) {
             throw new CustomException(CustomExceptionList.MEMBER_NOT_FOUND);
         }
