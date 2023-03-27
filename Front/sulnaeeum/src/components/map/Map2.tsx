@@ -15,9 +15,9 @@ export default function Map2(props: any) {
   return (
     <>
       <div className={`${style.mapContainer2} ${style.layout}`}>
-        {datas.map((data: any, index: number) => {
+        {datas.map((data: any) => {
           return <>
-            <img id={data.id} className={`${style['map0' + data.id]} ${style.myMap} ${style.hover_cursor}`} src={`${data.src}.png`} alt="지도 이미지"
+            <img key={data} id={data.id} className={`${style['map0' + data.id]} ${style.myMap} ${style.hover_cursor}`} src={`${data.src}.png`} alt="지도 이미지"
 
               onMouseLeave={() => {
                 const target = document.getElementById(data.id);
