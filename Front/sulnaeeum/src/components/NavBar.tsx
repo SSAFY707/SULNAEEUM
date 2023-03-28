@@ -62,7 +62,7 @@ function Navbar() {
                       {menuTab[i].map((val, idx) => {
                         return (
                           // 각 페이지 URL 넣어야함
-                          <Link href={`${url[i]}?tab=${val}`} key={idx}>
+                          <Link href={`${url[i]}?sort="이름"?type=${val}?tab=${val}`} key={idx}>
                             <li className="hover:font-preB text-neutral-500 font-preR text-[16px] mt-[17px] ">
                               {val}
                             </li>
