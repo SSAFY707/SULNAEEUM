@@ -37,14 +37,14 @@ public class DrinkService {
 
     // 모든 전통주 조회
     @Transactional
-    public List<DrinkInfoDto> getAllDrink(String drinkTypeName, String kakaoId, String sortType) {
+    public List<DrinkInfoDto> getAllDrink(Long drinkTypeId, String kakaoId, String sortType) {
         List<Drink> drinkList;
 
         // 카테고리 분류
-        if(drinkTypeName.equals("전체")) {
+        if(drinkTypeId == 0) {
             drinkList = drinkRepo.findAll(); // 전체 조회
         } else {
-            Optional<DrinkType> drinkType = drinkTypeRepo.findByDrinkTypeName(drinkTypeName); // 주종 id 찾기
+            Optional<DrinkType> drinkType = drinkTypeRepo.findByDrinkTypeId(drinkTypeId); // 주종 id 찾기
             if(drinkType.isEmpty()) {
                 throw new CustomException(CustomExceptionList.ROW_NOT_FOUND); // 존재하지 않는 주종일 경우
             }
