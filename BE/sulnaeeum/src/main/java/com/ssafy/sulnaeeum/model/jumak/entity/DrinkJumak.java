@@ -13,7 +13,7 @@ import javax.persistence.*;
 @SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name="jumak")
+@Table(name="drink_jumak")
 public class DrinkJumak {
 
     @Id
