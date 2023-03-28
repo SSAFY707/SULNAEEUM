@@ -1,11 +1,12 @@
 import { Drink, DrinkDetailType, DrinkDetailTypeFirst } from '../types/DataTypes'
 import { defaultAxios, authAxios } from './common'
 
-export const getDrinkList = async (type: string, sort : string) => {
+export const getDrinkList = async (typeId: number, sort : string) => {
     let drinkList = []
-    await defaultAxios.get(`drink/n/${type}`, {
+    await defaultAxios.get(`drink/n/${typeId}`, {
         params: {sortType: sort}
     }).then((res)=>{
+        console.log(res.data)
         drinkList = res.data
     }).catch((err)=>{
         console.log(err)
@@ -13,9 +14,9 @@ export const getDrinkList = async (type: string, sort : string) => {
     return drinkList;
 }
 
-export const getDrinkListForUser = async (type: string, sort : string) => {
+export const getDrinkListForUser = async (typeId: number, sort : string) => {
     let drinkList = []
-    await authAxios.get(`drink/${type}`, {
+    await authAxios.get(`drink/${typeId}`, {
         params: {sortType: sort}
     }).then((res)=>{
         drinkList = res.data
