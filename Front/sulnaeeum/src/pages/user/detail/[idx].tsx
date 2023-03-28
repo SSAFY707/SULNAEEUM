@@ -13,7 +13,6 @@ export default function Detail(props: { idx: number }) {
     "내가 찜 한 전통주 가게",
   ];
 
-
   const userClear: UserClear[] = [
     {
       drinkId: 1,
@@ -132,91 +131,102 @@ export default function Detail(props: { idx: number }) {
     },
   ];
 
-  const userPreferenceStore  = [
+  const userPreferenceStore = [
     {
       storeId: 1,
       storeName: "맛조아전통주집",
       storeImage: "/images/jubti/drink/도깨비술 11.png",
       storeAddress: "서울 강남구 언주로 508 서울상록빌딩",
-      storeDrink : ["전통주1","전통주2","전통주3"],
-      storeDrinkImage: ["/images/jubti/drink/단홍.png",
-      "/images/jubti/drink/뱅꼬레 더감.png",
-      "/images/jubti/drink/도깨비술 11.png",],
-      storeDrinkType:["과실주","약주/청주","탁주"]
+      storeDrink: ["전통주1", "전통주2", "전통주3"],
+      storeDrinkImage: [
+        "/images/jubti/drink/단홍.png",
+        "/images/jubti/drink/뱅꼬레 더감.png",
+        "/images/jubti/drink/도깨비술 11.png",
+      ],
+      storeDrinkType: ["과실주", "약주/청주", "탁주"],
     },
     {
       storeId: 2,
       storeName: "맛조아전통주집",
       storeImage: "/images/jubti/drink/도깨비술 11.png",
       storeAddress: "서울 강남구 언주로 508 서울상록빌딩",
-      storeDrink : ["전통주1","전통주2","전통주3"],
-      storeDrinkImage: ["/images/jubti/drink/단홍.png",
+      storeDrink: ["전통주1", "전통주2", "전통주3"],
+      storeDrinkImage: [
+        "/images/jubti/drink/단홍.png",
         "/images/jubti/drink/뱅꼬레 더감.png",
-        "/images/jubti/drink/도깨비술 11.png",],
-        storeDrinkType:["과실주","약주/청주","탁주"]
-      
+        "/images/jubti/drink/도깨비술 11.png",
+      ],
+      storeDrinkType: ["과실주", "약주/청주", "탁주"],
     },
     {
       storeId: 3,
       storeName: "맛조아전통주집",
       storeImage: "/images/jubti/drink/도깨비술 11.png",
       storeAddress: "서울 강남구 언주로 508 서울상록빌딩",
-      storeDrink : ["전통주1","전통주2","전통주3"],
-      storeDrinkImage: ["/images/jubti/drink/단홍.png",
+      storeDrink: ["전통주1", "전통주2", "전통주3"],
+      storeDrinkImage: [
+        "/images/jubti/drink/단홍.png",
         "/images/jubti/drink/뱅꼬레 더감.png",
-        "/images/jubti/drink/도깨비술 11.png",],
-        storeDrinkType:["과실주","약주/청주","탁주"]
-      
+        "/images/jubti/drink/도깨비술 11.png",
+      ],
+      storeDrinkType: ["과실주", "약주/청주", "탁주"],
     },
     {
       storeId: 4,
       storeName: "맛조아전통주집",
       storeImage: "/images/jubti/drink/도깨비술 11.png",
       storeAddress: "서울 강남구 언주로 508 서울상록빌딩",
-      storeDrink : ["전통주1","전통주2","전통주3"],
-      storeDrinkImage: ["/images/jubti/drink/단홍.png",
+      storeDrink: ["전통주1", "전통주2", "전통주3"],
+      storeDrinkImage: [
+        "/images/jubti/drink/단홍.png",
         "/images/jubti/drink/뱅꼬레 더감.png",
-        "/images/jubti/drink/도깨비술 11.png",],
-        storeDrinkType:["과실주","약주/청주","탁주"]
-      
+        "/images/jubti/drink/도깨비술 11.png",
+      ],
+      storeDrinkType: ["과실주", "약주/청주", "탁주"],
     },
     {
       storeId: 5,
       storeName: "맛조아전통주집",
       storeImage: "/images/jubti/drink/도깨비술 11.png",
       storeAddress: "서울 강남구 언주로 508 서울상록빌딩",
-      storeDrink : ["전통주1","전통주2","전통주3"],
-      storeDrinkImage: ["/images/jubti/drink/단홍.png",
+      storeDrink: ["전통주1", "전통주2", "전통주3"],
+      storeDrinkImage: [
+        "/images/jubti/drink/단홍.png",
         "/images/jubti/drink/뱅꼬레 더감.png",
-        "/images/jubti/drink/도깨비술 11.png",],
-        storeDrinkType:["과실주","약주/청주","탁주"]
-      
+        "/images/jubti/drink/도깨비술 11.png",
+      ],
+      storeDrinkType: ["과실주", "약주/청주", "탁주"],
     },
     {
       storeId: 6,
       storeName: "맛조아전통주집",
       storeImage: "/images/jubti/drink/도깨비술 11.png",
       storeAddress: "서울 강남구 언주로 508 서울상록빌딩",
-      storeDrink : ["전통주1","전통주2","전통주3"],
-      storeDrinkImage: ["/images/jubti/drink/단홍.png",
+      storeDrink: ["전통주1", "전통주2", "전통주3"],
+      storeDrinkImage: [
+        "/images/jubti/drink/단홍.png",
         "/images/jubti/drink/뱅꼬레 더감.png",
-        "/images/jubti/drink/도깨비술 11.png",],
-        storeDrinkType:["과실주","약주/청주","탁주"]
-      
+        "/images/jubti/drink/도깨비술 11.png",
+      ],
+      storeDrinkType: ["과실주", "약주/청주", "탁주"],
     },
   ];
 
   return (
     <div className="w-screen h-screen bg-gray-100 flex justify-center">
-      <div className="w-[1200px] h-[750px] mt-[120px] rounded-lg  ">
-        <div className="flex ">
+      <div className="w-[1200px] h-[750px] mt-[105px] rounded-lg  ">
+        <div className="flex mb-[20px]">
           <div className="flex items-center pr-[20px] opacity-70">
             <Link href="/user/profile">
-              <AiOutlineArrowLeft size={30}></AiOutlineArrowLeft>
+              <AiOutlineArrowLeft size={25}></AiOutlineArrowLeft>
             </Link>
           </div>
-          <div className="w-[300px] h-[50px]  text-[30px] font-preM flex items-center">
-            {idx == 0 ? menuName[idx] : idx == 1 ? menuName[idx] : menuName[idx]}
+          <div className="w-[300px] h-[50px]  text-[33px] font-preM flex items-center">
+            {idx == 0
+              ? menuName[idx]
+              : idx == 1
+              ? menuName[idx]
+              : menuName[idx]}
           </div>
         </div>
         {

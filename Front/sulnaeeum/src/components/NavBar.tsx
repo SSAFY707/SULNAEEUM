@@ -20,7 +20,7 @@ function Navbar() {
     ["나만의 전통주", "선물하기", "오늘의 시리즈"],
     ["검사하기"],
   ];
-  const menuTabUrl = ['sort="이름"?type=', "tab=", "", "tab=", ""];
+  const menuTabUrl = ['sort="이름"&type=', "tab=", "", "tab=", ""];
 
   //
   return (
