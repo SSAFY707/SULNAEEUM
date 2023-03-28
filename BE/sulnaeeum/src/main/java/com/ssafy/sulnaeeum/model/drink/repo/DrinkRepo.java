@@ -15,7 +15,8 @@ public interface DrinkRepo extends JpaRepository<Drink, Integer> {
     Optional<Drink> findByDrinkId(Long drinkId);
 
     // drink_type_id로 찾기
-    List<Drink> findByDrinkType(Long drinkTypeId);
+    @Query(value = "select * from drink where drink_type_id = ?1", nativeQuery = true)
+    List<Drink> findByDrinkTypeId(Long drinkTypeId);
 
     List<Drink> findTop10ByOrderByLikeCntDesc();
 

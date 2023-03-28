@@ -2,6 +2,7 @@ package com.ssafy.sulnaeeum.model.drink.service;
 
 import com.ssafy.sulnaeeum.exception.CustomException;
 import com.ssafy.sulnaeeum.exception.CustomExceptionList;
+import com.ssafy.sulnaeeum.model.drink.dto.DrinkDetailPageDto;
 import com.ssafy.sulnaeeum.model.drink.dto.DrinkDto;
 import com.ssafy.sulnaeeum.model.drink.dto.DrinkInfoDto;
 import com.ssafy.sulnaeeum.model.drink.entity.Drink;
@@ -53,7 +54,7 @@ public class DrinkService {
             if(drinkType.isEmpty()) {
                 throw new CustomException(CustomExceptionList.ROW_NOT_FOUND); // 존재하지 않는 주종일 경우
             }
-            drinkList = drinkRepo.findByDrinkType(drinkType.get().getDrinkTypeId()); // 카테고리별 조회
+            drinkList = drinkRepo.findByDrinkTypeId(drinkTypeId); // 카테고리별 조회
         }
 
         // 정렬 (인기, 낮은도수, 높은도수의 경우 같은 값에 대해서는 이름으로 정렬하도록 함)
@@ -97,4 +98,29 @@ public class DrinkService {
         }
         return drink.get().toDto();
     }
+
+//    public DrinkDetailPageDto getDrinkDetailPage(Long drinkId, String kakaoId) {
+//        Optional<Drink> drink = drinkRepo.findByDrinkId(drinkId);
+//        if(drink.isEmpty()) {
+//            throw new CustomException(CustomExceptionList.ROW_NOT_FOUND);
+//        }
+//
+//        Drink
+//
+//        // 회원일 때
+//        if(kakaoId != null) {
+//            Long userId = userService.findUserId(kakaoId);
+//
+//            Optional<LikeDrink> likeDrink = likeDrinkRepo.findLikeInfo(drinkId, userId);
+//            if(likeDrink.isPresent()) {
+//                drinkInfoDto.setLike(true);
+//            }
+//
+//            Optional<Review> review = reviewRepo.findMyReview(userId, drinkId);
+//            if(review.isPresent()) {
+//                drinkInfoDto.setClear(true);
+//            }
+//        }
+//
+//    }
 }
