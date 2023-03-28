@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
-import { Tabs, TabList, TabPanels, Tab, TabPanel } from "@chakra-ui/react";
 import UserDetailDrink from "@/components/profile/userDetailDrink";
 import UserDetailStore from "@/components/profile/userDetailStore";
-import { useRouter } from "next/router";
-
 import { UserClear } from "@/types/DataTypes";
+import { AiOutlineArrowLeft } from "react-icons/ai";
 
 export default function Detail(props: { idx: number }) {
   const { idx } = props;
@@ -14,6 +12,7 @@ export default function Detail(props: { idx: number }) {
     "내가 찜 한 전통주",
     "내가 찜 한 전통주 가게",
   ];
+
 
   const userClear: UserClear[] = [
     {
@@ -25,7 +24,7 @@ export default function Detail(props: { idx: number }) {
       drinkType: "탁주",
     },
     {
-      drinkId: 1,
+      drinkId: 2,
       drinkName: "전통주1",
       drinkImage: "/images/jubti/drink/도깨비술 11.png",
       drinkAmount: "500ml",
@@ -33,7 +32,7 @@ export default function Detail(props: { idx: number }) {
       drinkType: "탁주",
     },
     {
-      drinkId: 1,
+      drinkId: 3,
       drinkName: "전통주1",
       drinkImage: "/images/jubti/drink/도깨비술 11.png",
       drinkAmount: "500ml",
@@ -41,7 +40,7 @@ export default function Detail(props: { idx: number }) {
       drinkType: "탁주",
     },
     {
-      drinkId: 1,
+      drinkId: 4,
       drinkName: "전통주1",
       drinkImage: "/images/jubti/drink/도깨비술 11.png",
       drinkAmount: "500ml",
@@ -49,7 +48,7 @@ export default function Detail(props: { idx: number }) {
       drinkType: "탁주",
     },
     {
-      drinkId: 1,
+      drinkId: 5,
       drinkName: "전통주1",
       drinkImage: "/images/jubti/drink/도깨비술 11.png",
       drinkAmount: "500ml",
@@ -57,7 +56,7 @@ export default function Detail(props: { idx: number }) {
       drinkType: "탁주",
     },
     {
-      drinkId: 1,
+      drinkId: 6,
       drinkName: "전통주1",
       drinkImage: "/images/jubti/drink/도깨비술 11.png",
       drinkAmount: "500ml",
@@ -65,7 +64,7 @@ export default function Detail(props: { idx: number }) {
       drinkType: "탁주",
     },
     {
-      drinkId: 1,
+      drinkId: 7,
       drinkName: "전통주1",
       drinkImage: "/images/jubti/drink/도깨비술 11.png",
       drinkAmount: "500ml",
@@ -92,7 +91,7 @@ export default function Detail(props: { idx: number }) {
       drinkType: "탁주",
     },
     {
-      drinkId: 1,
+      drinkId: 2,
       drinkName: "전통주1",
       drinkImage: "/images/jubti/drink/도깨비술 11.png",
       drinkAmount: "500ml",
@@ -100,7 +99,7 @@ export default function Detail(props: { idx: number }) {
       drinkType: "탁주",
     },
     {
-      drinkId: 1,
+      drinkId: 3,
       drinkName: "전통주1",
       drinkImage: "/images/jubti/drink/도깨비술 11.png",
       drinkAmount: "500ml",
@@ -108,7 +107,7 @@ export default function Detail(props: { idx: number }) {
       drinkType: "탁주",
     },
     {
-      drinkId: 1,
+      drinkId: 4,
       drinkName: "전통주1",
       drinkImage: "/images/jubti/drink/도깨비술 11.png",
       drinkAmount: "500ml",
@@ -116,7 +115,7 @@ export default function Detail(props: { idx: number }) {
       drinkType: "탁주",
     },
     {
-      drinkId: 1,
+      drinkId: 5,
       drinkName: "전통주1",
       drinkImage: "/images/jubti/drink/도깨비술 11.png",
       drinkAmount: "500ml",
@@ -124,7 +123,7 @@ export default function Detail(props: { idx: number }) {
       drinkType: "탁주",
     },
     {
-      drinkId: 1,
+      drinkId: 6,
       drinkName: "전통주1",
       drinkImage: "/images/jubti/drink/도깨비술 11.png",
       drinkAmount: "500ml",
@@ -133,56 +132,92 @@ export default function Detail(props: { idx: number }) {
     },
   ];
 
-  const userPreferenceStore = [
+  const userPreferenceStore  = [
     {
       storeId: 1,
       storeName: "맛조아전통주집",
       storeImage: "/images/jubti/drink/도깨비술 11.png",
       storeAddress: "서울 강남구 언주로 508 서울상록빌딩",
-      storeDrink: "전통주1",
+      storeDrink : ["전통주1","전통주2","전통주3"],
+      storeDrinkImage: ["/images/jubti/drink/단홍.png",
+      "/images/jubti/drink/뱅꼬레 더감.png",
+      "/images/jubti/drink/도깨비술 11.png",],
+      storeDrinkType:["과실주","약주/청주","탁주"]
     },
     {
-      storeId: 1,
+      storeId: 2,
       storeName: "맛조아전통주집",
       storeImage: "/images/jubti/drink/도깨비술 11.png",
       storeAddress: "서울 강남구 언주로 508 서울상록빌딩",
-      storeDrink: "전통주1",
+      storeDrink : ["전통주1","전통주2","전통주3"],
+      storeDrinkImage: ["/images/jubti/drink/단홍.png",
+        "/images/jubti/drink/뱅꼬레 더감.png",
+        "/images/jubti/drink/도깨비술 11.png",],
+        storeDrinkType:["과실주","약주/청주","탁주"]
+      
     },
     {
-      storeId: 1,
+      storeId: 3,
       storeName: "맛조아전통주집",
       storeImage: "/images/jubti/drink/도깨비술 11.png",
       storeAddress: "서울 강남구 언주로 508 서울상록빌딩",
-      storeDrink: "전통주1",
+      storeDrink : ["전통주1","전통주2","전통주3"],
+      storeDrinkImage: ["/images/jubti/drink/단홍.png",
+        "/images/jubti/drink/뱅꼬레 더감.png",
+        "/images/jubti/drink/도깨비술 11.png",],
+        storeDrinkType:["과실주","약주/청주","탁주"]
+      
     },
     {
-      storeId: 1,
+      storeId: 4,
       storeName: "맛조아전통주집",
       storeImage: "/images/jubti/drink/도깨비술 11.png",
       storeAddress: "서울 강남구 언주로 508 서울상록빌딩",
-      storeDrink: "전통주1",
+      storeDrink : ["전통주1","전통주2","전통주3"],
+      storeDrinkImage: ["/images/jubti/drink/단홍.png",
+        "/images/jubti/drink/뱅꼬레 더감.png",
+        "/images/jubti/drink/도깨비술 11.png",],
+        storeDrinkType:["과실주","약주/청주","탁주"]
+      
     },
     {
-      storeId: 1,
+      storeId: 5,
       storeName: "맛조아전통주집",
       storeImage: "/images/jubti/drink/도깨비술 11.png",
       storeAddress: "서울 강남구 언주로 508 서울상록빌딩",
-      storeDrink: "전통주1",
+      storeDrink : ["전통주1","전통주2","전통주3"],
+      storeDrinkImage: ["/images/jubti/drink/단홍.png",
+        "/images/jubti/drink/뱅꼬레 더감.png",
+        "/images/jubti/drink/도깨비술 11.png",],
+        storeDrinkType:["과실주","약주/청주","탁주"]
+      
     },
     {
-      storeId: 1,
+      storeId: 6,
       storeName: "맛조아전통주집",
       storeImage: "/images/jubti/drink/도깨비술 11.png",
       storeAddress: "서울 강남구 언주로 508 서울상록빌딩",
-      storeDrink: "전통주1",
+      storeDrink : ["전통주1","전통주2","전통주3"],
+      storeDrinkImage: ["/images/jubti/drink/단홍.png",
+        "/images/jubti/drink/뱅꼬레 더감.png",
+        "/images/jubti/drink/도깨비술 11.png",],
+        storeDrinkType:["과실주","약주/청주","탁주"]
+      
     },
   ];
 
   return (
     <div className="w-screen h-screen bg-gray-100 flex justify-center">
-      <div className="w-[1200px] h-[750px] mt-[120px] rounded-lg  bg-red-300 ">
-        <div className="w-[300px] h-[50px] bg-blue-300 text-[20px] font-preM">
-          {idx == 0 ? menuName[idx] : idx == 1 ? menuName[idx] : menuName[idx]}
+      <div className="w-[1200px] h-[750px] mt-[120px] rounded-lg  ">
+        <div className="flex ">
+          <div className="flex items-center pr-[20px] opacity-70">
+            <Link href="/user/profile">
+              <AiOutlineArrowLeft size={30}></AiOutlineArrowLeft>
+            </Link>
+          </div>
+          <div className="w-[300px] h-[50px]  text-[30px] font-preM flex items-center">
+            {idx == 0 ? menuName[idx] : idx == 1 ? menuName[idx] : menuName[idx]}
+          </div>
         </div>
         {
           // idx==0,

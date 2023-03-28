@@ -13,10 +13,10 @@ export default function userDetailDrink(props: {
     <>
       <div className="">
         <div className="flex">
-          <div className=" ml-[200px] w-[530px] bg-blue-400">
+          <div className=" ml-[200px] w-[530px] ">
             <div>전통주명</div>
           </div>
-          <div className="flex justify-around w-[400px] bg-green-200">
+          <div className="flex justify-around w-[400px]">
             <div>용량</div>
             <div>도수</div>
             <div>종류</div>

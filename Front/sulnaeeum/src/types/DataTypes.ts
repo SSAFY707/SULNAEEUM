@@ -69,5 +69,7 @@ export interface UserPreferenceStore {
   storeName: string;
   storeImage: string;
   storeAddress: string;
-  storeDrink: string;
+  storeDrink: string[];
+  storeDrinkImage: string[];
+  storeDrinkType: string[];
 }
