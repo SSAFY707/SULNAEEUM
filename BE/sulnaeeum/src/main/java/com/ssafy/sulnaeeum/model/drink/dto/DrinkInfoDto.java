@@ -35,6 +35,9 @@ public class DrinkInfoDto {
     @Schema(description = "찜 여부")
     private boolean like;
 
+    @Schema(description = "클리어 여부")
+    private boolean clear;
+
     @Schema(description = "찜과 리뷰 개수 (인기)")
     private int popularity;
 

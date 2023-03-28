@@ -6,10 +6,12 @@ import com.ssafy.sulnaeeum.model.drink.dto.DrinkDto;
 import com.ssafy.sulnaeeum.model.drink.dto.DrinkInfoDto;
 import com.ssafy.sulnaeeum.model.drink.entity.Drink;
 import com.ssafy.sulnaeeum.model.drink.entity.DrinkType;
+import com.ssafy.sulnaeeum.model.drink.entity.Review;
 import com.ssafy.sulnaeeum.model.drink.repo.DrinkRepo;
 import com.ssafy.sulnaeeum.model.drink.repo.DrinkTypeRepo;
 import com.ssafy.sulnaeeum.model.drink.entity.LikeDrink;
 import com.ssafy.sulnaeeum.model.drink.repo.LikeDrinkRepo;
+import com.ssafy.sulnaeeum.model.drink.repo.ReviewRepo;
 import com.ssafy.sulnaeeum.model.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -34,6 +36,9 @@ public class DrinkService {
 
     @Autowired
     UserService userService;
+
+    @Autowired
+    ReviewRepo reviewRepo;
 
     // 모든 전통주 조회
     @Transactional
@@ -63,13 +68,20 @@ public class DrinkService {
             drinkInfoDtoList = drinkInfoDtoList.stream().sorted(Comparator.comparing(DrinkInfoDto::getDrinkLevel, Comparator.reverseOrder()).thenComparing(DrinkInfoDto::getDrinkName)).collect(Collectors.toList());
         }
 
-        // 회원 접근일 때 (찜 여부 확인)
+        // 회원 접근일 때 (찜 및 클리어 여부 확인)
         if(kakaoId != null) {
             for(DrinkInfoDto drinkInfoDto: drinkInfoDtoList) {
                 Long userId = userService.findUserId(kakaoId);
-                Optional<LikeDrink> likeDrink = likeDrinkRepo.findLikeInfo(drinkInfoDto.getDrinkId(), userId);
+                Long drinkId = drinkInfoDto.getDrinkId();
+
+                Optional<LikeDrink> likeDrink = likeDrinkRepo.findLikeInfo(drinkId, userId);
                 if(likeDrink.isPresent()) {
                     drinkInfoDto.setLike(true);
+                }
+
+                Optional<Review> review = reviewRepo.findMyReview(userId, drinkId);
+                if(review.isPresent()) {
+                    drinkInfoDto.setClear(true);
                 }
             }
         }
