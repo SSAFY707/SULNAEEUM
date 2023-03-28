@@ -2,7 +2,6 @@ package com.ssafy.sulnaeeum.model.drink.service;
 
 import com.ssafy.sulnaeeum.exception.CustomException;
 import com.ssafy.sulnaeeum.exception.CustomExceptionList;
-import com.ssafy.sulnaeeum.model.drink.dto.DrinkDetailPageDto;
 import com.ssafy.sulnaeeum.model.drink.dto.DrinkDto;
 import com.ssafy.sulnaeeum.model.drink.dto.DrinkInfoDto;
 import com.ssafy.sulnaeeum.model.drink.entity.Drink;
