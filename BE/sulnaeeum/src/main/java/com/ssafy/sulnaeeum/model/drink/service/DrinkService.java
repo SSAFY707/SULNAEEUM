@@ -2,8 +2,7 @@ package com.ssafy.sulnaeeum.model.drink.service;
 
 import com.ssafy.sulnaeeum.exception.CustomException;
 import com.ssafy.sulnaeeum.exception.CustomExceptionList;
-import com.ssafy.sulnaeeum.model.drink.dto.DrinkDto;
-import com.ssafy.sulnaeeum.model.drink.dto.DrinkInfoDto;
+import com.ssafy.sulnaeeum.model.drink.dto.*;
 import com.ssafy.sulnaeeum.model.drink.entity.Drink;
 import com.ssafy.sulnaeeum.model.drink.entity.DrinkType;
 import com.ssafy.sulnaeeum.model.drink.entity.Review;
@@ -12,6 +11,9 @@ import com.ssafy.sulnaeeum.model.drink.repo.DrinkTypeRepo;
 import com.ssafy.sulnaeeum.model.drink.entity.LikeDrink;
 import com.ssafy.sulnaeeum.model.drink.repo.LikeDrinkRepo;
 import com.ssafy.sulnaeeum.model.drink.repo.ReviewRepo;
+import com.ssafy.sulnaeeum.model.jumak.dto.JumakDto;
+import com.ssafy.sulnaeeum.model.jumak.entity.Jumak;
+import com.ssafy.sulnaeeum.model.jumak.repo.JumakRepo;
 import com.ssafy.sulnaeeum.model.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -39,6 +41,9 @@ public class DrinkService {
 
     @Autowired
     ReviewRepo reviewRepo;
+
+    @Autowired
+    JumakRepo jumakRepo;
 
     // 모든 전통주 조회
     @Transactional
@@ -68,17 +73,19 @@ public class DrinkService {
             drinkInfoDtoList = drinkInfoDtoList.stream().sorted(Comparator.comparing(DrinkInfoDto::getDrinkLevel, Comparator.reverseOrder()).thenComparing(DrinkInfoDto::getDrinkName)).collect(Collectors.toList());
         }
 
-        // 회원 접근일 때 (찜 및 클리어 여부 확인)
+        // 회원 접근일 때
         if(kakaoId != null) {
             for(DrinkInfoDto drinkInfoDto: drinkInfoDtoList) {
                 Long userId = userService.findUserId(kakaoId);
                 Long drinkId = drinkInfoDto.getDrinkId();
 
+                // 찜 여부 세팅
                 Optional<LikeDrink> likeDrink = likeDrinkRepo.findLikeInfo(drinkId, userId);
                 if(likeDrink.isPresent()) {
                     drinkInfoDto.setLike(true);
                 }
 
+                // 클리어 여부 세팅
                 Optional<Review> review = reviewRepo.findMyReview(userId, drinkId);
                 if(review.isPresent()) {
                     drinkInfoDto.setClear(true);
@@ -98,28 +105,49 @@ public class DrinkService {
         return drink.get().toDto();
     }
 
-//    public DrinkDetailPageDto getDrinkDetailPage(Long drinkId, String kakaoId) {
-//        Optional<Drink> drink = drinkRepo.findByDrinkId(drinkId);
-//        if(drink.isEmpty()) {
-//            throw new CustomException(CustomExceptionList.ROW_NOT_FOUND);
-//        }
-//
-//        Drink
-//
-//        // 회원일 때
-//        if(kakaoId != null) {
-//            Long userId = userService.findUserId(kakaoId);
-//
-//            Optional<LikeDrink> likeDrink = likeDrinkRepo.findLikeInfo(drinkId, userId);
-//            if(likeDrink.isPresent()) {
-//                drinkInfoDto.setLike(true);
-//            }
-//
-//            Optional<Review> review = reviewRepo.findMyReview(userId, drinkId);
-//            if(review.isPresent()) {
-//                drinkInfoDto.setClear(true);
-//            }
-//        }
-//
-//    }
+    // 전통주 상세 페이지의 모든 정보 가져오기
+    @Transactional
+    public DrinkDetailPageDto getDrinkDetailPage(Long drinkId, String kakaoId) {
+        DrinkDetailPageDto drinkDetailPageDto = new DrinkDetailPageDto();
+
+        // 전통주 기본 정보
+        Optional<Drink> drink = drinkRepo.findByDrinkId(drinkId);
+        if(drink.isEmpty()) {
+            throw new CustomException(CustomExceptionList.ROW_NOT_FOUND);
+        }
+        DrinkDetailDto drinkDetailDto = drink.get().toDrinkDetailDto();
+
+        // 회원 접근일 때
+        if(kakaoId != null) {
+            Long userId = userService.findUserId(kakaoId);
+
+            // 찜 여부 세팅
+            Optional<LikeDrink> likeDrink = likeDrinkRepo.findLikeInfo(drinkId, userId);
+            if(likeDrink.isPresent()) {
+                drinkDetailDto.setLike(true);
+            }
+
+            // 클리어 여부 세팅
+            Optional<Review> review = reviewRepo.findMyReview(userId, drinkId);
+            if(review.isPresent()) {
+                drinkDetailDto.setClear(true);
+            }
+        }
+
+        drinkDetailPageDto.setDrinkDetailDto(drinkDetailDto);
+
+        // 리뷰 세팅
+        List<Review> reviewList = reviewRepo.findAllByDrinkId(drinkId);
+        List<ReviewResponseDto> reviewResponseDtoList = reviewList.stream().map(ReviewResponseDto::new).collect(Collectors.toList());
+        drinkDetailPageDto.setReviewResponseDto(reviewResponseDtoList);
+
+        // 술집 세팅
+        List<Jumak> jumakList = jumakRepo.findByDrink(drinkId);
+        List<JumakDto> jumakDtoList = jumakList.stream().map(JumakDto::new).collect(Collectors.toList());
+        drinkDetailPageDto.setJumakDto(jumakDtoList);
+
+        // 비슷한 술 추천 필요 !! (Flask에서 받아와야 함)
+
+        return drinkDetailPageDto;
+    }
 }

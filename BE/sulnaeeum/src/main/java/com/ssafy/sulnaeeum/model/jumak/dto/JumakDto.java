@@ -1,5 +1,6 @@
 package com.ssafy.sulnaeeum.model.jumak.dto;
 
+import com.ssafy.sulnaeeum.model.jumak.entity.Jumak;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -24,4 +25,12 @@ public class JumakDto {
 
     @Schema(description = "술집 주소")
     private String jumakLocation;
+
+    // 생성자 (List<Entity> -> List<DTO>)
+    public JumakDto(Jumak jumak) {
+        this.jumakId = jumak.getJumakId();
+        this.jumakName = jumak.getJumakName();
+        this.jumakUrl = jumak.getJumakUrl();
+        this.jumakLocation = jumak.getJumakLocation();
+    }
 }
