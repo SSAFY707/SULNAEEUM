@@ -65,7 +65,7 @@ function Navbar() {
         </li>
         <li className="max-[900px]:hidden w-[290px] pl-[20px] flex font-preL">
           <button>검색</button>
-          <Link href={"https://kauth.kakao.com/oauth/authorize?client_id=8ffe34463577f1799ebd2b1d8b64c61d&redirect_uri=http://localhost:3000/user/kakao/callback&response_type=code"}>
+          <Link href='/user'>
             <div className="pl-[40px]">로그인</div>
           </Link>
         </li>
