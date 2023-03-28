@@ -1,4 +1,4 @@
-package com.ssafy.sulnaeeum.model.mypage.dto;
+package com.ssafy.sulnaeeum.model.drink.dto;
 
 import com.ssafy.sulnaeeum.model.drink.dto.DrinkDto;
 import io.swagger.v3.oas.annotations.media.Schema;

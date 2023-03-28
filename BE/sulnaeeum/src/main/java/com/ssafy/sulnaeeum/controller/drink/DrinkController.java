@@ -1,8 +1,11 @@
 package com.ssafy.sulnaeeum.controller.drink;
 
 import com.ssafy.sulnaeeum.model.drink.dto.DrinkInfoDto;
+import com.ssafy.sulnaeeum.model.drink.dto.ReviewRequestDto;
+import com.ssafy.sulnaeeum.model.drink.dto.ReviewResponseDto;
 import com.ssafy.sulnaeeum.model.drink.service.DrinkService;
-import com.ssafy.sulnaeeum.model.mypage.service.LikeDrinkService;
+import com.ssafy.sulnaeeum.model.drink.service.ReviewService;
+import com.ssafy.sulnaeeum.model.drink.service.LikeDrinkService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
@@ -25,6 +28,9 @@ public class DrinkController {
 
     @Autowired
     LikeDrinkService likeDrinkService;
+
+    @Autowired
+    ReviewService reviewService;
 
     // =================================================================================================================
     // -----------------------------------------------   [ 회원 ]   -----------------------------------------------------
@@ -55,6 +61,43 @@ public class DrinkController {
         return new ResponseEntity<>(likeDrinkService.switchLikeDrink(drinkId, kakaoId), HttpStatus.OK);
     }
 
+    /***
+     * [ 리뷰 작성 or 수정 ]
+     * - 해당 전통주에 대하여 해당하는 회원이 이미 리뷰를 작성한 경우, `수정`으로 판단 -> update
+     * - 해당 전통주에 대하여 해당하는 회원이 아직 리뷰를 작성하지 않은 경우, `작성`으로 판단 -> insert
+     * - 리뷰 `작성` 시 Drink 엔티티의 reviewCnt 1 증가 시켜줌
+     ***/
+    @Operation(summary = "리뷰 작성 or 수정 - 회원", description = "리뷰 작성 or 수정 (전통주 클리어)")
+    @PostMapping("/review/{drinkId}")
+    public ResponseEntity<String> writeReview(@PathVariable Long drinkId, @RequestBody ReviewRequestDto reviewRequestDto) {
+        String kakaoId = SecurityContextHolder.getContext().getAuthentication().getName();
+        return new ResponseEntity<>(reviewService.writeReview(drinkId, kakaoId, reviewRequestDto), HttpStatus.OK);
+    }
+
+    /***
+     * [ 리뷰 삭제 ]
+     * - DB에서 리뷰 delete
+     * - Drink 엔티티의 reviewCnt 1 증가 시켜줌
+     ***/
+    @Operation(summary = "리뷰 삭제 - 회원", description = "리뷰 삭제 (전통주 클리어 취소)")
+    @DeleteMapping("/review/{drinkId}")
+    public ResponseEntity<String> deleteReview(@PathVariable Long drinkId) {
+        String kakaoId = SecurityContextHolder.getContext().getAuthentication().getName();
+        return new ResponseEntity<>(reviewService.deleteReview(drinkId, kakaoId), HttpStatus.OK);
+    }
+
+    /***
+     * [ 내 리뷰 조회 ]
+     * - 해당 전통주의 내 리뷰 필터링
+     * - 존재하지 않을 시, null 반환
+     ***/
+    @Operation(summary = "내 리뷰 조회", description = "내 리뷰 조회")
+    @GetMapping("/review/{drinkId}")
+    public ResponseEntity<ReviewResponseDto> getMyReview(@PathVariable Long drinkId) {
+        String kakaoId = SecurityContextHolder.getContext().getAuthentication().getName();
+        return new ResponseEntity<>(reviewService.getMyReview(drinkId, kakaoId), HttpStatus.OK);
+    }
+
     // =================================================================================================================
     // ----------------------------------------------   [ 비회원 ]   ----------------------------------------------------
     // =================================================================================================================
@@ -70,5 +113,14 @@ public class DrinkController {
     @GetMapping("/n/{drinkTypeName}")
     public ResponseEntity<List<DrinkInfoDto>> getAllDrink(@PathVariable String drinkTypeName, @RequestParam String sortType) {
         return new ResponseEntity<>(drinkService.getAllDrink(drinkTypeName, null, sortType), HttpStatus.OK);
+    }
+
+    /***
+     * [ 모든 리뷰 조회 ]
+     ***/
+    @Operation(summary = "모든 리뷰 조회 - 비회원", description = "전체 리뷰 리스트 제공")
+    @GetMapping("/n/review/{drinkId}")
+    public ResponseEntity<List<ReviewResponseDto>> getAllReview(@PathVariable Long drinkId) {
+        return new ResponseEntity<>(reviewService.getAllReview(drinkId), HttpStatus.OK);
     }
 }

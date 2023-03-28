@@ -3,7 +3,6 @@ package com.ssafy.sulnaeeum.model.user.service;
 import com.ssafy.sulnaeeum.exception.CustomException;
 import com.ssafy.sulnaeeum.exception.CustomExceptionList;
 import com.ssafy.sulnaeeum.jwt.TokenProvider;
-import com.ssafy.sulnaeeum.model.user.dto.UserDto;
 import com.ssafy.sulnaeeum.model.user.dto.UserPreferenceDto;
 import com.ssafy.sulnaeeum.model.user.entity.UserPreference;
 import com.ssafy.sulnaeeum.model.user.repo.UserPreferenceRepo;
@@ -27,9 +26,6 @@ public class UserService {
     private final UserRepo userRepository;
     private final UserPreferenceRepo userPreferenceRepo;
     private final TokenProvider tokenProvider;
-
-    @Autowired
-    UserRepo userRepo;
 
     @Transactional
     public TokenDto refreshToken(TokenDto tokenRequestDto) {
@@ -80,7 +76,7 @@ public class UserService {
 
     // kakaoId로 userId 찾기
     public Long findUserId(String kakaoId) {
-        Optional<Long> userId = userRepo.findUserId(kakaoId);
+        Optional<Long> userId = userRepository.findUserId(kakaoId);
         if(!userId.isPresent()) {
             throw new CustomException(CustomExceptionList.MEMBER_NOT_FOUND);
         }
