@@ -38,15 +38,15 @@ public class DrinkController {
 
     /***
      * [ 모든 전통주 조회 ]
-     * - 조회한 내용을 필요한 데이터만 선별하여 반환 (id, 이름, 이미지, 양, 도수, 주종, 찜 여부)
+     * - 조회한 내용을 필요한 데이터만 선별하여 반환 (id, 이름, 이미지, 양, 도수, 주종, 찜 여부, 클리어 여부)
      * - 이름, 인기, 도수(높은 순, 낮은 순) 기준 정렬 (인기, 도수의 경우 같을 경우에는 이름으로 정렬)
      * - 카테고리 분류
      ***/
     @Operation(summary = "모든 전통주 조회 - 회원", description = "전체 전통주를 데이터 가공하여 필요한 정보만 정렬 및 분류하여 제공")
-    @GetMapping("/{drinkTypeName}")
-    public ResponseEntity<List<DrinkInfoDto>> getAllDrinkForUser(@PathVariable String drinkTypeName, @RequestParam String sortType) {
+    @GetMapping("/{drinkTypeId}")
+    public ResponseEntity<List<DrinkInfoDto>> getAllDrinkForUser(@PathVariable Long drinkTypeId, @RequestParam String sortType) {
         String kakaoId = SecurityContextHolder.getContext().getAuthentication().getName();
-        return new ResponseEntity<>(drinkService.getAllDrink(drinkTypeName, kakaoId, sortType), HttpStatus.OK);
+        return new ResponseEntity<>(drinkService.getAllDrink(drinkTypeId, kakaoId, sortType), HttpStatus.OK);
     }
 
     /***
@@ -98,6 +98,17 @@ public class DrinkController {
         return new ResponseEntity<>(reviewService.getMyReview(drinkId, kakaoId), HttpStatus.OK);
     }
 
+//    /***
+//     * [ 전통주 상세 페이지 조회 ]
+//     * - 해당 전통주 정보 중 필요한 정보들을 가공하여 모두 조회 (전통주 정보, 리뷰, 술집, 찜 및 클리어 여부 등)
+//     * - 비슷한 술 추천 정보 조회 (Flask 통해서 추천 정보 받아옴)
+//     ***/
+//    @Operation(summary = "전통주 상세 페이지", description = "전통주 상세 페이지 정보 모두 조회")
+//    @GetMapping("/detail/{drinkId}")
+//    public ResponseEntity<> getDrink(@PathVariable Long drinkId) {
+//        return new ResponseEntity<>();
+//    }
+
     // =================================================================================================================
     // ----------------------------------------------   [ 비회원 ]   ----------------------------------------------------
     // =================================================================================================================
@@ -110,9 +121,9 @@ public class DrinkController {
      * - 찜 여부는 모두 false 반환
      ***/
     @Operation(summary = "모든 전통주 조회 - 비회원", description = "전체 전통주를 데이터 가공하여 필요한 정보만 정렬 및 분류하여 제공")
-    @GetMapping("/n/{drinkTypeName}")
-    public ResponseEntity<List<DrinkInfoDto>> getAllDrink(@PathVariable String drinkTypeName, @RequestParam String sortType) {
-        return new ResponseEntity<>(drinkService.getAllDrink(drinkTypeName, null, sortType), HttpStatus.OK);
+    @GetMapping("/n/{drinkTypeId}")
+    public ResponseEntity<List<DrinkInfoDto>> getAllDrink(@PathVariable Long drinkTypeId, @RequestParam String sortType) {
+        return new ResponseEntity<>(drinkService.getAllDrink(drinkTypeId, null, sortType), HttpStatus.OK);
     }
 
     /***
