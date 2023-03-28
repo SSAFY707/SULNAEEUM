@@ -1,7 +1,7 @@
 import { DetailRate, StarRate } from '@/components/common/Rating'
 import { ReviewType } from '@/types/DataTypes';
 import React, { useState } from 'react'
-import { GrCheckbox, GrCheckboxSelected, GrFormClose } from 'react-icons/gr'
+import { GrCheckbox, GrCheckboxSelected } from 'react-icons/gr'
 
 export default function AllReview(props: {reviews : ReviewType[], modalOpen}) {
     const {reviews, modalOpen} = props

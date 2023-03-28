@@ -74,7 +74,7 @@ export default function DrinkJumak(props: {drink: DrinkDetailType}) {
     <div className={'w-7/12 h-[700px] mt-[200px]'}>
         <div>
             <Modal h='auto' w='500px' modalOpen={modalOpen} open={open}>
-                < AddJumak />
+                < AddJumak modalOpen={modalOpen} />
             </Modal>
         </div>
         <div className={'flex justify-between items-end'}>
