@@ -4,9 +4,17 @@ import { HiMap } from 'react-icons/hi'
 import { FaRegBookmark, FaBookmark } from 'react-icons/fa'
 import React, { useState, useEffect } from 'react'
 import { Map, MapMarker } from 'react-kakao-maps-sdk'
+import { Modal } from '../common/modal'
+import AddJumak from './modal/addJumak'
 
 
 export default function DrinkJumak(props: {drink: DrinkDetailType}) {
+    const [open, setOpen] = useState<boolean>(false)
+    
+    const modalOpen = () => {
+        setOpen(!open)
+    }
+
     type jumakType = {
         name: string,
         num: string,
@@ -53,8 +61,7 @@ export default function DrinkJumak(props: {drink: DrinkDetailType}) {
 
     useEffect(()=>{
         for(let i=0; i<jumaks.length; i++){
-            const data = add_to_latlng(jumaks[i])
-            console.log(data)
+            add_to_latlng(jumaks[i])
         }
     },[])
     useEffect(()=>{
@@ -65,9 +72,14 @@ export default function DrinkJumak(props: {drink: DrinkDetailType}) {
     
   return (
     <div className={'w-7/12 h-[700px] mt-[200px]'}>
+        <div>
+            <Modal h='auto' w='500px' modalOpen={modalOpen} open={open}>
+                < AddJumak />
+            </Modal>
+        </div>
         <div className={'flex justify-between items-end'}>
             <div className={'text-[20px] pl-2 font-preR'}><span className={'font-mj text-[40px] mr-2'}>{drink.drinkName}</span>을(를) 판매하는 식당</div>
-            <div className={'flex justify-center items-center mb-4 mr-4 rounded text-white h-3/4 p-2 bg-[#78C3DC] hover:bg-[#60A5BC] cursor-pointer'}>판매처 등록하기</div>
+            <div onClick={modalOpen} className={'flex justify-center items-center mb-4 mr-4 rounded text-white h-3/4 p-2 bg-[#78C3DC] hover:bg-[#60A5BC] cursor-pointer'}>판매처 등록하기</div>
         </div>
         <hr className={'border-[#D3D3D3] border-1 mb-10'} />
         <div className={'flex w-full h-[600px]'}>
