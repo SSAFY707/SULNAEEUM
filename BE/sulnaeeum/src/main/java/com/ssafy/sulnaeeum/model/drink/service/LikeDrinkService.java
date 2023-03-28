@@ -61,7 +61,7 @@ public class LikeDrinkService {
             // 해당 술의 찜 수 증가
             cntLike(true, drinkId);
 
-            return "찜 성공";
+            return "like success";
         } else { // 이전에 찜 했을 경우
             // 기존에 저장되어있던 찜 내용 삭제
             likeDrinkRepo.deleteById(likeDrink.get().getLikeDrinkId());
@@ -69,7 +69,7 @@ public class LikeDrinkService {
             // 해당 술의 찜 수 감소
             cntLike(false, drinkId);
 
-            return "찜 취소";
+            return "like cancel";
         }
     }
 

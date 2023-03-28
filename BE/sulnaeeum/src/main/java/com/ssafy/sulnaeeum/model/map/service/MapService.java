@@ -81,7 +81,7 @@ public class MapService {
 
             List<String> drinkTypeList = new ArrayList<>();
             for(int drinkTypeId: drinkTypeIdList) {
-                Optional<String> drinkTypeName = drinkTypeRepo.findByDrinkTypeId((long)drinkTypeId);
+                Optional<String> drinkTypeName = drinkTypeRepo.findDrinkTypeName((long)drinkTypeId);
                 if(drinkTypeName.isEmpty()) {
                     throw new CustomException(CustomExceptionList.ROW_NOT_FOUND);
                 }
