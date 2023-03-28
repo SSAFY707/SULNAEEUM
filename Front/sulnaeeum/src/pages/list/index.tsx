@@ -15,11 +15,11 @@ export default function List(props: {type: string, sort: string}) {
     })
   }
   const setSort = (s : string) => {
-    window.location.href = `/list?type=${type}&sort=${s}`
-    // router.push({
-    //   pathname: '/list',
-    //   query: {type: type, sort: s}
-    // })
+    // window.location.href = `/list?type=${type}&sort=${s}`
+    router.push({
+      pathname: '/list',
+      query: {type: type, sort: s}
+    })
   }
   return (
     <>
