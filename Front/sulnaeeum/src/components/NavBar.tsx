@@ -5,6 +5,14 @@ import { useState } from "react";
 import { useDisclosure } from "@chakra-ui/react";
 import { useRef } from "react";
 
+
+function kakaoLogin() {
+  window.Kakao.Auth.authorize({
+    redirectUri: 'http://localhost:3000/user/kakao/callback',
+  });
+}
+
+
 function Navbar() {
   const [hover, setHover] = useState("");
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -65,9 +73,9 @@ function Navbar() {
         </li>
         <li className="max-[900px]:hidden w-[290px] pl-[20px] flex font-preL">
           <button>검색</button>
-          <Link href={"https://kauth.kakao.com/oauth/authorize?client_id=8ffe34463577f1799ebd2b1d8b64c61d&redirect_uri=http://localhost:3000/user/kakao/callback&response_type=code"}>
-            <div className="pl-[40px]">로그인</div>
-          </Link>
+          <div className="hover:bg-gray-100 ml-[40px] rounded-[4px] cursor-pointer" onClick={kakaoLogin}>
+            <div className="px-[20px] py-[6px]">로그인</div>
+          </div>
         </li>
       </ul>
       {hover == "On" ? (
