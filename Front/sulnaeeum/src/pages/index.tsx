@@ -51,11 +51,11 @@ export default function Home() {
         <title>SULNAEEUM | 술내음</title>
       </Head>
       <div className="h-[4900px] overflow-hidden scroll-smooth">
-        <div className="text-red-600 fixed z-30 right-1/2 top-1/2">
+        {/* <div className="text-red-600 fixed z-30 right-1/2 top-1/2">
           <p>Scroll Value : {scroll}</p>
           <p>translateY :{translateY}</p>
           <p>image : {imageX}</p>
-        </div>
+        </div> */}
 
         {/* PART 1 */}
         {/*흰 텍스트1 */}
