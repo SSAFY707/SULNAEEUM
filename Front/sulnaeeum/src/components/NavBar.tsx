@@ -1,9 +1,10 @@
 import Link from "next/link";
 import React from "react";
 import Image from "next/image";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useDisclosure } from "@chakra-ui/react";
 import { useRef } from "react";
+
 
 
 function kakaoLogin() {
@@ -14,6 +15,26 @@ function kakaoLogin() {
 
 
 function Navbar() {
+
+
+
+  const [login, setLogin] = useState<boolean>(false)
+
+
+  // window 객체가 존재하는지 확인하고 접근할 경우 정상적으로 접근된다.
+
+
+
+  useEffect(() => {
+    const check = sessionStorage.getItem('isLogin')
+    if (check) {
+      setLogin(true)
+    } else {
+      setLogin(false)
+    }
+  }, [])
+
+
   const [hover, setHover] = useState("");
   const { isOpen, onOpen, onClose } = useDisclosure();
   const btnRef = useRef();
@@ -27,6 +48,8 @@ function Navbar() {
     ["나만의 전통주", "선물하기"],
     ["검사하기"],
   ];
+
+
 
   //
   return (
@@ -73,9 +96,13 @@ function Navbar() {
         </li>
         <li className="max-[900px]:hidden w-[290px] pl-[20px] flex font-preL">
           <button>검색</button>
-          <div className="hover:bg-gray-100 ml-[40px] rounded-[4px] cursor-pointer" onClick={kakaoLogin}>
-            <div className="px-[20px] py-[6px]">로그인</div>
-          </div>
+
+          {login ? <div>로그인됨</div> :
+            <div className="hover:bg-gray-100 ml-[40px] rounded-[4px] cursor-pointer" onClick={kakaoLogin}>
+              <div className="px-[20px] py-[6px]">로그인</div>
+            </div>
+          }
+
         </li>
       </ul>
       {hover == "On" ? (

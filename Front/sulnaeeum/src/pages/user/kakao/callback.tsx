@@ -29,6 +29,7 @@ export default function callback(props: { code: string }) {
 
         accessToken = sessionStorage.getItem('accessToken')
 
+
         if (data.finish) {
           location.href = '/'
         } else {

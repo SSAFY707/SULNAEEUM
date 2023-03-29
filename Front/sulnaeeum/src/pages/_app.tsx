@@ -1,6 +1,6 @@
 import "@/styles/globals.css";
 import type { AppProps } from "next/app";
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import Head from "next/head";
 import NavBar from "../components/NavBar";
 import { ChakraProvider } from "@chakra-ui/react";
@@ -17,13 +17,17 @@ declare global {
   }
 }
 
+
+
 export default function App({ Component, pageProps }: AppProps) {
+
 
   function kakaoInit() { // 페이지가 로드되면 실행
     console.log('앱 로드 및 카카오 초기화')
     window.Kakao.init(process.env.NEXT_PUBLIC_KAKAO_JS_KEY);
     console.log(window.Kakao.isInitialized());
   }
+
 
 
 
