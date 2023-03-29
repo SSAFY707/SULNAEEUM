@@ -7,6 +7,9 @@ import com.ssafy.sulnaeeum.model.drink.dto.ReviewResponseDto;
 import com.ssafy.sulnaeeum.model.drink.service.DrinkService;
 import com.ssafy.sulnaeeum.model.drink.service.ReviewService;
 import com.ssafy.sulnaeeum.model.drink.service.LikeDrinkService;
+import com.ssafy.sulnaeeum.model.jumak.dto.JumakDto;
+import com.ssafy.sulnaeeum.model.jumak.dto.JumakInfoDto;
+import com.ssafy.sulnaeeum.model.jumak.service.JumakService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
@@ -32,6 +35,9 @@ public class DrinkController {
 
     @Autowired
     ReviewService reviewService;
+
+    @Autowired
+    JumakService jumakService;
 
     // =================================================================================================================
     // -----------------------------------------------   [ 회원 ]   -----------------------------------------------------
@@ -109,6 +115,15 @@ public class DrinkController {
     public ResponseEntity<DrinkDetailPageDto> getDrinkForUser(@PathVariable Long drinkId) {
         String kakaoId = SecurityContextHolder.getContext().getAuthentication().getName();
         return new ResponseEntity<>(drinkService.getDrinkDetailPage(drinkId, kakaoId), HttpStatus.OK);
+    }
+
+    /***
+     * [ 전통주 식당 등록 ]
+     ***/
+    @Operation(summary = "전통주 식당 등록", description = "전통주 식당에 대한 정보 등록")
+    @PostMapping("/jumak")
+    public ResponseEntity<String> insertJumak(@RequestBody JumakInfoDto jumakInfoDto) {
+        return new ResponseEntity<>(jumakService.insertJumak(jumakInfoDto), HttpStatus.OK);
     }
 
     // =================================================================================================================

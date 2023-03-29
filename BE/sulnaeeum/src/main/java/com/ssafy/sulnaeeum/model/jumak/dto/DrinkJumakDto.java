@@ -1,6 +1,7 @@
 package com.ssafy.sulnaeeum.model.jumak.dto;
 
 import com.ssafy.sulnaeeum.model.drink.dto.DrinkDto;
+import com.ssafy.sulnaeeum.model.jumak.entity.DrinkJumak;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -22,4 +23,12 @@ public class DrinkJumakDto {
 
     @Schema(description = "전통주")
     private JumakDto jumakDto;
+
+    //  DTO -> Entity 변환
+    public DrinkJumak toEntity() {
+        return DrinkJumak.builder()
+                .drinkJumakId(this.drinkJumakId)
+                .drink(this.drinkDto.toEntity())
+                .jumak(this.jumakDto.toEntity()).build();
+    }
 }
