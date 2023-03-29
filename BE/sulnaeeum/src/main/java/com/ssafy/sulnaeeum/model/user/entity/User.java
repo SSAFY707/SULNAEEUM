@@ -68,6 +68,11 @@ public class User {
         this.finish = finish;
     }
 
+    public void updateInfo(String sex, String age){
+        this.sex = sex;
+        this.age = age;
+    }
+
     // Entity -> DTO 변환
     public UserDto toDto() {
         return UserDto.builder()
