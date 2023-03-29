@@ -23,7 +23,7 @@ public class DrinkDetailPageDto {
     private List<ReviewResponseDto> reviewResponseDto;
 
     @Schema(description = "전통주 식당")
-    private JumakDto jumakDto;
+    private List<JumakDto> jumakDto;
 
     @Schema(description = "비슷한 술")
     private SimilarDrinkDto similarDrinkDto;

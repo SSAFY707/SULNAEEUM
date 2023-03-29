@@ -10,6 +10,7 @@ import com.ssafy.sulnaeeum.model.drink.entity.Review;
 import com.ssafy.sulnaeeum.model.drink.repo.DrinkRepo;
 import com.ssafy.sulnaeeum.model.drink.repo.ReviewRepo;
 import com.ssafy.sulnaeeum.model.drink.repo.MyDrinkRepo;
+import com.ssafy.sulnaeeum.model.user.dto.UserDto;
 import com.ssafy.sulnaeeum.model.user.entity.User;
 import com.ssafy.sulnaeeum.model.user.repo.UserRepo;
 import com.ssafy.sulnaeeum.model.user.service.UserService;
@@ -42,6 +43,8 @@ public class ReviewService {
     @Autowired
     UserService userService;
 
+    User user;
+
     // 리뷰 작성 or 수정 (전통주 클리어)
     @Transactional
     public String writeReview(Long drinkId, String kakaoId, ReviewRequestDto reviewRequestDto) {
@@ -61,14 +64,21 @@ public class ReviewService {
         if(review.isPresent()) {
             result = "update";
             updateAvg(1, drinkId, drinkDto.getReviewCnt(), drinkDto.getAvgScore(), resultReview.getScore(), review.get().getScore());
+
+            // 기존의 리뷰 아이디 그대로 유지
             resultReview.setReviewId(review.get().getReviewId());
         } else {
             result = "insert";
             updateAvg(0, drinkId, drinkDto.getReviewCnt(), drinkDto.getAvgScore(), resultReview.getScore(), 0);
+
+            // 리뷰 개수 증가
             cntReview(true, drinkId);
         }
-
         reviewRepo.save(resultReview);
+
+        // 랭킹 갱신
+        updateRanking();
+
         return "review " + result + " success";
     }
 
@@ -83,6 +93,7 @@ public class ReviewService {
             throw new CustomException(CustomExceptionList.ROW_NOT_FOUND);
         }
 
+        // 기존 리뷰에 대한 정보 조회 후 삭제 (평점 평균 갱신을 위함)
         Review resultReview = review.get();
         reviewRepo.delete(resultReview);
 
@@ -92,8 +103,12 @@ public class ReviewService {
         }
         DrinkDto drinkDto = drink.get().toDto();
 
+        // 평점평균 갱신 및 리뷰 개수 감소
         updateAvg(2, drinkId, drinkDto.getReviewCnt(), drinkDto.getAvgScore(), resultReview.getScore(), review.get().getScore());
         cntReview(false, drinkId);
+
+        // 랭킹 갱신
+        updateRanking();
 
         return "review delete success";
     }
@@ -130,6 +145,30 @@ public class ReviewService {
         DrinkDto drinkDto = drink.get().toDto();
         drinkDto.setAvgScore(result);
         drinkRepo.save(drinkDto.toEntity());
+    }
+
+    // 모든 회원 랭킹 갱신
+    @Transactional
+    public void updateRanking() {
+        List<User> userList = userRepo.findAll();
+        List<UserDto> userDtoList = userList.stream().map(UserDto::new).collect(Collectors.toList());
+
+        int allReviewCnt = reviewRepo.findAll().size();
+        for(UserDto userDto: userDtoList) {
+            Long userId = userDto.getUserId();
+            int myReviewCnt = reviewRepo.findByUserId(userId).size();
+
+            Optional<User> user = userRepo.findByUserId(userId);
+            if(user.isEmpty()) {
+                throw new CustomException(CustomExceptionList.MEMBER_NOT_FOUND);
+            }
+
+            if(allReviewCnt == 0) {
+                user.get().updateRanking(0);
+            } else {
+                user.get().updateRanking(myReviewCnt / allReviewCnt * 100);
+            }
+        }
     }
 
     // 해당 전통주의 내 리뷰 조회

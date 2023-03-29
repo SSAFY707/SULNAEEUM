@@ -1,5 +1,6 @@
 package com.ssafy.sulnaeeum.controller.drink;
 
+import com.ssafy.sulnaeeum.model.drink.dto.DrinkDetailPageDto;
 import com.ssafy.sulnaeeum.model.drink.dto.DrinkInfoDto;
 import com.ssafy.sulnaeeum.model.drink.dto.ReviewRequestDto;
 import com.ssafy.sulnaeeum.model.drink.dto.ReviewResponseDto;
@@ -98,16 +99,17 @@ public class DrinkController {
         return new ResponseEntity<>(reviewService.getMyReview(drinkId, kakaoId), HttpStatus.OK);
     }
 
-//    /***
-//     * [ 전통주 상세 페이지 조회 ]
-//     * - 해당 전통주 정보 중 필요한 정보들을 가공하여 모두 조회 (전통주 정보, 리뷰, 술집, 찜 및 클리어 여부 등)
-//     * - 비슷한 술 추천 정보 조회 (Flask 통해서 추천 정보 받아옴)
-//     ***/
-//    @Operation(summary = "전통주 상세 페이지", description = "전통주 상세 페이지 정보 모두 조회")
-//    @GetMapping("/detail/{drinkId}")
-//    public ResponseEntity<> getDrink(@PathVariable Long drinkId) {
-//        return new ResponseEntity<>();
-//    }
+    /***
+     * [ 전통주 상세 페이지 조회 ]
+     * - 해당 전통주 정보 중 필요한 정보들을 가공하여 모두 조회 (전통주 정보, 리뷰, 술집, 찜 및 클리어 여부 등)
+     * - 비슷한 술 추천 정보 조회 (Flask 통해서 추천 정보 받아옴)
+     ***/
+    @Operation(summary = "전통주 상세 페이지", description = "전통주 상세 페이지 정보 모두 조회")
+    @GetMapping("/detail/{drinkId}")
+    public ResponseEntity<DrinkDetailPageDto> getDrinkForUser(@PathVariable Long drinkId) {
+        String kakaoId = SecurityContextHolder.getContext().getAuthentication().getName();
+        return new ResponseEntity<>(drinkService.getDrinkDetailPage(drinkId, kakaoId), HttpStatus.OK);
+    }
 
     // =================================================================================================================
     // ----------------------------------------------   [ 비회원 ]   ----------------------------------------------------
@@ -133,5 +135,16 @@ public class DrinkController {
     @GetMapping("/n/review/{drinkId}")
     public ResponseEntity<List<ReviewResponseDto>> getAllReview(@PathVariable Long drinkId) {
         return new ResponseEntity<>(reviewService.getAllReview(drinkId), HttpStatus.OK);
+    }
+
+    /***
+     * [ 전통주 상세 페이지 조회 ]
+     * - 해당 전통주 정보 중 필요한 정보들을 가공하여 모두 조회 (전통주 정보, 리뷰, 술집 등)
+     * - 비슷한 술 추천 정보 조회 (Flask 통해서 추천 정보 받아옴)
+     ***/
+    @Operation(summary = "전통주 상세 페이지", description = "전통주 상세 페이지 정보 모두 조회")
+    @GetMapping("/n/detail/{drinkId}")
+    public ResponseEntity<DrinkDetailPageDto> getDrink(@PathVariable Long drinkId) {
+        return new ResponseEntity<>(drinkService.getDrinkDetailPage(drinkId, null), HttpStatus.OK);
     }
 }
