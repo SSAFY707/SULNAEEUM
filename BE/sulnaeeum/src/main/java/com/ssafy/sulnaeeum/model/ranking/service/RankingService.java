@@ -106,7 +106,7 @@ public class RankingService {
     @Transactional
     @Scheduled(cron = "0 0 0/1 * * *")
     public void jubtiRequest (){
-        String requestUrl = "http://localhost:5000/ranking";
+        String requestUrl = "http://j8a707.p.ssafy.io:5000/ranking";
         Map<String, List> params = null;
         List<List<Integer>> input_data = new ArrayList<>();
         List<JubtiResult> jubtiResultList = jubtiRepo.findAll();

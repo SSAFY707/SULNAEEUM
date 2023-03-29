@@ -3,6 +3,7 @@ package com.ssafy.sulnaeeum.model.jumak.entity;
 import com.ssafy.sulnaeeum.model.drink.entity.Drink;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
@@ -14,6 +15,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name="drink_jumak")
+@Getter
 public class DrinkJumak {
 
     @Id
