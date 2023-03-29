@@ -11,6 +11,12 @@ data_list = {}
 # 술 검색
 DRINK_INFO = "select drink_name, drink_amount, drink_level, drink_image from drink where drink_id = %s"
 
+# 술 재료 ID 검색
+DRINK_INGREDIENT_ID = "select ingredient_type_id from ingredient where drink_id = %s" 
+
+# 술 재료 검색
+DRINK_INGREDIENT = "select ingredient_name from ingredient_type where ingredient_type_id = %s" 
+
 # 술 맛 select 구문
 DRINK_TASTE = "select score from taste where drink_id = %s"
 
@@ -31,9 +37,9 @@ DRINK_DISH_CATEGORY = "select dish_category from dish where dish_id = %s"
 # DB 연결
 def db_connect():
     # DB 설정
-    conn = pymysql.connect(host='localhost',
+    conn = pymysql.connect(host='j8a707.p.ssafy.io',
                         user='root',
-                        password='a710&soez&mtc',
+                        password='A707sulnaeeumA707',
                         db='sulnaeeum',
                         charset='utf8')
     
@@ -149,8 +155,10 @@ make_drink_data()
 # ============================= 추천 API ============================
 
 
-# 컨텐츠 기반 추천 알고리즘 / 아이디, 이름, 도수, 용량, 사진
-@app.route("/recommend", methods=["POST"])
+# 컨텐츠 기반 추천 알고리즘
+# 요청 : 단, 신, 청, 향, 목, 바, 도, 안
+# 응답 : 아이디, 이름, 도수, 용량, 사진
+@app.route("/recommend/contents", methods=["POST"])
 def recommend_drink():
     parameter_dict = request.get_json()
 
@@ -209,6 +217,70 @@ def find_drink(input_data):
     
     return sorted(dis_dic.items(), key = lambda item: item[1])
 
+
+# 컨텐츠 기반 선물 추천 알고리즘
+# 요청 : 단, 신, 청, 향, 목, 바, 도, 안
+# 응답 : 아이디, 이름, 도수, 용량, 사진
+@app.route("/ranking", methods=["POST"])
+def ranking():
+    parameter_dict = request.get_json()
+    input_data = parameter_dict["input_data"]
+
+    data_size = len(input_data)
+
+    find_drink_id_dic = {}
+
+    conn = db_connect()
+    cur = conn.cursor()
+
+    for i in range(data_size):
+        print(input_data[i])
+
+        find_list = find_drink(input_data[i])
+        find_drink_id_dic[i] = []
+
+        for k in range(10):
+            drink_id = find_list[k][0]+1
+
+            this_drink_list = {}
+            this_drink_list['drink_id'] = drink_id 
+
+            cur.execute(DRINK_INFO, str(drink_id))
+            result = cur.fetchall()
+
+            this_drink_list['drink_name'] = result[0][0]
+            this_drink_list['drink_amount'] = result[0][1]
+            this_drink_list['drink_level'] = result[0][2]
+            this_drink_list['drink_image'] = result[0][3] 
+
+            cur.execute(DRINK_INGREDIENT_ID, str(drink_id))
+            ingredient_result_list = cur.fetchall()
+
+            ingredient_list = []            
+
+            for ingredient_result in ingredient_result_list:
+                ingredient_id = ingredient_result[0]
+                
+                cur.execute(DRINK_INGREDIENT, str(ingredient_id))
+                ingredient = cur.fetchall()[0][0]
+
+                ingredient_list.append(ingredient)
+            
+            # print(ingredient_list)                                                                                                                                                                                   
+            this_drink_list['drink_ingredient'] = ingredient_list
+
+            # print(i+1, "위 : ", result, "(", drink_id, ") / 유사도 : ", find_list[i][1])
+            # print(result, "술 정보 : ", data_list[drink_id-1])
+
+            find_drink_id_dic[i].append(this_drink_list)
+
+    print(find_drink_id_dic.keys())
+    for i in find_drink_id_dic:
+        print(find_drink_id_dic[i])
+ 
+    conn.close()
+
+    return find_drink_id_dic
 
 
 
