@@ -21,6 +21,8 @@ function Navbar() {
 
   const menu: string[] = ["전통주", "지도", "랭킹", "추천", "전통주 유형검사"];
   const url: string[] = ["/list", "/map", "/rank", "/recommend", "/jubti"];
+  const menuMainTab =
+    ["?sort=이름&type=전체", "", "", "", ""];
   const menuTab = [
     ["탁주", "약주/청주", "과실주", "증류주", "기타 주류"],
     ["양조장", "전통주 축제", "체험 프로그램"],
@@ -28,7 +30,7 @@ function Navbar() {
     ["나만의 전통주", "선물하기", "랜덤 추천"],
     ["검사하기"],
   ];
-  const menuTabUrl = ['sort="이름"&type=', "tab=", "", "tab=", ""];
+  const menuTabUrl = ['sort=이름&type=', "tab=", "", "tab=", ""];
 
   //
   return (
@@ -77,7 +79,7 @@ function Navbar() {
         >
           {menu.map((v, i) => {
             return (
-              <Link href={url[i] + ""} key={i}>
+              <Link href={url[i]+menuMainTab[i]} key={i}>
                 <div className="hover:border-b-2 hover:border-[#B58269] text-neutral-600 hover:font-preEB font-preM w-[110px] pt-[9px] h-[42px] text-center">
                   {v}
                   {hover == "On" ? (
@@ -86,7 +88,7 @@ function Navbar() {
                         return (
                           // 각 페이지 URL 넣어야함
                           <Link
-                            href={`${url[i]}?${menuTabUrl[i]}"${val}"`}
+                            href={`${url[i]}?${menuTabUrl[i]}${val}`}
                             key={idx}
                           >
                             <li className="hover:font-preB text-neutral-500 font-preR text-[16px] mt-[17px] ">
