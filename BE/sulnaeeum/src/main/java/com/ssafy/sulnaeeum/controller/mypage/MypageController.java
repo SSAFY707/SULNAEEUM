@@ -1,5 +1,6 @@
 package com.ssafy.sulnaeeum.controller.mypage;
 
+import com.ssafy.sulnaeeum.model.drink.dto.ClearDrinkListDto;
 import com.ssafy.sulnaeeum.model.drink.dto.LikeDrinkListDto;
 import com.ssafy.sulnaeeum.model.drink.service.LikeDrinkService;
 import com.ssafy.sulnaeeum.model.mypage.service.MypageService;
@@ -54,6 +55,27 @@ public class MypageController {
 
         return new ResponseEntity<>(likeDrinkListDto, HttpStatus.OK);
     }
+
+    /***
+     * [클리어한 전통주 조회]
+     ***/
+    @Operation(summary = "클리어한 전통주 조회", description = "클리어한 전통주 조회")
+    @GetMapping("/clear/drink")
+    public ResponseEntity<ClearDrinkListDto> getClearDrink() {
+
+        String kakaoId = SecurityContextHolder.getContext().getAuthentication().getName();
+
+        ClearDrinkListDto clearDrinkListDto = likeDrinkService.getClearDrink(kakaoId);
+
+        return new ResponseEntity<>(clearDrinkListDto, HttpStatus.OK);
+    }
+
+    /***
+     * [찜한 가게 조회]
+     ***/
+//    @Operation(summary = "찜한 가게 조회", description = "찜한 가게 조회")
+//    @GetMapping("/like/jumak")
+
 
     /***
      * [택스트 마이닝]

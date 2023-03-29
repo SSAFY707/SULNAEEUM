@@ -9,13 +9,14 @@ import lombok.experimental.SuperBuilder;
 
 import java.util.List;
 
-@Schema(description = "회원별 찜한 전통주 정보")
+@Schema(description = "회원별 클리어한 전통주 정보")
 @Data
 @SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class LikeDrinkListDto {
+public class ClearDrinkListDto {
+
     @Schema(description = "전통주")
-    private List<MyPageDrinkDto> userPreferenceDrink;
+    private List<MyPageDrinkDto> userClear;
 }
