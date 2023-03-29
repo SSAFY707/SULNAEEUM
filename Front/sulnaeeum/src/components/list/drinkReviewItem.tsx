@@ -10,7 +10,7 @@ export default function DrinkReviewItem(props: {review: ReviewType}) {
         <div className={'h-2/3 mb-5 overflow-hidden'}>{review.content}</div>
         <div className={'flex items-center'}>
             <img className={'h-[40px] rounded-full mr-4'} src={review.userImage as string} />
-            <div className={'font-preR text-[18px]'}>{review.id}</div>
+            <div className={'font-preR text-[18px]'}>{review.userName}</div>
         </div>
     </div>
   )

@@ -1,11 +1,11 @@
-import { toast } from 'react-toastify'
+import { toast, ToastPosition } from 'react-toastify'
 
-export const toastError = (content: string, icon : string) => {
+export const toastError = (content: string, icon : string, position: ToastPosition) => {
     return (
         toast.error(content, {
-            position: "top-right",
-            autoClose: 3000,
-            hideProgressBar: false,
+            position: position,
+            autoClose: 1500,
+            hideProgressBar: true,
             closeOnClick: true,
             pauseOnHover: false,
             draggable: true,
@@ -16,12 +16,12 @@ export const toastError = (content: string, icon : string) => {
     )
 }
 
-export const toastOK = (content: string, icon : string) => {
+export const toastOK = (content: string, icon : string, position: ToastPosition) => {
     return (
         toast.info(content, {
-            position: "top-right",
-            autoClose: 3000,
-            hideProgressBar: false,
+            position: position,
+            autoClose: 1500,
+            hideProgressBar: true,
             closeOnClick: true,
             pauseOnHover: false,
             draggable: true,

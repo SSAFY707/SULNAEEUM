@@ -1,4 +1,4 @@
-import { BACKEND_URL } from '@/config/config';
+import { BACKEND_URL, SEARCH_URL } from '@/config/config';
 import axios, { AxiosInstance } from 'axios';
 
 // const SERVER_URL = 'http://localhost:9090/api/'
@@ -57,3 +57,7 @@ export const logout = () => {
   localStorage.removeItem('access_token');
   window.location.href = '/login';
 };
+
+export const searchAxios: AxiosInstance = axios.create({
+  baseURL: `${SEARCH_URL}`,
+});

@@ -1,6 +1,7 @@
 import { Rating } from '@/components/common/Rating'
 import { toastError, toastOK } from '@/components/common/toast'
 import { tasteType } from '@/types/DataTypes'
+import { ReviewWriteType } from '@/types/DrinkType'
 import React, { useState } from 'react'
 
 export default function DrinkClear(props: {drinkName: string, modalOpen}) {
@@ -41,7 +42,7 @@ export default function DrinkClear(props: {drinkName: string, modalOpen}) {
 
     const submit = () => {
         if(!rate){
-            toastError('별점을 등록해 주세요', "📌")
+            toastError('별점을 등록해 주세요', "📌", 'top-right')
             return
         }
         const arr = ['tasteFlavor', 'tasteSweet', 'tasteSour', 'tasteThroat', 'tasteBody', 'tasteRefresh']
@@ -53,17 +54,22 @@ export default function DrinkClear(props: {drinkName: string, modalOpen}) {
             }
         });
         if(!flag){
-            toastError('상세 항목을 모두 선택해주세요', "📌")
+            toastError('상세 항목을 모두 선택해주세요', "📌", 'top-right')
             return
         }
-        const data = {
-            taste: taste,
-            rate : rate,
+        const data : ReviewWriteType = {
+            score: rate,
+            sweetScore: taste.tasteSweet,
+            sourScore : taste.tasteSour,
+            flavorScore : taste.tasteFlavor,
+            throatScore : taste.tasteThroat,
+            bodyScore : taste.tasteBody,
+            refreshScore : taste.tasteRefresh,
             content : content,
         }
         console.log(data)
-        toastOK('리뷰가 등록되었습니다.', '✨')
         modalOpen()
+        toastOK('리뷰가 등록되었습니다.', '✨', 'top-center')
     }
   return (
     <div className={'flex flex-col items-center w-full h-full p-4'}>

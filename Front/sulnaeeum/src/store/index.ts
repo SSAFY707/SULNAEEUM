@@ -1,36 +1,20 @@
-import { configureStore } from "@reduxjs/toolkit";
-import { HYDRATE, createWrapper, MakeStore } from "next-redux-wrapper";
-import { TypedUseSelectorHook, useSelector as useReduxSelector } from "react-redux";
-import { combineReducers } from "redux";
-import drinkSlice from "./drinkSlice";
+import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
+import drinkSlice from './drinkSlice';
+import searchSlice from './searchSlice';
 
-const rootRedux = combineReducers({
-   drink: drinkSlice,
-})
+export const store = configureStore({
+  reducer: {
+    // slice 삽입. slice의 name을 key값으로 사용
+    drink : drinkSlice,
+    search: searchSlice
+  },
+});
 
-// 스토어 타입
-export type RootState = ReturnType<typeof rootRedux>;
-let initialRootState: RootState;
-const reducer = (state: any, action:any) =>{
-   if(action.type === HYDRATE){
-       if(state === initialRootState){
-           return {
-               ...state,
-               ...action.payload,
-           }
-       }
-       return state
-   };
-   return rootRedux(state, action);
-};
-// 타입 지원되는 커스텀 useSelector 만들기
-export const useSelector: TypedUseSelectorHook<RootState> = useReduxSelector;
-const initStore = () => {
-   const store = configureStore({
-     reducer,
-     devTools: true,
-   });
-   initialRootState = store.getState();
-   return store;
- };
- export const wrapper = createWrapper(initStore);
+export type AppDispatch = typeof store.dispatch;
+export type RootState = ReturnType<typeof store.getState>;
+export type AppThunk<ReturnType = void> = ThunkAction<
+  ReturnType,
+  RootState,
+  unknown,
+  Action<string>
+>;
