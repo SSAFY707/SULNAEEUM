@@ -46,6 +46,7 @@ public class UserPreferenceService {
 
         userPreferenceRepo.save(userPreference);
         user.updateFinish(true);
+        user.updateInfo(userPreferenceDto.getSex(), userPreferenceDto.getAge());
     }
 
     /***
