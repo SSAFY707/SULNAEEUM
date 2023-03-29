@@ -23,12 +23,8 @@ export default function App({ Component, pageProps }: AppProps) {
 
 
   function kakaoInit() { // 페이지가 로드되면 실행
-    console.log('앱 로드 및 카카오 초기화')
     window.Kakao.init(process.env.NEXT_PUBLIC_KAKAO_JS_KEY);
-    console.log(window.Kakao.isInitialized());
   }
-
-
 
 
   return (
