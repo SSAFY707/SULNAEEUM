@@ -4,24 +4,11 @@ import React, { useEffect } from 'react'
 export default function Result (props: any) {
     const router = useRouter()
     const { result, mbti } = props
-    
-    useEffect(()=>{
-        initialize()
-    }, [])
-    
-    const initialize = () => {
-        if (window.Kakao) {
-            const kakao = window.Kakao
-            if (!kakao.isInitialized()) {
-                kakao.init(process.env.NEXT_PUBLIC_KAKAO_API_KEY);
-            }
-        }
-    }
 
     const share = () => {
         const {Kakao} = window;
         Kakao.Link.sendCustom({
-            templateId: 91440,
+            templateId: 91868,
             templateArgs: {
                 name: result.name,
             }
