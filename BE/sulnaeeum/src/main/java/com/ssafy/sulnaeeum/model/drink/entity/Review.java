@@ -6,6 +6,7 @@ import com.ssafy.sulnaeeum.model.user.dto.UserDto;
 import com.ssafy.sulnaeeum.model.user.entity.User;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
@@ -17,6 +18,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name="review")
+@Getter
 public class Review {
 
     @Id

@@ -42,6 +42,12 @@ public class UserPreferenceDto {
     @Schema(description = "가중치")
     private String weight; // 가중치
 
+    @Schema(description = "연령대")
+    private String age;
+
+    @Schema(description = "성별")
+    private String sex;
+
     public UserPreference toEntity() {
 
         return UserPreference.builder()

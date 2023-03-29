@@ -1,8 +1,8 @@
 package com.ssafy.sulnaeeum.model.drink.entity;
 
 import com.ssafy.sulnaeeum.model.drink.dto.DrinkDetailDto;
-import com.ssafy.sulnaeeum.model.drink.dto.DrinkDetailPageDto;
 import com.ssafy.sulnaeeum.model.drink.dto.DrinkDto;
+import com.ssafy.sulnaeeum.model.drink.dto.MyPageDrinkDto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -81,5 +81,17 @@ public class Drink {
                 .drinkLevel(this.drinkLevel)
                 .drinkTypeName(this.drinkType.getDrinkTypeName())
                 .avgScore(this.avgScore).build();
+    }
+
+    // Entity -> MyLikeDrinkDto 변환
+    public MyPageDrinkDto toMyLikeDrinkDto() {
+        return MyPageDrinkDto.builder()
+                .drinkId(this.drinkId)
+                .drinkName(this.drinkName)
+                .drinkImage(this.drinkImage)
+                .drinkAmount(this.drinkAmount)
+                .drinkLevel(this.drinkLevel)
+                .drinkType(this.drinkType.toDto().getDrinkTypeName())
+                .build();
     }
 }
