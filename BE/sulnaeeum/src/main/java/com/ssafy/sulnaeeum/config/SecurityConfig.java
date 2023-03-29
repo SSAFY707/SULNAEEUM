@@ -13,6 +13,7 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.web.cors.CorsUtils;
 
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true) // @PreAuthorize 어노테이션을 메소드 단위로 추가해주기 위해 적용
@@ -65,6 +66,7 @@ public class SecurityConfig {
                 .and()
                 .authorizeRequests()
                 .antMatchers(PERMIT_URL_ARRAY).permitAll()
+                .requestMatchers(CorsUtils::isPreFlightRequest).permitAll()
                 .anyRequest().authenticated()
 
                 .and()
