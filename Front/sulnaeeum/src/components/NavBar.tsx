@@ -14,6 +14,13 @@ function kakaoLogin() {
   });
 }
 
+function kakaoLogout() {
+  window.Kakao.Auth.authorize({
+    redirectUri: 'http://localhost:3000/user/kakao/logout',
+  });
+}
+
+
 
 function Navbar() {
 
@@ -102,7 +109,7 @@ function Navbar() {
         >
           {menu.map((v, i) => {
             return (
-              <Link href={url[i]+menuMainTab[i]} key={i}>
+              <Link href={url[i] + menuMainTab[i]} key={i}>
                 <div className="hover:border-b-2 hover:border-[#B58269] text-neutral-600 hover:font-preEB font-preM w-[110px] pt-[9px] h-[42px] text-center">
                   {v}
                   {hover == "On" ? (
@@ -132,7 +139,10 @@ function Navbar() {
         <li className="max-[900px]:hidden w-[290px] pl-[20px] flex font-preL">
           <button>검색</button>
 
-          {login ? <div>로그인됨</div> :
+          {login ?
+            <div className="hover:bg-gray-100 ml-[40px] rounded-[4px] cursor-pointer" onClick={kakaoLogout}>
+              <div className="px-[20px] py-[6px]">로그아웃</div>
+            </div> :
             <div className="hover:bg-gray-100 ml-[40px] rounded-[4px] cursor-pointer" onClick={kakaoLogin}>
               <div className="px-[20px] py-[6px]">로그인</div>
             </div>
