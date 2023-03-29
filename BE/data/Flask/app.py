@@ -285,8 +285,8 @@ def ranking():
 
 
 
-if __name__ == "__main__":
-    app.run()
+# if __name__ == "__main__":
+#     app.run()
 
 
 # @app.route('/')
@@ -294,6 +294,6 @@ if __name__ == "__main__":
 #     make_drink_data()
 #     app.run()
 
-# if __name__ == "__main__":
+if __name__ == "__main__":
 #     init_scheduler()
-#     app.run(host="0.0.0.0", port=int("5000"), debug=True)
+    app.run(host="0.0.0.0", port=int("5000"), debug=True)
