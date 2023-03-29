@@ -80,4 +80,8 @@ public class User {
                 .ranking(this.ranking)
                 .finish(this.finish).build();
     }
+
+    public void updateRanking(int ranking) {
+        this.ranking = ranking;
+    }
 }

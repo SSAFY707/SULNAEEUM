@@ -36,6 +36,18 @@ public class UserDto {
     @Schema(description = "finish")
     private boolean finish;
 
+    // 생성자 (List<Entity> -> List<DTO> 변환을 위함)
+    public UserDto(User user) {
+        this.userId = user.getUserId();
+        this.kakaoId = user.getKakaoId();
+        this.nickname = user.getNickname();
+        this.age = user.getAge();
+        this.sex = user.getSex();
+        this.img = user.getImg();
+        this.ranking = user.getRanking();
+        this.finish = user.isFinish();
+    }
+
     // DTO -> Entity 변환
     public User toEntity() {
         return User.builder()
