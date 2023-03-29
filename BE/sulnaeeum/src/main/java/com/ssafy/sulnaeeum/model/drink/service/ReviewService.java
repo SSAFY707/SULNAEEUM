@@ -156,7 +156,7 @@ public class ReviewService {
         int allReviewCnt = reviewRepo.findAll().size();
         for(UserDto userDto: userDtoList) {
             Long userId = userDto.getUserId();
-            int myReviewCnt = reviewRepo.findByUserId(userId).size();
+            int myReviewCnt = reviewRepo.findAllByDrinkId(userId).size();
 
             Optional<User> user = userRepo.findByUserId(userId);
             if(user.isEmpty()) {

@@ -2,13 +2,14 @@ package com.ssafy.sulnaeeum.model.drink.service;
 
 import com.ssafy.sulnaeeum.exception.CustomException;
 import com.ssafy.sulnaeeum.exception.CustomExceptionList;
-import com.ssafy.sulnaeeum.model.drink.dto.DrinkDto;
+import com.ssafy.sulnaeeum.model.drink.dto.*;
 import com.ssafy.sulnaeeum.model.drink.entity.Drink;
+import com.ssafy.sulnaeeum.model.drink.entity.MyDrink;
+import com.ssafy.sulnaeeum.model.drink.entity.Review;
 import com.ssafy.sulnaeeum.model.drink.repo.DrinkRepo;
-import com.ssafy.sulnaeeum.model.drink.dto.LikeDrinkDto;
-import com.ssafy.sulnaeeum.model.drink.dto.LikeDrinkListDto;
 import com.ssafy.sulnaeeum.model.drink.entity.LikeDrink;
 import com.ssafy.sulnaeeum.model.drink.repo.LikeDrinkRepo;
+import com.ssafy.sulnaeeum.model.drink.repo.ReviewRepo;
 import com.ssafy.sulnaeeum.model.user.entity.User;
 import com.ssafy.sulnaeeum.model.user.repo.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +34,9 @@ public class LikeDrinkService {
 
     @Autowired
     DrinkService drinkService;
+
+    @Autowired
+    ReviewRepo reviewRepo;
 
     // 전통주 찜
     @Transactional
@@ -91,11 +95,26 @@ public class LikeDrinkService {
         User user = userRepo.findByKakaoId(kakaoId).orElseThrow(() -> new CustomException(CustomExceptionList.MEMBER_NOT_FOUND));
         List<LikeDrink> likeDrinks = likeDrinkRepo.findByUserId(user.getUserId());
 
-        List<DrinkDto> likeDrinkList = new ArrayList<>();
+        List<MyPageDrinkDto> likeDrinkList = new ArrayList<>();
         for (LikeDrink likeDrink : likeDrinks) {
-            likeDrinkList.add(likeDrink.getDrink().toDto());
+            likeDrinkList.add(likeDrink.getDrink().toMyLikeDrinkDto());
         }
 
-        return LikeDrinkListDto.builder().likeDrinkList(likeDrinkList).build();
+        return LikeDrinkListDto.builder().userPreferenceDrink(likeDrinkList).build();
+    }
+
+    // 클리어한 전통주 조회
+    @Transactional
+    public ClearDrinkListDto getClearDrink (String kakaoId) {
+
+        User user = userRepo.findByKakaoId(kakaoId).orElseThrow(() -> new CustomException(CustomExceptionList.MEMBER_NOT_FOUND));
+        List<Review> clearDrinks = reviewRepo.findAllByDrinkId(user.getUserId());
+
+        List<MyPageDrinkDto> clearDrinkList = new ArrayList<>();
+        for (Review clearDrink : clearDrinks) {
+            clearDrinkList.add(clearDrink.getDrink().toMyLikeDrinkDto());
+        }
+
+        return ClearDrinkListDto.builder().userClear(clearDrinkList).build();
     }
 }
