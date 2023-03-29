@@ -16,7 +16,7 @@ declare global {
 export default function App({ Component, pageProps }: AppProps) {
 
   function kakaoInit() { // 페이지가 로드되면 실행
-    window.Kakao.init(process.env.NEXT_PUBLIC_KAKAO_LOGIN_KEY);
+    window.Kakao.init(process.env.NEXT_PUBLIC_KAKAO_JS_KEY);
     console.log('app 첫 시작과 동시에 실행')
     console.log(window.Kakao.isInitialized());
   }
