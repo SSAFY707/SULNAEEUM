@@ -3,6 +3,8 @@ package com.ssafy.sulnaeeum.controller.mypage;
 import com.ssafy.sulnaeeum.model.drink.dto.ClearDrinkListDto;
 import com.ssafy.sulnaeeum.model.drink.dto.LikeDrinkListDto;
 import com.ssafy.sulnaeeum.model.drink.service.LikeDrinkService;
+import com.ssafy.sulnaeeum.model.jumak.dto.LikeJumakListDto;
+import com.ssafy.sulnaeeum.model.jumak.service.MyJumakService;
 import com.ssafy.sulnaeeum.model.mypage.service.MypageService;
 import com.ssafy.sulnaeeum.model.user.dto.UserDto;
 import io.swagger.v3.oas.annotations.Operation;
@@ -27,6 +29,7 @@ public class MypageController {
     private static final String FAIL = "fail";
     private final LikeDrinkService likeDrinkService;
     private final MypageService mypageService;
+    private final MyJumakService myJumakService;
 
     /***
      * [프로필 조회]
@@ -73,8 +76,16 @@ public class MypageController {
     /***
      * [찜한 가게 조회]
      ***/
-//    @Operation(summary = "찜한 가게 조회", description = "찜한 가게 조회")
-//    @GetMapping("/like/jumak")
+    @Operation(summary = "찜한 가게 조회", description = "찜한 가게 조회")
+    @GetMapping("/like/jumak")
+    public ResponseEntity<LikeJumakListDto> getLikeJumak() {
+
+        String kakaoId = SecurityContextHolder.getContext().getAuthentication().getName();
+
+        LikeJumakListDto likeJumakListDto = myJumakService.getLikeJumak(kakaoId);
+
+        return new ResponseEntity<>(likeJumakListDto, HttpStatus.OK);
+    }
 
 
     /***

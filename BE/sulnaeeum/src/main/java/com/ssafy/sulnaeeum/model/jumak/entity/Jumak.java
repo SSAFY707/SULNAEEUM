@@ -26,4 +26,6 @@ public class Jumak {
     private String jumakUrl; // 카카오맵 링크
 
     private String jumakLocation; // 주소
+
+
 }
