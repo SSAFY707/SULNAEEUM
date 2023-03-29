@@ -47,6 +47,9 @@ public class DrinkDto {
     @Schema(description = "리뷰 개수")
     private int reviewCnt;
 
+    @Schema(description = "평점 평균")
+    private double avgScore;
+
 //    // 생성자 (List<Entity> -> List<DTO> 변환을 위함)
 //    public DrinkDto(Drink drink) {
 //        this.drinkId = drink.getDrinkId();
@@ -75,6 +78,7 @@ public class DrinkDto {
                 .drinkLevel(this.drinkLevel)
                 .drinkType(this.drinkTypeDto.toEntity())
                 .likeCnt(this.likeCnt)
-                .reviewCnt(this.reviewCnt).build();
+                .reviewCnt(this.reviewCnt)
+                .avgScore(this.avgScore).build();
     }
 }

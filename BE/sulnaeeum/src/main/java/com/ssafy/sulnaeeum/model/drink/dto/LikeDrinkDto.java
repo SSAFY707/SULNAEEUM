@@ -1,7 +1,7 @@
-package com.ssafy.sulnaeeum.model.mypage.dto;
+package com.ssafy.sulnaeeum.model.drink.dto;
 
 import com.ssafy.sulnaeeum.model.drink.dto.DrinkDto;
-import com.ssafy.sulnaeeum.model.mypage.entity.LikeDrink;
+import com.ssafy.sulnaeeum.model.drink.entity.LikeDrink;
 import com.ssafy.sulnaeeum.model.user.dto.UserDto;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;

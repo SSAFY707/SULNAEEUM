@@ -1,5 +1,7 @@
 package com.ssafy.sulnaeeum.model.drink.entity;
 
+import com.ssafy.sulnaeeum.model.drink.dto.DrinkDetailDto;
+import com.ssafy.sulnaeeum.model.drink.dto.DrinkDetailPageDto;
 import com.ssafy.sulnaeeum.model.drink.dto.DrinkDto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -47,6 +49,8 @@ public class Drink {
 
     private int reviewCnt; // 리뷰 개수
 
+    private double avgScore; // 평점 평균
+
     // Entity -> DTO 변환
     public DrinkDto toDto() {
         return DrinkDto.builder()
@@ -60,6 +64,22 @@ public class Drink {
                 .drinkLevel(this.drinkLevel)
                 .drinkTypeDto(this.drinkType.toDto())
                 .likeCnt(this.likeCnt)
-                .reviewCnt(this.reviewCnt).build();
+                .reviewCnt(this.reviewCnt)
+                .avgScore(this.avgScore).build();
+    }
+
+    // DrinkEntity -> DrinkDetailDto (like, clear는 없음 - 나중에 set 할 예정)
+    public DrinkDetailDto toDrinkDetailDto() {
+        return DrinkDetailDto.builder()
+                .drinkId(this.drinkId)
+                .drinkName(this.drinkName)
+                .drinkInfo(this.drinkInfo)
+                .drinkImage(this.drinkImage)
+                .drinkSaleUrl(this.drinkSaleUrl)
+                .drinkPrice(this.drinkPrice)
+                .drinkAmount(this.drinkAmount)
+                .drinkLevel(this.drinkLevel)
+                .drinkTypeName(this.drinkType.getDrinkTypeName())
+                .avgScore(this.avgScore).build();
     }
 }

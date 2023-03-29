@@ -1,7 +1,6 @@
 package com.ssafy.sulnaeeum.model.drink.repo;
 
 import com.ssafy.sulnaeeum.model.drink.entity.Drink;
-import com.ssafy.sulnaeeum.model.mypage.entity.LikeDrink;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -16,7 +15,8 @@ public interface DrinkRepo extends JpaRepository<Drink, Integer> {
     Optional<Drink> findByDrinkId(Long drinkId);
 
     // drink_type_id로 찾기
-    List<Drink> findByDrinkType(Long drinkTypeId);
+    @Query(value = "select * from drink where drink_type_id = ?1", nativeQuery = true)
+    List<Drink> findByDrinkTypeId(Long drinkTypeId);
 
     List<Drink> findTop10ByOrderByLikeCntDesc();
 

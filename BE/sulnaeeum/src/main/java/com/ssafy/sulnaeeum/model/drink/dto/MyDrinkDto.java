@@ -1,5 +1,6 @@
 package com.ssafy.sulnaeeum.model.drink.dto;
 
+import com.ssafy.sulnaeeum.model.drink.entity.MyDrink;
 import com.ssafy.sulnaeeum.model.user.dto.UserDto;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
@@ -22,4 +23,18 @@ public class MyDrinkDto {
 
     @Schema(description = "회원")
     private UserDto userDto;
+
+    // 생성자
+    public MyDrinkDto(DrinkDto drinkDto, UserDto userDto) {
+        this.drinkDto = drinkDto;
+        this.userDto = userDto;
+    }
+
+    // DTO -> Entity 변환
+    public MyDrink toEntity() {
+        return MyDrink.builder()
+                .myDrinkId(this.myDrinkId)
+                .drink(this.drinkDto.toEntity())
+                .user(this.userDto.toEntity()).build();
+    }
 }

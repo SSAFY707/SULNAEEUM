@@ -3,7 +3,6 @@ package com.ssafy.sulnaeeum.model.user.service;
 import com.ssafy.sulnaeeum.exception.CustomException;
 import com.ssafy.sulnaeeum.exception.CustomExceptionList;
 import com.ssafy.sulnaeeum.jwt.TokenProvider;
-import com.ssafy.sulnaeeum.model.user.dto.UserDto;
 import com.ssafy.sulnaeeum.model.user.dto.UserPreferenceDto;
 import com.ssafy.sulnaeeum.model.user.entity.UserPreference;
 import com.ssafy.sulnaeeum.model.user.repo.UserPreferenceRepo;

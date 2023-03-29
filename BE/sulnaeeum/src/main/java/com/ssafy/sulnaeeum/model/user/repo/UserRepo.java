@@ -17,4 +17,8 @@ public interface UserRepo extends JpaRepository<User, Long> {
     // kakao_id로 user_id 찾기
     @Query(value = "select user_id from user where kakao_id = ?1", nativeQuery = true)
     Optional<Long> findUserId(String kakaoId);
+
+    // user_id로 User 찾기
+    @Query(value = "select * from user where user_id = ?1", nativeQuery = true)
+    Optional<User> findByUserId(Long userId);
 }

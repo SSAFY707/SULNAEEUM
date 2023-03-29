@@ -6,19 +6,25 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
-@Schema(description = "전통주 정보 (검색용)")
+@Schema(description = "비슷한 술")
 @Data
 @SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
-public class DrinkSearchDto {
+public class SimilarDrinkDto {
 
     @Schema(description = "아이디 (auto_increment)")
     private Long drinkId;
 
-    @Schema(description = "이름")
+    @Schema(description = "전통주 이름")
     private String drinkName;
 
-    @Schema(description = "이미지")
+    @Schema(description = "전통주 이미지")
     private String drinkImage;
+
+    @Schema(description = "도수")
+    private int drinkLevel;
+
+    @Schema(description = "용량")
+    private String drinkAmount;
 }

@@ -1,15 +1,14 @@
-package com.ssafy.sulnaeeum.model.mypage.service;
+package com.ssafy.sulnaeeum.model.drink.service;
 
 import com.ssafy.sulnaeeum.exception.CustomException;
 import com.ssafy.sulnaeeum.exception.CustomExceptionList;
 import com.ssafy.sulnaeeum.model.drink.dto.DrinkDto;
 import com.ssafy.sulnaeeum.model.drink.entity.Drink;
 import com.ssafy.sulnaeeum.model.drink.repo.DrinkRepo;
-import com.ssafy.sulnaeeum.model.drink.service.DrinkService;
-import com.ssafy.sulnaeeum.model.mypage.dto.LikeDrinkDto;
-import com.ssafy.sulnaeeum.model.mypage.dto.LikeDrinkListDto;
-import com.ssafy.sulnaeeum.model.mypage.entity.LikeDrink;
-import com.ssafy.sulnaeeum.model.mypage.repo.LikeDrinkRepo;
+import com.ssafy.sulnaeeum.model.drink.dto.LikeDrinkDto;
+import com.ssafy.sulnaeeum.model.drink.dto.LikeDrinkListDto;
+import com.ssafy.sulnaeeum.model.drink.entity.LikeDrink;
+import com.ssafy.sulnaeeum.model.drink.repo.LikeDrinkRepo;
 import com.ssafy.sulnaeeum.model.user.entity.User;
 import com.ssafy.sulnaeeum.model.user.repo.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -62,7 +61,7 @@ public class LikeDrinkService {
             // 해당 술의 찜 수 증가
             cntLike(true, drinkId);
 
-            return "찜 성공";
+            return "like success";
         } else { // 이전에 찜 했을 경우
             // 기존에 저장되어있던 찜 내용 삭제
             likeDrinkRepo.deleteById(likeDrink.get().getLikeDrinkId());
@@ -70,7 +69,7 @@ public class LikeDrinkService {
             // 해당 술의 찜 수 감소
             cntLike(false, drinkId);
 
-            return "찜 취소";
+            return "like cancel";
         }
     }
 
