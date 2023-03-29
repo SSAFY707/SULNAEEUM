@@ -45,7 +45,12 @@ const drinkSlice = createSlice({
         drink : initDrinkInfo
     },
     reducers: {
-
+        setDrinkLike(state, {payload: input}) {
+            const new_drinkList = [...state.drinkList]
+            new_drinkList[input].like = !new_drinkList[input].like
+            state.drinkList = new_drinkList
+            return
+        }
     },
     extraReducers: (builder) => {
         builder.addCase(getDrinkDetail.fulfilled, (state, action)=>{
@@ -54,10 +59,13 @@ const drinkSlice = createSlice({
         })
         builder.addCase(getDrinkList.fulfilled, (state, action)=>{
             state.drinkList = action.payload
-            console.log(state.drinkList, '리스트 가져오기 성공!')
+            // console.log(state.drinkList, '리스트 가져오기 성공!')
         })
     }
 })
+
+// reducer export
+export const { setDrinkLike } = drinkSlice.actions 
 
 export const drinkList = (state : RootState)=>state.drink.drinkList
 export default drinkSlice.reducer;

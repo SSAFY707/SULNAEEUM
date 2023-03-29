@@ -8,6 +8,7 @@ export default function List(props: {type: string, sort: string}) {
 
   const typeArr : Array<string> = ['전체', '탁주', '약주/청주', '과실주', '증류주', '기타']
   const sortArr : string[] = ['이름', '인기', '높은도수', '낮은도수']
+  
   const setType = (t : string) => {
     router.push({
       pathname: '/list',
@@ -15,7 +16,6 @@ export default function List(props: {type: string, sort: string}) {
     })
   }
   const setSort = (s : string) => {
-    // window.location.href = `/list?type=${type}&sort=${s}`
     router.push({
       pathname: '/list',
       query: {type: type, sort: s}

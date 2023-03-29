@@ -1,10 +1,12 @@
 {
     "development": {
         "BACKEND_URL" : "https://j8a707.p.ssafy.io/api/",
-        "REDIRECT_URL" : "http://localhost:3000"
+        "REDIRECT_URL" : "https://j8a707.p.ssafy.io/api/",
+        "SEARCH_URL" : "https://j8a707.p.ssafy.io/es/_search"
     },
     "production": {
         "BACKEND_URL" : "https://j8a707.p.ssafy.io/api/",
-        "REDIRECT_URL" : "http://localhost:3000"
+        "REDIRECT_URL" : "https://j8a707.p.ssafy.io/api/",
+        "SEARCH_URL" : "https://j8a707.p.ssafy.io/es/_search"
     }
 }

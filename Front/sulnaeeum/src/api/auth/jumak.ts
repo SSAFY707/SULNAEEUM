@@ -15,17 +15,15 @@ export async function CNU_CK (cnu : any) {
         
         const result  = await axios.post(postUrl,JSON.stringify(data),{ headers: { 'Content-Type': 'application/json' } }
         ).then((res) => { 
-            console.log(res)
             return res.data.data[0].tax_type
         }).catch((err)=> {
             console.log(err)
         });
-        console.log(result)
         if (result == '국세청에 등록되지 않은 사업자등록번호입니다.'){
-            toastError("등록되지 않은 번호입니다.", '🚨')
+            toastError("등록되지 않은 번호입니다.", '🚨', 'top-right')
             return false;
         }else {
-            toastOK("인증되었습니다.", "✨")
+            toastOK("인증되었습니다.", "✨", 'top-right')
             return true;
         }
     };
