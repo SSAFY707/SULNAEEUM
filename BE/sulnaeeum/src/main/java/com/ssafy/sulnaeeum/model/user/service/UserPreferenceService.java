@@ -54,7 +54,7 @@ public class UserPreferenceService {
     @Transactional
     public Map<String, Map<String, String>> recommendUserDrink(UserPreferenceDto userPreferenceDto) {
 
-        String requestUrl = "http://localhost:5000/recommend/contents";
+        String requestUrl = "http://j8a707.p.ssafy.io:5000/recommend/contents";
 
         Map<String, List> params = new HashMap<>();
 
