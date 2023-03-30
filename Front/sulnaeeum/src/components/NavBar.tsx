@@ -21,7 +21,7 @@ function kakaoLogin() {
 
 const kakaoLogout = async () => {
 
-  await authAxios.get("https://j8a707.p.ssafy.io/api/user/kakao/logout")
+  await authAxios.get(`user/kakao/logout`)
     .then((res) => {
       console.log('로그아웃 성공')
       console.log(res)
