@@ -11,6 +11,7 @@ import com.ssafy.sulnaeeum.model.jumak.repo.JumakRepo;
 import com.ssafy.sulnaeeum.model.user.dto.UserPreferenceDto;
 import com.ssafy.sulnaeeum.model.user.service.UserService;
 import com.ssafy.sulnaeeum.util.FlaskUtil;
+import io.swagger.v3.core.util.Json;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -236,7 +237,7 @@ public class DrinkService {
         String requestUrl = "http://j8a707.p.ssafy.io:5000/recommend/contents";
         JSONObject jsonObject = flaskUtil.requestFlask(requestUrl, params);
 
-        SimilarDrinkDto similarDrinkDto = new SimilarDrinkDto(jsonObject);
+        SimilarDrinkDto similarDrinkDto = new SimilarDrinkDto((JSONObject)jsonObject.get("0"));
         return similarDrinkDto;
     }
 }

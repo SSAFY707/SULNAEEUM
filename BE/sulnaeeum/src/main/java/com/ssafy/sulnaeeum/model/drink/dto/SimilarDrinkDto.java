@@ -29,11 +29,11 @@ public class SimilarDrinkDto {
     @Schema(description = "용량")
     private String drinkAmount;
 
-    public SimilarDrinkDto(JSONObject jsonValue) {
-        this.drinkId = Long.parseLong(jsonValue.get("drink_id").toString());
-        this.drinkName = jsonValue.get("drink_name").toString();
-        this.drinkImage = jsonValue.get("drink_image").toString().replace("\\", "");
-        this.drinkLevel = Integer.parseInt(jsonValue.get("drink_level").toString());
-        this.drinkAmount = jsonValue.get("drink_amount").toString();
+    public SimilarDrinkDto(JSONObject jsonObject) {
+        this.drinkId = Long.parseLong(jsonObject.get("drink_id").toString());
+        this.drinkName = jsonObject.get("drink_name").toString();
+        this.drinkImage = jsonObject.get("drink_image").toString().replace("\\", "");
+        this.drinkLevel = Integer.parseInt(jsonObject.get("drink_level").toString());
+        this.drinkAmount = jsonObject.get("drink_amount").toString();
     }
 }
