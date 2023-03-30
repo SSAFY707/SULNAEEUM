@@ -207,7 +207,7 @@ public class DrinkService {
         inputData.add(drinkDetailDto.getTasteBody());
         inputData.add(drinkDetailDto.getDrinkLevel());
 
-        String dishName = dishRepo.findByDishName(drinkDetailDto.getDishName());
+        String dishName = dishRepo.findByDishName(drinkDetailDto.getDishName().get(0));
         int[] dishArr;
 
         if(dishName.equals("전/무침")) {

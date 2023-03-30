@@ -1,6 +1,5 @@
 package com.ssafy.sulnaeeum.model.drink.dto;
 
-import com.ssafy.sulnaeeum.model.user.dto.UserPreferenceDto;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -71,7 +70,7 @@ public class DrinkDetailDto {
     private int tasteFlavor;
 
     @Schema(description = "어울리는 안주")
-    private String dishName;
+    private List<String> dishName;
 
     @Schema(description = "재료")
     private List<String> ingredient;
