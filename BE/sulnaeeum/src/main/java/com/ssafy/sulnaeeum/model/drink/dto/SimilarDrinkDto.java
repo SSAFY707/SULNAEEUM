@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
+import org.json.simple.JSONObject;
 
 @Schema(description = "비슷한 술")
 @Data
@@ -27,4 +28,13 @@ public class SimilarDrinkDto {
 
     @Schema(description = "용량")
     private String drinkAmount;
+
+    // Flask에서 반환받은 JSON -> DTO 변환
+    public SimilarDrinkDto(JSONObject jsonObject) {
+        this.drinkId = Long.parseLong(jsonObject.get("drink_id").toString());
+        this.drinkName = jsonObject.get("drink_name").toString();
+        this.drinkImage = jsonObject.get("drink_image").toString().replace("\\", "");
+        this.drinkLevel = Integer.parseInt(jsonObject.get("drink_level").toString());
+        this.drinkAmount = jsonObject.get("drink_amount").toString();
+    }
 }

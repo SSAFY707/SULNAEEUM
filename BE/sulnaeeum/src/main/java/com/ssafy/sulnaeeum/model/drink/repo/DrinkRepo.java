@@ -54,24 +54,24 @@ public interface DrinkRepo extends JpaRepository<Drink, Integer> {
      * 나이별 조회
      ***/
 
-    @Query(value = "select * from drink where drink_id in (select twenties from ranking)", nativeQuery = true)
+    @Query(value = "select * from drink inner join ranking on drink.drink_id = ranking.twenties", nativeQuery = true)
     List<Drink> findTwenties();
 
-    @Query(value = "select * from drink where drink_id in (select thirties from ranking)", nativeQuery = true)
+    @Query(value = "select * from drink inner join ranking on drink.drink_id = ranking.thirties", nativeQuery = true)
     List<Drink> findThirties();
 
-    @Query(value = "select * from drink where drink_id in (select forties from ranking)", nativeQuery = true)
+    @Query(value = "select * from drink inner join ranking on drink.drink_id = ranking.forties", nativeQuery = true)
     List<Drink> findForties();
 
-    @Query(value = "select * from drink where drink_id in (select fifties from ranking)", nativeQuery = true)
+    @Query(value = "select * from drink inner join ranking on drink.drink_id = ranking.fifties", nativeQuery = true)
     List<Drink> findFifties();
 
-    @Query(value = "select * from drink where drink_id in (select sixties from ranking)", nativeQuery = true)
+    @Query(value = "select * from drink inner join ranking on drink.drink_id = ranking.sixties", nativeQuery = true)
     List<Drink> findSixties();
 
-    @Query(value = "select * from drink where drink_id in (select female from ranking)", nativeQuery = true)
+    @Query(value = "select * from drink inner join ranking on drink.drink_id = ranking.female", nativeQuery = true)
     List<Drink> findFemale();
 
-    @Query(value = "select * from drink where drink_id in (select male from ranking)", nativeQuery = true)
+    @Query(value = "select * from drink inner join ranking on drink.drink_id = ranking.male", nativeQuery = true)
     List<Drink> findMale();
 }

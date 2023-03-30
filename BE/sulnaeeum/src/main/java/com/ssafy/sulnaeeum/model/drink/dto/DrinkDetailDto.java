@@ -1,5 +1,6 @@
 package com.ssafy.sulnaeeum.model.drink.dto;
 
+import com.ssafy.sulnaeeum.model.user.dto.UserPreferenceDto;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -51,6 +52,24 @@ public class DrinkDetailDto {
     @Schema(description = "평점 평균")
     private double avgScore;
 
+    @Schema(description = "단맛")
+    private int tasteSweet;
+
+    @Schema(description = "신맛")
+    private int tasteSour;
+
+    @Schema(description = "목넘김")
+    private int tasteThroat;
+
+    @Schema(description = "청량감")
+    private int tasteRefresh;
+
+    @Schema(description = "바디감")
+    private int tasteBody;
+
+    @Schema(description = "향")
+    private int tasteFlavor;
+
     @Schema(description = "어울리는 안주")
     private String dishName;
 
@@ -62,4 +81,18 @@ public class DrinkDetailDto {
 
     @Schema(description = "클리어 여부")
     private boolean clear;
+
+//    // UserPreferenceDto에서 필요로 하는 DrinkDetailDto의 값을 찾아 넣기 위함 (dish는 대분류로 찾아서 넣어주어야 함)
+//    public UserPreferenceDto toUserPreferenceDto() {
+//        return UserPreferenceDto.builder()
+//                .tasteSweet(this.tasteSweet)
+//                .tasteSour(this.tasteSour)
+//                .tasteRefresh(this.tasteRefresh)
+//                .tasteThroat(this.tasteThroat)
+//                .tasteBody(this.tasteBody)
+//                .tasteFlavor(this.tasteFlavor)
+//                .level(this.drinkLevel)
+//                .dish(this.dishName)
+//                .weight(null).build();
+//    }
 }

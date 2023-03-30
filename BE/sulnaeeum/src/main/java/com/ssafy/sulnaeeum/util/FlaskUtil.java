@@ -30,7 +30,7 @@ public class FlaskUtil {
                 entity,
                 String.class
         );
-        String result = response.getBody();//리턴되는 결과의 body를 저장.
+        String result = response.getBody(); // 리턴되는 결과의 body 저장
         JSONParser jsonParser = new JSONParser();
         JSONObject jsonObject = null;
 
