@@ -80,18 +80,4 @@ public class DrinkDetailDto {
 
     @Schema(description = "클리어 여부")
     private boolean clear;
-
-//    // UserPreferenceDto에서 필요로 하는 DrinkDetailDto의 값을 찾아 넣기 위함 (dish는 대분류로 찾아서 넣어주어야 함)
-//    public UserPreferenceDto toUserPreferenceDto() {
-//        return UserPreferenceDto.builder()
-//                .tasteSweet(this.tasteSweet)
-//                .tasteSour(this.tasteSour)
-//                .tasteRefresh(this.tasteRefresh)
-//                .tasteThroat(this.tasteThroat)
-//                .tasteBody(this.tasteBody)
-//                .tasteFlavor(this.tasteFlavor)
-//                .level(this.drinkLevel)
-//                .dish(this.dishName)
-//                .weight(null).build();
-//    }
 }
