@@ -96,6 +96,9 @@ export default function Home() {
               width={2700}
               height={0}
             />
+            <div className="absolute left-[1025px] top-[175px]">
+          <Image src="/main/part1/scroll.gif" alt=" " width={80} height={80}></Image>
+          </div>
           </div>
         </div>
         {/* 한국 전통주 정의 */}
@@ -104,7 +107,7 @@ export default function Home() {
         </div>
 
         {/* PART 2 */}
-        <div className="absolute  top-[2420px] w-screen h-[1000px]  flex">
+        <div className="absolute  top-[2350px] w-screen h-[1000px]  flex">
           {/* 미리보기 */}
           <div className="absolute">
             {/* <Image src="/main/part2/main2_bg.png" alt="" width={1910} height={100}></Image> */}
@@ -152,18 +155,18 @@ export default function Home() {
           {/* 스크롤 애니메이션 */}
           <div className="absolute top-[200px] w-screen h-[300px] ">
             <Image
-              className={`${
-                scroll > 2000 ? styles.show3 : styles.hide
-              } absolute z-20 ml-[-10px]`}
+              className="
+               
+              absolute z-20 ml-[-10px]"
               src="/main/part2/main2_1.png"
               alt=""
               width={400}
               height={0}
             ></Image>
             <Image
-              className={` ${
-                scroll > 2000 ? styles.show2 : styles.hide
-              } absolute z-10 right-0 mt-[-100px]`}
+              className="
+            
+               absolute z-10 right-0 mt-[-100px]"
               src="/main/part2/main2_2.png"
               alt=""
               width={750}
@@ -171,14 +174,14 @@ export default function Home() {
             ></Image>
             <div className="">
               <Image
-                className={`${scroll>2290?styles.opacity4:styles.hide} absolute opacity-5 z-0`}
+                className={`${scroll>2100?styles.opacity4:styles.hide} absolute opacity-5 z-0`}
                 src="/main/part2/main2_3.png"
                 alt=""
                 width={400}
                 height={0}
               />
               <Image
-                className={`${scroll>2290?styles.opacity4:styles.hide} absolute top-[500px] left-[1200px] opacity-5 z-0`}
+                className={`${scroll>2100?styles.opacity4:styles.hide} absolute top-[500px] left-[1200px] opacity-5 z-0`}
                 src="/main/part2/main2_3.png"
                 alt=""
                 width={300}
