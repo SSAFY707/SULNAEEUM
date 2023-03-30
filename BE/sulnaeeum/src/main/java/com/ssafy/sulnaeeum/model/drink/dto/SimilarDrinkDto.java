@@ -29,6 +29,7 @@ public class SimilarDrinkDto {
     @Schema(description = "용량")
     private String drinkAmount;
 
+    // Flask에서 반환받은 JSON -> DTO 변환
     public SimilarDrinkDto(JSONObject jsonObject) {
         this.drinkId = Long.parseLong(jsonObject.get("drink_id").toString());
         this.drinkName = jsonObject.get("drink_name").toString();
