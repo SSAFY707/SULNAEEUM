@@ -5,6 +5,7 @@ import com.ssafy.sulnaeeum.model.drink.dto.LikeDrinkListDto;
 import com.ssafy.sulnaeeum.model.drink.service.LikeDrinkService;
 import com.ssafy.sulnaeeum.model.jumak.dto.LikeJumakListDto;
 import com.ssafy.sulnaeeum.model.jumak.service.MyJumakService;
+import com.ssafy.sulnaeeum.model.mypage.dto.Words;
 import com.ssafy.sulnaeeum.model.mypage.service.MypageService;
 import com.ssafy.sulnaeeum.model.user.dto.UserDto;
 import io.swagger.v3.oas.annotations.Operation;
@@ -17,6 +18,9 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/mypage")
@@ -87,19 +91,18 @@ public class MypageController {
         return new ResponseEntity<>(likeJumakListDto, HttpStatus.OK);
     }
 
-
     /***
      * [택스트 마이닝]
      * - 내가 클리어한 & 찜한 전통주의 맛, 재료, 안주, 주종 총 4가지의 정보를 카운트하여 오름 차순 정렬
      ***/
     @Operation(summary = "택스트 마이닝", description = "택스트 마이닝")
     @GetMapping("/textmining")
-    public ResponseEntity<String> textmMining() {
+    public ResponseEntity<Words> textmMining() {
 
         String kakaoId = SecurityContextHolder.getContext().getAuthentication().getName();
 
-        String tmp = mypageService.textmMining(kakaoId);
-        return new ResponseEntity<>(null, HttpStatus.OK);
+        Words words = mypageService.textmMining(kakaoId);
+        return new ResponseEntity<>(words, HttpStatus.OK);
     }
 
 }
