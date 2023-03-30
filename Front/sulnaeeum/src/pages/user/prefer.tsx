@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { MdArrowBackIosNew } from 'react-icons/MD'
+import { MdArrowBackIosNew } from 'react-icons/md'
 
 
 
@@ -48,7 +48,7 @@ export default function index() {
             <div className={'w-[400px] h-full mt-20 flex flex-col items-center'}>
               <div className={'w-[400px] h-3/5 flex flex-col items-center'}>
                 <div className='flex w-full h-[200px] space-x-4  items-center justify-center'>
-                  <img src={session.img} alt='프로필사진' className='w-[70px] h-[70px] rounded-full object-cover'></img>
+                  {session.img && <img src={session.img} alt='프로필사진' className='w-[70px] h-[70px] rounded-full object-cover'></img>}
                   <div className={'font-preB text-[34px] my-8'}>{session.name}님 환영합니다.</div>
                 </div>
                 <div className='flex  flex-col w-full h-[1000px] items-center'>

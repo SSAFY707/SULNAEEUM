@@ -5,8 +5,7 @@ import Image from "next/image";
 import { useState, useEffect } from "react";
 import { useDisclosure } from "@chakra-ui/react";
 import { useRef } from "react";
-import { Axios } from "axios";
-import { defaultAxios, authAxios } from "@/api/common";
+import { authAxios } from "@/api/common";
 
 
 
@@ -14,8 +13,8 @@ function kakaoLogin() {
   window.Kakao.Auth.authorize({
 
     // 최종 배포이후에는 localhost가 아닌 j8a707 url로 요청해야함
-    //redirectUri: 'http://j8a707.p.ssafy.io/user/kakao/callback',
-    redirectUri: 'http://localhost:3000/user/kakao/callback',
+    //redirectUri: 'https://j8a707.p.ssafy.io/user/kakao/callback',
+    redirectUri: 'https://localhost:3000/user/kakao/callback',
   });
 }
 
