@@ -102,7 +102,6 @@ public class RankingService {
                 .build();
     }
 
-//    @Scheduled
     @Transactional
     @Scheduled(cron = "0 0 0/1 * * *")
     public void jubtiRequest (){
@@ -112,7 +111,6 @@ public class RankingService {
         List<JubtiResult> jubtiResultList = jubtiRepo.findAll();
 
         int size = jubtiResultList.size();
-        int tweCnt = 0, thiCnt = 0, forCnt = 0, fitCnt = 0, sixCnt = 0, maleCnt = 0, femaleCnt = 0;
 
         List<Integer> twenties = new ArrayList<>();
         List<Integer> thirties = new ArrayList<>();
@@ -154,8 +152,6 @@ public class RankingService {
             }else{
                 dish_arr = new int[] {0, 0, 0, 0, 0, 3};
             }
-
-            String getSex = jubti.getSex();
 
             input.add(jubti.getTasteSweet());
             input.add(jubti.getTasteSour());
