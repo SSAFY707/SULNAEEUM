@@ -7,20 +7,15 @@ import com.ssafy.sulnaeeum.model.user.entity.User;
 import com.ssafy.sulnaeeum.model.user.entity.UserPreference;
 import com.ssafy.sulnaeeum.model.user.repo.UserPreferenceRepo;
 import com.ssafy.sulnaeeum.model.user.repo.UserRepo;
+import com.ssafy.sulnaeeum.util.FlaskUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.client.RestTemplate;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -32,6 +27,7 @@ import java.util.Map;
 public class UserPreferenceService {
     private final UserPreferenceRepo userPreferenceRepo;
     private final UserRepo userRepository;
+    private final FlaskUtil flaskUtil;
 
     /***
      * 회원 가입 시 회원 취향을 저장
@@ -55,12 +51,7 @@ public class UserPreferenceService {
     @Transactional
     public Map<String, Map<String, String>> recommendUserDrink(UserPreferenceDto userPreferenceDto) {
 
-        String requestUrl = "http://j8a707.p.ssafy.io:5000/recommend/contents";
-
-        Map<String, List> params = new HashMap<>();
-
         List<Integer> input_data = new ArrayList<>();
-
         input_data.add(userPreferenceDto.getTasteSweet());
         input_data.add(userPreferenceDto.getTasteSour());
         input_data.add(userPreferenceDto.getTasteRefresh());
@@ -88,32 +79,14 @@ public class UserPreferenceService {
 
         for(int i = 0; i < 6; i++) input_data.add(dish_arr[i]);
 
+        Map<String, List> params = new HashMap<>();
         params.put("input_data", input_data);
 
         System.out.println(params);
 
-        HttpHeaders headers = new HttpHeaders();
-        headers.add("accept", "text/plain;charset=UTF-8");
-
-        HttpEntity<Map<String, List>> entity = new HttpEntity<>(params, headers);
-
-        RestTemplate rt = new RestTemplate();
-
-        ResponseEntity<String> response = rt.exchange(
-                requestUrl,
-                HttpMethod.POST,
-                entity,
-                String.class
-        );
-        String result = response.getBody();//리턴되는 결과의 body를 저장.
+        String requestUrl = "http://j8a707.p.ssafy.io:5000/recommend/contents";
         JSONParser jsonParser = new JSONParser();
-        JSONObject jsonObject = null;
-
-        try {
-            jsonObject = (JSONObject) jsonParser.parse(result);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
+        JSONObject jsonObject = flaskUtil.requestFlask(requestUrl, params);
 
         System.out.println(jsonObject.keySet());
         System.out.println(jsonObject.get("0").toString());
@@ -149,5 +122,4 @@ public class UserPreferenceService {
 
         return recommend;
     }
-
 }
