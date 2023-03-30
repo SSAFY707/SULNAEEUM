@@ -1,3 +1,4 @@
+import { toastOK } from '@/components/common/toast'
 import { Drink, DrinkDetailType, DrinkDetailTypeFirst } from '../types/DataTypes'
 import { defaultAxios, authAxios } from './common'
 
@@ -28,8 +29,7 @@ export const getDrinkListForUser = async (typeId: number, sort : string) => {
 
 export const drinkLike = (drinkId: number) => {
     authAxios.post(`drink/like/${drinkId}`
-    ).then((res)=>{
-        console.log(res)
+    ).then(()=>{
     }).catch((err)=>{
         console.log(err)
     })

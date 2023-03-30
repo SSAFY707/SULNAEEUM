@@ -13,14 +13,14 @@ function kakaoLogin() {
   window.Kakao.Auth.authorize({
 
     // 최종 배포이후에는 localhost가 아닌 j8a707 url로 요청해야함
-    //redirectUri: 'https://j8a707.p.ssafy.io/user/kakao/callback',
-    redirectUri: 'https://localhost:3000/user/kakao/callback',
+    redirectUri: 'https://j8a707.p.ssafy.io/user/kakao/callback',
+    // redirectUri: 'http://localhost:3000/user/kakao/callback',
   });
 }
 
 const kakaoLogout = async () => {
 
-  await authAxios.get("https://j8a707.p.ssafy.io/api/user/kakao/logout")
+  await authAxios.get(`user/kakao/logout`)
     .then((res) => {
       console.log('로그아웃 성공')
       console.log(res)
