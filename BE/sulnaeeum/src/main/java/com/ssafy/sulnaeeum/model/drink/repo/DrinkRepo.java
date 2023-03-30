@@ -14,13 +14,45 @@ public interface DrinkRepo extends JpaRepository<Drink, Integer> {
     // drink_id로 찾기
     Optional<Drink> findByDrinkId(Long drinkId);
 
-    // drink_type_id로 찾기
-    @Query(value = "select * from drink where drink_type_id = ?1", nativeQuery = true)
-    List<Drink> findByDrinkTypeId(Long drinkTypeId);
+    /***
+     * 정렬 조회
+     ***/
+
+    @Query(value = "select * from drink order by drink_name", nativeQuery = true)
+    List<Drink> findAllSortByName();
+
+    @Query(value = "select * from drink order by like_cnt + review_cnt desc", nativeQuery = true)
+    List<Drink> findAllSortByPopularity();
+
+    @Query(value = "select * from drink order by drink_level", nativeQuery = true)
+    List<Drink> findAllSortByLevelAsc();
+
+    @Query(value = "select * from drink order by drink_level desc", nativeQuery = true)
+    List<Drink> findAllSortByLevelDesc();
+
+    @Query(value = "select * from drink where drink_type_id = ?1 order by drink_name", nativeQuery = true)
+    List<Drink> findSortByName(Long drinkTypeId);
+
+    @Query(value = "select * from drink where drink_type_id = ?1 order by like_cnt + review_cnt desc", nativeQuery = true)
+    List<Drink> findSortByPopularity(Long drinkTypeId);
+
+    @Query(value = "select * from drink where drink_type_id = ?1 order by drink_level", nativeQuery = true)
+    List<Drink> findSortByLevelAsc(Long drinkTypeId);
+
+    @Query(value = "select * from drink where drink_type_id = ?1 order by drink_level desc", nativeQuery = true)
+    List<Drink> findSortByLevelDesc(Long drinkTypeId);
+
+    /***
+     * 랭킹 조회
+     ***/
 
     List<Drink> findTop10ByOrderByLikeCntDesc();
 
     List<Drink> findTop10ByOrderByReviewCntDesc();
+
+    /***
+     * 나이별 조회
+     ***/
 
     @Query(value = "select * from drink where drink_id in (select twenties from ranking)", nativeQuery = true)
     List<Drink> findTwenties();
