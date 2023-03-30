@@ -6,9 +6,6 @@ export type DrinkListType = {
     drinkAmount : string,
     drinkLevel : number,
     drinkImage : string,
-    like : boolean,
-    clear : boolean,
-    popularity : number
 }
 
 // elastic search의 결과를 위한 type 정의

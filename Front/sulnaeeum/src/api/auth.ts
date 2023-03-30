@@ -29,8 +29,7 @@ export const getDrinkListForUser = async (typeId: number, sort : string) => {
 
 export const drinkLike = (drinkId: number) => {
     authAxios.post(`drink/like/${drinkId}`
-    ).then((res)=>{
-        console.log(res)
+    ).then(()=>{
     }).catch((err)=>{
         console.log(err)
     })
