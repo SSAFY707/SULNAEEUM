@@ -5,20 +5,36 @@ import Image from "next/image";
 import { useState, useEffect } from "react";
 import { useDisclosure } from "@chakra-ui/react";
 import { useRef } from "react";
+import { Axios } from "axios";
+import { defaultAxios, authAxios } from "@/api/common";
 
 
 
 function kakaoLogin() {
   window.Kakao.Auth.authorize({
+
+    // 최종 배포이후에는 localhost가 아닌 j8a707 url로 요청해야함
+    //redirectUri: 'http://j8a707.p.ssafy.io/user/kakao/callback',
     redirectUri: 'http://localhost:3000/user/kakao/callback',
   });
 }
 
-function kakaoLogout() {
-  window.Kakao.Auth.authorize({
-    redirectUri: 'http://localhost:3000/user/kakao/logout',
-  });
+const kakaoLogout = async () => {
+
+  await authAxios.get("https://j8a707.p.ssafy.io/api/user/kakao/logout")
+    .then((res) => {
+      console.log('로그아웃 성공')
+      console.log(res)
+      sessionStorage.clear()
+      location.href = '/'
+
+    }).catch((err) => {
+      alert('로그아웃 실패')
+      console.log(err)
+
+    })
 }
+
 
 
 
@@ -29,7 +45,6 @@ function Navbar() {
   const [login, setLogin] = useState<boolean>(false)
 
 
-  // window 객체가 존재하는지 확인하고 접근할 경우 정상적으로 접근된다.
 
 
 
