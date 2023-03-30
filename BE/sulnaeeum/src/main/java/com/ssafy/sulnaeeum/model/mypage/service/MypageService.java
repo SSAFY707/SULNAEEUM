@@ -56,16 +56,7 @@ public class MypageService {
         for (LikeDrink likeDrink :likeDrinks) {
             textMiningCal(likeDrink.getDrink());
         }
-
-        // 정렬
-//        List<Map.Entry<String, Double>> countingList = new ArrayList<Map.Entry<String, Double>>(counting.entrySet());
-//
-//        Collections.sort(countingList, new Comparator<Map.Entry<String, Double>>() {
-//            @Override
-//            public int compare(Map.Entry<String, Double> o1, Map.Entry<String, Double> o2) {
-//                return Double.compare(o1.getValue(),o2.getValue())*-1;
-//            }
-//        });
+        
         List<Word> words = new ArrayList<>();
         for (Map.Entry<String, Double> entry :counting.entrySet()) {
             words.add(new Word(entry.getKey(),entry.getValue()));
