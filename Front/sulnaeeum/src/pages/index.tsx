@@ -213,13 +213,12 @@ export default function Home() {
               return (
                 <Image
                   key={i}
-                  className={`${scroll > 3050 ? styles.show1 : styles.hide} ${
-                    styles.part3
-                  } mr-[30px] drop-shadow-[3px_10px_10px_rgba(0,0,0,0.12)]`}
+                  className={`${scroll > 3050 ? styles.show1 : styles.hide} ${styles.part3
+                    } mr-[30px] drop-shadow-[3px_10px_10px_rgba(0,0,0,0.12)]`}
                   src={v}
                   alt=""
                   width={300}
-                  height={60}
+                  height={0}
                 ></Image>
               );
             })}
