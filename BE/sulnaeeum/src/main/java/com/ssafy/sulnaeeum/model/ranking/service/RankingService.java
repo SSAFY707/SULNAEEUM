@@ -91,31 +91,31 @@ public class RankingService {
         List<RankingDto> maleTopDrinkDto = new ArrayList<>();
 
         for (int i = 0; i < twentiesTopDrink.size(); i++) {
-            List<Ingredient> ingredients = ingredientRepo.findAllByDrinkId(twentiesTopDrink.get(i).getDrinkId());
+            List<Ingredient> ingredients = ingredientRepo.findByDrink(twentiesTopDrink.get(i));
             List<String> ingredientNameList = getIngredientName(ingredients);
             twentiesTopDrinkDto.add(new RankingDto(twentiesTopDrink.get(i).toDto(), ingredientNameList));
 
-            ingredients = ingredientRepo.findAllByDrinkId(thirtiesTopDrink.get(i).getDrinkId());
+            ingredients = ingredientRepo.findByDrink(thirtiesTopDrink.get(i));
             ingredientNameList = getIngredientName(ingredients);
             thirtiesTopDrinkDto.add(new RankingDto(thirtiesTopDrink.get(i).toDto(), ingredientNameList));
 
-            ingredients = ingredientRepo.findAllByDrinkId(fortiesTopDrink.get(i).getDrinkId());
+            ingredients = ingredientRepo.findByDrink(fortiesTopDrink.get(i));
             ingredientNameList = getIngredientName(ingredients);
             fortiesTopDrinkDto.add(new RankingDto(fortiesTopDrink.get(i).toDto(), ingredientNameList));
 
-            ingredients = ingredientRepo.findAllByDrinkId(fiftiesTopDrink.get(i).getDrinkId());
+            ingredients = ingredientRepo.findByDrink(fiftiesTopDrink.get(i));
             ingredientNameList = getIngredientName(ingredients);
             fiftiesTopDrinkDto.add(new RankingDto(fiftiesTopDrink.get(i).toDto(), ingredientNameList));
 
-            ingredients = ingredientRepo.findAllByDrinkId(sixtiesTopDrink.get(i).getDrinkId());
+            ingredients = ingredientRepo.findByDrink(sixtiesTopDrink.get(i));
             ingredientNameList = getIngredientName(ingredients);
             sixtiesTopDrinkDto.add(new RankingDto(sixtiesTopDrink.get(i).toDto(), ingredientNameList));
 
-            ingredients = ingredientRepo.findAllByDrinkId(femaleTopDrink.get(i).getDrinkId());
+            ingredients = ingredientRepo.findByDrink(femaleTopDrink.get(i));
             ingredientNameList = getIngredientName(ingredients);
             femaleTopDrinkDto.add(new RankingDto(femaleTopDrink.get(i).toDto(), ingredientNameList));
 
-            ingredients = ingredientRepo.findAllByDrinkId(maleTopDrink.get(i).getDrinkId());
+            ingredients = ingredientRepo.findByDrink(maleTopDrink.get(i));
             ingredientNameList = getIngredientName(ingredients);
             maleTopDrinkDto.add(new RankingDto(maleTopDrink.get(i).toDto(), ingredientNameList));
         }

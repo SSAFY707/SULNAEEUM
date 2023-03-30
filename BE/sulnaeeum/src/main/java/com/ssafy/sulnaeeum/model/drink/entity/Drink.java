@@ -5,6 +5,7 @@ import com.ssafy.sulnaeeum.model.drink.dto.DrinkDto;
 import com.ssafy.sulnaeeum.model.drink.dto.MyPageDrinkDto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
@@ -16,6 +17,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name="drink")
+@Getter
 public class Drink {
 
     @Id
