@@ -18,4 +18,8 @@ public interface LikeDrinkRepo extends JpaRepository<LikeDrink, Long> {
     // 해당 회원이 찜한 술 모두 조회
     @Query(value = "select * from like_drink where user_id = ?1", nativeQuery = true)
     List<LikeDrink> findByUserId(Long userId);
+
+    // 해당 회원이 찜한 모든 술의 id 조회
+    @Query(value = "select drink_id from like_drink where user_id = ?1", nativeQuery = true)
+    List<Long> findMyDrink(Long userId);
 }
