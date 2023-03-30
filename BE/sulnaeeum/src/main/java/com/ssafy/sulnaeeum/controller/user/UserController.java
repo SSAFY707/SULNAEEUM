@@ -3,9 +3,9 @@ package com.ssafy.sulnaeeum.controller.user;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.ssafy.sulnaeeum.jwt.JwtFilter;
 import com.ssafy.sulnaeeum.model.user.dto.KakaoLoginDto;
+import com.ssafy.sulnaeeum.model.user.dto.MineDto;
 import com.ssafy.sulnaeeum.model.user.dto.TokenDto;
 import com.ssafy.sulnaeeum.model.user.dto.UserPreferenceDto;
-import com.ssafy.sulnaeeum.model.user.entity.User;
 import com.ssafy.sulnaeeum.model.user.service.KakaoLoginService;
 import com.ssafy.sulnaeeum.model.user.service.UserPreferenceService;
 import com.ssafy.sulnaeeum.model.user.service.UserService;
@@ -95,4 +95,13 @@ public class UserController {
         return new ResponseEntity<>(recommend, HttpStatus.OK);
     }
 
+    /***
+     * [ 회원이 찜 및 클리어한 전통주 조회 ]
+     ***/
+    @Operation(summary = "", description = "")
+    @GetMapping("/mine")
+    public ResponseEntity<MineDto> getMine() {
+        String kakaoId = SecurityContextHolder.getContext().getAuthentication().getName();
+        return new ResponseEntity<>(userService.getMine(kakaoId), HttpStatus.OK);
+    }
 }

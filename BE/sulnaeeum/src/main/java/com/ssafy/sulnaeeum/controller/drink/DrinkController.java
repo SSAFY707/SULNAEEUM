@@ -7,7 +7,6 @@ import com.ssafy.sulnaeeum.model.drink.dto.ReviewResponseDto;
 import com.ssafy.sulnaeeum.model.drink.service.DrinkService;
 import com.ssafy.sulnaeeum.model.drink.service.ReviewService;
 import com.ssafy.sulnaeeum.model.drink.service.LikeDrinkService;
-import com.ssafy.sulnaeeum.model.jumak.dto.JumakDto;
 import com.ssafy.sulnaeeum.model.jumak.dto.JumakInfoDto;
 import com.ssafy.sulnaeeum.model.jumak.service.JumakService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -42,19 +41,6 @@ public class DrinkController {
     // =================================================================================================================
     // -----------------------------------------------   [ 회원 ]   -----------------------------------------------------
     // =================================================================================================================
-
-    /***
-     * [ 모든 전통주 조회 ]
-     * - 조회한 내용을 필요한 데이터만 선별하여 반환 (id, 이름, 이미지, 양, 도수, 주종, 찜 여부, 클리어 여부)
-     * - 이름, 인기, 도수(높은 순, 낮은 순) 기준 정렬 (인기, 도수의 경우 같을 경우에는 이름으로 정렬)
-     * - 카테고리 분류
-     ***/
-    @Operation(summary = "모든 전통주 조회 - 회원", description = "전체 전통주를 데이터 가공하여 필요한 정보만 정렬 및 분류하여 제공")
-    @GetMapping("/{drinkTypeId}")
-    public ResponseEntity<List<DrinkInfoDto>> getAllDrinkForUser(@PathVariable Long drinkTypeId, @RequestParam String sortType) {
-        String kakaoId = SecurityContextHolder.getContext().getAuthentication().getName();
-        return new ResponseEntity<>(drinkService.getAllDrink(drinkTypeId, kakaoId, sortType), HttpStatus.OK);
-    }
 
     /***
      * [ 전통주 찜 ]
