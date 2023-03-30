@@ -1,6 +1,5 @@
 package com.ssafy.sulnaeeum.model.drink.entity;
 
-import com.ssafy.sulnaeeum.model.drink.dto.TasteDto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
