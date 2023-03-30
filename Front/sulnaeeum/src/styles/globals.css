@@ -3,6 +3,11 @@
 @tailwind utilities;
 
 /* 기본 세팅 */
+
+* {
+    font-family: preL;
+}
+
 h1 {
     font-size: 40px;
     font-family: preB;
@@ -63,6 +68,14 @@ a {
     font-family: 'preT';
     src: url("../assets/fonts/Pretendard-Thin.ttf");
 }
+@font-face {
+    font-family: 'mj';
+    src: url("../assets/fonts/NanumMyeongjo.ttf");
+}
+@font-face {
+    font-family: 'mjB';
+    src: url("../assets/fonts/NanumMyeongjoBold.ttf");
+}
 
 .scroll::-webkit-scrollbar {
     width: 10px;
@@ -74,4 +87,14 @@ a {
 }
 .scroll::-webkit-scrollbar-track {
     display: none;
+}
+
+/* react-toastify 억지 적용 */
+.Toastify__toast-theme--colored.Toastify__toast--error {
+    background-color: #ef3a27d4 !important;
+}
+
+.Toastify__toast-theme--colored.Toastify__toast--info {
+    background-color: #67d2f9d4 !important;
+    color: #000 !important;
 }

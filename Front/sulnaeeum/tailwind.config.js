@@ -29,6 +29,8 @@ module.exports = {
         preR : ['preR'],
         preSB : ['preSB'],
         preT : ['preT'],
+        mj : ['mj'],
+        mjB : ['mjB'],
       }
     },
   },

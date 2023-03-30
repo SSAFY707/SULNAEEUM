@@ -1,23 +1,21 @@
+import { BACKEND_URL, SEARCH_URL } from '@/config/config';
 import axios, { AxiosInstance } from 'axios';
 
-// const SERVER_URL = 'http://localhost:9090/api/'
-
-const SERVER_URL = 'https://j8a707.p.ssafy.io/api/'
 const accessToken = typeof window !== 'undefined' ? sessionStorage.getItem('accessToken') : null;
 
 // 로그인 후 사용할 axios (-> 토큰이 필요한 경우)
 export const authAxios: AxiosInstance = axios.create({
-    baseURL: `${SERVER_URL}`,
-    headers: {
-        Authorization: 'Bearer ' + accessToken || '',
-    },
+  baseURL: `${BACKEND_URL}`,
+  headers: {
+    Authorization: 'Bearer ' + accessToken || '',
+  },
 });
 
 authAxios.defaults.withCredentials = true;
 
 // 로그인이 필요없는 axios
 export const defaultAxios: AxiosInstance = axios.create({
-  baseURL: `${SERVER_URL}`,
+  baseURL: `${BACKEND_URL}`,
 });
 
 authAxios.interceptors.response.use(
@@ -32,7 +30,7 @@ authAxios.interceptors.response.use(
 export const refreshAPI = async () => {
   await axios
     .post(
-      `${SERVER_URL}/user/auth`,
+      `${BACKEND_URL}/user/auth`,
       {},
       {
         headers: {
@@ -57,3 +55,7 @@ export const logout = () => {
   localStorage.removeItem('access_token');
   window.location.href = '/login';
 };
+
+export const searchAxios: AxiosInstance = axios.create({
+  baseURL: `${SEARCH_URL}`,
+});

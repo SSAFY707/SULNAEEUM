@@ -2,18 +2,18 @@ import { sendJubti } from '@/api/dafault';
 import { JubtiType } from '@/types/DataTypes';
 import { useRouter } from 'next/router';
 import React, { useState } from 'react'
-import { BsArrowLeftCircle } from 'react-icons/bs';
 
-export default function Jubti () {
+
+export default function Jubti() {
 
   type MbtiType = {
-    [index : string] : string
+    [index: string]: string
   }
 
   // 선택된 데이터 타입
   type SelData = {
     [index: string]: string | number
-    age : string;
+    age: string;
     sex: string;
     level: number;
     tasteRefresh: number;
@@ -27,39 +27,39 @@ export default function Jubti () {
     ns: number;
     ft: number;
     jp: number;
-  } 
+  }
 
   // JBTI 질문지 데이터
   const datas = {
-    age : [
-      { name: '20대', value: '20s'},
-      { name: '30대', value: '30s'},
-      { name: '40대', value: '40s'},
-      { name: '50대', value: '50s'},
+    age: [
+      { name: '20대', value: '20s' },
+      { name: '30대', value: '30s' },
+      { name: '40대', value: '40s' },
+      { name: '50대', value: '50s' },
       { name: '60대 이상', value: '60s' }
-      ],
-    sex : [
-      {name: '남성', value: '남성'},
-      {name: '여성', value: '여성'},
     ],
-    dish : [
-      {name: '육류', value: 'meat'},
-      {name: '양식', value: 'western'},
-      {name: '해산물', value: 'seafood'},
-      {name: '전 / 무침', value: 'jeon'},
-      {name: '탕 / 전골', value: 'soup'},
-      {name: '디저트', value: 'dessert'}
+    sex: [
+      { name: '남성', value: '남성' },
+      { name: '여성', value: '여성' },
     ],
-    question : [
-      {value: 'tasteRefresh', value2: 'tasteBody', q1: '탄산음료', q2: '이온음료'},
-      {value: 'ie', q1: '혼술', q2: '같이 술먹기'},
-      {value: 'tasteThroat', q1: '처음처럼', q2: '참이슬'},
-      {value: 'level', q1: '가볍게 술 한잔', q2: '얼큰하게 만취'},
-      {value: 'ns', q1: '술 섞어먹기', q2: '그냥 먹기'},
-      {value: 'tasteSweet', value2: 'tasteSour', q1: '새콤한 젤리', q2: '달콤한 쿠키'},
-      {value: 'ft', q1: '술 마시면 운다', q2: '술 마셔도 안운다'},
-      {value: 'tasteFlavor', q1: '반민초', q2: '민초'},
-      {value: 'jp', q1: '미리 찾아본 술집', q2: '즉흥적으로 정한 술집'},
+    dish: [
+      { name: '육류', value: 'meat' },
+      { name: '양식', value: 'western' },
+      { name: '해산물', value: 'seafood' },
+      { name: '전 / 무침', value: 'jeon' },
+      { name: '탕 / 전골', value: 'soup' },
+      { name: '디저트', value: 'dessert' }
+    ],
+    question: [
+      { value: 'tasteRefresh', value2: 'tasteBody', q1: '탄산음료', q2: '이온음료' },
+      { value: 'ie', q1: '혼술', q2: '같이 술먹기' },
+      { value: 'tasteThroat', q1: '처음처럼', q2: '참이슬' },
+      { value: 'level', q1: '가볍게 술 한잔', q2: '얼큰하게 만취' },
+      { value: 'ns', q1: '술 섞어먹기', q2: '그냥 먹기' },
+      { value: 'tasteSweet', value2: 'tasteSour', q1: '새콤한 젤리', q2: '달콤한 쿠키' },
+      { value: 'ft', q1: '술 마시면 운다', q2: '술 마셔도 안운다' },
+      { value: 'tasteFlavor', q1: '반민초', q2: '민초' },
+      { value: 'jp', q1: '미리 찾아본 술집', q2: '즉흥적으로 정한 술집' },
     ],
   }
 
@@ -71,8 +71,8 @@ export default function Jubti () {
     ['ft', 'tasteFlavor', 'jp'],
     ['dish']
   ]
-  
-  const sel_data : SelData = {
+
+  const sel_data: SelData = {
     age: '',
     sex: '',
     level: 0,
@@ -90,20 +90,20 @@ export default function Jubti () {
   }
 
   const router = useRouter()
-  
+
   const [data, setData] = useState<SelData>(sel_data)
   const [page, setPage] = useState(0)
-  
+
   // 선택된 데이터를 sel_data에 넣는 과정
-  const select = (key : string, value : any) => {
+  const select = (key: string, value: any) => {
     // console.log(key, value)
-    const new_data : SelData = {...data}
+    const new_data: SelData = { ...data }
     new_data[key] = value
     setData(new_data)
   }
 
-  const select2 = (key1 : string, key2 : string, value: any) => {
-    const new_data : SelData = {...data}
+  const select2 = (key1: string, key2: string, value: any) => {
+    const new_data: SelData = { ...data }
     new_data[key1] = value
     new_data[key2] = 6 - value;
     setData(new_data)
@@ -111,25 +111,25 @@ export default function Jubti () {
 
   const check_select = () => {
     let flag = true;
-    page_data[page-1].forEach(key => {
-      if(data[key] == ''){
+    page_data[page - 1].forEach(key => {
+      if (data[key] == '') {
         flag = false
         return
       }
     });
-    if(!flag) return false
+    if (!flag) return false
     return true
   }
 
-  const move_page = () => { 
-    if(!check_select()) {
+  const move_page = () => {
+    if (!check_select()) {
       alert('질문을 모두 선택해 주세요 😎')
       return
-    } 
+    }
     return setPage(page + 1)
   }
 
-  const mbti_to_drink : MbtiType = {
+  const mbti_to_drink: MbtiType = {
     infp: '아이싱 자몽',
     enfp: '얼떨결에',
     infj: '제주 낭만',
@@ -149,13 +149,13 @@ export default function Jubti () {
   }
 
   const jubti = () => {
-    if(!check_select()) {
+    if (!check_select()) {
       alert('안주를 선택해 주세요 😋')
       return
     }
 
     // 보낼 데이터만 가공
-    const payload : JubtiType = {
+    const payload: JubtiType = {
       age: data.age,
       sex: data.sex,
       level: data.level,
@@ -174,8 +174,8 @@ export default function Jubti () {
     sendJubti(payload);
 
     let mbti = ''
-    const arr : Array<string> = ['ie', 'ns', 'ft', 'jp']
-    const check = (key : string, value: number) => {
+    const arr: Array<string> = ['ie', 'ns', 'ft', 'jp']
+    const check = (key: string, value: number) => {
       if (value < 3) {
         return key[0]
       } else if (value > 3) {
@@ -186,12 +186,12 @@ export default function Jubti () {
         return key[idx]
       }
     }
-    arr.map((a)=>{mbti += check(a, data[a] as number)})
+    arr.map((a) => { mbti += check(a, data[a] as number) })
     const drink = mbti_to_drink[mbti]
     console.log(drink)
     router.push(`/jubti/result/${drink}`)
   }
-  
+
   return (
     <>
       <div className={`${page == 0 ? 'block' : 'hidden'} flex flex-col items-center w-full h-[1080px] overflow-hidden font-preL`}>
@@ -202,7 +202,7 @@ export default function Jubti () {
             <div className={'text-[16px] font-preEL md:text-[24px] md:my-2'}>간단한 질문으로 나의 酒BTI를 확인해보세요.</div>
             <img className={'w-[400px] mt-4 mb-6 md:w-[502px] md:mt-8'} src="/images/jubti/pattern2.png" />
           </div>
-          <div onClick={()=>{setPage(page + 1)}} className={'hidden md:flex w-[200px] h-[60px] absolute top-[360px] bg-white text-[#AEA896] rounded cursor-pointer justify-center items-center text-[20px] font-preM hover:bg-gray-200'}>시작하기</div>
+          <div onClick={() => { setPage(page + 1) }} className={'hidden md:flex w-[200px] h-[60px] absolute top-[360px] bg-white text-[#AEA896] rounded cursor-pointer justify-center items-center text-[20px] font-preM hover:bg-gray-200'}>시작하기</div>
           <div className={'flex flex-col items-center w-full md:w-11/12 text-[16px] md:flex-row md:absolute md:top-[500px] md:justify-center md:items-center'}>
             <div className={'flex items-center mb-5 pr-3 bg-stone-200/80 h-[90px] w-full rounded-lg md:mx-6 md:w-1/4 md:h-[300px] md:flex-col md:p-4'}>
               <img className={'h-1/2 ml-5 mr-5 md:h-2/5 md:mb-8 md:mt-3'} src="/images/jubti/icon/1.png" />
@@ -220,24 +220,24 @@ export default function Jubti () {
         </div>
         <div className={'hidden md:flex relative w-[2700px] h-[1200px] justify-center rounded-b-full bg-[#AEA896] top-[-450px] z-[-10]'}>
         </div>
-        <div onClick={()=>{setPage(page + 1)}} className={'w-5/6 h-[70px] bg-[#AEA896] hover:bg-[#655442] rounded text-white text-[20px] font-preL flex justify-center items-center mt-14 cursor-pointer relative md:hidden'}>시작하기</div>
+        <div onClick={() => { setPage(page + 1) }} className={'w-5/6 h-[70px] bg-[#AEA896] hover:bg-[#655442] rounded text-white text-[20px] font-preL flex justify-center items-center mt-14 cursor-pointer relative md:hidden'}>시작하기</div>
       </div>
-      <div className={`${page != 0 ? 'block' : 'hidden'} cursor-pointer relative ml-[30px] top-[100px] md:left-[10%] md:top-[120px]`} onClick={()=>setPage(page - 1)}><BsArrowLeftCircle className={'w-[34px] h-[34px] text-[#655442] md:w-[40px] md:h-[40px]'} /></div>
+      <div className={`${page != 0 ? 'block' : 'hidden'} cursor-pointer relative ml-[30px] top-[100px] md:left-[10%] md:top-[120px]`} onClick={() => setPage(page - 1)}><BsArrowLeftCircle className={'w-[34px] h-[34px] text-[#655442] md:w-[40px] md:h-[40px]'} /></div>
       <div className={`${page == 1 ? 'block' : 'hidden'} w-full overflow-hidden`}>
         <div className={'mt-32 mb-[73px] flex flex-col items-center w-full md:mt-40'}>
           <div className={'flex flex-col items-center w-5/6'}>
             <div className={'text-[20px] font-preM mb-8 md:text-[30px] md:mb-16'}>당신의 나이를 선택해주세요.</div>
             <div className={'grid grid-cols-2 gap-2 justify-center w-full md:flex md:gap-5'}>
-                {datas.age.map((age, index)=>{
-                    return (<div onClick={()=>{select('age',age.value)}} key={index} className={`flex font-preL justify-center items-center cursor-pointer w-full h-[50px] border border-[#AEA896] rounded md:w-[150px] md:h-[60px] md:text-[20px] ${age.value == '60s' && 'col-span-2 w-full md:w-[150px]'} ${age.value == data['age'] && 'text-white bg-[#655442]'}`}>{age.name}</div>)
-                })}
+              {datas.age.map((age, index) => {
+                return (<div onClick={() => { select('age', age.value) }} key={index} className={`flex font-preL justify-center items-center cursor-pointer w-full h-[50px] border border-[#AEA896] rounded md:w-[150px] md:h-[60px] md:text-[20px] ${age.value == '60s' && 'col-span-2 w-full md:w-[150px]'} ${age.value == data['age'] && 'text-white bg-[#655442]'}`}>{age.name}</div>)
+              })}
             </div>
           </div>
           <div className={'flex flex-col items-center mt-2 w-5/6 md:mt-20'}>
             <div className={'text-[20px] font-preM mb-8 md:text-[30px] md:mb-16 md: mt-8'}>당신의 성별을 선택해주세요.</div>
             <div className={'flex justify-center w-full md:gap-3'}>
-              {datas.sex.map((sex, index)=>{
-                return(<div onClick={()=>{select('sex', sex.value)}} key={index} className={`flex font-preL justify-center items-center cursor-pointer w-full h-[50px] border border-[#AEA896] m-1 rounded md:w-[150px] md:h-[60px] md:text-[20px] ${sex.value == data['sex'] && 'text-white bg-[#655442]'}`}>{sex.name}</div>)
+              {datas.sex.map((sex, index) => {
+                return (<div onClick={() => { select('sex', sex.value) }} key={index} className={`flex font-preL justify-center items-center cursor-pointer w-full h-[50px] border border-[#AEA896] m-1 rounded md:w-[150px] md:h-[60px] md:text-[20px] ${sex.value == data['sex'] && 'text-white bg-[#655442]'}`}>{sex.name}</div>)
               })}
             </div>
           </div>
@@ -249,24 +249,24 @@ export default function Jubti () {
           <div className={''}>가까운 쪽을 선택해 주세요</div >
         </div>
         <div className={'flex flex-col items-center justify-center'}>
-            {datas.question.slice(0,3).map((q, index)=>{
-              return (
+          {datas.question.slice(0, 3).map((q, index) => {
+            return (
               <div className={'w-5/6 px-2 my-4 md:flex md:flex-col md:items-center md:w-3/4 md:my-4'} key={index}>
                 <div className={'flex w-full justify-between text-[16px] font-preL mb-4 md:mb-8 md:w-3/4 md:relative md:top-[70px] md:text-[22px]'}>
                   <div>{q.q1}</div>
                   <div>{q.q2}</div>
                 </div>
                 <div className={'flex justify-between items-center md:w-2/5 md:z-10'}>
-                  <div onClick={()=>{{q.value2 ? select2(q.value, q.value2, 1) : select(q.value, 1)}}} className={`w-[50px] h-[50px] rounded-full border border-[#999483] ${data[q.value] == 1 && 'bg-[#655442]' }`}></div>
-                  <div onClick={()=>{{q.value2 ? select2(q.value, q.value2, 2) : select(q.value, 2)}}} className={`w-[40px] h-[40px] rounded-full border border-[#999483] ${data[q.value] == 2 && 'bg-[#655442]' }`}></div>
-                  <div onClick={()=>{{q.value2 ? select2(q.value, q.value2, 3) : select(q.value, 3)}}} className={`w-[30px] h-[30px] rounded-full border border-[#999483] ${data[q.value] == 3 && 'bg-[#655442]' }`}></div>
-                  <div onClick={()=>{{q.value2 ? select2(q.value, q.value2, 4) : select(q.value, 4)}}} className={`w-[40px] h-[40px] rounded-full border border-[#999483] ${data[q.value] == 4 && 'bg-[#655442]' }`}></div>
-                  <div onClick={()=>{{q.value2 ? select2(q.value, q.value2, 5) : select(q.value, 5)}}} className={`w-[50px] h-[50px] rounded-full border border-[#999483] ${data[q.value] == 5 && 'bg-[#655442]' }`}></div>
+                  <div onClick={() => { { q.value2 ? select2(q.value, q.value2, 1) : select(q.value, 1) } }} className={`w-[50px] h-[50px] rounded-full border border-[#999483] ${data[q.value] == 1 && 'bg-[#655442]'}`}></div>
+                  <div onClick={() => { { q.value2 ? select2(q.value, q.value2, 2) : select(q.value, 2) } }} className={`w-[40px] h-[40px] rounded-full border border-[#999483] ${data[q.value] == 2 && 'bg-[#655442]'}`}></div>
+                  <div onClick={() => { { q.value2 ? select2(q.value, q.value2, 3) : select(q.value, 3) } }} className={`w-[30px] h-[30px] rounded-full border border-[#999483] ${data[q.value] == 3 && 'bg-[#655442]'}`}></div>
+                  <div onClick={() => { { q.value2 ? select2(q.value, q.value2, 4) : select(q.value, 4) } }} className={`w-[40px] h-[40px] rounded-full border border-[#999483] ${data[q.value] == 4 && 'bg-[#655442]'}`}></div>
+                  <div onClick={() => { { q.value2 ? select2(q.value, q.value2, 5) : select(q.value, 5) } }} className={`w-[50px] h-[50px] rounded-full border border-[#999483] ${data[q.value] == 5 && 'bg-[#655442]'}`}></div>
                 </div>
                 <hr className={'border-xs border-[#AEA89699] mt-6 md:w-3/4 md:mt-10'}></hr>
               </div>
-              )
-            })}
+            )
+          })}
         </div>
       </div>
       <div className={`${page == 3 ? 'block' : 'hidden'}`}>
@@ -275,24 +275,24 @@ export default function Jubti () {
           <div className={''}>가까운 쪽을 선택해 주세요</div >
         </div>
         <div className={'flex flex-col items-center justify-center'}>
-            {datas.question.slice(3,6).map((q, index)=>{
-              return (
-                <div className={'w-5/6 px-2 my-4 md:flex md:flex-col md:items-center md:w-3/4 md:my-4'} key={index}>
+          {datas.question.slice(3, 6).map((q, index) => {
+            return (
+              <div className={'w-5/6 px-2 my-4 md:flex md:flex-col md:items-center md:w-3/4 md:my-4'} key={index}>
                 <div className={'flex w-full justify-between text-[16px] font-preL mb-4 md:mb-8 md:w-3/4 md:relative md:top-[70px] md:text-[22px]'}>
                   <div>{q.q1}</div>
                   <div>{q.q2}</div>
                 </div>
                 <div className={'flex justify-between items-center md:w-2/5 md:z-10'}>
-                  <div onClick={()=>{{q.value2 ? select2(q.value, q.value2, 1) : select(q.value, 1)}}} className={`w-[50px] h-[50px] rounded-full border border-[#999483] ${data[q.value] == 1 && 'bg-[#655442]' }`}></div>
-                  <div onClick={()=>{{q.value2 ? select2(q.value, q.value2, 2) : select(q.value, 2)}}} className={`w-[40px] h-[40px] rounded-full border border-[#999483] ${data[q.value] == 2 && 'bg-[#655442]' }`}></div>
-                  <div onClick={()=>{{q.value2 ? select2(q.value, q.value2, 3) : select(q.value, 3)}}} className={`w-[30px] h-[30px] rounded-full border border-[#999483] ${data[q.value] == 3 && 'bg-[#655442]' }`}></div>
-                  <div onClick={()=>{{q.value2 ? select2(q.value, q.value2, 4) : select(q.value, 4)}}} className={`w-[40px] h-[40px] rounded-full border border-[#999483] ${data[q.value] == 4 && 'bg-[#655442]' }`}></div>
-                  <div onClick={()=>{{q.value2 ? select2(q.value, q.value2, 5) : select(q.value, 5)}}} className={`w-[50px] h-[50px] rounded-full border border-[#999483] ${data[q.value] == 5 && 'bg-[#655442]' }`}></div>
+                  <div onClick={() => { { q.value2 ? select2(q.value, q.value2, 1) : select(q.value, 1) } }} className={`w-[50px] h-[50px] rounded-full border border-[#999483] ${data[q.value] == 1 && 'bg-[#655442]'}`}></div>
+                  <div onClick={() => { { q.value2 ? select2(q.value, q.value2, 2) : select(q.value, 2) } }} className={`w-[40px] h-[40px] rounded-full border border-[#999483] ${data[q.value] == 2 && 'bg-[#655442]'}`}></div>
+                  <div onClick={() => { { q.value2 ? select2(q.value, q.value2, 3) : select(q.value, 3) } }} className={`w-[30px] h-[30px] rounded-full border border-[#999483] ${data[q.value] == 3 && 'bg-[#655442]'}`}></div>
+                  <div onClick={() => { { q.value2 ? select2(q.value, q.value2, 4) : select(q.value, 4) } }} className={`w-[40px] h-[40px] rounded-full border border-[#999483] ${data[q.value] == 4 && 'bg-[#655442]'}`}></div>
+                  <div onClick={() => { { q.value2 ? select2(q.value, q.value2, 5) : select(q.value, 5) } }} className={`w-[50px] h-[50px] rounded-full border border-[#999483] ${data[q.value] == 5 && 'bg-[#655442]'}`}></div>
                 </div>
                 <hr className={'border-xs border-[#AEA89699] mt-6 md:w-3/4 md:mt-10'}></hr>
               </div>
-              )
-            })}
+            )
+          })}
         </div>
       </div>
       <div className={`${page == 4 ? 'block' : 'hidden'}`}>
@@ -301,24 +301,24 @@ export default function Jubti () {
           <div className={''}>가까운 쪽을 선택해 주세요</div >
         </div>
         <div className={'flex flex-col items-center justify-center'}>
-            {datas.question.slice(6,9).map((q, index)=>{
-              return (
-                <div className={'w-5/6 px-2 my-4 md:flex md:flex-col md:items-center md:w-3/4 md:my-4'} key={index}>
+          {datas.question.slice(6, 9).map((q, index) => {
+            return (
+              <div className={'w-5/6 px-2 my-4 md:flex md:flex-col md:items-center md:w-3/4 md:my-4'} key={index}>
                 <div className={'flex w-full justify-between text-[16px] font-preL mb-4 md:mb-8 md:w-3/4 md:relative md:top-[70px] md:text-[22px]'}>
                   <div>{q.q1}</div>
                   <div>{q.q2}</div>
                 </div>
                 <div className={'flex justify-between items-center md:w-2/5 md:z-10'}>
-                  <div onClick={()=>{{q.value2 ? select2(q.value, q.value2, 1) : select(q.value, 1)}}} className={`w-[50px] h-[50px] rounded-full border border-[#999483] ${data[q.value] == 1 && 'bg-[#655442]' }`}></div>
-                  <div onClick={()=>{{q.value2 ? select2(q.value, q.value2, 2) : select(q.value, 2)}}} className={`w-[40px] h-[40px] rounded-full border border-[#999483] ${data[q.value] == 2 && 'bg-[#655442]' }`}></div>
-                  <div onClick={()=>{{q.value2 ? select2(q.value, q.value2, 3) : select(q.value, 3)}}} className={`w-[30px] h-[30px] rounded-full border border-[#999483] ${data[q.value] == 3 && 'bg-[#655442]' }`}></div>
-                  <div onClick={()=>{{q.value2 ? select2(q.value, q.value2, 4) : select(q.value, 4)}}} className={`w-[40px] h-[40px] rounded-full border border-[#999483] ${data[q.value] == 4 && 'bg-[#655442]' }`}></div>
-                  <div onClick={()=>{{q.value2 ? select2(q.value, q.value2, 5) : select(q.value, 5)}}} className={`w-[50px] h-[50px] rounded-full border border-[#999483] ${data[q.value] == 5 && 'bg-[#655442]' }`}></div>
+                  <div onClick={() => { { q.value2 ? select2(q.value, q.value2, 1) : select(q.value, 1) } }} className={`w-[50px] h-[50px] rounded-full border border-[#999483] ${data[q.value] == 1 && 'bg-[#655442]'}`}></div>
+                  <div onClick={() => { { q.value2 ? select2(q.value, q.value2, 2) : select(q.value, 2) } }} className={`w-[40px] h-[40px] rounded-full border border-[#999483] ${data[q.value] == 2 && 'bg-[#655442]'}`}></div>
+                  <div onClick={() => { { q.value2 ? select2(q.value, q.value2, 3) : select(q.value, 3) } }} className={`w-[30px] h-[30px] rounded-full border border-[#999483] ${data[q.value] == 3 && 'bg-[#655442]'}`}></div>
+                  <div onClick={() => { { q.value2 ? select2(q.value, q.value2, 4) : select(q.value, 4) } }} className={`w-[40px] h-[40px] rounded-full border border-[#999483] ${data[q.value] == 4 && 'bg-[#655442]'}`}></div>
+                  <div onClick={() => { { q.value2 ? select2(q.value, q.value2, 5) : select(q.value, 5) } }} className={`w-[50px] h-[50px] rounded-full border border-[#999483] ${data[q.value] == 5 && 'bg-[#655442]'}`}></div>
                 </div>
                 <hr className={'border-xs border-[#AEA89699] mt-6 md:w-3/4 md:mt-10'}></hr>
               </div>
-              )
-            })}
+            )
+          })}
         </div>
       </div>
       <div className={`${page == 5 ? 'block' : 'hidden'} flex flex-col items-center`}>
@@ -327,26 +327,27 @@ export default function Jubti () {
           <div className={''}>선택해 주세요</div >
         </div>
         <div className={'grid grid-cols-2 md:flex md:gap-16 justify-center w-5/6 items-center justify-center'}>
-            {datas.dish.map((dish, index)=>{
-              return (
-                <div onClick={()=>{select('dish', dish.value)}} className={`flex flex-col items-center md:h-[400px] md:justify-center ${data['dish'] == dish.value && 'brightness-50'}`}>
-                  <img className={'w-[120px] md:w-[200px]'} src={`/images/jubti/dish/${index + 1}.png`} />
-                  <div className={'text-[18px] mt-1 mb-4 md:text-[24px] md:mt-6'}>{dish.name}</div>
-                </div>
-              )
-            })}
+          {datas.dish.map((dish, index) => {
+            return (
+              <div onClick={() => { select('dish', dish.value) }} className={`flex flex-col items-center md:h-[400px] md:justify-center ${data['dish'] == dish.value && 'brightness-50'}`}>
+                <img className={'w-[120px] md:w-[200px]'} src={`/images/jubti/dish/${index + 1}.png`} />
+                <div className={'text-[18px] mt-1 mb-4 md:text-[24px] md:mt-6'}>{dish.name}</div>
+              </div>
+            )
+          })}
         </div>
       </div>
       <div className={'flex justify-center'}>
-        <div className={`flex ${(page == 0 || page == 5) && 'hidden'} font-preL justify-center items-center w-5/6 md:w-[400px] relative text-[20px] md:text-xl h-[70px] bg-[#655442] hover:bg-[#504336] text-white rounded cursor-pointer`} onClick={()=>{if(page == 5){console.log(jubti())} else move_page()}}>
+        <div className={`flex ${(page == 0 || page == 5) && 'hidden'} font-preL justify-center items-center w-5/6 md:w-[400px] relative text-[20px] md:text-xl h-[70px] bg-[#655442] hover:bg-[#504336] text-white rounded cursor-pointer`} onClick={() => { if (page == 5) { console.log(jubti()) } else move_page() }}>
           다음으로
         </div>
       </div>
       <div className={'flex justify-center'}>
-        <div onClick={()=>jubti()} className={`flex ${page != 5 && 'hidden'} font-preL justify-center items-center w-5/6 md:w-[400px] relative mt-9 md:bottom-[-80px] text-[20px] md:text-xl h-[70px] bg-[#655442] hover:bg-[#504336] text-white rounded cursor-pointer`}>
+        <div onClick={() => jubti()} className={`flex ${page != 5 && 'hidden'} font-preL justify-center items-center w-5/6 md:w-[400px] relative mt-9 md:bottom-[-80px] text-[20px] md:text-xl h-[70px] bg-[#655442] hover:bg-[#504336] text-white rounded cursor-pointer`}>
           결과 제출하기
         </div>
       </div>
     </>
   )
 }
+
