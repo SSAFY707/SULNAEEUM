@@ -3,11 +3,15 @@ package com.ssafy.sulnaeeum.model.ranking.service;
 import com.ssafy.sulnaeeum.exception.CustomException;
 import com.ssafy.sulnaeeum.exception.CustomExceptionList;
 import com.ssafy.sulnaeeum.model.drink.dto.DrinkDto;
+import com.ssafy.sulnaeeum.model.drink.dto.IngredientDto;
 import com.ssafy.sulnaeeum.model.drink.entity.Drink;
+import com.ssafy.sulnaeeum.model.drink.entity.Ingredient;
 import com.ssafy.sulnaeeum.model.drink.repo.DrinkRepo;
+import com.ssafy.sulnaeeum.model.drink.repo.IngredientRepo;
 import com.ssafy.sulnaeeum.model.jubti.entity.JubtiResult;
 import com.ssafy.sulnaeeum.model.jubti.repo.JubtiRepo;
 import com.ssafy.sulnaeeum.model.ranking.dto.JubtiTopDrinkDto;
+import com.ssafy.sulnaeeum.model.ranking.dto.RankingDto;
 import com.ssafy.sulnaeeum.model.ranking.dto.TopDrinkListDto;
 import com.ssafy.sulnaeeum.model.ranking.entity.Ranking;
 import com.ssafy.sulnaeeum.model.ranking.repo.RankingRepo;
@@ -35,6 +39,7 @@ public class RankingService {
     private final DrinkRepo drinkRepo;
     private final JubtiRepo jubtiRepo;
     private final RankingRepo rankingRepo;
+    private final IngredientRepo ingredientRepo;
 
     @Transactional
     public TopDrinkListDto getTopLike() {
@@ -73,22 +78,46 @@ public class RankingService {
         List<Drink> femaleTopDrink = drinkRepo.findFemale();
         List<Drink> maleTopDrink = drinkRepo.findMale();
 
-        List<DrinkDto> twentiesTopDrinkDto = new ArrayList<>();
-        List<DrinkDto> thirtiesTopDrinkDto = new ArrayList<>();
-        List<DrinkDto> fortiesTopDrinkDto = new ArrayList<>();
-        List<DrinkDto> fiftiesTopDrinkDto = new ArrayList<>();
-        List<DrinkDto> sixtiesTopDrinkDto = new ArrayList<>();
-        List<DrinkDto> femaleTopDrinkDto = new ArrayList<>();
-        List<DrinkDto> maleTopDrinkDto = new ArrayList<>();
+        for(int i = 0; i < 10; i++){
+            System.out.println(twentiesTopDrink.get(i).getDrinkId());
+        }
+
+        List<RankingDto> twentiesTopDrinkDto = new ArrayList<>();
+        List<RankingDto> thirtiesTopDrinkDto = new ArrayList<>();
+        List<RankingDto> fortiesTopDrinkDto = new ArrayList<>();
+        List<RankingDto> fiftiesTopDrinkDto = new ArrayList<>();
+        List<RankingDto> sixtiesTopDrinkDto = new ArrayList<>();
+        List<RankingDto> femaleTopDrinkDto = new ArrayList<>();
+        List<RankingDto> maleTopDrinkDto = new ArrayList<>();
 
         for (int i = 0; i < twentiesTopDrink.size(); i++) {
-            twentiesTopDrinkDto.add(twentiesTopDrink.get(i).toDto());
-            thirtiesTopDrinkDto.add(thirtiesTopDrink.get(i).toDto());
-            fortiesTopDrinkDto.add(fortiesTopDrink.get(i).toDto());
-            fiftiesTopDrinkDto.add(fiftiesTopDrink.get(i).toDto());
-            sixtiesTopDrinkDto.add(sixtiesTopDrink.get(i).toDto());
-            femaleTopDrinkDto.add(femaleTopDrink.get(i).toDto());
-            maleTopDrinkDto.add(maleTopDrink.get(i).toDto());
+            List<Ingredient> ingredients = ingredientRepo.findAllByDrinkId(twentiesTopDrink.get(i).getDrinkId());
+            List<String> ingredientNameList = getIngredientName(ingredients);
+            twentiesTopDrinkDto.add(new RankingDto(twentiesTopDrink.get(i).toDto(), ingredientNameList));
+
+            ingredients = ingredientRepo.findAllByDrinkId(thirtiesTopDrink.get(i).getDrinkId());
+            ingredientNameList = getIngredientName(ingredients);
+            thirtiesTopDrinkDto.add(new RankingDto(thirtiesTopDrink.get(i).toDto(), ingredientNameList));
+
+            ingredients = ingredientRepo.findAllByDrinkId(fortiesTopDrink.get(i).getDrinkId());
+            ingredientNameList = getIngredientName(ingredients);
+            fortiesTopDrinkDto.add(new RankingDto(fortiesTopDrink.get(i).toDto(), ingredientNameList));
+
+            ingredients = ingredientRepo.findAllByDrinkId(fiftiesTopDrink.get(i).getDrinkId());
+            ingredientNameList = getIngredientName(ingredients);
+            fiftiesTopDrinkDto.add(new RankingDto(fiftiesTopDrink.get(i).toDto(), ingredientNameList));
+
+            ingredients = ingredientRepo.findAllByDrinkId(sixtiesTopDrink.get(i).getDrinkId());
+            ingredientNameList = getIngredientName(ingredients);
+            sixtiesTopDrinkDto.add(new RankingDto(sixtiesTopDrink.get(i).toDto(), ingredientNameList));
+
+            ingredients = ingredientRepo.findAllByDrinkId(femaleTopDrink.get(i).getDrinkId());
+            ingredientNameList = getIngredientName(ingredients);
+            femaleTopDrinkDto.add(new RankingDto(femaleTopDrink.get(i).toDto(), ingredientNameList));
+
+            ingredients = ingredientRepo.findAllByDrinkId(maleTopDrink.get(i).getDrinkId());
+            ingredientNameList = getIngredientName(ingredients);
+            maleTopDrinkDto.add(new RankingDto(maleTopDrink.get(i).toDto(), ingredientNameList));
         }
 
         return JubtiTopDrinkDto.builder()
@@ -100,6 +129,14 @@ public class RankingService {
                 .femaleTopDrink(femaleTopDrinkDto)
                 .maleTopDrink(maleTopDrinkDto)
                 .build();
+    }
+
+    private List<String> getIngredientName(List<Ingredient> ingredients){
+        List<String> names = new ArrayList<>();
+
+        for(int i = 0; i < ingredients.size(); i++) names.add(ingredients.get(i).getIngredientType().getIngredientName());
+
+        return names;
     }
 
     @Transactional
