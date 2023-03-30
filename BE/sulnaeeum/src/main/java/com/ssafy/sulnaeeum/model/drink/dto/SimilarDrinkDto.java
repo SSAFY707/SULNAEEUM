@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
+import org.json.simple.JSONObject;
 
 @Schema(description = "비슷한 술")
 @Data
@@ -27,4 +28,12 @@ public class SimilarDrinkDto {
 
     @Schema(description = "용량")
     private String drinkAmount;
+
+    public SimilarDrinkDto(JSONObject jsonValue) {
+        this.drinkId = Long.parseLong(jsonValue.get("drink_id").toString());
+        this.drinkName = jsonValue.get("drink_name").toString();
+        this.drinkImage = jsonValue.get("drink_image").toString().replace("\\", "");
+        this.drinkLevel = Integer.parseInt(jsonValue.get("drink_level").toString());
+        this.drinkAmount = jsonValue.get("drink_amount").toString();
+    }
 }
