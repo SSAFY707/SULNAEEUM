@@ -29,12 +29,14 @@ export default function callback(props: { code: string }) {
 
         accessToken = sessionStorage.getItem('accessToken')
 
-
-        if (data.finish) {
-          location.href = '/'
-        } else {
-          location.href = '/user/prefer'
+        setTimeout(() => {
+          if (data.finish) {
+            location.href = '/'
+          } else {
+            location.href = '/user/prefer'
+          }
         }
+          , 3000);
 
 
 
@@ -47,9 +49,9 @@ export default function callback(props: { code: string }) {
 
   return (<>
     <div className='flex flex-col w-screen h-screen justify-center items-center'>
-      <div className='flex flex-col justify-center items-center w-[700px] h-[700px] bg-[#ebf3f3] rounded-[14px]'>
-        <img src='/images/loading1.gif' className='w-[400px]'></img>
-        <p className='font-normal text-[30px] text-[#3C97A5]'>로그인 중...</p>
+      <div className='flex flex-col justify-center items-center w-[700px] h-[700px] rounded-[14px]'>
+        <img src='/images/loading.gif' className='w-[600px]'></img>
+        <p className='font-normal text-[30px] text-[#AEA896]'>Loading...</p>
       </div>
     </div>
   </>

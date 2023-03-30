@@ -2,7 +2,7 @@ import { sendJubti } from '@/api/dafault';
 import { JubtiType } from '@/types/DataTypes';
 import { useRouter } from 'next/router';
 import React, { useState } from 'react'
-import { BsArrowLeftCircle } from 'react-icons/bs';
+
 
 export default function Jubti() {
 
