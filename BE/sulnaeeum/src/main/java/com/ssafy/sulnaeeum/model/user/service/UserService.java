@@ -3,15 +3,15 @@ package com.ssafy.sulnaeeum.model.user.service;
 import com.ssafy.sulnaeeum.exception.CustomException;
 import com.ssafy.sulnaeeum.exception.CustomExceptionList;
 import com.ssafy.sulnaeeum.jwt.TokenProvider;
-import com.ssafy.sulnaeeum.model.user.dto.UserPreferenceDto;
-import com.ssafy.sulnaeeum.model.user.entity.UserPreference;
+import com.ssafy.sulnaeeum.model.drink.repo.LikeDrinkRepo;
+import com.ssafy.sulnaeeum.model.drink.repo.MyDrinkRepo;
+import com.ssafy.sulnaeeum.model.user.dto.MineDto;
 import com.ssafy.sulnaeeum.model.user.repo.UserPreferenceRepo;
 import com.ssafy.sulnaeeum.model.user.repo.UserRepo;
 import com.ssafy.sulnaeeum.model.user.dto.TokenDto;
 import com.ssafy.sulnaeeum.model.user.entity.User;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -26,6 +26,9 @@ public class UserService {
     private final UserRepo userRepository;
     private final UserPreferenceRepo userPreferenceRepo;
     private final TokenProvider tokenProvider;
+
+    private final LikeDrinkRepo likeDrinkRepo;
+    private final MyDrinkRepo myDrinkRepo;
 
     @Transactional
     public TokenDto refreshToken(TokenDto tokenRequestDto) {
@@ -62,18 +65,6 @@ public class UserService {
         user.updateToken(null);
     }
 
-    @Transactional
-    public void preference(String kakaoId, UserPreferenceDto userPreferenceDto) {
-
-        User user = userRepository.findByKakaoId(kakaoId).orElseThrow(() -> new CustomException(CustomExceptionList.MEMBER_NOT_FOUND));
-
-        UserPreference userPreference = userPreferenceDto.toEntity();
-        userPreference.setUser(user);
-
-        userPreferenceRepo.save(userPreference);
-        user.updateFinish(true);
-    }
-
     // kakaoId로 userId 찾기
     public Long findUserId(String kakaoId) {
         Optional<Long> userId = userRepository.findUserId(kakaoId);
@@ -81,5 +72,12 @@ public class UserService {
             throw new CustomException(CustomExceptionList.MEMBER_NOT_FOUND);
         }
         return userId.get();
+    }
+
+    // 내가 찜 및 클리어한 모든 전통주의 id 가져오기
+    public MineDto getMine(String kakaoId) {
+        Long userId = findUserId(kakaoId);
+        MineDto mineDto = new MineDto(likeDrinkRepo.findMyDrink(userId), myDrinkRepo.findMyDrink(userId));
+        return mineDto;
     }
 }

@@ -88,26 +88,6 @@ public class DrinkService {
         }
         drinkInfoDtoList = drinkList.stream().map(DrinkInfoDto::new).collect(Collectors.toList());
 
-        // 회원 접근일 때
-        if(kakaoId != null) {
-            for(DrinkInfoDto drinkInfoDto: drinkInfoDtoList) {
-                Long userId = userService.findUserId(kakaoId);
-                Long drinkId = drinkInfoDto.getDrinkId();
-
-                // 찜 여부 세팅
-                Optional<LikeDrink> likeDrink = likeDrinkRepo.findLikeInfo(drinkId, userId);
-                if(likeDrink.isPresent()) {
-                    drinkInfoDto.setLike(true);
-                }
-
-                // 클리어 여부 세팅
-                Optional<Review> review = reviewRepo.findMyReview(userId, drinkId);
-                if(review.isPresent()) {
-                    drinkInfoDto.setClear(true);
-                }
-            }
-        }
-
         return drinkInfoDtoList;
     }
 
