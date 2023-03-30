@@ -17,23 +17,23 @@ import java.util.List;
 public class JubtiTopDrinkDto {
 
     @Schema(description = "20대 상위 전통주")
-    private List<DrinkDto> twentiesTopDrink;
+    private List<RankingDto> twentiesTopDrink;
 
     @Schema(description = "30대 상위 전통주")
-    private List<DrinkDto> thirtiesTopDrink;
+    private List<RankingDto> thirtiesTopDrink;
 
     @Schema(description = "40대 상위 전통주")
-    private List<DrinkDto> fortiesTopDrink;
+    private List<RankingDto> fortiesTopDrink;
 
     @Schema(description = "50대 상위 전통주")
-    private List<DrinkDto> fiftiesTopDrink;
+    private List<RankingDto> fiftiesTopDrink;
 
     @Schema(description = "60대 상위 전통주")
-    private List<DrinkDto> sixtiesTopDrink;
+    private List<RankingDto> sixtiesTopDrink;
 
     @Schema(description = "여성 상위 전통주")
-    private List<DrinkDto> femaleTopDrink;
+    private List<RankingDto> femaleTopDrink;
 
     @Schema(description = "남성 상위 전통주")
-    private List<DrinkDto> maleTopDrink;
+    private List<RankingDto> maleTopDrink;
 }
