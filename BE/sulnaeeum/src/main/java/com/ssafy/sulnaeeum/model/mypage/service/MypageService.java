@@ -56,7 +56,7 @@ public class MypageService {
         for (LikeDrink likeDrink :likeDrinks) {
             textMiningCal(likeDrink.getDrink());
         }
-        
+
         List<Word> words = new ArrayList<>();
         for (Map.Entry<String, Double> entry :counting.entrySet()) {
             words.add(new Word(entry.getKey(),entry.getValue()));
