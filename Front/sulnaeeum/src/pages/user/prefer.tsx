@@ -17,7 +17,7 @@ export default function index() {
   }
 
   const data: DataType = {
-    gender: [{ name: '남성', value: true }, { name: '여성', value: false }],
+    gender: [{ name: '남성', value: '남성' }, { name: '여성', value: '여성' }],
     age: [
       { name: '20대', value: '20s' },
       { name: '30대', value: '30s' },
@@ -26,6 +26,12 @@ export default function index() {
       { name: '60대 이상', value: '60s' },
     ]
   }
+
+  const [gender, setGender] = useState<boolean>();
+  const [age, setAge] = useState<string>('');
+
+
+
 
   const [page, setPage] = useState(0);
 
@@ -66,12 +72,16 @@ export default function index() {
               <div onClick={() => { setPage(page + 1) }} className={'flex justify-center items-center mt-[70px] w-full h-[60px] text-[22px] text-white font-preL bg-[#847260] hover:bg-[#655442] cursor-pointer rounded'}>시작하기</div>
             </div>
           </div>
+
+          {/* 1페이지 */}
           <div className={`${page != 1 && 'hidden'} flex flex-col items-center w-[500px] h-[650px] rounded-xl bg-white/90`}>
             <div className={'w-5/6 mt-10 mb-6'}>
-              <MdArrowBackIosNew className='hover:cursor-pointer' onClick={() => { setPage(page - 1) }} ></MdArrowBackIosNew>
-              <div className={'font-preM mb-2'}>1 / 3 단계</div>
+              <div className='flex items-center w-full h-[30px] bg-red-200 mb-[10px]'>
+                <MdArrowBackIosNew className='hover:cursor-pointer' onClick={() => { setPage(page - 1) }} ></MdArrowBackIosNew>
+                <div className={'font-preM ml-[8px]'}>{page}/4 단계</div>
+              </div>
               <div className={'w-full h-2 bg-zinc-200 rounded-2xl'}>
-                <div className={'w-1/3 h-full bg-[#655442] rounded-2xl'}></div>
+                <div className={'w-1/4 h-full bg-[#655442] rounded-2xl'}></div>
               </div>
             </div>
             <div className={'h-2/3 w-5/6 p-2'}>
@@ -80,7 +90,9 @@ export default function index() {
                 <div className={'grid grid-cols-2 gap-2 w-full'}>
                   {data.gender.map((g, index) => {
                     return (
-                      <div className={'w-full h-[50px] flex justify-center items-center cursor-pointer border rounded'} key={index}>{g.name}</div>
+                      <div key={index} onClick={() => {
+                        setGender(g.value as boolean)
+                      }} className={`w-full h-[50px] flex justify-center items-center cursor-pointer border rounded ${gender === g.value ? 'bg-[#847260] text-white' : ''}`} >{g.name}</div>
                     )
                   })}
                 </div>
@@ -88,16 +100,78 @@ export default function index() {
               <div>
                 <div className={'font-preR text-[24px] mb-4'}>나이</div>
                 <div className={'grid grid-cols-3 gap-2'}>
-                  {data.age.map((age, index) => {
+                  {data.age.map((a, index) => {
                     return (
-                      <div className={'w-full h-[50px] flex justify-center items-center cursor-pointer border rounded'} key={index}>{age.name}</div>
+                      <div key={index} onClick={() => {
+                        setAge(a.value as string)
+                      }}
+                        className={`w-full h-[50px] flex justify-center items-center cursor-pointer border rounded ${age === a.value ? 'bg-[#847260] text-white' : ''}`} >{a.name}</div>
                     )
                   })}
                 </div>
               </div>
             </div>
+            <div onClick={() => { setPage(page + 1) }} className={`flex justify-center items-center text-white font-preL bg-gray-300 rounded w-5/6 h-[60px] text-[20px] ${gender && age ? 'bg-[#847260]' : ''} `}>다음 단계</div>
+          </div>
+
+          {/* 2페이지 */}
+          <div className={`${page != 2 && 'hidden'} flex flex-col items-center w-[500px] h-[650px] rounded-xl bg-white/90`}>
+            <div className={'w-5/6 mt-10 mb-6'}>
+              <div className='flex items-center w-full h-[30px] bg-red-200 mb-[10px]'>
+                <MdArrowBackIosNew className='hover:cursor-pointer' onClick={() => { setPage(page - 1) }} ></MdArrowBackIosNew>
+                <div className={'font-preM ml-[8px]'}>{page}/4 단계</div>
+              </div>
+              <div className={'w-full h-2 bg-zinc-200 rounded-2xl'}>
+                <div className={'w-2/4 h-full bg-[#655442] rounded-2xl'}></div>
+              </div>
+            </div>
+            <div className={'h-2/3 w-5/6 p-2'}>
+              <div className='w-full h-[160px] bg-red-300'></div>
+            </div>
             <div onClick={() => { setPage(page + 1) }} className={'flex justify-center items-center rounded w-5/6 h-[60px] text-[20px] text-white font-preL bg-[#847260] hover:bg-[#655442] cursor-pointer'}>다음 단계</div>
           </div>
+
+
+          {/* 3페이지 */}
+          <div className={`${page != 3 && 'hidden'} flex flex-col items-center w-[500px] h-[650px] rounded-xl bg-white/90`}>
+            <div className={'w-5/6 mt-10 mb-6'}>
+              <div className='flex items-center w-full h-[30px] bg-red-200 mb-[10px]'>
+                <MdArrowBackIosNew className='hover:cursor-pointer' onClick={() => { setPage(page - 1) }} ></MdArrowBackIosNew>
+                <div className={'font-preM ml-[8px]'}>{page}/4 단계</div>
+              </div>
+              <div className={'w-full h-2 bg-zinc-200 rounded-2xl'}>
+                <div className={'w-3/4 h-full bg-[#655442] rounded-2xl'}></div>
+              </div>
+            </div>
+            <div className={'h-2/3 w-5/6 p-2'}>
+
+            </div>
+            <div onClick={() => { setPage(page + 1) }} className={'flex justify-center items-center rounded w-5/6 h-[60px] text-[20px] text-white font-preL bg-[#847260] hover:bg-[#655442] cursor-pointer'}>다음 단계</div>
+          </div>
+
+
+          {/* 4페이지 */}
+          <div className={`${page != 4 && 'hidden'} flex flex-col items-center w-[500px] h-[650px] rounded-xl bg-white/90`}>
+            <div className={'w-5/6 mt-10 mb-6'}>
+              <div className='flex items-center w-full h-[30px] bg-red-200 mb-[10px]'>
+                <MdArrowBackIosNew className='hover:cursor-pointer' onClick={() => { setPage(page - 1) }} ></MdArrowBackIosNew>
+                <div className={'font-preM ml-[8px]'}>{page}/4 단계</div>
+              </div>
+              <div className={'w-full h-2 bg-zinc-200 rounded-2xl'}>
+                <div className={'w-4/4 h-full bg-[#655442] rounded-2xl'}></div>
+              </div>
+            </div>
+            <div className={'h-2/3 w-5/6 p-2'}>
+
+            </div>
+            <div onClick={() => { setPage(page + 1) }} className={'flex justify-center items-center rounded w-5/6 h-[60px] text-[20px] text-white font-preL bg-[#847260] hover:bg-[#655442] cursor-pointer'}>다음 단계</div>
+          </div>
+
+
+
+
+
+          {/* 
           <div className={`${page != 2 && 'hidden'} flex flex-col items-center w-[500px] h-[650px] rounded-xl bg-white/90`}>
             <div className={'w-5/6 mt-10 mb-6'}>
               <MdArrowBackIosNew className='hover:cursor-pointer' onClick={() => { setPage(page - 1) }} ></MdArrowBackIosNew>
@@ -146,7 +220,9 @@ export default function index() {
             <div className={'flex w-5/6 gap-2'}>
               <div onClick={() => { setPage(page + 1) }} className={'flex justify-center items-center rounded w-full h-[60px] text-[20px] text-white font-preL bg-[#847260] hover:bg-[#655442] cursor-pointer'}>다음 단계</div>
             </div>
-          </div>
+          </div> */}
+
+
         </div>
       </div>
     </>
