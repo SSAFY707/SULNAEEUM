@@ -3,23 +3,20 @@ package com.ssafy.sulnaeeum.model.drink.service;
 import com.ssafy.sulnaeeum.exception.CustomException;
 import com.ssafy.sulnaeeum.exception.CustomExceptionList;
 import com.ssafy.sulnaeeum.model.drink.dto.*;
-import com.ssafy.sulnaeeum.model.drink.entity.Drink;
-import com.ssafy.sulnaeeum.model.drink.entity.Review;
-import com.ssafy.sulnaeeum.model.drink.repo.DrinkRepo;
-import com.ssafy.sulnaeeum.model.drink.repo.DrinkTypeRepo;
-import com.ssafy.sulnaeeum.model.drink.entity.LikeDrink;
-import com.ssafy.sulnaeeum.model.drink.repo.LikeDrinkRepo;
-import com.ssafy.sulnaeeum.model.drink.repo.ReviewRepo;
+import com.ssafy.sulnaeeum.model.drink.entity.*;
+import com.ssafy.sulnaeeum.model.drink.repo.*;
 import com.ssafy.sulnaeeum.model.jumak.dto.JumakDto;
 import com.ssafy.sulnaeeum.model.jumak.entity.Jumak;
 import com.ssafy.sulnaeeum.model.jumak.repo.JumakRepo;
+import com.ssafy.sulnaeeum.model.user.dto.UserPreferenceDto;
 import com.ssafy.sulnaeeum.model.user.service.UserService;
+import com.ssafy.sulnaeeum.util.FlaskUtil;
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -42,6 +39,18 @@ public class DrinkService {
 
     @Autowired
     JumakRepo jumakRepo;
+
+    @Autowired
+    IngredientTypeRepo ingredientTypeRepo;
+
+    @Autowired
+    DishRepo dishRepo;
+
+    @Autowired
+    TasteRepo tasteRepo;
+
+    @Autowired
+    FlaskUtil flaskUtil;
 
     // 모든 전통주 조회
     @Transactional
@@ -112,6 +121,15 @@ public class DrinkService {
         }
         DrinkDetailDto drinkDetailDto = drink.get().toDrinkDetailDto();
 
+        // 맛 세팅
+        findTaste(drinkId, drinkDetailDto);
+
+        // 재료 세팅
+        drinkDetailDto.setIngredient(ingredientTypeRepo.findIngredientName(drinkId));
+
+        // 어울리는 안주 세팅
+        drinkDetailDto.setDishName(dishRepo.findDishName(drinkId));
+
         // 회원 접근일 때
         if(kakaoId != null) {
             Long userId = userService.findUserId(kakaoId);
@@ -141,8 +159,83 @@ public class DrinkService {
         List<JumakDto> jumakDtoList = jumakList.stream().map(JumakDto::new).collect(Collectors.toList());
         drinkDetailPageDto.setJumakDto(jumakDtoList);
 
-        // 비슷한 술 추천 필요 !! (Flask에서 받아와야 함)
+        // 비슷한 추천 술 세팅
+        drinkDetailPageDto.setSimilarDrinkDto(similarDrink(drinkDetailDto));
 
         return drinkDetailPageDto;
+    }
+
+    // 맛 세팅
+    public DrinkDetailDto findTaste(Long drinkId, DrinkDetailDto drinkDetailDto) {
+        List<Taste> tasteList = tasteRepo.findTaste(drinkId);
+        List<TasteDto> tasteDtoList = tasteList.stream().map(TasteDto::new).collect(Collectors.toList());
+
+        for(TasteDto tasteDto: tasteDtoList) {
+            Long tasteTypeId = tasteDto.getTasteType();
+            if (tasteTypeId == 1) {
+                drinkDetailDto.setTasteSweet(tasteDto.getScore());
+            } else if (tasteTypeId == 2) {
+                drinkDetailDto.setTasteSour(tasteDto.getScore());
+            } else if (tasteTypeId == 3) {
+                drinkDetailDto.setTasteBody(tasteDto.getScore());
+            } else if (tasteTypeId == 4) {
+                drinkDetailDto.setTasteRefresh(tasteDto.getScore());
+            } else if (tasteTypeId == 5) {
+                drinkDetailDto.setTasteFlavor(tasteDto.getScore());
+            } else if (tasteTypeId == 6) {
+                drinkDetailDto.setTasteThroat(tasteDto.getScore());
+            } else {
+                throw new CustomException(CustomExceptionList.RUNTIME_EXCEPTION);
+            }
+        }
+
+        return drinkDetailDto;
+    }
+
+    // 비슷한 술 추천
+    public SimilarDrinkDto similarDrink(DrinkDetailDto drinkDetailDto) {
+
+        UserPreferenceDto userPreferenceDto = new UserPreferenceDto();
+
+        // 비슷한 술 추천을 위한 Flask 연동
+        List<Integer> inputData = new ArrayList<>();
+        inputData.add(drinkDetailDto.getTasteSweet());
+        inputData.add(drinkDetailDto.getTasteSour());
+        inputData.add(drinkDetailDto.getTasteRefresh());
+        inputData.add(drinkDetailDto.getTasteFlavor());
+        inputData.add(drinkDetailDto.getTasteThroat());
+        inputData.add(drinkDetailDto.getTasteBody());
+        inputData.add(drinkDetailDto.getDrinkLevel());
+
+        String dishName = dishRepo.findByDishName(drinkDetailDto.getDishName());
+        int[] dishArr;
+
+        if(dishName.equals("전/무침")) {
+            dishArr = new int[] {3, 0, 0, 0, 0, 0};
+        } else if(dishName.equals("육류")) {
+            dishArr = new int[] {0, 3, 0, 0, 0, 0};
+        } else if(dishName.equals("해산물")) {
+            dishArr = new int[] {0, 0, 3, 0, 0, 0};
+        } else if(dishName.equals("탕/전골")) {
+            dishArr = new int[] {0, 0, 0, 3, 0, 0};
+        } else if(dishName.equals("양식")) {
+            dishArr = new int[] {0, 0, 0, 0, 3, 0};
+        } else {
+            dishArr = new int[] {0, 0, 0, 0, 0, 3};
+        }
+
+        for(int i = 0; i < 6; i++) {
+            inputData.add(dishArr[i]);
+        }
+
+        Map<String, List> params = new HashMap<>();
+        params.put("input_data", inputData);
+
+        // Flask 요청 후 반환받기
+        String requestUrl = "http://j8a707.p.ssafy.io:5000/recommend/contents";
+        JSONObject jsonObject = flaskUtil.requestFlask(requestUrl, params);
+
+        SimilarDrinkDto similarDrinkDto = new SimilarDrinkDto((JSONObject)jsonObject.get("0"));
+        return similarDrinkDto;
     }
 }

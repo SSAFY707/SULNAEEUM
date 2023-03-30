@@ -1,16 +1,15 @@
 package com.ssafy.sulnaeeum.model.user.dto;
 
-import com.ssafy.sulnaeeum.model.user.entity.User;
 import com.ssafy.sulnaeeum.model.user.entity.UserPreference;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 
-import javax.persistence.*;
-
-@Schema(description = "유저 취행 조사")
+@Schema(description = "유저 취향 조사")
 @Setter
 @Getter
+@Data
+@SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
 public class UserPreferenceDto {
