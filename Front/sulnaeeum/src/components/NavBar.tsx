@@ -7,8 +7,8 @@ import { useDisclosure } from "@chakra-ui/react";
 import { useRef } from "react";
 import { Axios } from "axios";
 import { defaultAxios, authAxios } from "@/api/common";
-
-
+import NavSearch from "./common/navSearch";
+import { useRouter } from 'next/router'
 
 function kakaoLogin() {
   window.Kakao.Auth.authorize({
@@ -20,34 +20,30 @@ function kakaoLogin() {
 }
 
 const kakaoLogout = async () => {
-
+  
   await authAxios.get("https://j8a707.p.ssafy.io/api/user/kakao/logout")
-    .then((res) => {
+  .then((res) => {
       console.log('로그아웃 성공')
       console.log(res)
       sessionStorage.clear()
       location.href = '/'
-
+      
     }).catch((err) => {
       alert('로그아웃 실패')
       console.log(err)
-
+      
     })
 }
 
-
-
-
 function Navbar() {
-
-
-
+  
+  
+  const router = useRouter()
+  
+  function selectDrink(id:number, name:string) { 
+    router.push(`/list/${id}`);
+  } 
   const [login, setLogin] = useState<boolean>(false)
-
-
-
-
-
   useEffect(() => {
     const check = sessionStorage.getItem('isLogin')
     if (check) {
@@ -76,7 +72,6 @@ function Navbar() {
   const menuTabUrl = ['sort=이름&type=', "tab=", "", "tab=", ""];
 
 
-
   //
   return (
     <nav className="fixed z-50">
@@ -92,6 +87,7 @@ function Navbar() {
             ></Image>
 
             <div className={`${hover == "On" ? "" : "hidden"}`}>
+              <Image className={` absolute z-20 top-[100px] left-[130px] opacity-[0.04]`} src="/main/part2/main2_3.png" alt="" width={130} height={130}></Image>
               <Image
                 className={`${styles.slowDown} absolute z-10 left-[200px] top-[50px]`}
                 src="/logo/술.png"
@@ -151,18 +147,20 @@ function Navbar() {
             );
           })}
         </li>
-        <li className="max-[900px]:hidden w-[290px] pl-[20px] flex font-preL">
-          <button>검색</button>
-
+        <li className="max-[900px]:hidden w-[280px] pl-[20px] flex font-preL items-center">
+          <div className="absoulte ml-[-200px] w-[280px] h-[50px] ">
+          <NavSearch  selectDrink={selectDrink}></NavSearch>
+          </div>
+          <div className="">
           {login ?
-            <div className="hover:bg-gray-100 ml-[40px] rounded-[4px] cursor-pointer" onClick={kakaoLogout}>
+            <div className="hover:bg-gray-100 ml-[20px] rounded-[4px] cursor-pointer" onClick={kakaoLogout}>
               <div className="px-[20px] py-[6px]">로그아웃</div>
             </div> :
-            <div className="hover:bg-gray-100 ml-[40px] rounded-[4px] cursor-pointer" onClick={kakaoLogin}>
+            <div className="hover:bg-gray-100 ml-[20px] rounded-[4px] cursor-pointer" onClick={kakaoLogin}>
               <div className="px-[20px] py-[6px]">로그인</div>
             </div>
           }
-
+          </div>
         </li>
       </ul>
       {hover == "On" ? (
