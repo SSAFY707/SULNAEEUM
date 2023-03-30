@@ -12,7 +12,7 @@ type Mine = {
 }
 
 const initDrinkList : DrinkListType[] = []
-const myDrink : Mine[] = []
+const myDrink : Mine = {likeList: [], clearList: []}
 
 const initDrinkInfo : DrinkDetailType = {
     drinkId: 0,
