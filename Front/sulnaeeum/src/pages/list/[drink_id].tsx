@@ -1,4 +1,4 @@
-import { getDrinkDetail, getDrinkDetailForUser } from '@/api/auth'
+import { getDrinkDetail, drinkDetail, getDrinkDetailForUser } from '@/store/drinkSlice'
 import { DrinkExplain } from '@/components/list/drinkExplain'
 import { DrinkDetailType } from '@/types/DataTypes'
 import React, { useState, useEffect } from 'react'
@@ -7,6 +7,7 @@ import DrinkReviews from '@/components/list/drinkReviews'
 import DrinkJumak from '@/components/list/drinkJumak'
 import { BsArrowLeftCircle } from 'react-icons/bs'
 import { useRouter } from 'next/router'
+import { useAppDispatch, useAppSelector } from '@/hooks'
 
 export default function Detail(props: {drinkId : number}) {
   const { drinkId } = props
@@ -32,7 +33,17 @@ export default function Detail(props: {drinkId : number}) {
     ]
   }
   const [drink, setDrink] = useState<DrinkDetailType>(data)
-  
+  const drinkk = useAppSelector(drinkDetail)
+  const dispatch = useAppDispatch()
+
+  useEffect(()=>{
+    const isLogin = sessionStorage.getItem('isLogin')
+    if(isLogin) {
+      dispatch(getDrinkDetailForUser(drinkId))
+    }else {
+      dispatch(getDrinkDetail(drinkId))
+    }
+  },[drinkId])
   // const getDrinkInfo = async () => {
   //   if(sessionStorage.getItem('isLogin')){
   //     setDrink(await getDrinkDetailForUser(drinkId))

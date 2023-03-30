@@ -33,3 +33,64 @@ export type ReviewWriteType = {
     refreshScore: number,
     content: string | null,
 }
+
+export type Mine = {
+    [index: string] : number[],
+    likeList : number[],
+    clearList : number[]
+}
+
+export type ReviewResType = {
+    [index : string] : string | number,
+    reviewId : number,
+    userId : number,
+    userNickName : string,
+    userImg : string,
+    score : number,
+    content : string
+}
+
+export type JumakType = {
+    [index: string] : string | number,
+    jumakId : number,
+    jumakName : string,
+    jumakUrl : string,
+    jumakLocation : string
+}
+
+export type DrinkDetailType = {
+    'drinkDetailDto' : {
+        [index : string] : string | number | string[] | boolean,
+        drinkId : number,
+        drinkName : string,
+        drinkInfo : string,
+        drinkImage : string,
+        drinkSaleUrl : string,
+        drinkAmount : string,
+        drinkLevel : number,
+        drinkTypeName : string,
+        likeCnt : number,
+        reviewCnt : number,
+        avgScore : number,
+        tasteSweet : number,
+        tasteSour : number,
+        tasteThroat : number,
+        tasteRefresh : number,
+        tasteBody : number,
+        tasteFlavor : number,
+        dishName : string,
+        ingredient : string[],
+        like : boolean,
+        clear : boolean
+    },
+    'reviewResponseDto' : ReviewResType[],
+    'jumakDto' : JumakType[],
+    'similarDrinkDto' : {
+        [index : string] : string | number,
+        drinkId : number,
+        drinkName : string,
+        drinkImage : string,
+        drinkLevel : number,
+        drinkAmount : string
+    }
+}
