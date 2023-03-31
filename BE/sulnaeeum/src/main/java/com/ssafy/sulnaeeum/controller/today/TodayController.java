@@ -26,7 +26,7 @@ public class TodayController {
     @GetMapping("/n/cheers")
     @Operation(summary = "오늘의 건배사", description = "랜덤으로 저장된 오늘의 건배사 보여주기")
     public ResponseEntity<TodayCheersDto> getTodayCheers(){
-        TodayCheersDto cheersDto = new TodayCheersDto();
+        TodayCheersDto cheersDto = todayService.getTodayCheers();
         return new ResponseEntity<>(cheersDto, HttpStatus.OK);
     }
 
