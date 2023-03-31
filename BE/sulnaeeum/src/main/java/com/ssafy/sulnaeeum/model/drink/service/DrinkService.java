@@ -9,6 +9,7 @@ import com.ssafy.sulnaeeum.model.jumak.dto.JumakDto;
 import com.ssafy.sulnaeeum.model.jumak.entity.Jumak;
 import com.ssafy.sulnaeeum.model.jumak.repo.DrinkJumakRepo;
 import com.ssafy.sulnaeeum.model.jumak.repo.JumakRepo;
+import com.ssafy.sulnaeeum.model.rabbitmq.service.ProducerService;
 import com.ssafy.sulnaeeum.model.user.dto.UserPreferenceDto;
 import com.ssafy.sulnaeeum.model.user.service.UserService;
 import com.ssafy.sulnaeeum.util.FlaskUtil;
@@ -52,6 +53,9 @@ public class DrinkService {
 
     @Autowired
     FlaskUtil flaskUtil;
+
+    @Autowired
+    ProducerService producerService;
 
     // 모든 전통주 조회
     @Transactional
@@ -222,7 +226,7 @@ public class DrinkService {
                 dishArr = new int[] {0, 0, 0, 3, 0, 0};
             } else if(dishName.equals("양식")) {
                 dishArr = new int[] {0, 0, 0, 0, 3, 0};
-            } else if(dishName.equals("기타")) {
+            } else if(dishName.equals("디저트")) {
                 dishArr = new int[] {0, 0, 0, 0, 0, 3};
             } else {
                 throw new CustomException(CustomExceptionList.CATEGORY_NOT_FOUND);
@@ -234,11 +238,12 @@ public class DrinkService {
 
         Map<String, List> params = new HashMap<>();
         params.put("input_data", inputData);
+        producerService.sendMessage(params);
 
         // Flask 요청 후 반환받기
         String requestUrl = "http://j8a707.p.ssafy.io:5000/recommend/contents";
         JSONObject jsonObject = flaskUtil.requestFlask(requestUrl, params);
-        SimilarDrinkDto similarDrinkDto = new SimilarDrinkDto((JSONObject)jsonObject.get("0"));
+        SimilarDrinkDto similarDrinkDto = new SimilarDrinkDto((JSONObject)jsonObject.get("1"));
 
         return similarDrinkDto;
     }
