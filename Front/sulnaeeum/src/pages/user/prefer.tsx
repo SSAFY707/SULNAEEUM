@@ -5,11 +5,84 @@ import { TbLemon } from 'react-icons/tb'
 import { FaPercent } from 'react-icons/fa'
 import { MdLocalDining } from 'react-icons/md'
 import { GiWineBottle } from 'react-icons/gi'
+import { authAxios } from '@/api/common'
+
+
+type PayloadType = {
+  tasteSour: number,
+  tasteSweet: number,
+  tasteFlavor: number,
+  tasteRefresh: number,
+  tasteBody: number,
+  tasteThroat: number,
+  level: number,
+  dish: string,
+  weight: string,
+}
+
+
 
 
 
 
 export default function index() {
+
+
+  const [gender, setGender] = useState<string>();
+  const [age, setAge] = useState<string>('');
+  const [tasteSour, setTasteSour] = useState<number>(0);
+  const [tasteSweet, setTasteSweet] = useState<number>(0);
+  const [tasteFlavor, setTasteFlavor] = useState<number>(0);
+  const [tasteRefresh, setTasteRefresh] = useState<number>(0);
+  const [tasteBody, setTasteBody] = useState<number>(0);
+  const [tasteThroat, setTasteThroat] = useState<number>(0);
+  const [level, setLevel] = useState<number>(0);
+  const [dish, setDish] = useState<string>('');
+  const [weight, setWeight] = useState<string>('');
+
+  // const [payload, setPayload] = useState<PayloadType>({
+  //   tasteSour: 0,
+  //   tasteSweet: 0,
+  //   tasteFlavor: 0,
+  //   tasteRefresh: 0,
+  //   tasteBody: 0,
+  //   tasteThroat: 0,
+  //   level: 0,
+  //   dish: "",
+  //   weight: "",
+  // })
+
+
+  const sendData = () => {
+
+
+
+    let payload: PayloadType = {
+      tasteSour: tasteSour,
+      tasteSweet: tasteSweet,
+      tasteFlavor: tasteFlavor,
+      tasteRefresh: tasteRefresh,
+      tasteBody: tasteBody,
+      tasteThroat: tasteThroat,
+      level: level,
+      dish: dish,
+      weight: weight
+    }
+
+
+
+    console.log(payload)
+
+    console.log('sendData() 실행')
+    authAxios.post(`/api/user/preference`, payload
+    ).then((res) => {
+      console.log(res)
+    }).catch((err) => {
+      console.log(err)
+    })
+  }
+
+
   type ObjType = {
     [index: string]: string | boolean
   }
@@ -33,17 +106,7 @@ export default function index() {
     ]
   }
 
-  const [gender, setGender] = useState<string>();
-  const [age, setAge] = useState<string>('');
-  const [tasteSour, setTasteSour] = useState<number>(0);
-  const [tasteSweet, setTasteSweet] = useState<number>(0);
-  const [tasteFlavor, setTasteFlavor] = useState<number>(0);
-  const [tasteRefresh, setTasteRefresh] = useState<number>(0);
-  const [tasteBody, setTasteBody] = useState<number>(0);
-  const [tasteThroat, setTasteThroat] = useState<number>(0);
-  const [level, setLevel] = useState<number>(0);
-  const [dish, setDish] = useState<string>('');
-  const [weight, setWeight] = useState<string>('');
+
 
 
 
@@ -541,7 +604,11 @@ export default function index() {
                 </div>
               </div>
             </div>
-            <div onClick={() => { setPage(page + 1) }} className={`flex justify-center items-center text-white font-preL rounded w-5/6 h-[60px] text-[20px] ${weight && level ? 'bg-[#847260] text-white hover:cursor-pointer' : 'bg-[#E4E4E7] '} `}>시작하기</div>
+            <div onClick={() => {
+              setPage(page + 1)
+              sendData()
+            }
+            } className={`flex justify-center items-center text-white font-preL rounded w-5/6 h-[60px] text-[20px] ${weight && level ? 'bg-[#847260] text-white hover:cursor-pointer' : 'bg-[#E4E4E7] '} `}>시작하기</div>
           </div>
 
 
