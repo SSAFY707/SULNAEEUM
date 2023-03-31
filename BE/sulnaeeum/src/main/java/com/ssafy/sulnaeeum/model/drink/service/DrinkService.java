@@ -7,10 +7,8 @@ import com.ssafy.sulnaeeum.model.drink.entity.*;
 import com.ssafy.sulnaeeum.model.drink.repo.*;
 import com.ssafy.sulnaeeum.model.jumak.dto.JumakDto;
 import com.ssafy.sulnaeeum.model.jumak.entity.Jumak;
-import com.ssafy.sulnaeeum.model.jumak.repo.DrinkJumakRepo;
 import com.ssafy.sulnaeeum.model.jumak.repo.JumakRepo;
-import com.ssafy.sulnaeeum.model.rabbitmq.service.ProducerService;
-import com.ssafy.sulnaeeum.model.user.dto.UserPreferenceDto;
+import com.ssafy.sulnaeeum.model.rabbitmq.service.Producer;
 import com.ssafy.sulnaeeum.model.user.service.UserService;
 import com.ssafy.sulnaeeum.util.FlaskUtil;
 import org.json.simple.JSONObject;
@@ -55,7 +53,7 @@ public class DrinkService {
     FlaskUtil flaskUtil;
 
     @Autowired
-    ProducerService producerService;
+    Producer producerService;
 
     // 모든 전통주 조회
     @Transactional
@@ -238,7 +236,7 @@ public class DrinkService {
 
         Map<String, List> params = new HashMap<>();
         params.put("input_data", inputData);
-        producerService.sendMessage(params);
+        // producerService.sendMessage(params);
 
         // Flask 요청 후 반환받기
         String requestUrl = "http://j8a707.p.ssafy.io:5000/recommend/contents";
