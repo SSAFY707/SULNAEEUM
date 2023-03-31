@@ -19,7 +19,7 @@ export default function AllReview(props: {modalOpen : any}) {
       <div className={'w-full h-full'}>
         <div className={'flex flex-col border-b'}>
           <div className={'flex justify-between items-center px-16 w-full h-[140px]'}>
-            <div className={'flex mr-4 text-[20px]'}>총 {drink.drinkDetailDto.reviewCnt}개의 리뷰</div>
+            <div className={'flex mr-4 text-[20px]'}>총 {reviews.length}개의 리뷰</div>
             <div className={'flex items-center'}>
               <DetailRate rate={drink.drinkDetailDto.avgScore / 5 * 100} size='44px' />
               <div className={'flex items-center ml-8 mr-4'}>
