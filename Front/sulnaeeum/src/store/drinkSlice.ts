@@ -111,10 +111,10 @@ const drinkSlice = createSlice({
             const idx = state.myDrink['likeList'].indexOf(input)
             if(idx == -1){
                 state.myDrink['likeList'].push(input)
-                toastOK('찜 되었습니다.', '📍', 'top-right')
+                toastOK('찜 되었습니다.', '⭐', 'top-right')
             }else{
                 state.myDrink['likeList'].splice(idx, 1)
-                toastOK('찜이 취소되었습니다.', '📍', 'top-right')
+                toastOK('찜이 취소되었습니다.', '⭐', 'top-right')
             }
             return
         }

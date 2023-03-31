@@ -113,13 +113,13 @@ export interface UserPreferenceStore {
   storeDrinkType: string[];
 }
 
-export interface todayCheers { 
+export type todayCheers = { 
   todayId: number;
   todayName: string;
   todayContent: string;
 }
 
-export interface todayDrink{ 
+export type todayDrink = { 
   todayId: number;
   todayLevel: number;
   todayDrink: string;
@@ -128,7 +128,7 @@ export interface todayDrink{
   todayImage: string;
 }
 
-export interface todayDish { 
+export type todayDish = { 
   todayId: number;
   todayContent: string;
 }
