@@ -36,7 +36,7 @@ export default function callback(props: { code: string }) {
             location.href = '/user/prefer'
           }
         }
-          , 3000);
+          , 1600);
 
 
 
