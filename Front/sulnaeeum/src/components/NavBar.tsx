@@ -23,21 +23,18 @@ const kakaoLogout = async () => {
 
   await authAxios.get(`user/kakao/logout`)
     .then((res) => {
-  
-      await authAxios.get("https://j8a707.p.ssafy.io/api/user/kakao/logout")
-        .then((res) => {
-          console.log('로그아웃 성공')
-          console.log(res)
-          sessionStorage.clear()
-          location.href = '/'
-      
-        }).catch((err) => {
-          alert('로그아웃 실패')
-          console.log(err)
-      
-        })
-    }
+      console.log('로그아웃 성공')
+      console.log(res)
+      sessionStorage.clear()
+      location.href = '/'
+
+    }).catch((err) => {
+      alert('로그아웃 실패')
+      console.log(err)
+
+    })
 }
+
 function Navbar() {
   
   
