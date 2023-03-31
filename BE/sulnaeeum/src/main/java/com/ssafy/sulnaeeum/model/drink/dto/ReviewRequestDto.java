@@ -57,18 +57,4 @@ public class ReviewRequestDto {
                 .score(this.score)
                 .content(this.content).build();
     }
-
-//    // DTO -> Entity 변환 (drink, user는 따로 받아서 Service 단에서 set)
-//    public Review toEntity() {
-//        return Review.builder()
-//                .reviewId(this.reviewId)
-//                .sweetScore(this.sweetScore)
-//                .sourScore(this.sourScore)
-//                .flavorScore(this.flavorScore)
-//                .throatScore(this.throatScore)
-//                .bodyScore(this.bodyScore)
-//                .refreshScore(this.refreshScore)
-//                .score(this.score)
-//                .content(this.content).build();
-//    }
 }

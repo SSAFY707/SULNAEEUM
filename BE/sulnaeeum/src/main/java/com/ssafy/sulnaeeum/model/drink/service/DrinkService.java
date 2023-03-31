@@ -7,6 +7,7 @@ import com.ssafy.sulnaeeum.model.drink.entity.*;
 import com.ssafy.sulnaeeum.model.drink.repo.*;
 import com.ssafy.sulnaeeum.model.jumak.dto.JumakDto;
 import com.ssafy.sulnaeeum.model.jumak.entity.Jumak;
+import com.ssafy.sulnaeeum.model.jumak.repo.DrinkJumakRepo;
 import com.ssafy.sulnaeeum.model.jumak.repo.JumakRepo;
 import com.ssafy.sulnaeeum.model.user.dto.UserPreferenceDto;
 import com.ssafy.sulnaeeum.model.user.service.UserService;
@@ -124,8 +125,10 @@ public class DrinkService {
         // 맛 세팅
         findTaste(drinkId, drinkDetailDto);
 
+
         // 재료 세팅
         drinkDetailDto.setIngredient(ingredientTypeRepo.findIngredientName(drinkId));
+
 
         // 어울리는 안주 세팅
         drinkDetailDto.setDishName(dishRepo.findDishName(drinkId));
@@ -154,7 +157,7 @@ public class DrinkService {
         List<ReviewResponseDto> reviewResponseDtoList = reviewList.stream().map(ReviewResponseDto::new).collect(Collectors.toList());
         drinkDetailPageDto.setReviewResponseDto(reviewResponseDtoList);
 
-        // 술집 세팅
+        // 전통주 식당 세팅
         List<Jumak> jumakList = jumakRepo.findByDrink(drinkId);
         List<JumakDto> jumakDtoList = jumakList.stream().map(JumakDto::new).collect(Collectors.toList());
         drinkDetailPageDto.setJumakDto(jumakDtoList);
@@ -195,8 +198,6 @@ public class DrinkService {
     // 비슷한 술 추천
     public SimilarDrinkDto similarDrink(DrinkDetailDto drinkDetailDto) {
 
-        UserPreferenceDto userPreferenceDto = new UserPreferenceDto();
-
         // 비슷한 술 추천을 위한 Flask 연동
         List<Integer> inputData = new ArrayList<>();
         inputData.add(drinkDetailDto.getTasteSweet());
@@ -207,23 +208,26 @@ public class DrinkService {
         inputData.add(drinkDetailDto.getTasteBody());
         inputData.add(drinkDetailDto.getDrinkLevel());
 
-        String dishName = dishRepo.findByDishName(drinkDetailDto.getDishName());
-        int[] dishArr;
+        int[] dishArr = {0, 0, 0, 0, 0, 0};
+        if(drinkDetailDto.getDishName().size() > 0) {
+            String dishName = dishRepo.findByDishName(drinkDetailDto.getDishName().get(0));
 
-        if(dishName.equals("전/무침")) {
-            dishArr = new int[] {3, 0, 0, 0, 0, 0};
-        } else if(dishName.equals("육류")) {
-            dishArr = new int[] {0, 3, 0, 0, 0, 0};
-        } else if(dishName.equals("해산물")) {
-            dishArr = new int[] {0, 0, 3, 0, 0, 0};
-        } else if(dishName.equals("탕/전골")) {
-            dishArr = new int[] {0, 0, 0, 3, 0, 0};
-        } else if(dishName.equals("양식")) {
-            dishArr = new int[] {0, 0, 0, 0, 3, 0};
-        } else {
-            dishArr = new int[] {0, 0, 0, 0, 0, 3};
+            if(dishName.equals("전/무침")) {
+                dishArr = new int[] {3, 0, 0, 0, 0, 0};
+            } else if(dishName.equals("육류")) {
+                dishArr = new int[] {0, 3, 0, 0, 0, 0};
+            } else if(dishName.equals("해산물")) {
+                dishArr = new int[] {0, 0, 3, 0, 0, 0};
+            } else if(dishName.equals("탕/전골")) {
+                dishArr = new int[] {0, 0, 0, 3, 0, 0};
+            } else if(dishName.equals("양식")) {
+                dishArr = new int[] {0, 0, 0, 0, 3, 0};
+            } else if(dishName.equals("기타")) {
+                dishArr = new int[] {0, 0, 0, 0, 0, 3};
+            } else {
+                throw new CustomException(CustomExceptionList.CATEGORY_NOT_FOUND);
+            }
         }
-
         for(int i = 0; i < 6; i++) {
             inputData.add(dishArr[i]);
         }
@@ -234,8 +238,8 @@ public class DrinkService {
         // Flask 요청 후 반환받기
         String requestUrl = "http://j8a707.p.ssafy.io:5000/recommend/contents";
         JSONObject jsonObject = flaskUtil.requestFlask(requestUrl, params);
-
         SimilarDrinkDto similarDrinkDto = new SimilarDrinkDto((JSONObject)jsonObject.get("0"));
+
         return similarDrinkDto;
     }
 }
