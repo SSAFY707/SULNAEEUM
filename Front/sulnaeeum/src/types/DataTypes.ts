@@ -130,5 +130,5 @@ export type todayDrink = {
 
 export type todayDish = { 
   todayId: number;
-  todayContent: string;
+  todayDish: string;
 }
