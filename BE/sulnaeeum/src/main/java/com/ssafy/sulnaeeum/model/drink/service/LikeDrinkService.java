@@ -4,7 +4,6 @@ import com.ssafy.sulnaeeum.exception.CustomException;
 import com.ssafy.sulnaeeum.exception.CustomExceptionList;
 import com.ssafy.sulnaeeum.model.drink.dto.*;
 import com.ssafy.sulnaeeum.model.drink.entity.Drink;
-import com.ssafy.sulnaeeum.model.drink.entity.MyDrink;
 import com.ssafy.sulnaeeum.model.drink.entity.Review;
 import com.ssafy.sulnaeeum.model.drink.repo.DrinkRepo;
 import com.ssafy.sulnaeeum.model.drink.entity.LikeDrink;
