@@ -112,3 +112,23 @@ export interface UserPreferenceStore {
   storeDrinkImage: string[];
   storeDrinkType: string[];
 }
+
+export interface todayCheers { 
+  todayId: number;
+  todayName: string;
+  todayContent: string;
+}
+
+export interface todayDrink{ 
+  todayId: number;
+  todayLevel: number;
+  todayDrink: string;
+  todayType: string;
+  todayAmount: string;
+  todayImage: string;
+}
+
+export interface todayDish { 
+  todayId: number;
+  todayContent: string;
+}
