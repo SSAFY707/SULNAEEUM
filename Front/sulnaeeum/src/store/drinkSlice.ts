@@ -1,12 +1,20 @@
 import { authAxios, defaultAxios } from "@/api/common";
 import { toastOK } from "@/components/common/toast";
-import { DrinkDetailType, DrinkListType, Mine } from "@/types/DrinkType";
+import { DrinkDetailType, DrinkListType, Mine, ReviewResType } from "@/types/DrinkType";
 import { createAsyncThunk ,createSlice } from "@reduxjs/toolkit";
 import { RootState } from ".";
 
 
 const initDrinkList : DrinkListType[] = []
 const myDrink : Mine = {likeList: [], clearList: []}
+const initMyReview : ReviewResType = {
+    reviewId : 0,
+    userId : 0,
+    userNickName : '',
+    userImg : '',
+    score : 0,
+    content : ''
+}
 
 const initDrinkDetail : DrinkDetailType = {
     'drinkDetailDto' : {
@@ -82,12 +90,21 @@ export const getDrinkDetailForUser = createAsyncThunk(
     }
 )
 
+export const getMyReview = createAsyncThunk(
+    `drinkSlice/getMyReview`,
+    async (drinkId : number) => {
+        const res = await authAxios.get(`drink/review/${drinkId}`)
+        return res.data
+    }
+)
+
 const drinkSlice = createSlice({
     name: 'drinkSlice',
     initialState: {
         drinkList : initDrinkList,
         myDrink : myDrink,
-        drink : initDrinkDetail
+        drink : initDrinkDetail,
+        myReview : initMyReview,
     },
     reducers: {
         setDrinkLike(state, {payload: input}) {
@@ -109,15 +126,18 @@ const drinkSlice = createSlice({
         })
         builder.addCase(getDrinkDetail.fulfilled, (state, action)=>{
             state.drink = action.payload
-            console.log(state.drink, '성공!')
+            // console.log(state.drink, '성공!')
         })
         builder.addCase(getDrinkDetailForUser.fulfilled, (state, action)=>{
             state.drink = action.payload
-            console.log(state.drink, '성공!')
+            // console.log(state.drink, '성공!')
         })
         builder.addCase(getMyDrink.fulfilled, (state, action)=>{
             state.myDrink = action.payload
             // console.log(state.myDrink)
+        })
+        builder.addCase(getMyReview.fulfilled, (state, action)=>{
+            state.myReview = action.payload
         })
     }
 })
@@ -129,4 +149,5 @@ export const drinkDetail = (state : RootState) => state.drink.drink
 export const drinkList = (state : RootState) => state.drink.drinkList
 export const likeDrink = (state : RootState) => state.drink.myDrink['likeList']
 export const clearDrink = (state : RootState) => state.drink.myDrink['clearList']
+export const myReview = (state : RootState) => state.drink.myReview
 export default drinkSlice.reducer;

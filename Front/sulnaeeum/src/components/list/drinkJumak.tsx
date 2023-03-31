@@ -1,24 +1,22 @@
-import { Drink, DrinkDetailType } from '@/types/DataTypes'
-import { IoCall } from 'react-icons/io5'
+import { IoEarth } from 'react-icons/io5'
 import { HiMap } from 'react-icons/hi'
 import { FaRegBookmark, FaBookmark } from 'react-icons/fa'
 import React, { useState, useEffect } from 'react'
 import { Map, MapMarker } from 'react-kakao-maps-sdk'
 import { Modal } from '../common/modal'
 import AddJumak from './modal/addJumak'
+import { useAppSelector } from '@/hooks'
+import { drinkDetail } from '@/store/drinkSlice'
+import { JumakType } from '@/types/DrinkType'
 
 
-export default function DrinkJumak(props: {drink: DrinkDetailType}) {
+export default function DrinkJumak() {
     const [open, setOpen] = useState<boolean>(false)
-    
+    const drink = useAppSelector(drinkDetail)
+    const jumaks : JumakType[] = drink['jumakDto']
+
     const modalOpen = () => {
         setOpen(!open)
-    }
-
-    type jumakType = {
-        name: string,
-        num: string,
-        address: string,
     }
     type markerType = {
         name: string,
@@ -27,22 +25,13 @@ export default function DrinkJumak(props: {drink: DrinkDetailType}) {
             lng : number
         },
         address: string,
-        num : string
+        url : string
     }
-    const {drink} = props
 
-    const jumaks = [
-        {name: '피곤해죽어식당', num: '010-1234-5678', address: '서울 동대문구 왕산로 91'},
-        {name: '쉬폰케익가게', num: '010-1111-2222', address: '서울 동대문구 천호대로27길 35'},
-        {name: '김식당', num: '010-0101-2929', address: '서울 동대문구 무학로44길 25'},
-        {name: '이식당', num: '010-1234-5678', address: '서울 동대문구 왕산로23길 55'},
-        {name: '장식당', num: '010-1111-2222', address: '서울 동대문구 왕산로16길 16'},
-        {name: '멀캠', num: '010-0101-2929', address: '서울 강남구 테헤란로 212'}
-    ]
-    const [center, setCenter] = useState({lat: 33.450701, lng: 126.570667})
-    const [array, setArray] = useState<markerType[]>([])
+    const [center, setCenter] = useState({lat: 37.5013068, lng: 127.0396597})
+    const [markerList, setMarkerList] = useState<markerType[]>([])
 
-    const add_to_latlng = async (jumak : jumakType) => {
+    const add_to_latlng = async (jumak : JumakType) => {
         const geocoder = new kakao.maps.services.Geocoder();
         let callback = (res, status) => {
             if (status === kakao.maps.services.Status.OK) {
@@ -50,25 +39,25 @@ export default function DrinkJumak(props: {drink: DrinkDetailType}) {
                     lat: res[0].y, 
                     lng: res[0].x
                 }
-                const new_array = array
-                array.push({name : jumak.name, latlng: latlng, address: jumak.address, num: jumak.num})
-                setArray([...new_array])
+                const new_arr = markerList
+                markerList.push({name : jumak.jumakName, latlng: latlng, address: jumak.jumakLocation, url: jumak.jumakUrl})
+                setMarkerList([...new_arr])
                 return latlng;
             }
         }
-        geocoder.addressSearch(jumak.address, callback)
+        geocoder.addressSearch(jumak.jumakLocation, callback)
     }
-
     useEffect(()=>{
+        setMarkerList([])
         for(let i=0; i<jumaks.length; i++){
             add_to_latlng(jumaks[i])
         }
-    },[])
+    },[jumaks])
     useEffect(()=>{
-        if(array.length != 0){
-            setCenter(array[0].latlng)
+        if(markerList.length != 0){
+            setCenter(markerList[0].latlng)
         }
-    },[array])
+    },[markerList])
     
   return (
     <div className={'w-7/12 h-[700px] mt-[200px]'}>
@@ -78,17 +67,17 @@ export default function DrinkJumak(props: {drink: DrinkDetailType}) {
             </Modal>
         </div>
         <div className={'flex justify-between items-end'}>
-            <div className={'text-[20px] pl-2 font-preR'}><span className={'font-mj text-[40px] mr-2'}>{drink.drinkName}</span>을(를) 판매하는 식당</div>
+            <div className={'text-[20px] pl-2 font-preR'}><span className={'font-mj text-[40px] mr-2'}>{drink.drinkDetailDto.drinkName}</span>을(를) 판매하는 식당</div>
             <div onClick={modalOpen} className={'flex justify-center items-center mb-4 mr-4 rounded text-white h-3/4 p-2 bg-[#78C3DC] hover:bg-[#60A5BC] cursor-pointer'}>판매처 등록하기</div>
         </div>
         <hr className={'border-[#D3D3D3] border-1 mb-10'} />
         <div className={'flex w-full h-[600px]'}>
             <div className={'w-1/2'}>
                 <Map id='map' center={center} isPanto={true} className={'w-full h-[500px]'}>
-                    {array.map((a, index)=>{
+                    {markerList.map((marker, index)=>{
                         return(
                             <MapMarker key={index}
-                            position={a.latlng}
+                            position={marker.latlng}
                             image={{
                                 src: "/images/list/marker_o.png", 
                                     size: {
@@ -102,18 +91,24 @@ export default function DrinkJumak(props: {drink: DrinkDetailType}) {
                 </Map>
             </div>
             <div className={'w-1/2 ml-4 h-[500px] overflow-y-scroll pr-4 scroll'}>
-                {array.map((v, i)=>{
+                {markerList.length != 0 &&
+                markerList.map((v, i)=>{
                     return (
                         <div onClick={()=>setCenter(v.latlng)} key={i} className={'w-full h-[140px] bg-zinc-100/70 rounded-lg p-5 mb-4 text-[#393939] hover:bg-zinc-100 cursor-pointer'}>
                             <div className={'flex justify-between'}>
                                 <div className={'font-preM text-[24px] mb-2'}>{v.name}</div>
                                 <FaRegBookmark className={'text-[20px] text-[#655442] cursor-pointer'}/>
                             </div>
-                            <div className={'flex items-center'}><IoCall className={'mr-2'} />{v.num}</div>
                             <div className={'flex items-center'}><HiMap className={'mr-2'} />{v.address}</div>
+                            <div className={'flex items-center'}><IoEarth className={'mr-2'} />{v.url}</div>
                         </div>
                     )
                 })}
+                {markerList.length == 0 &&
+                <div className={'w-full h-[140px] text-[18px] rounded-lg p-5 mb-4 text-[#393939]'}>
+                    등록된 식당이 없습니다.
+                </div>
+                }
             </div>
         </div>
     </div>

@@ -68,11 +68,6 @@ export const DrinkList = (props: {drinkType: string, sortType : string}) => {
   return (
     <>
       <div className={'grid grid-cols-4 px-3 py-2 gap-y-2'}>
-        {/* {likeList.map((v,i)=>{
-          return(
-            <span key={i}>{v}</span>
-          )
-        })} */}
         {list.map((item, index)=>{
           return (
             <div key={index} className={'flex w-full justify-center items-center h-[360px]'}>
