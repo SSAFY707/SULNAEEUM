@@ -69,64 +69,36 @@ public class RankingService {
     @Transactional
     public JubtiTopDrinkDto getTopJubti() {
 
-        List<Drink> twentiesTopDrink = drinkRepo.findTwenties();
-        List<Drink> thirtiesTopDrink = drinkRepo.findThirties();
-        List<Drink> fortiesTopDrink = drinkRepo.findForties();
-        List<Drink> fiftiesTopDrink = drinkRepo.findFifties();
-        List<Drink> sixtiesTopDrink = drinkRepo.findSixties();
         List<Drink> femaleTopDrink = drinkRepo.findFemale();
         List<Drink> maleTopDrink = drinkRepo.findMale();
+        List<Drink> totalTopDrink = drinkRepo.findTotal();
 
         for(int i = 0; i < 10; i++){
-            System.out.println(twentiesTopDrink.get(i).getDrinkId());
+            System.out.println(femaleTopDrink.get(i).getDrinkId());
         }
 
-        List<RankingDto> twentiesTopDrinkDto = new ArrayList<>();
-        List<RankingDto> thirtiesTopDrinkDto = new ArrayList<>();
-        List<RankingDto> fortiesTopDrinkDto = new ArrayList<>();
-        List<RankingDto> fiftiesTopDrinkDto = new ArrayList<>();
-        List<RankingDto> sixtiesTopDrinkDto = new ArrayList<>();
         List<RankingDto> femaleTopDrinkDto = new ArrayList<>();
         List<RankingDto> maleTopDrinkDto = new ArrayList<>();
+        List<RankingDto> totalTopDrinkDto = new ArrayList<>();
 
-        for (int i = 0; i < twentiesTopDrink.size(); i++) {
-            List<Ingredient> ingredients = ingredientRepo.findByDrink(twentiesTopDrink.get(i));
+        for (int i = 0; i < 10; i++) {
+            List<Ingredient> ingredients = ingredientRepo.findByDrink(femaleTopDrink.get(i));
             List<String> ingredientNameList = getIngredientName(ingredients);
-            twentiesTopDrinkDto.add(new RankingDto(twentiesTopDrink.get(i).toDto(), ingredientNameList));
-
-            ingredients = ingredientRepo.findByDrink(thirtiesTopDrink.get(i));
-            ingredientNameList = getIngredientName(ingredients);
-            thirtiesTopDrinkDto.add(new RankingDto(thirtiesTopDrink.get(i).toDto(), ingredientNameList));
-
-            ingredients = ingredientRepo.findByDrink(fortiesTopDrink.get(i));
-            ingredientNameList = getIngredientName(ingredients);
-            fortiesTopDrinkDto.add(new RankingDto(fortiesTopDrink.get(i).toDto(), ingredientNameList));
-
-            ingredients = ingredientRepo.findByDrink(fiftiesTopDrink.get(i));
-            ingredientNameList = getIngredientName(ingredients);
-            fiftiesTopDrinkDto.add(new RankingDto(fiftiesTopDrink.get(i).toDto(), ingredientNameList));
-
-            ingredients = ingredientRepo.findByDrink(sixtiesTopDrink.get(i));
-            ingredientNameList = getIngredientName(ingredients);
-            sixtiesTopDrinkDto.add(new RankingDto(sixtiesTopDrink.get(i).toDto(), ingredientNameList));
-
-            ingredients = ingredientRepo.findByDrink(femaleTopDrink.get(i));
-            ingredientNameList = getIngredientName(ingredients);
             femaleTopDrinkDto.add(new RankingDto(femaleTopDrink.get(i).toDto(), ingredientNameList));
 
             ingredients = ingredientRepo.findByDrink(maleTopDrink.get(i));
             ingredientNameList = getIngredientName(ingredients);
             maleTopDrinkDto.add(new RankingDto(maleTopDrink.get(i).toDto(), ingredientNameList));
+
+            ingredients = ingredientRepo.findByDrink(totalTopDrink.get(i));
+            ingredientNameList = getIngredientName(ingredients);
+            totalTopDrinkDto.add(new RankingDto(totalTopDrink.get(i).toDto(), ingredientNameList));
         }
 
         return JubtiTopDrinkDto.builder()
-                .twentiesTopDrink(twentiesTopDrinkDto)
-                .thirtiesTopDrink(thirtiesTopDrinkDto)
-                .fortiesTopDrink(fortiesTopDrinkDto)
-                .fiftiesTopDrink(fiftiesTopDrinkDto)
-                .sixtiesTopDrink(sixtiesTopDrinkDto)
                 .femaleTopDrink(femaleTopDrinkDto)
                 .maleTopDrink(maleTopDrinkDto)
+                .totalTopDrink(totalTopDrinkDto)
                 .build();
     }
 
@@ -139,6 +111,7 @@ public class RankingService {
     }
 
     @Transactional
+//    @Scheduled(cron = "0 0/5 13,14 * * *")
     @Scheduled(cron = "0 0 0/1 * * *")
     public void jubtiRequest (){
         String requestUrl = "http://j8a707.p.ssafy.io:5000/ranking";
@@ -155,6 +128,7 @@ public class RankingService {
         List<Integer> sixties = new ArrayList<>();
         List<Integer> female = new ArrayList<>();
         List<Integer> male = new ArrayList<>();
+        List<Integer> total = new ArrayList<>();
 
         for(int i = 0; i < 13; i++){
             twenties.add(0);
@@ -164,6 +138,7 @@ public class RankingService {
             sixties.add(0);
             female.add(0);
             male.add(0);
+            total.add(0);
         }
 
         for(int i = 0; i < size; i++){
@@ -217,6 +192,8 @@ public class RankingService {
                 }else {
                     sixties.set(j, input.get(j) + sixties.get(j));
                 }
+
+                total.set(j, input.get(j) + total.get(j));
             }
         }
 
@@ -228,10 +205,12 @@ public class RankingService {
             forties.set(i, forties.get(i) / size);
             fifties.set(i, fifties.get(i) / size);
             sixties.set(i, sixties.get(i) / size);
+            total.set(i, total.get(i) / size);
         }
 
         input_data.add(male);
         input_data.add(female);
+        input_data.add(total);
         input_data.add(twenties);
         input_data.add(thirties);
         input_data.add(forties);
@@ -272,7 +251,7 @@ public class RankingService {
 
         List<List<Drink>> topDrink = new ArrayList<>();
 
-        for(int i = 0; i < 7; i++){
+        for(int i = 0; i < 8; i++){
             String key = Integer.toString(i);
             String sVal = jsonObject.get(key).toString();
 
@@ -314,11 +293,12 @@ public class RankingService {
 
             ranking.setMale(topDrink.get(0).get(i));
             ranking.setFemale(topDrink.get(1).get(i));
-            ranking.setTwenties(topDrink.get(2).get(i));
-            ranking.setThirties(topDrink.get(3).get(i));
-            ranking.setForties(topDrink.get(4).get(i));
-            ranking.setFifties(topDrink.get(5).get(i));
-            ranking.setSixties(topDrink.get(6).get(i));
+            ranking.setTotal(topDrink.get(2).get(i));
+            ranking.setTwenties(topDrink.get(3).get(i));
+            ranking.setThirties(topDrink.get(4).get(i));
+            ranking.setForties(topDrink.get(5).get(i));
+            ranking.setFifties(topDrink.get(6).get(i));
+            ranking.setSixties(topDrink.get(7).get(i));
 
             System.out.println("성공");
             rankingRepo.save(ranking);

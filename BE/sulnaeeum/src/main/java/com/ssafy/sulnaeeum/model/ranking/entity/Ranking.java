@@ -48,4 +48,9 @@ public class Ranking {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "male")
     private Drink male;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "total")
+    private Drink total;
+
 }

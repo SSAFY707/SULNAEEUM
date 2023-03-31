@@ -30,6 +30,9 @@ public class RankingDto {
     @Schema(description = "전통주 용량")
     private String drinkAmount;
 
+    @Schema(description = "전통주 종류")
+    private String drinkType;
+
     @Schema(description = "전통주 재료")
     private List<String> ingredientList;
 
@@ -39,6 +42,7 @@ public class RankingDto {
         this.drinkName = drinkDto.getDrinkName();
         this.drinkImg = drinkDto.getDrinkImage();
         this.drinkAmount = drinkDto.getDrinkAmount();
+        this.drinkType = drinkDto.getDrinkTypeDto().getDrinkTypeName();
         this.ingredientList = ingredientList;
     }
 }
