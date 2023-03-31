@@ -74,4 +74,7 @@ public interface DrinkRepo extends JpaRepository<Drink, Integer> {
 
     @Query(value = "select * from drink inner join ranking on drink.drink_id = ranking.male", nativeQuery = true)
     List<Drink> findMale();
+
+    @Query(value = "select * from drink inner join ranking on drink.drink_id = ranking.total", nativeQuery = true)
+    List<Drink> findTotal();
 }

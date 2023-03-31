@@ -57,6 +57,7 @@ public class RankingController {
     public ResponseEntity<JubtiTopDrinkDto> getTopJubti() {
 
         JubtiTopDrinkDto jubtiTopDrinkDto = rankingService.getTopJubti();
+        System.out.println("결과 : " + jubtiTopDrinkDto);
 
         return new ResponseEntity<>(jubtiTopDrinkDto, HttpStatus.OK);
     }
