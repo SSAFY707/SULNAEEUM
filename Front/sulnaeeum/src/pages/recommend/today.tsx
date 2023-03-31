@@ -14,15 +14,15 @@ export default function today() {
     ["#삼겹살", "#족발", "#두부김치", "#감자탕", "#어묵탕", "#번데기탕", "#김치찌개", '#회', "#후라이드", "#피자", "#골뱅이무침"]
   ]
 
-  const todayCheers = [
-    {todayId:1, todayName:"청바지", todayContent:"청춘은 바로 지금"} 
-  ]
-  const todayDish = [
-    {todayId:1, todayDish:"어묵탕"} 
-  ]
-  const todayDrink = [
-    { todayId: 1, todayDrink: "도깨비술", todayType: "탁주", todaylevel: 3, todayAmount: "375ml" }
-  ]
+  // const todayCheers = [
+  //   {todayId:1, todayName:"청바지", todayContent:"청춘은 바로 지금"} 
+  // ]
+  // const todayDish = [
+  //   {todayId:1, todayDish:"어묵탕"} 
+  // ]
+  // const todayDrink = [
+  //   { todayId: 1, todayDrink: "도깨비술", todayType: "탁주", todaylevel: 3, todayAmount: "375ml" }
+  // ]
 
 
   return (
@@ -42,7 +42,7 @@ export default function today() {
         <div className="absolute  w-[1500px] h-[480px] items-center bg-[#E8D9CD] rounded-sm flex justify-evenly">
         {todayType.map((v, i) => {
           return (
-            <TodayModal todayType={v} todayText={todayText[i]} image={image[i]} key={i}></TodayModal>
+            <TodayModal todayType={v} todayText={todayText[i]} image={image[i]} key={i} idx={i}></TodayModal>
           );
         })}
           </div>
