@@ -10,6 +10,9 @@ import { defaultAxios, authAxios } from "@/api/common";
 import NavSearch from "./common/navSearch";
 import { useRouter } from 'next/router'
 
+
+
+
 function kakaoLogin() {
   window.Kakao.Auth.authorize({
 
@@ -36,13 +39,13 @@ const kakaoLogout = async () => {
 }
 
 function Navbar() {
-  
-  
+
+
   const router = useRouter()
-  
-  function selectDrink(id:number, name:string) { 
+
+  function selectDrink(id: number, name: string) {
     router.push(`/list/${id}`);
-  } 
+  }
   const [login, setLogin] = useState<boolean>(false)
   useEffect(() => {
     const check = sessionStorage.getItem('isLogin')
@@ -149,17 +152,17 @@ function Navbar() {
         </li>
         <li className="max-[900px]:hidden w-[280px] pl-[20px] flex font-preL items-center">
           <div className="absoulte ml-[-210px] w-[280px] h-[50px] ">
-          <NavSearch  selectDrink={selectDrink}></NavSearch>
+            <NavSearch selectDrink={selectDrink}></NavSearch>
           </div>
           <div className="">
-          {login ?
-            <div className="hover:bg-gray-100 ml-[20px] rounded-[4px] cursor-pointer" onClick={kakaoLogout}>
-              <div className="px-[20px] py-[6px]">로그아웃</div>
-            </div> :
-            <div className="hover:bg-gray-100 ml-[20px] rounded-[4px] cursor-pointer" onClick={kakaoLogin}>
-              <div className="px-[20px] py-[6px]">로그인</div>
-            </div>
-          }
+            {login ?
+              <div className="hover:bg-gray-100 ml-[20px] rounded-[4px] cursor-pointer" onClick={kakaoLogout}>
+                <div className="px-[20px] py-[6px]">로그아웃</div>
+              </div> :
+              <div className="hover:bg-gray-100 ml-[20px] rounded-[4px] cursor-pointer" onClick={kakaoLogin}>
+                <div className="px-[20px] py-[6px]">로그인</div>
+              </div>
+            }
           </div>
         </li>
       </ul>
