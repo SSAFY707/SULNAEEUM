@@ -4,19 +4,40 @@ import { HiMagnifyingGlass } from 'react-icons/hi2'
 export const ReconmendDrinkList = () => {
 
     // redux의 store에서 통신된 추천 Drink List 가져옴
-    const list = [{
+    const list = [
+      {
         drinkImage : "/images/jubti/drink/단홍.png",
         drinkName : "담향 대대포 블루",
         drinkLevel : 5,
         drinkAmount : "300ml",
-    }];
+      },
+      {
+        drinkImage : "/images/jubti/drink/단홍.png",
+        drinkName : "담향 대대포 블루",
+        drinkLevel : 5,
+        drinkAmount : "300ml",
+      },
+      {
+        drinkImage : "/images/jubti/drink/단홍.png",
+        drinkName : "담향 대대포 블루",
+        drinkLevel : 5,
+        drinkAmount : "300ml",
+      },
+      {
+        drinkImage : "/images/jubti/drink/단홍.png",
+        drinkName : "담향 대대포 블루",
+        drinkLevel : 5,
+        drinkAmount : "300ml",
+      },
+
+  ];
     // const list = useAppSelector();
 
     return(
         <>
             {list.map((item, index)=> {
                 return (
-                    <div className={"flex w-[345px] h-[510px] rounded-xl mx-7 bg-white drop-shadow-[3px_4px_7px_rgba(0,0,0,0.25)] hover:drop-shadow-[3px_5px_7px_rgba(0,0,0,0.4)]"}>
+                    <div key={index} className={"flex w-[345px] h-[510px] rounded-xl mx-7 bg-white drop-shadow-[3px_4px_7px_rgba(0,0,0,0.25)] hover:drop-shadow-[3px_5px_7px_rgba(0,0,0,0.4)]"}>
                     <div className={"flex flex-col items-center justify-center w-full"}>
                       <img className={"h-[270px] relative"} src={item.drinkImage} alt="" />
                       <div className='flex w-full pl-8 pt-5'>
