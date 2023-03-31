@@ -1,31 +1,58 @@
 import { authAxios, defaultAxios } from "@/api/common";
 import { toastOK } from "@/components/common/toast";
-import { DrinkDetailType } from "@/types/DataTypes";
-import { DrinkListType } from "@/types/DrinkType";
+import { DrinkDetailType, DrinkListType, Mine, ReviewResType } from "@/types/DrinkType";
 import { createAsyncThunk ,createSlice } from "@reduxjs/toolkit";
 import { RootState } from ".";
 
-type Mine = {
-    [index: string] : number[],
-    likeList : number[],
-    clearList : number[]
-}
 
 const initDrinkList : DrinkListType[] = []
 const myDrink : Mine = {likeList: [], clearList: []}
-
-const initDrinkInfo : DrinkDetailType = {
-    drinkId: 0,
-    drinkAmount: '',
-    drinkImage: '',
-    drinkInfo: '',
-    drinkLevel: 0,
-    drinkName: '',
-    drinkPrice: '',
-    drinkReviews: [],
-    drinkSaleUrl: '',
-    drinkType: ''
+const initMyReview : ReviewResType = {
+    reviewId : 0,
+    userId : 0,
+    userNickName : '',
+    userImg : '',
+    score : 0,
+    content : ''
 }
+
+const initDrinkDetail : DrinkDetailType = {
+    'drinkDetailDto' : {
+        drinkId: 0,
+        drinkName: '',
+        drinkInfo: '',
+        drinkImage: '',
+        drinkSaleUrl: '',
+        drinkPrice: '',
+        drinkAmount: '',
+        drinkLevel: 0,
+        drinkTypeName: '',
+        likeCnt : 0,
+        reviewCnt : 0,
+        avgScore : 0,
+        tasteSweet : 0,
+        tasteSour : 0,
+        tasteThroat : 0,
+        tasteRefresh : 0,
+        tasteBody : 0,
+        tasteFlavor : 0,
+        dishName : '',
+        ingredient : [],
+        like : false,
+        clear : false
+    },
+    'reviewResponseDto' : [],
+    'jumakDto' : [],
+    'similarDrinkDto' : {
+        drinkId : 0,
+        drinkName : '',
+        drinkImage : '',
+        drinkLevel: 0,
+        drinkAmount : ''
+    }
+    
+}
+
 
 export const getDrinkList = createAsyncThunk(
     `drinkSlice/getDrinkList`,
@@ -49,8 +76,24 @@ export const getMyDrink = createAsyncThunk(
 
 export const getDrinkDetail = createAsyncThunk(
     `drinkSlice/getDrinkDetail`,
-    async (drinkId : string) => {
-        const res = await defaultAxios.get(`drink/n/${drinkId}`)
+    async (drinkId : number) => {
+        const res = await defaultAxios.get(`drink/n/detail/${drinkId}`)
+        return res.data
+    }
+)
+
+export const getDrinkDetailForUser = createAsyncThunk(
+    `drinkSlice/getDrinkDetailForUser`,
+    async (drinkId : number) => {
+        const res = await authAxios.get(`drink/detail/${drinkId}`)
+        return res.data
+    }
+)
+
+export const getMyReview = createAsyncThunk(
+    `drinkSlice/getMyReview`,
+    async (drinkId : number) => {
+        const res = await authAxios.get(`drink/review/${drinkId}`)
         return res.data
     }
 )
@@ -60,17 +103,13 @@ const drinkSlice = createSlice({
     initialState: {
         drinkList : initDrinkList,
         myDrink : myDrink,
-        drink : initDrinkInfo
+        drink : initDrinkDetail,
+        myReview : initMyReview,
     },
     reducers: {
         setDrinkLike(state, {payload: input}) {
             const idx = state.myDrink['likeList'].indexOf(input)
             if(idx == -1){
-                // const new_list : number[] = [...state.myDrink['likeList']]
-                // new_list.push(input)
-                // const new_mine = {...state.myDrink}
-                // new_mine['likeList'] = new_list
-                // state.myDrink = new_mine
                 state.myDrink['likeList'].push(input)
                 toastOK('찜 되었습니다.', '📍', 'top-right')
             }else{
@@ -87,11 +126,18 @@ const drinkSlice = createSlice({
         })
         builder.addCase(getDrinkDetail.fulfilled, (state, action)=>{
             state.drink = action.payload
-            console.log(state.drink, '성공!')
+            // console.log(state.drink, '성공!')
+        })
+        builder.addCase(getDrinkDetailForUser.fulfilled, (state, action)=>{
+            state.drink = action.payload
+            // console.log(state.drink, '성공!')
         })
         builder.addCase(getMyDrink.fulfilled, (state, action)=>{
             state.myDrink = action.payload
             // console.log(state.myDrink)
+        })
+        builder.addCase(getMyReview.fulfilled, (state, action)=>{
+            state.myReview = action.payload
         })
     }
 })
@@ -99,7 +145,9 @@ const drinkSlice = createSlice({
 // reducer export
 export const { setDrinkLike } = drinkSlice.actions 
 
-export const drinkList = (state : RootState)=>state.drink.drinkList
-export const likeDrink = (state : RootState)=>state.drink.myDrink['likeList']
-export const clearDrink = (state : RootState)=>state.drink.myDrink['clearList']
+export const drinkDetail = (state : RootState) => state.drink.drink
+export const drinkList = (state : RootState) => state.drink.drinkList
+export const likeDrink = (state : RootState) => state.drink.myDrink['likeList']
+export const clearDrink = (state : RootState) => state.drink.myDrink['clearList']
+export const myReview = (state : RootState) => state.drink.myReview
 export default drinkSlice.reducer;
