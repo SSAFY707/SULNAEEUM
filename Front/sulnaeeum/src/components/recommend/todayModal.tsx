@@ -14,6 +14,7 @@ import Image from "next/image";
 import { todayCheers, todayDrink, todayDish } from "@/types/DataTypes";
 import { useState, useEffect } from "react";
 import axios from "axios";
+// import { Modal } from '@/components/common/modal'
 
 export default function todayModal(props: {
   idx : number
@@ -24,23 +25,26 @@ export default function todayModal(props: {
   
   const { image, todayType,todayText ,idx} = props;
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const [cheers, setCheers] = useState<todayCheers[]>([]);
-  const [drink, setDrink] = useState<todayDrink[]>([]);
-  const [dish, setDish] = useState<todayDish[]>([]);
-
+  const [cheers, setCheers] = useState<todayCheers>({todayContent:'',todayId:0,todayName:''});
+  const [drink, setDrink] = useState<todayDrink>({todayAmount:'',todayDrink:'',todayId:0,todayImage:'',todayLevel:0,todayType:''});
+  const [dish, setDish] = useState<todayDish>({todayId:0, todayDish:''});
+  const [open, setOpen] = useState<boolean>(false)
+  const modalOpen = () => { 
+    setOpen(!open)
+  }
 
   const getCheers = () => {
-    axios.get<todayCheers[]>('http://j8a707.p.ssafy.io:9090/api/today/n/cheers').then((response) => {
+    axios.get<todayCheers>('http://j8a707.p.ssafy.io:9090/api/today/n/cheers').then((response) => {
       setCheers(response.data);
     });
   }
   const getDrink = () => {
-    axios.get<todayDrink[]>('http://j8a707.p.ssafy.io:9090/api/today/n/drink').then((response) => {
+    axios.get<todayDrink>('http://j8a707.p.ssafy.io:9090/api/today/n/drink').then((response) => {
       setDrink(response.data);
     });
   }
   const getDish = () => {
-    axios.get<todayDish[]>('http://j8a707.p.ssafy.io:9090/api/today/n/dish').then((response) => {
+    axios.get<todayDish>('http://j8a707.p.ssafy.io:9090/api/today/n/dish').then((response) => {
       setDish(response.data);
     });
   }
