@@ -42,7 +42,7 @@ export default function today() {
         <div className="absolute  w-[1500px] h-[480px] items-center bg-[#E8D9CD] rounded-sm flex justify-evenly">
         {todayType.map((v, i) => {
           return (
-            <TodayModal todayType={v} todayText={todayText[i]} image={image[i]} key={i}></TodayModal>
+            <TodayModal todayType={v} todayText={todayText[i]} image={image[i]} key={i} idx={i}></TodayModal>
           );
         })}
           </div>
