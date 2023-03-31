@@ -8,7 +8,7 @@ import {
   ModalBody,
   ModalCloseButton,
 } from "@chakra-ui/react";
-import { Button, ButtonGroup } from "@chakra-ui/react";
+import { Button } from "@chakra-ui/react";
 import { useDisclosure } from "@chakra-ui/react";
 import Image from "next/image";
 import { todayCheers, todayDrink, todayDish } from "@/types/DataTypes";
@@ -136,7 +136,7 @@ export default function todayModal(props: {
             <div onClick={() => { 
                   idx == 0 ? getCheers() : idx == 1 ? getDrink() : getDish();
             }}>
-              <Button >다시 돌리기</Button>
+              <Button>다시 돌리기</Button>
               </div>
             <Button colorScheme='orange' className="ml-[15px]" onClick={onClose}>확인</Button>
           </ModalFooter>

@@ -148,7 +148,7 @@ function Navbar() {
           })}
         </li>
         <li className="max-[900px]:hidden w-[280px] pl-[20px] flex font-preL items-center">
-          <div className="absoulte ml-[-200px] w-[280px] h-[50px] ">
+          <div className="absoulte ml-[-210px] w-[280px] h-[50px] ">
           <NavSearch  selectDrink={selectDrink}></NavSearch>
           </div>
           <div className="">
