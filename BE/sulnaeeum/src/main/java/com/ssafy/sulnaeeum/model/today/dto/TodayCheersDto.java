@@ -2,7 +2,16 @@ package com.ssafy.sulnaeeum.model.today.dto;
 
 import com.ssafy.sulnaeeum.model.today.entity.Cheers;
 import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 
+@Schema(description = "오늘의 건배사 정보를 담을 Dto")
+@Data
+@SuperBuilder
+@NoArgsConstructor
+@AllArgsConstructor
 public class TodayCheersDto {
     @Schema(description = "오늘의 건배사 아이디")
     private Long todayId;
