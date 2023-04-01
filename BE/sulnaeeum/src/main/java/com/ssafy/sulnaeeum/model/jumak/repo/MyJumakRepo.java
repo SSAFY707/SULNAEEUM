@@ -15,4 +15,7 @@ public interface MyJumakRepo extends JpaRepository<MyJumak, Long> {
     // user_id, jumak_id로 내가 찜한 전통주 술집 찾기
     @Query(value = "select * from my_jumak where user_id = ?1 and jumak_id = ?2", nativeQuery = true)
     Optional<MyJumak> findMyJumak(Long userId, Long jumakId);
+
+    @Query(value = "select jumak_id from my_jumak where jumak_id in (select jumak_id from drink_jumak where drink_id = ?1) and user_id = ?2", nativeQuery = true)
+    List<Long> findLikeJumakId(Long drinkId, Long userId);
 }
