@@ -7,7 +7,7 @@ import { Modal } from '../common/modal'
 import AddJumak from './modal/addJumak'
 import { useAppDispatch, useAppSelector } from '@/hooks'
 import { drinkDetail, myLikeJumak, setJumakLike } from '@/store/drinkSlice'
-import { JumakType } from '@/types/DrinkType'
+import { JumakType, LatlngType, MarkerType } from '@/types/DrinkType'
 import { toastError } from '../common/toast'
 import { likeJumak } from '@/api/auth'
 
@@ -26,43 +26,41 @@ export default function DrinkJumak() {
         }
         setOpen(!open)
     }
-    type markerType = {
-        id : number,
-        name: string,
-        latlng : {
-            lat : number,
-            lng : number
-        },
-        address: string,
-        url : string
-    }
 
     const [center, setCenter] = useState({lat: 37.5013068, lng: 127.0396597})
-    const [markerList, setMarkerList] = useState<markerType[]>([])
 
     const add_to_latlng = async (jumak : JumakType) => {
-        const geocoder = new kakao.maps.services.Geocoder();
-        let callback = (res, status) => {
-            if (status === kakao.maps.services.Status.OK) {
-                const latlng = {
-                    lat: res[0].y, 
-                    lng: res[0].x
+        const geocoder = new kakao.maps.services.Geocoder()
+        let callbackPromise = new Promise((resolve, reject)=>{
+            geocoder.addressSearch(jumak.jumakLocation, (res, status)=>{
+                if (status === kakao.maps.services.Status.OK) {
+                    const latlng = {
+                        lat: res[0].y, 
+                        lng: res[0].x
+                    }
+                    resolve(latlng)
                 }
-                const new_arr = markerList
-                markerList.push({id: jumak.jumakId, name : jumak.jumakName, latlng: latlng, address: jumak.jumakLocation, url: jumak.jumakUrl})
-                setMarkerList([...new_arr])
-                return latlng;
-            }
-        }
-        geocoder.addressSearch(jumak.jumakLocation, callback)
+            })
+        })
+        return callbackPromise
     }
-    useEffect(()=>{
-        console.log('마커 다시 세팅할게 ㅎㅎㅎ힣히', jumaks)
-        setMarkerList([])
+
+    const [markerList, setMarkerList] = useState<MarkerType[]>([])
+
+    const changeMarker = async (jumaks : JumakType[]) => {
+        const array : MarkerType[] = []
         for(let i=0; i<jumaks.length; i++){
-            add_to_latlng(jumaks[i])
+            const jumak = jumaks[i]
+            const res = await add_to_latlng(jumak)
+            array.push({id: jumak.jumakId, name : jumak.jumakName, latlng: res, address: jumak.jumakLocation, url: jumak.jumakUrl})
         }
-    },[jumaks, drink])
+        setMarkerList(array)
+    }
+
+    useEffect(()=>{
+        changeMarker(jumaks)
+    },[jumaks])
+
     useEffect(()=>{
         if(markerList.length != 0){
             setCenter(markerList[0].latlng)

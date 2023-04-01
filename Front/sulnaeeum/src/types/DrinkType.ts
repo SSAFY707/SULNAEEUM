@@ -102,3 +102,16 @@ export type DrinkDetailType = {
         drinkAmount : string
     }
 }
+
+export type LatlngType = {
+    lat : number,
+    lng : number
+}
+
+export type MarkerType = {
+    id : number,
+    name: string,
+    latlng : any,
+    address: string,
+    url : string
+}

@@ -6,7 +6,7 @@ export const store = configureStore({
   reducer: {
     // slice 삽입. slice의 name을 key값으로 사용
     drink : drinkSlice,
-    search: searchSlice
+    search: searchSlice,
   },
 });
 
