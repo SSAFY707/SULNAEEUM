@@ -19,7 +19,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class JumakService {
@@ -91,5 +94,11 @@ public class JumakService {
 
             return "like cancel";
         }
+    }
+
+    // 찜한 전통주 식당 조회
+    public List<Long> getLikeJumak(String kakaoId, Long drinkId) {
+        Long userId = userService.findUserId(kakaoId);
+        return myJumakRepo.findLikeJumakId(drinkId, userId);
     }
 }
