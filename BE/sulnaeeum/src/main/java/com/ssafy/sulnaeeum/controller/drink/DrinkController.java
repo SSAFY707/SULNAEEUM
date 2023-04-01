@@ -49,7 +49,7 @@ public class DrinkController {
      ***/
     @Operation(summary = "전통주 찜 - 회원", description = "찜하거나 찜을 취소")
     @PostMapping("/like/{drinkId}")
-    public ResponseEntity<String> switchLikeDrinkForUser(@PathVariable Long drinkId) {
+    public ResponseEntity<String> switchLikeDrink(@PathVariable Long drinkId) {
         String kakaoId = SecurityContextHolder.getContext().getAuthentication().getName();
         return new ResponseEntity<>(likeDrinkService.switchLikeDrink(drinkId, kakaoId), HttpStatus.OK);
     }
@@ -110,6 +110,16 @@ public class DrinkController {
     @PostMapping("/jumak")
     public ResponseEntity<String> insertJumak(@RequestBody JumakInfoDto jumakInfoDto) {
         return new ResponseEntity<>(jumakService.insertJumak(jumakInfoDto), HttpStatus.OK);
+    }
+
+    /***
+     * [ 전통주 식당 찜 ]
+     ***/
+    @Operation(summary = "전통주 식당 찜", description = "전통주 식당 찜")
+    @PostMapping("/like/jumak/{jumakId}")
+    public ResponseEntity<String> switchLikeJumak(@PathVariable Long jumakId) {
+        String kakaoId = SecurityContextHolder.getContext().getAuthentication().getName();
+        return new ResponseEntity<>(jumakService.likeJumak(kakaoId, jumakId), HttpStatus.OK);
     }
 
     // =================================================================================================================

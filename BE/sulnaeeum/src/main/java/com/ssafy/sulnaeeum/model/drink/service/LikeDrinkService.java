@@ -11,6 +11,7 @@ import com.ssafy.sulnaeeum.model.drink.repo.LikeDrinkRepo;
 import com.ssafy.sulnaeeum.model.drink.repo.ReviewRepo;
 import com.ssafy.sulnaeeum.model.user.entity.User;
 import com.ssafy.sulnaeeum.model.user.repo.UserRepo;
+import com.ssafy.sulnaeeum.model.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -37,15 +38,13 @@ public class LikeDrinkService {
     @Autowired
     ReviewRepo reviewRepo;
 
+    @Autowired
+    UserService userService;
+
     // 전통주 찜
     @Transactional
     public String switchLikeDrink(Long drinkId, String kakaoId) {
-        Long userId;
-        Optional<User> user = userRepo.findByKakaoId(kakaoId);
-        if(user.isEmpty()) {
-            throw new CustomException(CustomExceptionList.MEMBER_NOT_FOUND); // 해당하는 회원이 없을 경우
-        }
-        userId = user.get().getUserId();
+        Long userId = userService.findUserId(kakaoId);
 
         Optional<LikeDrink> likeDrink = likeDrinkRepo.findLikeInfo(drinkId, userId);
         if(likeDrink.isEmpty()) { // 이전에 찜 하지 않았을 경우
