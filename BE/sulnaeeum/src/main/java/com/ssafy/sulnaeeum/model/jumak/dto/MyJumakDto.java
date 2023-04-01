@@ -30,6 +30,13 @@ public class MyJumakDto {
         this.userDto = userDto;
     }
 
+    // 생성자 (List<MyJumak> -> List<MyJumakDto> 변환을 위함)
+    public MyJumakDto(MyJumak myJumak) {
+        this.myJumakId = myJumak.getMyJumakId();
+        this.jumakDto = myJumak.getJumak().toDto();
+        this.userDto = myJumak.getUser().toDto();
+    }
+
     // DTO -> Entity 변환
     public MyJumak toEntity() {
         return MyJumak.builder()

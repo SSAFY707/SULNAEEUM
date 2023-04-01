@@ -122,6 +122,17 @@ public class DrinkController {
         return new ResponseEntity<>(jumakService.likeJumak(kakaoId, jumakId), HttpStatus.OK);
     }
 
+    /***
+     * [ 회원이 찜한 전통주 식당 조회 ]
+     * - 회원이 찜한 전통주 식당의 아이디를 List 형태로 반환
+     ***/
+    @Operation(summary = "찜한 전통주 식당 조회", description = "찜한 전통주 식당 조회")
+    @GetMapping("/get/like/jumak/{drinkId}")
+    public ResponseEntity<List<Long>> getLikeJumak(@PathVariable Long drinkId) {
+        String kakaoId = SecurityContextHolder.getContext().getAuthentication().getName();
+        return new ResponseEntity<>(jumakService.getLikeJumak(kakaoId, drinkId), HttpStatus.OK);
+    }
+
     // =================================================================================================================
     // ----------------------------------------------   [ 비회원 ]   ----------------------------------------------------
     // =================================================================================================================
