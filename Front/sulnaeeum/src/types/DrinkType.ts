@@ -58,6 +58,14 @@ export type JumakType = {
     jumakLocation : string
 }
 
+export type JumakInsertType = {
+    [index : string] : string | number[],
+    jumakName : string,
+    jumakUrl : string,
+    jumakLocation : string,
+    drink : number[]
+}
+
 export type DrinkDetailType = {
     'drinkDetailDto' : {
         [index : string] : string | number | string[] | boolean,
@@ -93,4 +101,17 @@ export type DrinkDetailType = {
         drinkLevel : number,
         drinkAmount : string
     }
+}
+
+export type LatlngType = {
+    lat : number,
+    lng : number
+}
+
+export type MarkerType = {
+    id : number,
+    name: string,
+    latlng : any,
+    address: string,
+    url : string
 }

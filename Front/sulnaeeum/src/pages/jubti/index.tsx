@@ -1,4 +1,5 @@
 import { sendJubti } from '@/api/dafault';
+import { toastError } from '@/components/common/toast';
 import { JubtiType } from '@/types/DataTypes';
 import { useRouter } from 'next/router';
 import React, { useState } from 'react'
@@ -123,7 +124,7 @@ export default function Jubti() {
 
   const move_page = () => {
     if (!check_select()) {
-      alert('질문을 모두 선택해 주세요 😎')
+      toastError('질문을 모두 선택해 주세요.', '📌', 'top-right')
       return
     }
     return setPage(page + 1)
@@ -150,7 +151,7 @@ export default function Jubti() {
 
   const jubti = () => {
     if (!check_select()) {
-      alert('안주를 선택해 주세요 😋')
+      toastError('안주를 선택해 주세요.', '🍖', 'top-right')
       return
     }
 
@@ -245,8 +246,8 @@ export default function Jubti() {
       </div>
       <div className={`${page == 2 ? 'block' : 'hidden'}`}>
         <div className={'flex flex-col md:flex-row text-[20px] md:text-[30px] md:justify-center md:gap-3 mb-10 mt-12 md:mt-20 md:mb-8 font-preM items-center'}>
-          <div className={''}>✔ 두 가지 선택지 중</div >
-          <div className={''}>가까운 쪽을 선택해 주세요</div >
+          <div className={'font-preM'}>✔ 두 가지 선택지 중</div >
+          <div className={'font-preM'}>가까운 쪽을 선택해 주세요</div >
         </div>
         <div className={'flex flex-col items-center justify-center'}>
           {datas.question.slice(0, 3).map((q, index) => {
@@ -271,8 +272,8 @@ export default function Jubti() {
       </div>
       <div className={`${page == 3 ? 'block' : 'hidden'}`}>
         <div className={'flex flex-col md:flex-row text-[20px] mb-10 mt-12 font-preM items-center md:text-[30px] md:justify-center md:gap-3 my-10 md:mt-20 md:mb-8'}>
-          <div className={''}>✔ 두 가지 선택지 중</div >
-          <div className={''}>가까운 쪽을 선택해 주세요</div >
+          <div className={'font-preM'}>✔ 두 가지 선택지 중</div >
+          <div className={'font-preM'}>가까운 쪽을 선택해 주세요</div >
         </div>
         <div className={'flex flex-col items-center justify-center'}>
           {datas.question.slice(3, 6).map((q, index) => {
@@ -297,8 +298,8 @@ export default function Jubti() {
       </div>
       <div className={`${page == 4 ? 'block' : 'hidden'}`}>
         <div className={'flex flex-col md:flex-row text-[20px] mt-12 mb-10 font-preM items-center md:text-[30px] md:justify-center md:gap-3 my-10 md:mt-20 md:mb-8'}>
-          <div className={''}>✔ 두 가지 선택지 중</div >
-          <div className={''}>가까운 쪽을 선택해 주세요</div >
+          <div className={'font-preM'}>✔ 두 가지 선택지 중</div >
+          <div className={'font-preM'}>가까운 쪽을 선택해 주세요</div >
         </div>
         <div className={'flex flex-col items-center justify-center'}>
           {datas.question.slice(6, 9).map((q, index) => {
@@ -323,22 +324,22 @@ export default function Jubti() {
       </div>
       <div className={`${page == 5 ? 'block' : 'hidden'} flex flex-col items-center`}>
         <div className={'flex flex-col md:flex-row md:gap-2 text-[20px] md:text-[30px] mt-12 mb-8 md:my-20 font-preM items-center'}>
-          <div className={''}>원하는 안주의 종류를</div >
-          <div className={''}>선택해 주세요</div >
+          <div className={'font-preM'}>원하는 안주의 종류를</div >
+          <div className={'font-preM'}>선택해 주세요</div >
         </div>
         <div className={'grid grid-cols-2 md:flex md:gap-16 justify-center w-5/6 items-center justify-center'}>
           {datas.dish.map((dish, index) => {
             return (
               <div onClick={() => { select('dish', dish.value) }} className={`flex flex-col items-center md:h-[400px] md:justify-center ${data['dish'] == dish.value && 'brightness-50'}`}>
                 <img className={'w-[120px] md:w-[200px]'} src={`/images/jubti/dish/${index + 1}.png`} />
-                <div className={'text-[18px] mt-1 mb-4 md:text-[24px] md:mt-6'}>{dish.name}</div>
+                <div className={'text-[18px] mt-1 mb-4 md:text-[24px] md:mt-6 md:font-preR'}>{dish.name}</div>
               </div>
             )
           })}
         </div>
       </div>
       <div className={'flex justify-center'}>
-        <div className={`flex ${(page == 0 || page == 5) && 'hidden'} font-preL justify-center items-center w-5/6 md:w-[400px] relative text-[20px] md:text-xl h-[70px] bg-[#655442] hover:bg-[#504336] text-white rounded cursor-pointer`} onClick={() => { if (page == 5) { console.log(jubti()) } else move_page() }}>
+        <div className={`flex ${(page == 0 || page == 5) && 'hidden'} font-preL justify-center items-center w-5/6 md:w-[400px] relative text-[20px] md:mt-10 md:text-xl h-[70px] bg-[#655442] hover:bg-[#504336] text-white rounded cursor-pointer`} onClick={() => { if (page == 5) { console.log(jubti()) } else move_page() }}>
           다음으로
         </div>
       </div>
