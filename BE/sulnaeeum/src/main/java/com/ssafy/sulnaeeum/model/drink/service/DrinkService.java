@@ -230,13 +230,15 @@ public class DrinkService {
             inputData.add(dishArr[i]);
         }
 
+        inputData.add(drinkDetailDto.getDrinkId().intValue());
+
         Map<String, List> params = new HashMap<>();
         params.put("input_data", inputData);
 
         // Flask 요청 후 반환받기
-        String requestUrl = "http://j8a707.p.ssafy.io:5000/recommend/contents";
+        String requestUrl = "http://localhost:5000/recommend/similar";
         JSONObject jsonObject = flaskUtil.requestFlask(requestUrl, params);
-        SimilarDrinkDto similarDrinkDto = new SimilarDrinkDto((JSONObject)jsonObject.get("1"));
+        SimilarDrinkDto similarDrinkDto = new SimilarDrinkDto((JSONObject)jsonObject.get("0"));
 
         return similarDrinkDto;
     }
