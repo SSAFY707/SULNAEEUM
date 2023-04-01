@@ -16,4 +16,6 @@ public interface JumakRepo extends JpaRepository<Jumak, Long> {
 
     @Query(value = "select * from jumak order by jumak_id desc limit 1", nativeQuery = true)
     Optional<Jumak> findLastJumak();
+
+    Optional<Jumak> findByJumakId(Long jumakId);
 }
