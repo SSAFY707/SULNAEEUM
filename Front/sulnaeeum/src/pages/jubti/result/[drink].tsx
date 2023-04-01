@@ -87,7 +87,7 @@ export default function Result (props: any) {
                     <div className={'text-[26px] font-preM mt-14 text-fontD'}>결과 공유하기</div>
                     <img onClick={share} className={'h-[50px] mt-5 mb-16 cursor-pointer'} src="/images/kakao.png" alt="" />
                 </div>
-                <div onClick={()=>{alert('서비스 준비중입니다 😇')}} className={'flex justify-center items-center cursor-pointer text-[20px] w-3/4 h-[60px] rounded bg-[#999483] text-white'}>{result.name} 더 알아보러 가기</div>
+                <div onClick={()=>{router.push(`/list/${result.drinkId}`)}} className={'flex justify-center items-center cursor-pointer text-[20px] w-3/4 h-[60px] rounded bg-[#999483] text-white'}>{result.name} 더 알아보러 가기</div>
                 <div onClick={()=>{window.location.href = '/jubti'}} className={'flex justify-center items-center cursor-pointer text-[20px] font-preR w-3/4 h-[60px] rounded border border-[#999483] mt-4 bg-white text-[#191919] mb-16'}>테스트 다시하기</div>
             </div>
         </div>
@@ -105,22 +105,22 @@ type ExplainType = {
 }
 
 const info : MbtiType = {
-    infp : {dish: '케이크', summary: '혼술러에게 딱! 새콤 달콤 자몽맛', drink: '아이싱 자몽', good: 'enfj', bad: 'isfp', color: '#F4BDBF'},
-    enfp : {dish: '치킨', summary: '태생부터 탄산 가득, 톡톡 튀는 스파클링', drink: '얼떨결에', good: 'infj', bad: 'esfp', color: '#CFEAEF'},
-    infj : {dish: '오리주물럭', summary: '찰랑이는 별빛 하늘처럼, 은은한 향', drink: '제주 낭만', good: 'enfp', bad: 'istp', color: '#E1CFE8'},
-    enfj : {dish: '치즈', summary: '과일과 꽃 향기가 느껴지는 우아한 감 와인', drink: '뱅꼬레 더감', good: 'isfp', bad: 'isfj', color: '#FFECD7'},
-    intj : {dish: '샐러드', summary: '탁하지만 우아한, 긴 여운의 진한 포도향', drink: '남산애 레드와인', good: 'entp', bad: 'istj', color: '#B9C0D0'},
-    entj : {dish: '보쌈', summary: '묵직하고 깊은, 달콤하고 고소한', drink: '도깨비술 11', good: 'infp', bad: 'estj', color: '#F3ECE2'},
-    intp : {dish: '쿠키', summary: '배꽃이 필 때 빚는 희고, 된 이화주', drink: '배꽃 필 무렵', good: 'entj', bad: 'esfj', color: '#E7D6C4'},
-    entp : {dish: '조기찜', summary: '달콤하고 부드러운 연한 살구빛의 매력', drink: '여포의 꿈(화이트)', good: 'intj', bad: 'istj', color: '#FFF8C2'},
-    isfp : {dish: '갈비찜', summary: '담황색으로 풀어내는 진한 풀향과 과실향', drink: '호산춘', good: 'esfj', bad: 'enfp', color: '#D1F8C7'},
-    esfp : {dish: '회', summary: '누구에게나 부담없이, 상큼한 맛을 자랑하는', drink: '키위술', good: 'istj', bad: 'infp', color: '#EAEAEA'},
-    istp : {dish: '피자', summary: '한 모금에 진하게 퍼지는 오미자향', drink: '볼빨간 미자', good: 'estj', bad: 'infp', color: '#E7BFA8'},
-    estp : {dish: '바게트', summary: '풍성하게 다가오는 특유의 구수함', drink: '호랑이 배꼽', good: 'isfj', bad: 'enfp', color: '#EEDDC8'},
-    isfj : {dish: '매운탕', summary: '단 맛 뒤에 느껴지는 씁쓸한 곡물향', drink: '토끼 소주', good: 'estp', bad: 'enfp', color: '#DAD1CA'},
-    esfj : {dish: '김치전', summary: '도수가 높아도 부드럽고 산뜻하게', drink: '소호', good: 'isfp', bad: 'infj', color: '#BED1E9'},
-    istj : {dish: '연어', summary: '화려한 히비스커스와 새콤달콤 화자오까지', drink: '단홍', good: 'esfp', bad: 'infj', color: '#DAB4B8'},
-    estj : {dish: '홍어삼합', summary: '완숙한 향매의 뛰어난 향미', drink: '서울의 밤', good: 'istp', bad: 'enfj', color: '#DFDFDF'},
+    infp : {drinkId: 5, dish: '케이크', summary: '혼술러에게 딱! 새콤 달콤 자몽맛', drink: '아이싱 자몽', good: 'enfj', bad: 'isfp', color: '#F4BDBF'},
+    enfp : {drinkId: 36, dish: '치킨', summary: '태생부터 탄산 가득, 톡톡 튀는 스파클링', drink: '얼떨결에', good: 'infj', bad: 'esfp', color: '#CFEAEF'},
+    infj : {drinkId: 541, dish: '오리주물럭', summary: '찰랑이는 별빛 하늘처럼, 은은한 향', drink: '제주 낭만', good: 'enfp', bad: 'istp', color: '#E1CFE8'},
+    enfj : {drinkId: 0, dish: '치즈', summary: '과일과 꽃 향기가 느껴지는 우아한 감 와인', drink: '뱅꼬레 더감', good: 'isfp', bad: 'isfj', color: '#FFECD7'},
+    intj : {drinkId: 373, dish: '샐러드', summary: '탁하지만 우아한, 긴 여운의 진한 포도향', drink: '남산애 레드와인', good: 'entp', bad: 'istj', color: '#B9C0D0'},
+    entj : {drinkId: 218, dish: '보쌈', summary: '묵직하고 깊은, 달콤하고 고소한', drink: '도깨비술 11', good: 'infp', bad: 'estj', color: '#F3ECE2'},
+    intp : {drinkId: 379, dish: '쿠키', summary: '배꽃이 필 때 빚는 희고, 된 이화주', drink: '배꽃 필 무렵', good: 'entj', bad: 'esfj', color: '#E7D6C4'},
+    entp : {drinkId: 267, dish: '조기찜', summary: '달콤하고 부드러운 연한 살구빛의 매력', drink: '여포의 꿈(화이트)', good: 'intj', bad: 'istj', color: '#FFF8C2'},
+    isfp : {drinkId: 0, dish: '갈비찜', summary: '담황색으로 풀어내는 진한 풀향과 과실향', drink: '호산춘', good: 'esfj', bad: 'enfp', color: '#D1F8C7'},
+    esfp : {drinkId: 542, dish: '회', summary: '누구에게나 부담없이, 상큼한 맛을 자랑하는', drink: '키위술', good: 'istj', bad: 'infp', color: '#EAEAEA'},
+    istp : {drinkId: 0, dish: '피자', summary: '한 모금에 진하게 퍼지는 오미자향', drink: '볼빨간 미자', good: 'estj', bad: 'infp', color: '#E7BFA8'},
+    estp : {drinkId: 126, dish: '바게트', summary: '풍성하게 다가오는 특유의 구수함', drink: '호랑이 배꼽', good: 'isfj', bad: 'enfp', color: '#EEDDC8'},
+    isfj : {drinkId: 491, dish: '매운탕', summary: '단 맛 뒤에 느껴지는 씁쓸한 곡물향', drink: '토끼 소주', good: 'estp', bad: 'enfp', color: '#DAD1CA'},
+    esfj : {drinkId: 624, dish: '김치전', summary: '도수가 높아도 부드럽고 산뜻하게', drink: '소호', good: 'isfp', bad: 'infj', color: '#BED1E9'},
+    istj : {drinkId: 0, dish: '연어', summary: '화려한 히비스커스와 새콤달콤 화자오까지', drink: '단홍', good: 'esfp', bad: 'infj', color: '#DAB4B8'},
+    estj : {drinkId: 497, dish: '홍어삼합', summary: '완숙한 향매의 뛰어난 향미', drink: '서울의 밤', good: 'istp', bad: 'enfj', color: '#DFDFDF'},
 }
 
 const explain : ExplainType = {
@@ -166,6 +166,7 @@ export async function getServerSideProps(context : any) {
     const mbti : string = drink_to_mbti[id]
     const target = info[mbti]
     const data = {
+        drinkId : target.drinkId,
         name : target.drink,
         summary : target.summary,
         dish : target.dish, 

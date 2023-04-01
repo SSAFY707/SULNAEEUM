@@ -7,6 +7,7 @@ import { RootState } from ".";
 
 const initDrinkList : DrinkListType[] = []
 const myDrink : Mine = {likeList: [], clearList: []}
+const initLikeJumak : number[] = []
 const initMyReview : ReviewResType = {
     reviewId : 0,
     userId : 0,
@@ -98,6 +99,14 @@ export const getMyReview = createAsyncThunk(
     }
 )
 
+export const getMyJumakLike = createAsyncThunk(
+    `drinkSlice/getMyJumakLike`,
+    async (drinkId : number) => {
+        const res = await authAxios.get(`drink/get/like/jumak/${drinkId}`)
+        return res.data
+    }
+)
+
 const drinkSlice = createSlice({
     name: 'drinkSlice',
     initialState: {
@@ -105,6 +114,7 @@ const drinkSlice = createSlice({
         myDrink : myDrink,
         drink : initDrinkDetail,
         myReview : initMyReview,
+        myLikeJumak : initLikeJumak
     },
     reducers: {
         setDrinkLike(state, {payload: input}) {
@@ -117,6 +127,26 @@ const drinkSlice = createSlice({
                 toastOK('찜이 취소되었습니다.', '⭐', 'top-right')
             }
             return
+        },
+        setJumakLike(state, {payload : input}){
+            const idx = state.myLikeJumak.indexOf(input)
+            if(idx == -1){
+                state.myLikeJumak.push(input)
+                toastOK('찜 되었습니다.', '⭐', 'top-right')
+            }else{
+                state.myLikeJumak.splice(idx, 1)
+                toastOK('찜이 취소되었습니다.', '⭐', 'top-right')
+            }
+            return
+        },
+        setDrinkLikeInDetail(state) {
+            if(state.drink.drinkDetailDto.like){
+                state.drink.drinkDetailDto.like = false
+                toastOK('찜이 취소되었습니다.', '⭐', 'top-right')
+            }else{
+                state.drink.drinkDetailDto.like = true
+                toastOK('찜 되었습니다.', '⭐', 'top-right')
+            }
         }
     },
     extraReducers: (builder) => {
@@ -139,15 +169,19 @@ const drinkSlice = createSlice({
         builder.addCase(getMyReview.fulfilled, (state, action)=>{
             state.myReview = action.payload
         })
+        builder.addCase(getMyJumakLike.fulfilled, (state, action)=>{
+            state.myLikeJumak = action.payload
+        })
     }
 })
 
 // reducer export
-export const { setDrinkLike } = drinkSlice.actions 
+export const { setDrinkLike, setDrinkLikeInDetail, setJumakLike } = drinkSlice.actions 
 
 export const drinkDetail = (state : RootState) => state.drink.drink
 export const drinkList = (state : RootState) => state.drink.drinkList
 export const likeDrink = (state : RootState) => state.drink.myDrink['likeList']
 export const clearDrink = (state : RootState) => state.drink.myDrink['clearList']
 export const myReview = (state : RootState) => state.drink.myReview
+export const myLikeJumak = (state : RootState) => state.drink.myLikeJumak
 export default drinkSlice.reducer;

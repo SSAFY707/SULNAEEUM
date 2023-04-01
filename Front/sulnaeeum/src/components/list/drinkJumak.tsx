@@ -5,20 +5,29 @@ import React, { useState, useEffect } from 'react'
 import { Map, MapMarker } from 'react-kakao-maps-sdk'
 import { Modal } from '../common/modal'
 import AddJumak from './modal/addJumak'
-import { useAppSelector } from '@/hooks'
-import { drinkDetail } from '@/store/drinkSlice'
+import { useAppDispatch, useAppSelector } from '@/hooks'
+import { drinkDetail, myLikeJumak, setJumakLike } from '@/store/drinkSlice'
 import { JumakType } from '@/types/DrinkType'
+import { toastError } from '../common/toast'
+import { likeJumak } from '@/api/auth'
 
 
 export default function DrinkJumak() {
     const [open, setOpen] = useState<boolean>(false)
     const drink = useAppSelector(drinkDetail)
+    const myJumaks = useAppSelector(myLikeJumak)
     const jumaks : JumakType[] = drink['jumakDto']
 
     const modalOpen = () => {
+        const login = sessionStorage.getItem('isLogin')
+        if(!login){
+            toastError('로그인이 필요한 기능입니다.', '🚨', 'top-right')
+            return
+        }
         setOpen(!open)
     }
     type markerType = {
+        id : number,
         name: string,
         latlng : {
             lat : number,
@@ -40,7 +49,7 @@ export default function DrinkJumak() {
                     lng: res[0].x
                 }
                 const new_arr = markerList
-                markerList.push({name : jumak.jumakName, latlng: latlng, address: jumak.jumakLocation, url: jumak.jumakUrl})
+                markerList.push({id: jumak.jumakId, name : jumak.jumakName, latlng: latlng, address: jumak.jumakLocation, url: jumak.jumakUrl})
                 setMarkerList([...new_arr])
                 return latlng;
             }
@@ -48,16 +57,29 @@ export default function DrinkJumak() {
         geocoder.addressSearch(jumak.jumakLocation, callback)
     }
     useEffect(()=>{
+        console.log('마커 다시 세팅할게 ㅎㅎㅎ힣히', jumaks)
         setMarkerList([])
         for(let i=0; i<jumaks.length; i++){
             add_to_latlng(jumaks[i])
         }
-    },[jumaks])
+    },[jumaks, drink])
     useEffect(()=>{
         if(markerList.length != 0){
             setCenter(markerList[0].latlng)
         }
     },[markerList])
+    
+    const dispatch = useAppDispatch()
+
+    const like = (jumakId : number) => {
+        const login = sessionStorage.getItem('isLogin')
+        if(!login){
+            toastError('로그인이 필요한 기능입니다.', '🚨', 'top-right')
+            return
+        }
+        dispatch(setJumakLike(jumakId))
+        likeJumak(jumakId)
+    } 
     
   return (
     <div className={'w-7/12 h-[700px] mt-[200px]'}>
@@ -97,7 +119,10 @@ export default function DrinkJumak() {
                         <div onClick={()=>setCenter(v.latlng)} key={i} className={'w-full h-[140px] bg-zinc-100/70 rounded-lg p-5 mb-4 text-[#393939] hover:bg-zinc-100 cursor-pointer'}>
                             <div className={'flex justify-between'}>
                                 <div className={'font-preM text-[24px] mb-2'}>{v.name}</div>
-                                <FaRegBookmark className={'text-[20px] text-[#655442] cursor-pointer'}/>
+                                {myJumaks.indexOf(v.id) == -1 ?
+                                <FaRegBookmark onClick={()=>{like(v.id)}} className={'text-[20px] text-[#655442] cursor-pointer'}/>
+                                :<FaBookmark onClick={()=>{like(v.id)}} className={'text-[20px] text-[#655442] cursor-pointer'}/>
+                                }
                             </div>
                             <div className={'flex items-center'}><HiMap className={'mr-2'} />{v.address}</div>
                             <div className={'flex items-center'}><IoEarth className={'mr-2'} />{v.url}</div>
