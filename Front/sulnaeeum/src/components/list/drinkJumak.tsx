@@ -123,7 +123,7 @@ export default function DrinkJumak() {
                                 }
                             </div>
                             <div className={'flex items-center'}><HiMap className={'mr-2'} />{v.address}</div>
-                            <div className={'flex items-center'}><IoEarth className={'mr-2'} />{v.url}</div>
+                            <div className={'flex items-center'}><IoEarth className={'mr-2'} /><a className={'hover:font-preR'} href={v.url} target='_blank'>{v.url}</a></div>
                         </div>
                     )
                 })}
