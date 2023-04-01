@@ -8,7 +8,6 @@ import com.ssafy.sulnaeeum.model.drink.repo.*;
 import com.ssafy.sulnaeeum.model.jumak.dto.JumakDto;
 import com.ssafy.sulnaeeum.model.jumak.entity.Jumak;
 import com.ssafy.sulnaeeum.model.jumak.repo.JumakRepo;
-import com.ssafy.sulnaeeum.rabbitmq.Producer;
 import com.ssafy.sulnaeeum.model.user.service.UserService;
 import com.ssafy.sulnaeeum.util.FlaskUtil;
 import org.json.simple.JSONObject;

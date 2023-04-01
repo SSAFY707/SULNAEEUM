@@ -7,7 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
-@Schema(description = "술집")
+@Schema(description = "전통주 식당")
 @Data
 @SuperBuilder
 @NoArgsConstructor
@@ -17,13 +17,13 @@ public class JumakDto {
     @Schema(description = "아이디 (auto_increment)")
     private Long jumakId;
 
-    @Schema(description = "술집 이름")
+    @Schema(description = "식당 이름")
     private String jumakName;
 
-    @Schema(description = "술집 링크")
+    @Schema(description = "식당 링크")
     private String jumakUrl;
 
-    @Schema(description = "술집 주소")
+    @Schema(description = "식당 주소")
     private String jumakLocation;
 
     // 생성자 (List<Entity> -> List<DTO>)
