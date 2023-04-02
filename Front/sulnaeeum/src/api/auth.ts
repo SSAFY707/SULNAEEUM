@@ -56,3 +56,14 @@ export const getDrinkDetailForUser = async (drinkId : number) => {
     })
     return info;
 }
+
+export const setRecomList = async () => {
+    let list = []
+    await authAxios.get(`drink/recommend`
+    ).then((res)=>{
+        list = res.data
+    }).catch((err)=>{
+        console.log(err)
+    })
+    return list
+}
