@@ -176,7 +176,7 @@ export const GiftModal = (props: {modalOpen : any}) => {
                     </div>
                     <div className={"flex w-full pl-8 pb-2 text-[18px]"}>도수</div>
                     <div className='flex w-[90%]'>
-                        <div className={'relative h-[4px] w-[88%] rounded-[10px] bg-[#dddddd]'}>
+                        <div className={'relative h-[4px] w-[100%] rounded-[10px] bg-[#dddddd]'}>
                             <div className={`absolute h-[4px] rounded-[10px] bg-[#b0b0b0]`}
                             style={{left:`${rangeMinPercentLevel}%`, right:`${rangeMaxPercentLevel}%`}}
                             />
