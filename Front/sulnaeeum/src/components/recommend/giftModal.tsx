@@ -20,15 +20,15 @@ export const GiftModal = (props: {modalOpen : any}) => {
     const [tasteThroat, setTasteThroat] = useState<number>(0);
   
     const fixedMinPrice = 0;
-    const fixedMaxPrice = 100000;
+    const fixedMaxPrice = 400000;
     const priceGap = 1000;
     const [rangeMinValue, setRangeMinValue] = useState(fixedMinPrice); 
     const [rangeMaxValue, setRangeMaxValue] = useState(fixedMaxPrice);
     const [rangeMinPercent, setRangeMinPercent] = useState(0);
     const [rangeMaxPercent, setRangeMaxPercent] = useState(0);
 
-    const fixedMinLevel = 0;
-    const fixedMaxLevel = 50;
+    const fixedMinLevel = 1;
+    const fixedMaxLevel = 55;
     const levelGap = 1;
     const [rangeMinLevel, setRangeMinLevel] = useState(fixedMinLevel); 
     const [rangeMaxLevel, setRangeMaxLevel] = useState(fixedMaxLevel);
@@ -161,7 +161,7 @@ export const GiftModal = (props: {modalOpen : any}) => {
                     <div className='h-[50px] border-solid border-[2px] border-[#b0b0b0] rounded-[10px]'>
                             <div className='flex pl-[7px] flex-col'>
                                 <div className='text-[14px]'>최소 요금</div>
-                                <div className='font-preB'>₩ {rangeMinValue}</div>
+                                <div className='font-preB'>₩ {rangeMinValue.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</div>
                             </div>
                         </div>
                     </div>
@@ -169,7 +169,7 @@ export const GiftModal = (props: {modalOpen : any}) => {
                     <div className='h-[50px] border-solid border-[2px] border-[#b0b0b0] rounded-[10px]'>
                             <div className='flex flex-col pl-[7px]'>
                                 <div className='text-[14px]'>최대 요금</div>
-                                <div className='font-preB'>₩ {rangeMaxValue}</div>
+                                <div className='font-preB'>₩ {rangeMaxValue.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</div>
                             </div>
                         </div>
                     </div>
