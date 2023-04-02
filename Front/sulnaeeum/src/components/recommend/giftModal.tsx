@@ -28,7 +28,7 @@ export const GiftModal = (props: {modalOpen : any}) => {
     const [rangeMaxPercent, setRangeMaxPercent] = useState(0);
 
     const fixedMinLevel = 1;
-    const fixedMaxLevel = 55;
+    const fixedMaxLevel = 56;
     const levelGap = 1;
     const [rangeMinLevel, setRangeMinLevel] = useState(fixedMinLevel); 
     const [rangeMaxLevel, setRangeMaxLevel] = useState(fixedMaxLevel);
