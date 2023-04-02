@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { clearDrink, drinkList, getDrinkList, likeDrink, getMyDrink } from '@/store/drinkSlice'
 import { useAppDispatch, useAppSelector } from '@/hooks'
 import { useRouter } from 'next/dist/client/router'
@@ -6,7 +6,7 @@ import { FaRegBookmark, FaBookmark } from 'react-icons/fa'
 import { ClearFalse, ClearTrue } from './clearBtn'
 import { drinkLike } from '@/api/auth'
 import { setDrinkLike } from '@/store/drinkSlice'
-import { toastError, toastOK } from '../common/toast'
+import { toastError} from '../common/toast'
 
 export const DrinkList = (props: {drinkType: string, sortType : string}) => {
   const {drinkType, sortType} = props
