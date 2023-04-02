@@ -83,7 +83,7 @@ export default function DrinkJumak() {
     <div className={'w-7/12 h-[700px] mt-[200px]'}>
         <div>
             <Modal h='auto' w='500px' modalOpen={modalOpen} open={open}>
-                < AddJumak modalOpen={modalOpen} />
+                < AddJumak drinkId={drink.drinkDetailDto.drinkId} modalOpen={modalOpen} />
             </Modal>
         </div>
         <div className={'flex justify-between items-end'}>

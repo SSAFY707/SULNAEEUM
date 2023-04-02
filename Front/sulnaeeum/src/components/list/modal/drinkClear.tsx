@@ -1,6 +1,9 @@
 import { clearDrink } from '@/api/auth/drink'
 import { Rating } from '@/components/common/Rating'
 import { toastError, toastOK } from '@/components/common/toast'
+import { useAppDispatch } from '@/hooks'
+import { useRouter } from 'next/dist/client/router'
+import { getDrinkDetailForUser } from '@/store/drinkSlice'
 import { tasteType } from '@/types/DataTypes'
 import { ReviewWriteType } from '@/types/DrinkType'
 import React, { useState } from 'react'
@@ -9,6 +12,9 @@ export default function DrinkClear(props: {drinkName: string, drinkId : number ,
     const {drinkName, drinkId, modalOpen} = props
     const [rate, setRate] = useState<number>()
     const [content, setContent] = useState<string | null>(null)
+
+    const dispatch = useAppDispatch()
+    const router = useRouter()
 
     const drinkTaste = [
         {idx: 'tasteFlavor', value: '향', q1: '향이 약해요', q2: '향이 적당해요', q3: '향이 강해요'},
@@ -41,7 +47,7 @@ export default function DrinkClear(props: {drinkName: string, drinkId : number ,
         setTaste(newTaste)
     }
 
-    const submit = () => {
+    const submit = async () => {
         if(!rate){
             toastError('별점을 등록해 주세요', "📌", 'top-right')
             return
@@ -58,7 +64,7 @@ export default function DrinkClear(props: {drinkName: string, drinkId : number ,
             toastError('상세 항목을 모두 선택해주세요', "📌", 'top-right')
             return
         }
-        const data : ReviewWriteType = {
+        const review : ReviewWriteType = {
             score: rate,
             sweetScore: taste.tasteSweet,
             sourScore : taste.tasteSour,
@@ -68,8 +74,9 @@ export default function DrinkClear(props: {drinkName: string, drinkId : number ,
             refreshScore : taste.tasteRefresh,
             content : content,
         }
-        console.log(data)
-        clearDrink(drinkId, data)
+        
+        await clearDrink(drinkId, review)
+        dispatch(getDrinkDetailForUser(drinkId))
         modalOpen()
         toastOK('리뷰가 등록되었습니다.', '✨', 'top-center')
     }

@@ -66,7 +66,7 @@ export const DrinkList = (props: {drinkType: string, sortType : string}) => {
   },[drinkType, sortType])
 
   return (
-    <>xw
+    <>
       <div className={'grid grid-cols-4 px-3 py-2 gap-y-2'}>
         {list.map((item, index)=>{
           return (
