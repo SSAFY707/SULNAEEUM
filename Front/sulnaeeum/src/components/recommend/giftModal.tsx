@@ -74,7 +74,7 @@ export const GiftModal = (props: {modalOpen : any}) => {
 
     return (
         <>
-            <div className="flex flex-col items-center w-[600px] h-[900px] overflow-y-auto">
+            <div className="flex flex-col items-center w-[600px] h-[900px] overflow-y-scroll scroll">
                 <div className={'flex w-full justify-end'}>
                     <button className={'relative top-[20px] right-[20px] text-[30px] text-zinc-400'} onClick={ () => modalOpen() }><CgClose/></button>
                 </div>
