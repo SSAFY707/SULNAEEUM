@@ -10,8 +10,8 @@ export const GiftModal = (props: {modalOpen : any}) => {
     // const [fruit, setFruit] = useState<string>('과일을 선택해주세요.')
     const [openGender, setOpenGender] = useState<boolean>(false)
     const [openAge, setOpenAge] = useState<boolean>(false)
-    const [openLevel, setOpenLevel] = useState<boolean>(false)
-    const [openFruit, setOpenFruit] = useState<boolean>(false)
+    // const [openLevel, setOpenLevel] = useState<boolean>(false)
+    // const [openFruit, setOpenFruit] = useState<boolean>(false)
     const [tasteSour, setTasteSour] = useState<number>(0);
     const [tasteSweet, setTasteSweet] = useState<number>(0);
     const [tasteFlavor, setTasteFlavor] = useState<number>(0);
@@ -405,9 +405,9 @@ export const GiftModal = (props: {modalOpen : any}) => {
 
 
                 <div className={'flex w-[280px] mt-10 mb-10 items-center gap-x-5 ml-[40%] text-[18px]'}>
-                        <div onClick={modalOpen} className={"flex justify-center items-center border-solid border-[2px] border-zinc-300 rounded-[8px] h-[50px] w-[140px] py-2 cursor-pointer hover:bg-zinc-300 text-[#000000]"}>뒤로가기</div>
+                        <div onClick={modalOpen} className={"flex justify-center items-center border-solid border-[2px] border-zinc-300 rounded-[8px] h-[50px] w-[140px] py-2 cursor-pointer hover:bg-[#CECECE] text-[#000000]"}>뒤로가기</div>
                         {/* 통신 */}
-                        <div onClick={modalOpen} className={"flex justify-center items-center border-solid border-[2px] border-zinc-300 rounded-[8px] h-[50px] w-[140px] py-2 cursor-pointer hover:bg-zinc-300 text-[#000000]"}>제출하기</div>
+                        <div onClick={modalOpen} className={"flex justify-center items-center border-solid border-[2px] border-zinc-300 rounded-[8px] h-[50px] w-[140px] py-2 cursor-pointer hover:bg-[#CECECE] text-[#000000]"}>제출하기</div>
                 </div>
             </div>
         </>
