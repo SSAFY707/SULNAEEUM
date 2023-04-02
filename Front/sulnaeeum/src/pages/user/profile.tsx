@@ -56,7 +56,6 @@ export default function profile() {
                 </div>
               </div>
             </div>
-            <Divider />
             <div className="absolute z-10 top-[420px] w-[220px] h-[230px] bg-[#655443] flex justify-between">
               
             </div>
