@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import { MdArrowBackIosNew } from 'react-icons/md'
-import { GiTongue } from 'react-icons/gi'
-import { TbLemon } from 'react-icons/tb'
 import { FaPercent } from 'react-icons/fa'
 import { MdLocalDining } from 'react-icons/md'
 import { GiWineBottle } from 'react-icons/gi'
@@ -25,7 +23,11 @@ type PayloadType = {
 
 
 
+
+
 export default function index() {
+
+
 
 
   const [gender, setGender] = useState<string>();
@@ -39,6 +41,16 @@ export default function index() {
   const [level, setLevel] = useState<number>(0);
   const [dish, setDish] = useState<string>('');
   const [weight, setWeight] = useState<string>('');
+
+  const [resultName, setResultName] = useState<string>('이름초기값')
+  const [resultImg, setResultImg] = useState<string>('이미지초기값')
+  const [resultId, setResultId] = useState<string>('아이디초기값')
+  const [resultAmount, setResultAmount] = useState<string>('용량초기값')
+  const [resultLevel, setResultLevel] = useState<string>('도수초기값')
+
+
+
+
 
   // const [payload, setPayload] = useState<PayloadType>({
   //   tasteSour: 0,
@@ -54,6 +66,11 @@ export default function index() {
 
 
   const sendData = () => {
+
+    type ResultType = {
+      name: string | null
+      img: string | null
+    }
 
 
 
@@ -74,9 +91,20 @@ export default function index() {
     console.log(payload)
 
     console.log('sendData() 실행')
-    authAxios.post(`/api/user/preference`, payload
+    authAxios.post('user/preference', payload
     ).then((res) => {
       console.log(res)
+      console.log(res.data[0].drink_name)
+      setResultName(res.data[0].drink_name)
+      setResultImg(res.data[0].drink_image)
+      setResultId(res.data[0].drink_id)
+      setResultAmount(res.data[0].drink_amount)
+      setResultLevel(res.data[0].drink_level)
+
+
+
+
+
     }).catch((err) => {
       console.log(err)
     })
@@ -120,6 +148,7 @@ export default function index() {
     setSession((prevState) => {
       return { ...prevState, name: sessionStorage.getItem('name'), img: sessionStorage.getItem('img') }
     })
+
   }, [])
 
 
@@ -137,9 +166,7 @@ export default function index() {
                 </div>
                 <div className='flex  flex-col w-full h-[1000px] items-center'>
                   <div className='flex justify-between items-center'>
-                    <img className='w-[130px]' src="/main/part5/main5_2s.png" alt='이미지'></img>
-                    <img className='w-[130px]' src="/main/part5/main5_3s.png" alt='이미지'></img>
-                    <img className='w-[130px]' src="/main/part5/main5_4s.png" alt='이미지'></img>
+                    <img className='w-[140px]' src="/main/part5/main5_3s.png" alt='이미지'></img>
                   </div>
                   <div className='flex flex-col justify-center items-center w-full h-[100px] mt-[20px]'>
                     <p className='text-[20px]'>'술내음'은 당신과 어울리는 전통주를 찾아드립니다.</p>
@@ -159,7 +186,7 @@ export default function index() {
                 <div className={'font-preM ml-[8px]'}>{page}/6 단계</div>
               </div>
               <div className={'w-full h-2 bg-zinc-200 rounded-2xl'}>
-                <div className={'w-1/4 h-full bg-[#655442] rounded-2xl'}></div>
+                <div className={'w-1/6 h-full bg-[#655442] rounded-2xl'}></div>
               </div>
             </div>
             <div className={'h-2/3 w-5/6 p-2'}>
@@ -200,13 +227,13 @@ export default function index() {
                 <div className={'font-preM ml-[8px]'}>{page}/6 단계</div>
               </div>
               <div className={'w-full h-2 bg-zinc-200 rounded-2xl'}>
-                <div className={'w-2/4 h-full bg-[#655442] rounded-2xl'}></div>
+                <div className={'w-2/6 h-full bg-[#655442] rounded-2xl'}></div>
               </div>
             </div>
             <div className={'h-2/3 w-[440px] p-2'}>
 
               <div className='w-full h-[180px] outline-1 outline-black mt-[20px]'>
-                <div className={'font-preR text-[24px] mb-4'}>술의 단맛은 어떤가요??</div>
+                <div className={'font-preR text-[24px] mb-4'}>단맛의 정도</div>
                 <div className='flex justify-between items-center w-full h-[100px] '>
                   <div onClick={() => {
                     setTasteSweet(1)
@@ -225,7 +252,7 @@ export default function index() {
                     onClick={() => {
                       setTasteSweet(4)
                     }}
-                    className={`flex justify-center items-center w-[80px] h-[60px] rounded-[4px] hover:cursor-pointer ${tasteSweet === 4 ? 'bg-[#847260] text-white hover:bg-[#847260]' : 'bg-gray-100 hover:bg-gray-200'}`}>조금약함</div>
+                    className={`flex justify-center items-center w-[80px] h-[60px] rounded-[4px] hover:cursor-pointer ${tasteSweet === 4 ? 'bg-[#847260] text-white hover:bg-[#847260]' : 'bg-gray-100 hover:bg-gray-200'}`}>조금강함</div>
                   <div
                     onClick={() => {
                       setTasteSweet(5)
@@ -235,7 +262,7 @@ export default function index() {
               </div>
 
               <div className='w-full h-[180px] outline-1 outline-black mt-[20px]'>
-                <div className={'font-preR text-[24px] mb-4'}>술의 신맛은 어떤가요??</div>
+                <div className={'font-preR text-[24px] mb-4'}>신맛의 정도</div>
                 <div className='flex justify-between items-center w-full h-[100px] '>
                   <div onClick={() => {
                     setTasteSour(1)
@@ -254,7 +281,7 @@ export default function index() {
                     onClick={() => {
                       setTasteSour(4)
                     }}
-                    className={`flex justify-center items-center w-[80px] h-[60px] rounded-[4px] hover:cursor-pointer ${tasteSour === 4 ? 'bg-[#847260] text-white hover:bg-[#847260]' : 'bg-gray-100 hover:bg-gray-200'}`}>조금약함</div>
+                    className={`flex justify-center items-center w-[80px] h-[60px] rounded-[4px] hover:cursor-pointer ${tasteSour === 4 ? 'bg-[#847260] text-white hover:bg-[#847260]' : 'bg-gray-100 hover:bg-gray-200'}`}>조금강함</div>
                   <div
                     onClick={() => {
                       setTasteSour(5)
@@ -274,13 +301,13 @@ export default function index() {
                 <div className={'font-preM ml-[8px]'}>{page}/6 단계</div>
               </div>
               <div className={'w-full h-2 bg-zinc-200 rounded-2xl'}>
-                <div className={'w-2/4 h-full bg-[#655442] rounded-2xl'}></div>
+                <div className={'w-3/6 h-full bg-[#655442] rounded-2xl'}></div>
               </div>
             </div>
             <div className={'h-2/3 w-[440px] p-2'}>
 
               <div className='w-full h-[180px] outline-1 outline-black mt-[20px]'>
-                <div className={'font-preR text-[24px] mb-4'}>술의 향은 어떤가요??</div>
+                <div className={'font-preR text-[24px] mb-4'}>향의 강도</div>
                 <div className='flex justify-between items-center w-full h-[100px] '>
                   <div onClick={() => {
                     setTasteFlavor(1)
@@ -299,7 +326,7 @@ export default function index() {
                     onClick={() => {
                       setTasteFlavor(4)
                     }}
-                    className={`flex justify-center items-center w-[80px] h-[60px] rounded-[4px] hover:cursor-pointer ${tasteFlavor === 4 ? 'bg-[#847260] text-white hover:bg-[#847260]' : 'bg-gray-100 hover:bg-gray-200'}`}>조금약함</div>
+                    className={`flex justify-center items-center w-[80px] h-[60px] rounded-[4px] hover:cursor-pointer ${tasteFlavor === 4 ? 'bg-[#847260] text-white hover:bg-[#847260]' : 'bg-gray-100 hover:bg-gray-200'}`}>조금강함</div>
                   <div
                     onClick={() => {
                       setTasteFlavor(5)
@@ -309,7 +336,7 @@ export default function index() {
               </div>
 
               <div className='w-full h-[180px] outline-1 outline-black mt-[20px]'>
-                <div className={'font-preR text-[24px] mb-4'}>술의 청량감은 어떤가요?(탄산 정도)</div>
+                <div className={'font-preR text-[24px] mb-4'}>청량감(탄산) 정도</div>
                 <div className='flex justify-between items-center w-full h-[100px] '>
                   <div onClick={() => {
                     setTasteRefresh(1)
@@ -328,7 +355,7 @@ export default function index() {
                     onClick={() => {
                       setTasteRefresh(4)
                     }}
-                    className={`flex justify-center items-center w-[80px] h-[60px] rounded-[4px] hover:cursor-pointer ${tasteRefresh === 4 ? 'bg-[#847260] text-white hover:bg-[#847260]' : 'bg-gray-100 hover:bg-gray-200'}`}>조금약함</div>
+                    className={`flex justify-center items-center w-[80px] h-[60px] rounded-[4px] hover:cursor-pointer ${tasteRefresh === 4 ? 'bg-[#847260] text-white hover:bg-[#847260]' : 'bg-gray-100 hover:bg-gray-200'}`}>조금강함</div>
                   <div
                     onClick={() => {
                       setTasteRefresh(5)
@@ -350,13 +377,13 @@ export default function index() {
                 <div className={'font-preM ml-[8px]'}>{page}/6 단계</div>
               </div>
               <div className={'w-full h-2 bg-zinc-200 rounded-2xl'}>
-                <div className={'w-2/4 h-full bg-[#655442] rounded-2xl'}></div>
+                <div className={'w-4/6 h-full bg-[#655442] rounded-2xl'}></div>
               </div>
             </div>
             <div className={'h-2/3 w-[440px] p-2'}>
 
               <div className='w-full h-[180px] outline-1 outline-black mt-[20px]'>
-                <div className={'font-preR text-[24px] mb-4'}>술의 바디감은 어떤가요??</div>
+                <div className={'font-preR text-[24px] mb-4'}>바디감</div>
                 <div className='flex justify-between items-center w-full h-[100px] '>
                   <div onClick={() => {
                     setTasteBody(1)
@@ -375,7 +402,7 @@ export default function index() {
                     onClick={() => {
                       setTasteBody(4)
                     }}
-                    className={`flex justify-center items-center w-[80px] h-[60px] rounded-[4px] hover:cursor-pointer ${tasteBody === 4 ? 'bg-[#847260] text-white hover:bg-[#847260]' : 'bg-gray-100 hover:bg-gray-200'}`}>조금약함</div>
+                    className={`flex justify-center items-center w-[80px] h-[60px] rounded-[4px] hover:cursor-pointer ${tasteBody === 4 ? 'bg-[#847260] text-white hover:bg-[#847260]' : 'bg-gray-100 hover:bg-gray-200'}`}>조금강함</div>
                   <div
                     onClick={() => {
                       setTasteBody(5)
@@ -385,7 +412,7 @@ export default function index() {
               </div>
 
               <div className='w-full h-[180px] outline-1 outline-black mt-[20px]'>
-                <div className={'font-preR text-[24px] mb-4'}>술의 목넘김은 어떤가요?</div>
+                <div className={'font-preR text-[24px] mb-4'}>목넘김 정도(부드러움/ 거침)</div>
                 <div className='flex justify-between items-center w-full h-[100px] '>
                   <div onClick={() => {
                     setTasteThroat(1)
@@ -404,12 +431,12 @@ export default function index() {
                     onClick={() => {
                       setTasteThroat(4)
                     }}
-                    className={`flex justify-center items-center w-[80px] h-[60px] rounded-[4px] hover:cursor-pointer ${tasteThroat === 4 ? 'bg-[#847260] text-white hover:bg-[#847260]' : 'bg-gray-100 hover:bg-gray-200'}`}>조금약함</div>
+                    className={`flex justify-center items-center w-[80px] h-[60px] rounded-[4px] hover:cursor-pointer ${tasteThroat === 4 ? 'bg-[#847260] text-white hover:bg-[#847260]' : 'bg-gray-100 hover:bg-gray-200'}`}>조금거침</div>
                   <div
                     onClick={() => {
                       setTasteThroat(5)
                     }}
-                    className={`flex justify-center items-center w-[80px] h-[60px] rounded-[4px] hover:cursor-pointer ${tasteThroat === 5 ? 'bg-[#847260] text-white hover:bg-[#847260]' : 'bg-gray-100 hover:bg-gray-200'}`}>매우강함</div>
+                    className={`flex justify-center items-center w-[80px] h-[60px] rounded-[4px] hover:cursor-pointer ${tasteThroat === 5 ? 'bg-[#847260] text-white hover:bg-[#847260]' : 'bg-gray-100 hover:bg-gray-200'}`}>매우거침</div>
                 </div>
               </div>
             </div>
@@ -425,7 +452,7 @@ export default function index() {
                 <div className={'font-preM ml-[8px]'}>{page}/6 단계</div>
               </div>
               <div className={'w-full h-2 bg-zinc-200 rounded-2xl'}>
-                <div className={'w-2/4 h-full bg-[#655442] rounded-2xl'}></div>
+                <div className={'w-5/6 h-full bg-[#655442] rounded-2xl'}></div>
               </div>
             </div>
             <div className={'h-2/3 w-[440px] p-2'}>
@@ -476,7 +503,7 @@ export default function index() {
                 <div className={'font-preM ml-[8px]'}>{page}/6 단계</div>
               </div>
               <div className={'w-full h-2 bg-zinc-200 rounded-2xl'}>
-                <div className={'w-2/4 h-full bg-[#655442] rounded-2xl'}></div>
+                <div className={'w-6/6 h-full bg-[#655442] rounded-2xl'}></div>
               </div>
             </div>
             <div className={'h-2/3 w-[440px] p-2'}>
@@ -487,96 +514,26 @@ export default function index() {
                   <div onClick={() => {
                     setLevel(1)
                   }}
-                    className={`flex justify-center items-center w-[80px] h-[60px] rounded-[4px] hover:cursor-pointer ${level === 1 ? 'bg-[#847260] text-white hover:bg-[#847260]' : 'bg-gray-100 hover:bg-gray-200'}`}>1º ~ 5º</div>
+                    className={`flex justify-center items-center w-[80px] h-[60px] rounded-[4px] hover:cursor-pointer ${level === 1 ? 'bg-[#847260] text-white hover:bg-[#847260]' : 'bg-gray-100 hover:bg-gray-200'}`}>1% ~ 5%</div>
                   <div onClick={() => {
                     setLevel(2)
                   }}
-                    className={`flex justify-center items-center w-[80px] h-[60px] rounded-[4px] hover:cursor-pointer ${level === 2 ? 'bg-[#847260] text-white hover:bg-[#847260]' : 'bg-gray-100 hover:bg-gray-200'}`}>6º ~ 10º</div>
+                    className={`flex justify-center items-center w-[80px] h-[60px] rounded-[4px] hover:cursor-pointer ${level === 2 ? 'bg-[#847260] text-white hover:bg-[#847260]' : 'bg-gray-100 hover:bg-gray-200'}`}>6% ~ 10%</div>
                   <div
                     onClick={() => {
                       setLevel(3)
                     }}
-                    className={`flex justify-center items-center w-[80px] h-[60px] rounded-[4px] hover:cursor-pointer ${level === 3 ? 'bg-[#847260] text-white hover:bg-[#847260]' : 'bg-gray-100 hover:bg-gray-200'}`}>11º ~ 20º</div>
+                    className={`flex justify-center items-center w-[80px] h-[60px] rounded-[4px] hover:cursor-pointer ${level === 3 ? 'bg-[#847260] text-white hover:bg-[#847260]' : 'bg-gray-100 hover:bg-gray-200'}`}>11% ~ 20%</div>
                   <div
                     onClick={() => {
                       setLevel(4)
                     }}
-                    className={`flex justify-center items-center w-[80px] h-[60px] rounded-[4px] hover:cursor-pointer ${level === 4 ? 'bg-[#847260] text-white hover:bg-[#847260]' : 'bg-gray-100 hover:bg-gray-200'}`}>21º ~ 30º</div>
+                    className={`flex justify-center items-center w-[80px] h-[60px] rounded-[4px] hover:cursor-pointer ${level === 4 ? 'bg-[#847260] text-white hover:bg-[#847260]' : 'bg-gray-100 hover:bg-gray-200'}`}>21% ~ 30%</div>
                   <div
                     onClick={() => {
                       setLevel(5)
                     }}
-                    className={`flex justify-center items-center w-[80px] h-[60px] rounded-[4px] hover:cursor-pointer ${level === 5 ? 'bg-[#847260] text-white hover:bg-[#847260]' : 'bg-gray-100 hover:bg-gray-200'}`}>31º 이상</div>
-                </div>
-              </div>
-
-              <div className='w-full h-[180px] outline-1 outline-black mt-[20px]'>
-                <div className={'font-preR text-[24px] mb-4'}>술을 고를때 가장 중요한 것은?</div>
-                <div className='flex justify-between items-center w-full h-[100px] '>
-                  <div onClick={() => {
-                    setWeight('맛')
-                  }}
-                    className={`flex flex-col text-[16px] font-medium justify-center items-center w-[130px] h-[90px] rounded-[4px] hover:cursor-pointer ${weight === '맛' ? 'bg-[#847260] text-white hover:bg-[#847260]' : 'bg-gray-100 hover:bg-gray-200'}`}>
-                    <GiWineBottle className='text-[24px] mb-[6px]'></GiWineBottle>
-                    맛</div>
-                  <div onClick={() => {
-                    setWeight('도수')
-                  }}
-                    className={`flex flex-col text-[16px] font-medium justify-center items-center w-[130px] h-[90px] rounded-[4px] hover:cursor-pointer ${weight === '도수' ? 'bg-[#847260] text-white hover:bg-[#847260]' : 'bg-gray-100 hover:bg-gray-200'}`}>
-                    <FaPercent className='text-[16px] mb-[6px]'></FaPercent>
-                    도수</div>
-                  <div onClick={() => {
-                    setWeight('안주')
-                  }}
-                    className={`flex flex-col text-[16px] font-medium justify-center items-center w-[130px] h-[90px] rounded-[4px] hover:cursor-pointer ${weight === '안주' ? 'bg-[#847260] text-white hover:bg-[#847260]' : 'bg-gray-100 hover:bg-gray-200'}`}>
-                    <MdLocalDining className='text-[24px] mb-[6px]'></MdLocalDining>
-                    안주</div>
-                </div>
-              </div>
-            </div>
-            <div onClick={() => { setPage(page + 1) }} className={`flex justify-center items-center text-white font-preL rounded w-5/6 h-[60px] text-[20px] ${weight && level ? 'bg-[#847260] text-white hover:cursor-pointer' : 'bg-[#E4E4E7] '} `}>시작하기</div>
-          </div>
-
-
-          {/* 7페이지 */}
-          <div className={`${page != 7 && 'hidden'} flex flex-col items-center w-[500px] h-[650px] rounded-xl bg-white/90`}>
-            <div className={'w-5/6 mt-10 mb-6'}>
-              <div className='flex items-center w-full h-[30px] mb-[10px]'>
-                <MdArrowBackIosNew className='hover:cursor-pointer' onClick={() => { setPage(page - 1) }} ></MdArrowBackIosNew>
-                <div className={'font-preM ml-[8px]'}>{page}/6 단계</div>
-              </div>
-              <div className={'w-full h-2 bg-zinc-200 rounded-2xl'}>
-                <div className={'w-2/4 h-full bg-[#655442] rounded-2xl'}></div>
-              </div>
-            </div>
-            <div className={'h-2/3 w-[440px] p-2'}>
-
-              <div className='w-full h-[180px] outline-1 outline-black mt-[20px]'>
-                <div className={'font-preR text-[24px] mb-4'}>알콜 도수는 어떤가요?</div>
-                <div className='flex justify-between items-center w-full h-[100px]'>
-                  <div onClick={() => {
-                    setLevel(1)
-                  }}
-                    className={`flex justify-center items-center w-[80px] h-[60px] rounded-[4px] hover:cursor-pointer ${level === 1 ? 'bg-[#847260] text-white hover:bg-[#847260]' : 'bg-gray-100 hover:bg-gray-200'}`}>1º ~ 5º</div>
-                  <div onClick={() => {
-                    setLevel(2)
-                  }}
-                    className={`flex justify-center items-center w-[80px] h-[60px] rounded-[4px] hover:cursor-pointer ${level === 2 ? 'bg-[#847260] text-white hover:bg-[#847260]' : 'bg-gray-100 hover:bg-gray-200'}`}>6º ~ 10º</div>
-                  <div
-                    onClick={() => {
-                      setLevel(3)
-                    }}
-                    className={`flex justify-center items-center w-[80px] h-[60px] rounded-[4px] hover:cursor-pointer ${level === 3 ? 'bg-[#847260] text-white hover:bg-[#847260]' : 'bg-gray-100 hover:bg-gray-200'}`}>11º ~ 20º</div>
-                  <div
-                    onClick={() => {
-                      setLevel(4)
-                    }}
-                    className={`flex justify-center items-center w-[80px] h-[60px] rounded-[4px] hover:cursor-pointer ${level === 4 ? 'bg-[#847260] text-white hover:bg-[#847260]' : 'bg-gray-100 hover:bg-gray-200'}`}>21º ~ 30º</div>
-                  <div
-                    onClick={() => {
-                      setLevel(5)
-                    }}
-                    className={`flex justify-center items-center w-[80px] h-[60px] rounded-[4px] hover:cursor-pointer ${level === 5 ? 'bg-[#847260] text-white hover:bg-[#847260]' : 'bg-gray-100 hover:bg-gray-200'}`}>31º 이상</div>
+                    className={`flex justify-center items-center w-[80px] h-[60px] rounded-[4px] hover:cursor-pointer ${level === 5 ? 'bg-[#847260] text-white hover:bg-[#847260]' : 'bg-gray-100 hover:bg-gray-200'}`}>31% 이상</div>
                 </div>
               </div>
 
@@ -606,15 +563,52 @@ export default function index() {
             </div>
             <div onClick={() => {
               setPage(page + 1)
+              console.log('setPage 실행후')
               sendData()
-            }
-            } className={`flex justify-center items-center text-white font-preL rounded w-5/6 h-[60px] text-[20px] ${weight && level ? 'bg-[#847260] text-white hover:cursor-pointer' : 'bg-[#E4E4E7] '} `}>시작하기</div>
+              setTimeout(() => {
+                console.log('setTimeout() 실행')
+                setPage(page + 2)
+
+              }
+                , 2400);
+            }} className={`flex justify-center items-center text-white font-preL rounded w-5/6 h-[60px] text-[20px] ${weight && level ? 'bg-[#847260] text-white hover:cursor-pointer' : 'bg-[#E4E4E7] '} `}>추천받기</div>
           </div>
 
 
+          {/* 7페이지 */}
+          <div className={`${page != 7 && 'hidden'} flex flex-col items-center w-[500px] h-[650px] rounded-xl bg-white/90`}>
+            <div className={'h-2/3 w-[440px] p-2'}>
+              <div className='w-full h-[180px] outline-1 outline-black mt-[20px]'>
+                <div className='flex flex-col justify-between items-center w-full h-[300px] mt-[160px]'>
+                  <img src='/images/loading.gif' className='w-[740px]'></img>
+                  <p className='font-bold text-[28px] text-[#272727]'>전통주 알고리즘 분석중...</p>
+                </div>
+              </div>
 
 
+            </div>
+          </div>
 
+          {/* 8페이지 */}
+          <div className={`${page != 8 && 'hidden'} flex flex-col items-center w-[500px] h-[650px] rounded-xl bg-white`}>
+            <div className={'h-2/3 w-[440px] p-2'}>
+              <div className='flex flex-col justify-center items-center w-full h-[460px] mt-[10px]'>
+                <div className={'font-preB text-[30px] mb-4 mt-[40px]'}>당신을 위한 전통주</div>
+                <div className='flex flex-col justify-between items-center w-full h-[400px] mt-[4px] rounded-[8px]'>
+                  <div className='flex justify-center w-[180px] h-[240px] mt-[4px]'>
+                    <img src={resultImg} alt="이미지" className='h-full object-cover' />
+                  </div>
+                  <p className='mt-[30px] text-[26px] font-bold'>{resultName}</p>
+                  <p className='text-[22px]'>{Number(resultLevel) * 3}° ㅣ {resultAmount}</p>
+                </div>
+              </div>
+
+            </div>
+            <div onClick={() => {
+              location.href = `/list/${resultId}`
+            }
+            } className={`flex justify-center items-center text-white font-preL rounded w-5/6 h-[60px] text-[20px] mt-[90px] bg-[#847260] text-white hover:cursor-pointer`}>더 알아보기</div>
+          </div>
 
 
 
@@ -623,3 +617,6 @@ export default function index() {
     </>
   )
 }
+
+
+
