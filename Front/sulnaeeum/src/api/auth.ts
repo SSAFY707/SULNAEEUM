@@ -25,3 +25,14 @@ export const likeJumak = (jumakId : number) => {
         console.log(err)
     })
 }
+
+export const setRecomList = async () => {
+    let list = []
+    await authAxios.get(`drink/recommend`
+    ).then((res)=>{
+        list = res.data
+    }).catch((err)=>{
+        console.log(err)
+    })
+    return list
+}
