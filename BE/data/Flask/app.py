@@ -218,7 +218,54 @@ def find_drink(input_data):
     return sorted(dis_dic.items(), key = lambda item: item[1])
 
 
-# 컨텐츠 기반 선물 추천 알고리즘
+# 컨텐츠 기반 비슷한 술 추천 알고리즘
+# 요청 : 단, 신, 청, 향, 목, 바, 도, 안
+# 응답 : 아이디, 이름, 도수, 용량, 사진
+@app.route("/recommend/similar", methods=["POST"])
+def recommend_similar_drink():
+    parameter_dict = request.get_json()
+
+    input_data = parameter_dict["input_data"]
+
+    data_id = input_data[13]
+    input_data = input_data[0:13]
+    print(input_data)
+
+    find_list = find_drink(input_data)
+
+    conn = db_connect()
+    cur = conn.cursor()
+
+    find_drink_id_dic = {}
+
+    for i in range(5):
+        drink_id = find_list[i][0]+1
+
+        if drink_id == data_id:
+            continue
+
+        this_drink_list = {}
+        this_drink_list['drink_id'] = drink_id 
+
+        cur.execute(DRINK_INFO, str(drink_id))
+        result = cur.fetchall()
+        this_drink_list['drink_name'] = result[0][0]
+        this_drink_list['drink_amount'] = result[0][1]
+        this_drink_list['drink_level'] = result[0][2]
+        this_drink_list['drink_image'] = result[0][3] 
+
+        # print(i+1, "위 : ", result, "(", drink_id, ") / 유사도 : ", find_list[i][1])
+        # print(result, "술 정보 : ", data_list[drink_id-1])
+
+        find_drink_id_dic[i] = this_drink_list
+        print(find_drink_id_dic[i])
+
+    conn.close()
+
+    return find_drink_id_dic
+
+
+# JuBTI 기반 랭킹 정렬 함수
 # 요청 : 단, 신, 청, 향, 목, 바, 도, 안
 # 응답 : 아이디, 이름, 도수, 용량, 사진
 @app.route("/ranking", methods=["POST"])
