@@ -50,4 +50,16 @@ public class UserPreference {
 
     @Column(length = 20, nullable = false)
     private String weight; // 가중치
+
+    public void updateInfo(int tasteSour, int tasteSweet, int tasteFlavor, int tasteRefresh, int tasteBody, int tasteThroat, int level, String dish, String weight ){
+        this.tasteSour = tasteSour;
+        this.tasteSweet = tasteSweet;
+        this.tasteFlavor = tasteFlavor;
+        this.tasteRefresh = tasteRefresh;
+        this.tasteBody = tasteBody;
+        this.tasteThroat = tasteThroat;
+        this.level = level;
+        this.dish = dish;
+        this.weight = weight;
+    }
 }
