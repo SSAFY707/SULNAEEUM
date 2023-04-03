@@ -111,10 +111,10 @@ public class RankingService {
     }
 
     @Transactional
-//    @Scheduled(cron = "0 0/5 13,14 * * *")
-    @Scheduled(cron = "0 0 0/1 * * *")
+    @Scheduled(cron = "0 0/1 13,14 * * *")
+//    @Scheduled(cron = "0 0 0/1 * * *")
     public void jubtiRequest (){
-        String requestUrl = "http://j8a707.p.ssafy.io:5000/ranking";
+        String requestUrl = "http://j8a707.p.ssafy.io/flask/ranking";
         Map<String, List> params = null;
         List<List<Integer>> input_data = new ArrayList<>();
         List<JubtiResult> jubtiResultList = jubtiRepo.findAll();
@@ -183,6 +183,7 @@ public class RankingService {
                     female.set(j, input.get(j) + female.get(j));
                     femaleCnt++;
                 }
+
                 if(jubti.getAge().equals("20s")){
                     twenties.set(j, input.get(j) + twenties.get(j));
                     twentiesCnt++;
