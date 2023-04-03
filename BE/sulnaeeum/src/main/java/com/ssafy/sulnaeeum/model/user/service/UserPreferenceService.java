@@ -37,10 +37,19 @@ public class UserPreferenceService {
 
         User user = userRepository.findByKakaoId(kakaoId).orElseThrow(() -> new CustomException(CustomExceptionList.MEMBER_NOT_FOUND));
 
-        UserPreference userPreference = userPreferenceDto.toEntity();
-        userPreference.setUser(user);
+        UserPreference userPreference = userPreferenceRepo.findByUser(user).orElse(null);
 
-        userPreferenceRepo.save(userPreference);
+        if(userPreference!=null){
+            userPreference.updateInfo(userPreferenceDto.getTasteSour(),userPreferenceDto.getTasteSweet(),
+                    userPreferenceDto.getTasteFlavor(), userPreferenceDto.getTasteRefresh(), userPreferenceDto.getTasteBody(),
+                    userPreferenceDto.getTasteThroat(), userPreferenceDto.getLevel(),userPreferenceDto.getDish(), userPreferenceDto.getWeight());
+        }
+        else {
+            userPreference = userPreferenceDto.toEntity();
+            userPreference.setUser(user);
+            userPreferenceRepo.save(userPreference);
+        }
+
         user.updateFinish(true);
         user.updateInfo(userPreferenceDto.getSex(), userPreferenceDto.getAge());
     }
