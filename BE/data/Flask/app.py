@@ -260,8 +260,10 @@ def recommend_similar_drink():
         find_drink_id_dic[i] = this_drink_list
         print(find_drink_id_dic[i])
 
-    conn.close()
+    if not 0 in find_drink_id_dic.keys():
+        find_drink_id_dic[0] = find_drink_id_dic[1]
 
+    conn.close()
     return find_drink_id_dic
 
 
