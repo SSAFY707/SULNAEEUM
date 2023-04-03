@@ -2,24 +2,30 @@ import { DetailRate, StarRate } from '@/components/common/Rating'
 import { useAppSelector } from '@/hooks';
 import { drinkDetail, myReview } from '@/store/drinkSlice';
 import { ReviewResType } from '@/types/DrinkType';
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { GrCheckbox, GrCheckboxSelected } from 'react-icons/gr'
 
 export default function AllReview(props: {modalOpen : any}) {
     const {modalOpen} = props
+    const [login, setLogin] = useState<boolean>(false)
     const [mine, setMine] = useState<boolean>(false);
 
     const drink = useAppSelector(drinkDetail)
     const itsMine = useAppSelector(myReview)
     const reviews : ReviewResType[] = drink['reviewResponseDto'];
 
-    
+    useEffect(()=>{
+      const isLogin = sessionStorage.getItem('isLogin')
+      if(isLogin){
+        setLogin(true)
+      }
+    },[])
 
   return (
       <div className={'w-full h-full'}>
         <div className={'flex flex-col border-b'}>
           <div className={'flex justify-between items-center px-16 w-full h-[140px]'}>
-            <div className={'flex mr-4 text-[20px]'}>총 {drink.drinkDetailDto.reviewCnt}개의 리뷰</div>
+            <div className={'flex mr-4 text-[20px]'}>총 {reviews.length}개의 리뷰</div>
             <div className={'flex items-center'}>
               <DetailRate rate={drink.drinkDetailDto.avgScore / 5 * 100} size='44px' />
               <div className={'flex items-center ml-8 mr-4'}>
@@ -30,7 +36,10 @@ export default function AllReview(props: {modalOpen : any}) {
           </div>
         </div>
         <div>
+          {login ?
           <div onClick={()=>{setMine(!mine)}} className={`mt-6 mb-4 mr-10 flex justify-end items-center cursor-pointer`}>{mine ? <GrCheckboxSelected className={'mr-2'} /> : <GrCheckbox className={'mr-2'} />}내 리뷰보기</div>
+          :<div className={`mt-6 mb-4 h-[16px]`}></div>
+          }
           <div className={`${mine && 'hidden'} flex flex-col items-center h-[500px] w-[98%] overflow-y-scroll scroll`}>
             {reviews.length != 0 && 
             reviews.map((v, i)=>{
@@ -72,7 +81,7 @@ export default function AllReview(props: {modalOpen : any}) {
             <div className='text-[18px]'>등록된 리뷰가 없습니다.</div>}
           </div>
         </div>
-        <div onClick={modalOpen} className={'flex items-center w-full mt-2 cursor-pointer justify-center text-[18px]'}>
+        <div onClick={modalOpen} className={'flex items-center w-full cursor-pointer justify-center text-[18px]'}>
           <div className={'w-5/6 h-[60px] flex justify-center items-center border bg-[#655443] hover:bg-[#5B4D3E] rounded-md text-white'}>닫기</div>
         </div>
     </div>

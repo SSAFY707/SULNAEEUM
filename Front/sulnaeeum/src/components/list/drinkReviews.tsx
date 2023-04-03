@@ -24,7 +24,7 @@ export default function DrinkReviews() {
           <div className={'font-preB text-[30px] mr-2'}>{(drink.drinkDetailDto.avgScore).toFixed(1)}</div>
           <div className={'flex pt-2 text-[18px]'}> / 5.0</div>
         </div>
-        <div onClick={modalOpen} className={'flex h-[20px] underline decoration-1 mb-1 mr-4 cursor-pointer hover:text-[18px]'}>{drink.drinkDetailDto.reviewCnt}개의 리뷰 더보기</div>
+        <div onClick={modalOpen} className={'flex h-[20px] underline decoration-1 mb-1 mr-4 cursor-pointer hover:text-[18px]'}>{drink.reviewResponseDto.length}개의 리뷰 더보기</div>
       </div>
       <div className={'flex h-[300px] grid grid-cols-3'}>
         {reviews.slice(0,3).map((r, index)=>{

@@ -1,31 +1,5 @@
-import { toastOK } from '@/components/common/toast'
-import { Drink, DrinkDetailType, DrinkDetailTypeFirst } from '../types/DataTypes'
-import { defaultAxios, authAxios } from './common'
-
-export const getDrinkList = async (typeId: number, sort : string) => {
-    let drinkList = []
-    await defaultAxios.get(`drink/n/${typeId}`, {
-        params: {sortType: sort}
-    }).then((res)=>{
-        console.log(res.data)
-        drinkList = res.data
-    }).catch((err)=>{
-        console.log(err)
-    })
-    return drinkList;
-}
-
-export const getDrinkListForUser = async (typeId: number, sort : string) => {
-    let drinkList = []
-    await authAxios.get(`drink/${typeId}`, {
-        params: {sortType: sort}
-    }).then((res)=>{
-        drinkList = res.data
-    }).catch((err)=>{
-        console.log(err)
-    })
-    return drinkList;
-}
+import { JumakInsertType } from '@/types/DrinkType'
+import { authAxios } from './common'
 
 export const drinkLike = (drinkId: number) => {
     authAxios.post(`drink/like/${drinkId}`
@@ -35,24 +9,31 @@ export const drinkLike = (drinkId: number) => {
     })
 }
 
-export const getDrinkDetail = async (drinkId : number) => {
-    let info = DrinkDetailTypeFirst
-    await defaultAxios.get(`drink/n/detail/${drinkId}`
+export const insertJumak = async (data: JumakInsertType) => {
+    await authAxios.post(`drink/jumak`, data
     ).then((res)=>{
-        info = res.data
+        console.log(res)
     }).catch((err)=>{
         console.log(err)
     })
-    return info;
+    return
 }
 
-export const getDrinkDetailForUser = async (drinkId : number) => {
-    let info = DrinkDetailTypeFirst
-    await authAxios.get(`drink/detail/${drinkId}`
-    ).then((res)=>{
-        info = res.data
+export const likeJumak = (jumakId : number) => {
+    authAxios.post(`drink/like/jumak/${jumakId}`
+    ).then(()=>{
     }).catch((err)=>{
         console.log(err)
     })
-    return info;
+}
+
+export const setRecomList = async () => {
+    let list = []
+    await authAxios.get(`drink/recommend`
+    ).then((res)=>{
+        list = res.data
+    }).catch((err)=>{
+        console.log(err)
+    })
+    return list
 }

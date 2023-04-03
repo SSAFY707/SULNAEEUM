@@ -1,12 +1,15 @@
+import { insertJumak } from '@/api/auth'
 import { CNU_CK } from '@/api/auth/jumak'
 import { Modal } from '@/components/common/modal'
 import Search from '@/components/common/search'
 import { toastError, toastOK } from '@/components/common/toast'
+import { useAppDispatch } from '@/hooks'
+import { getDrinkDetailForUser } from '@/store/drinkSlice'
 import React, { useState } from 'react'
 import DaumPostcodeEmbed from 'react-daum-postcode'
 import { IoClose } from 'react-icons/io5'
 
-export default function AddJumak(props: {modalOpen}) {
+export default function AddJumak(props: {drinkId : number, modalOpen : any}) {
 
     type DrinkSelType = {
         [index : string] : number | string,
@@ -14,16 +17,17 @@ export default function AddJumak(props: {modalOpen}) {
         drinkName : string
     }
 
-    const {modalOpen} = props
+    const {drinkId, modalOpen} = props
     const [isOpen, setIsOpen] = useState<boolean>(false)
     const [cnu, setCnu] = useState<string>('')
     const [next, setNext] = useState<boolean>(false)
     const [jumakName, setJumakName] = useState<string>('')
+    const [jumakUrl, setJumakUrl] = useState<string>('')
     const [jumakDrink, setJumakDrink] = useState<DrinkSelType[]>([])
     const [jumakAdd, setJumakAdd] = useState<string>('주소를 입력해주세요.')
     const [detailAdd, setDetailAdd] = useState<string>('')
 
-
+    const dispatch = useAppDispatch()
 
     const addOpen = () => {
         setIsOpen(!isOpen)
@@ -40,7 +44,7 @@ export default function AddJumak(props: {modalOpen}) {
         }
     }
 
-    const addJumak = () => {
+    const addJumak = async () => {
         if(!jumakName) {
             toastError('상호명을 입력해주세요.', '📢', 'top-right')
             return
@@ -57,10 +61,14 @@ export default function AddJumak(props: {modalOpen}) {
         })
         const data = {
             jumakName: jumakName,
-            jumakAdd : `${jumakAdd} ${detailAdd}`,
-            jumakDrink : sel
+            jumakLocation : `${jumakAdd} ${detailAdd}`,
+            jumakUrl : jumakUrl,
+            drink : sel
         }
-        console.log(data)
+        // console.log(data)
+        await insertJumak(data)
+        dispatch(getDrinkDetailForUser(drinkId))
+        modalOpen()
         toastOK('등록되었습니다.', '✨', 'top-right')
     }
     const selectDrink = (drinkId : number, drinkName: string) => {
@@ -119,12 +127,16 @@ export default function AddJumak(props: {modalOpen}) {
                 </Modal>
                 <input onChange={(e)=>{setDetailAdd(e.target.value)}} className={'w-full h-[50px] px-4 mt-2 rounded bg-zinc-100 outline-none'} placeholder='상세주소' type="text" />
             </div>
+            <div className={'w-5/6 mb-4'}>
+                <div className={'mb-2 font-preM'}>관련사이트</div>
+                <input onChange={(e)=>{setJumakUrl(e.target.value)}} placeholder='(선택) 사이트 주소를 입력해주세요.' className={'w-full h-[50px] px-4 rounded bg-zinc-100 outline-none'} type="text" />
+            </div>
             <div className={'w-5/6 mb-8'}>
                 <div className={'w-5/6 mb-2 font-preM'}>판매하는 전통주</div>
                 <div className={''}>
                     {/* <input className={'w-full h-[50px] px-4 mb-4 rounded bg-zinc-100 outline-none'} placeholder='전통주 이름을 검색해주세요.' type="text" /> */}
                     < Search selectDrink={selectDrink} />
-                    <div className={'flex flex-wrap h-[80px] overflow-y-scroll scroll'}>
+                    <div className={'flex flex-wrap h-[100px] overflow-y-scroll scroll'}>
                         { jumakDrink.length == 0 ?
                         <div>등록된 전통주가 없습니다.</div>
                         :

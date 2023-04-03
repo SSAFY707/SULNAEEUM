@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { clearDrink, drinkList, getDrinkList, likeDrink, getMyDrink } from '@/store/drinkSlice'
 import { useAppDispatch, useAppSelector } from '@/hooks'
 import { useRouter } from 'next/dist/client/router'
@@ -6,7 +6,7 @@ import { FaRegBookmark, FaBookmark } from 'react-icons/fa'
 import { ClearFalse, ClearTrue } from './clearBtn'
 import { drinkLike } from '@/api/auth'
 import { setDrinkLike } from '@/store/drinkSlice'
-import { toastError, toastOK } from '../common/toast'
+import { toastError} from '../common/toast'
 
 export const DrinkList = (props: {drinkType: string, sortType : string}) => {
   const {drinkType, sortType} = props
@@ -72,8 +72,12 @@ export const DrinkList = (props: {drinkType: string, sortType : string}) => {
           return (
             <div key={index} className={'flex w-full justify-center items-center h-[360px]'}>
               <div onClick={()=>move(item.drinkId)} className={'group flex flex-col items-center bg-white p-4 cursor-pointer w-[95%] h-[350px] border rounded-xl hover:w-full hover:h-[360px] shadow-sm hover:shadow-lg'}>
-                <div className={'w-full flex justify-end'}>
-                  {likeList.indexOf(item.drinkId) != -1 ? <FaBookmark onClick={(event)=>like(event, item.drinkId)} className={'cursor-pointer text-[20px] text-[#655422]'} /> : <FaRegBookmark onClick={(event)=>like(event, item.drinkId)} className={'cursor-pointer text-[20px] text-[#655422]'} />}
+                <div className={'w-full flex justify-end h-[28px]'}>
+                  <div onClick={(event)=>like(event, item.drinkId)} className={'h-full w-[40px] flex justify-center tcursor-pointer text-[20px] text-[#655422] hover:text-[24px]'}>
+                  {likeList.indexOf(item.drinkId) != -1 ? 
+                  <FaBookmark /> : 
+                  <FaRegBookmark />}
+                  </div>
                 </div>
                 <div className={'w-full h-[46%] flex justify-center items-center mb-4'}><img className={'h-full'} src={item.drinkImage} /></div>
                 <div className={'flex justify-center items-center text-center text-[22px] font-preR group-hover:font-preM'}>{item.drinkName}</div>
