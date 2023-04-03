@@ -120,6 +120,7 @@ public class RankingService {
         List<JubtiResult> jubtiResultList = jubtiRepo.findAll();
 
         int size = jubtiResultList.size();
+        int maleCnt = 0, femaleCnt = 0, twentiesCnt = 0, thirtiesCnt = 0, fortiesCnt = 0, fiftiesCnt = 0, sixtiesCnt = 0;
 
         List<Integer> twenties = new ArrayList<>();
         List<Integer> thirties = new ArrayList<>();
@@ -177,20 +178,26 @@ public class RankingService {
             for(int j = 0; j < 13; j++){
                 if(jubti.getSex().equals("남성")){
                     male.set(j, input.get(j) + male.get(j));
+                    maleCnt++;
                 }else{
                     female.set(j, input.get(j) + female.get(j));
+                    femaleCnt++;
                 }
-
                 if(jubti.getAge().equals("20s")){
                     twenties.set(j, input.get(j) + twenties.get(j));
+                    twentiesCnt++;
                 }else if(jubti.getAge().equals("30s")){
                     thirties.set(j, input.get(j) + thirties.get(j));
+                    thirtiesCnt++;
                 }else if(jubti.getAge().equals("40s")){
                     forties.set(j, input.get(j) + forties.get(j));
+                    fortiesCnt++;
                 }else if(jubti.getAge().equals("50s")){
                     fifties.set(j, input.get(j) + fifties.get(j));
+                    fiftiesCnt++;
                 }else {
                     sixties.set(j, input.get(j) + sixties.get(j));
+                    sixtiesCnt++;
                 }
 
                 total.set(j, input.get(j) + total.get(j));
@@ -198,13 +205,13 @@ public class RankingService {
         }
 
         for(int i = 0; i < 13; i++){
-            male.set(i, male.get(i) / size);
-            female.set(i, female.get(i) / size);
-            twenties.set(i, twenties.get(i) / size);
-            thirties.set(i, thirties.get(i) / size);
-            forties.set(i, forties.get(i) / size);
-            fifties.set(i, fifties.get(i) / size);
-            sixties.set(i, sixties.get(i) / size);
+            male.set(i, male.get(i) / maleCnt);
+            female.set(i, female.get(i) / femaleCnt);
+            twenties.set(i, twenties.get(i) / twentiesCnt);
+            thirties.set(i, thirties.get(i) / thirtiesCnt);
+            forties.set(i, forties.get(i) / fortiesCnt);
+            fifties.set(i, fifties.get(i) / fiftiesCnt);
+            sixties.set(i, sixties.get(i) / sixtiesCnt);
             total.set(i, total.get(i) / size);
         }
 
