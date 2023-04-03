@@ -1,4 +1,4 @@
-import { ReviewWriteType } from "@/types/DrinkType";
+import { RecommendDrinkType, ReviewWriteType } from "@/types/DrinkType";
 import { authAxios } from "../common";
 
 export const clearDrink = async (drinkId: number, data: ReviewWriteType) => {
@@ -8,4 +8,15 @@ export const clearDrink = async (drinkId: number, data: ReviewWriteType) => {
         console.log(err)
     })
     return
+}
+
+export const getRecommendDrinkList = async () => {
+    let list : RecommendDrinkType[] = []
+    await authAxios.get(`user/recommend`
+    ).then((res)=>{
+        list = res.data
+    }).catch((err)=>{
+        console.log(err)
+    })
+    return list
 }
