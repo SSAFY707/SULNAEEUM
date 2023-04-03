@@ -111,9 +111,9 @@ export default function DrinkClear(props: {drinkName: string, drinkId : number ,
         </div>
         <textarea onChange={(e)=>{setContent(e.target.value)}} placeholder='(선택) 간단한 리뷰를 작성해 주세요.' className={'mt-4 resize-none rounded bg-zinc-100 w-[400px] h-[100px] p-4 text-[16px] focus:outline-none'}>
         </textarea>
-        <div className={'flex justify-center w-[400px] my-8'}>
-            <div onClick={modalOpen} className={'flex justify-center items-center cursor-pointer mx-2 w-[100px] h-[44px] border border-[#655442] rounded hover:bg-zinc-100'}>닫기</div>
-            <div onClick={submit} className={'flex justify-center items-center cursor-pointer mx-2 w-[100px] h-[44px] rounded text-white bg-[#655442] hover:bg-[#5B4D3E]'}>제출하기</div>
+        <div className={'flex justify-center w-full px-6 my-8'}>
+            <div onClick={modalOpen} className={'flex justify-center items-center cursor-pointer mx-2 w-1/2 h-[44px] border border-[#655442] rounded hover:bg-zinc-100'}>닫기</div>
+            <div onClick={submit} className={'flex justify-center items-center cursor-pointer mx-2 w-1/2 h-[44px] rounded text-white bg-[#655442] hover:bg-[#5B4D3E]'}>제출하기</div>
         </div>
     </div>
   )

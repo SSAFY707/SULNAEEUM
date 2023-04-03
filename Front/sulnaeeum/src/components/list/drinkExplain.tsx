@@ -46,13 +46,13 @@ export const DrinkExplain = () => {
             <div className={'flex items-center p-5 rounded-lg bg-zinc-100'}>자세한 설명이 없습니다.</div>
             }
             <div className={'flex px-5 mt-8 items-center'}>
-              <div className={'w-[100px] font-preM text-[18px] text-zinc-500'}>재료</div><div className={'font-preB text-[18px] text-zinc-500 mr-4'}>|</div>
-              {detail.ingredient.map((i)=>{return `${i} `})}
+              <div className={'w-1/6 font-preM text-[18px] text-zinc-500'}>재료</div><div className={'font-preB text-[18px] text-zinc-500 mr-4'}>|</div>
+              <div>{detail.ingredient.map((i)=>{return `${i} `})}</div>
             </div>
             <div className={'flex px-5 mt-4 items-center'}>
-              <div className={'w-[100px] font-preM text-[18px] text-zinc-500'}>관련 사이트</div><div className={'font-preB text-[18px] text-zinc-500 mr-4'}>|</div>
+              <div className={'w-1/6 font-preM text-[18px] text-zinc-500'}>관련 사이트</div><div className={'font-preB text-[18px] text-zinc-500 mr-4'}>|</div>
               {detail.drinkSaleUrl.length != 0 ?
-              <a className={'underline'} target='_blank' href={detail.drinkSaleUrl}>{detail.drinkSaleUrl}</a>
+              <a className={'w-4/5 underline'} target='_blank' href={detail.drinkSaleUrl}>{detail.drinkSaleUrl}</a>
               :
               <div>관련 사이트가 없습니다.</div>
               }
