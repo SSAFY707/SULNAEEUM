@@ -3,6 +3,7 @@ package com.ssafy.sulnaeeum.model.drink.service;
 import com.ssafy.sulnaeeum.exception.CustomException;
 import com.ssafy.sulnaeeum.exception.CustomExceptionList;
 import com.ssafy.sulnaeeum.model.drink.dto.DrinkDto;
+import com.ssafy.sulnaeeum.model.drink.dto.MyDrinkDto;
 import com.ssafy.sulnaeeum.model.drink.dto.ReviewRequestDto;
 import com.ssafy.sulnaeeum.model.drink.dto.ReviewResponseDto;
 import com.ssafy.sulnaeeum.model.drink.entity.Drink;
@@ -43,8 +44,6 @@ public class ReviewService {
     @Autowired
     UserService userService;
 
-    User user;
-
     // 리뷰 작성 or 수정 (전통주 클리어)
     @Transactional
     public String writeReview(Long drinkId, String kakaoId, ReviewRequestDto reviewRequestDto) {
@@ -61,15 +60,26 @@ public class ReviewService {
         // 해당 전통주를 해당 회원이 이미 클리어한 경우 - 수정 / 아직 클리어하지 않은 경우 - 작성
         Optional<Review> review = reviewRepo.findMyReview(userId, drinkId);
         Review resultReview = reviewRequestDto.toEntity(user.get().toDto(), drink.get().toDto());
+
+        Long myDrinkId = myDrinkRepo.findMyDrinkId(userId, drinkId);
+
         if(review.isPresent()) {
             result = "update";
             updateAvg(1, drinkId, drinkDto.getReviewCnt(), drinkDto.getAvgScore(), resultReview.getScore(), review.get().getScore());
+
+            // 만약 내가 클리어한 전통주 리스트 중 해당 전통주가 없을 경우 추가
+            if(myDrinkId == null) {
+                myDrinkRepo.save(new MyDrinkDto(drinkDto, user.get().toDto()).toEntity());
+            }
 
             // 기존의 리뷰 아이디 그대로 유지
             resultReview.setReviewId(review.get().getReviewId());
         } else {
             result = "insert";
             updateAvg(0, drinkId, drinkDto.getReviewCnt(), drinkDto.getAvgScore(), resultReview.getScore(), 0);
+
+            // 내가 클리어한 전통주 추가
+            myDrinkRepo.save(new MyDrinkDto(drinkDto, user.get().toDto()).toEntity());
 
             // 리뷰 개수 증가
             cntReview(true, drinkId);
@@ -96,6 +106,13 @@ public class ReviewService {
         // 기존 리뷰에 대한 정보 조회 후 삭제 (평점 평균 갱신을 위함)
         Review resultReview = review.get();
         reviewRepo.delete(resultReview);
+
+        // 내가 클리어한 전통주 리스트에서 삭제
+        Long myDrinkId = myDrinkRepo.findMyDrinkId(userId, drinkId);
+        if(myDrinkId == null) {
+            throw new CustomException(CustomExceptionList.ROW_NOT_FOUND);
+        }
+        myDrinkRepo.deleteByMyDrinkId(myDrinkId);
 
         Optional<Drink> drink = drinkRepo.findByDrinkId(drinkId);
         if(drink.isEmpty()) {
