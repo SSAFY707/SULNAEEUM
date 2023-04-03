@@ -5,16 +5,13 @@ import Image from "next/image";
 import { useState, useEffect } from "react";
 import { useDisclosure } from "@chakra-ui/react";
 import { useRef } from "react";
-import { Axios } from "axios";
 import { defaultAxios, authAxios } from "@/api/common";
 import NavSearch from "./common/navSearch";
 import { useRouter } from 'next/router'
-import { FaUserAlt, FaRegBookmark, FaWineBottle } from 'react-icons/fa'
-import { AiOutlineUser } from 'react-icons/ai'
+import { FaRegBookmark } from 'react-icons/fa'
 import { BiUser } from 'react-icons/bi'
 import { RiHome2Line } from 'react-icons/ri'
 import { MdLogout } from 'react-icons/md'
-import { IoWineOutline } from 'react-icons/io5'
 import { IoMdWine } from 'react-icons/io'
 import { toastError } from "./common/toast";
 

@@ -1,6 +1,7 @@
 import { IoEarth } from 'react-icons/io5'
 import { HiMap } from 'react-icons/hi'
 import { FaRegBookmark, FaBookmark } from 'react-icons/fa'
+import { RiHome2Line, RiHome2Fill } from 'react-icons/ri'
 import React, { useState, useEffect } from 'react'
 import { Map, MapMarker } from 'react-kakao-maps-sdk'
 import { Modal } from '../common/modal'
@@ -118,8 +119,8 @@ export default function DrinkJumak() {
                             <div className={'flex justify-between'}>
                                 <div className={'font-preM text-[24px] mb-2'}>{v.name}</div>
                                 {myJumaks.indexOf(v.id) == -1 ?
-                                <FaRegBookmark onClick={()=>{like(v.id)}} className={'text-[20px] text-[#655442] cursor-pointer'}/>
-                                :<FaBookmark onClick={()=>{like(v.id)}} className={'text-[20px] text-[#655442] cursor-pointer'}/>
+                                <RiHome2Line onClick={()=>{like(v.id)}} className={'text-[24px] text-[#655442] cursor-pointer'}/>
+                                :<RiHome2Fill onClick={()=>{like(v.id)}} className={'text-[24px] text-[#655442] cursor-pointer'}/>
                                 }
                             </div>
                             <div className={'flex items-center'}><HiMap className={'mr-2'} />{v.address}</div>

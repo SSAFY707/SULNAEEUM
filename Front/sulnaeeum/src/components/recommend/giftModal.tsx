@@ -150,8 +150,8 @@ export const GiftModal = (props: {modalOpen : any}) => {
                   </div>
               </div>
               <div className={'flex w-[88%] mt-6'}>추가 정보를 입력하면 더 정확한 결과를 받으실 수 있습니다.</div> 
-              <div onClick={()=>{setPage(2)}} className={'w-[88%] text-[18px] border-2 border-zinc-200 rounded h-[60px] flex justify-center items-center mt-2 cursor-pointer hover:bg-zinc-200'}>(선택) 추가정보 입력하기</div>
-              <div onClick={()=>firstSubmit()} className={'w-[88%] text-[18px] border-2 rounded h-[60px] flex justify-center items-center mt-2 cursor-pointer'}>이대로 제출하기</div>
+              <div onClick={()=>{setPage(2)}} className={'w-[88%] text-[18px] rounded h-[60px] flex justify-center items-center mt-2 cursor-pointer text-white bg-[#655442] hover:bg-[#5B4D3E]'}>(선택) 추가정보 입력하기</div>
+              <div onClick={()=>firstSubmit()} className={'w-[88%] text-[18px] border rounded h-[60px] flex justify-center items-center mt-2 cursor-pointer text-[#655442] border-[#655442] hover:bg-stone-200 hover:border-none'}>추가정보 없이 제출하기</div>
           </div>
           <div className={`${page == 2 ? 'flex' : 'hidden'} flex-col w-[600px] h-[820px] px-8 overflow-y-scroll scroll`}>
             <div className={'flex w-full justify-end'}>
@@ -257,7 +257,7 @@ export const GiftModal = (props: {modalOpen : any}) => {
               <div className={'text-[18px] font-preR mb-4'}>원하는 태그를 선택해주세요. (중복 선택 가능)</div>
               <div className='grid grid-cols-3 gap-2 w-full'>
                 {tags.map((item)=>{
-                  return <div onClick={()=>selectTag(item.key, item.value)} className={`h-[50px] flex justify-center items-center bg-zinc-100 rounded cursor-pointer hover:bg-zinc-300 ${taste[item.key] == item.value && 'bg-zinc-300'}`} key={item.name}>{item.name}</div>
+                  return <div onClick={()=>selectTag(item.key, item.value)} className={`h-[50px] flex justify-center items-center bg-zinc-100 rounded cursor-pointer hover:bg-zinc-300 hover:font-preM ${taste[item.key] == item.value && 'bg-zinc-300 font-preM'}`} key={item.name}>{item.name}</div>
                 })}
               </div>
             </div>
