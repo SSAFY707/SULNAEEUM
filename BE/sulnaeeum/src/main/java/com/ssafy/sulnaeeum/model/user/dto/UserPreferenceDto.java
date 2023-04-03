@@ -1,5 +1,6 @@
 package com.ssafy.sulnaeeum.model.user.dto;
 
+import com.ssafy.sulnaeeum.model.user.entity.User;
 import com.ssafy.sulnaeeum.model.user.entity.UserPreference;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
@@ -60,5 +61,19 @@ public class UserPreferenceDto {
                 .dish(dish)
                 .weight(weight)
                 .build();
+    }
+
+    public UserPreferenceDto(UserPreference userPreference, User user) {
+        this.tasteSour = userPreference.getTasteSour();
+        this.tasteSweet = userPreference.getTasteSweet();
+        this.tasteFlavor = userPreference.getTasteFlavor();
+        this.tasteRefresh = userPreference.getTasteRefresh();
+        this.tasteBody = userPreference.getTasteBody();
+        this.tasteThroat = userPreference.getTasteThroat();
+        this.level = userPreference.getLevel();
+        this.dish = userPreference.getDish();
+        this.weight = userPreference.getWeight();
+        this.age = user.getAge();
+        this.sex = user.getSex();
     }
 }

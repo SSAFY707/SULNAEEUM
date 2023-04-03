@@ -165,58 +165,85 @@ public class RankingService {
                 dish_arr = new int[] {0, 0, 0, 0, 0, 3};
             }
 
+            int drinkLevel = 0;
+            if(jubti.getLevel() == 1){
+                drinkLevel= 4;
+            }else if (jubti.getLevel() == 2){
+                drinkLevel = 7;
+            }else if (jubti.getLevel() == 3){
+                drinkLevel = 15;
+            }else if (jubti.getLevel() == 4){
+                drinkLevel = 25;
+            }else if (jubti.getLevel() == 5){
+                drinkLevel = 40;
+            }
+
             input.add(jubti.getTasteSweet());
             input.add(jubti.getTasteSour());
             input.add(jubti.getTasteRefresh());
             input.add(jubti.getTasteFlavor());
             input.add(jubti.getTasteThroat());
             input.add(jubti.getTasteBody());
-            input.add(jubti.getLevel());
+            input.add(drinkLevel);
 
             for(int j = 0; j < 6; j++) input.add(dish_arr[j]);
 
             for(int j = 0; j < 13; j++){
                 if(jubti.getSex().equals("남성")){
                     male.set(j, input.get(j) + male.get(j));
-                    maleCnt++;
                 }else{
                     female.set(j, input.get(j) + female.get(j));
-                    femaleCnt++;
                 }
 
                 if(jubti.getAge().equals("20s")){
                     twenties.set(j, input.get(j) + twenties.get(j));
-                    twentiesCnt++;
                 }else if(jubti.getAge().equals("30s")){
                     thirties.set(j, input.get(j) + thirties.get(j));
-                    thirtiesCnt++;
                 }else if(jubti.getAge().equals("40s")){
                     forties.set(j, input.get(j) + forties.get(j));
-                    fortiesCnt++;
                 }else if(jubti.getAge().equals("50s")){
                     fifties.set(j, input.get(j) + fifties.get(j));
-                    fiftiesCnt++;
                 }else {
                     sixties.set(j, input.get(j) + sixties.get(j));
-                    sixtiesCnt++;
                 }
 
                 total.set(j, input.get(j) + total.get(j));
             }
+
+            if(jubti.getSex().equals("남성")){
+                maleCnt++;
+            }else{
+                femaleCnt++;
+            }
+
+
+            if(jubti.getAge().equals("20s")){
+                twentiesCnt++;
+            }else if(jubti.getAge().equals("30s")){
+                thirtiesCnt++;
+            }else if(jubti.getAge().equals("40s")){
+                fortiesCnt++;
+            }else if(jubti.getAge().equals("50s")){
+                fiftiesCnt++;
+            }else {
+                sixtiesCnt++;
+            }
         }
 
-        System.out.println(male.get(0) + " : " + maleCnt + ", " + female.get(0) + " : " +  femaleCnt);
+        System.out.println(male.get(6) + " : " + maleCnt + ", " + female.get(6) + " : " +  femaleCnt);
 
         for(int i = 0; i < 13; i++){
-            male.set(i, male.get(i) / maleCnt);
-            female.set(i, female.get(i) / femaleCnt);
-            twenties.set(i, twenties.get(i) / twentiesCnt);
-            thirties.set(i, thirties.get(i) / thirtiesCnt);
-            forties.set(i, forties.get(i) / fortiesCnt);
-            fifties.set(i, fifties.get(i) / fiftiesCnt);
-            sixties.set(i, sixties.get(i) / sixtiesCnt);
+            male.set(i, Math.round((float) (male.get(i) / (1.0*maleCnt))));
+            female.set(i, Math.round((float) (female.get(i) / (1.0*femaleCnt))));
+            twenties.set(i, Math.round((float)(twenties.get(i) / (1.0*twentiesCnt))));
+            thirties.set(i, Math.round((float)(thirties.get(i) / (1.0*thirtiesCnt))));
+            forties.set(i, Math.round((float)(forties.get(i) / (1.0*fortiesCnt))));
+            fifties.set(i, Math.round((float)(fifties.get(i) / (1.0*fiftiesCnt))));
+            sixties.set(i, Math.round((float)(sixties.get(i) / (1.0*sixtiesCnt))));
             total.set(i, total.get(i) / size);
         }
+
+        System.out.println(male.get(6) + " : " + maleCnt + ", " + female.get(6) + " : " +  femaleCnt);
 
         input_data.add(male);
         input_data.add(female);
