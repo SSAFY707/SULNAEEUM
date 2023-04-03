@@ -1,6 +1,7 @@
 import { authAxios, defaultAxios } from "@/api/common";
 import { toastOK } from "@/components/common/toast";
-import { DrinkDetailType, DrinkListType, Mine, ReviewResType } from "@/types/DrinkType";
+import { useAppDispatch } from "@/hooks";
+import { DrinkDetailType, DrinkListType, Mine, ReviewResType, ReviewWriteType } from "@/types/DrinkType";
 import { createAsyncThunk ,createSlice } from "@reduxjs/toolkit";
 import { RootState } from ".";
 

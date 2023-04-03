@@ -27,7 +27,7 @@ export default function Detail(props: {drinkId : number}) {
     }else {
       dispatch(getDrinkDetail(drinkId))
     }
-  },[drinkId])
+  },[drinkId, dispatch])
 
   const like = () => {
     dispatch(setDrinkLikeInDetail())
