@@ -51,6 +51,20 @@ public class UserPreferenceService {
     @Transactional
     public Map<String, Map<String, String>> recommendUserDrink(UserPreferenceDto userPreferenceDto) {
 
+        int drinkLevel = 0;
+
+        if(userPreferenceDto.getLevel() == 1){
+            drinkLevel= 4;
+        }else if (userPreferenceDto.getLevel() == 2){
+            drinkLevel = 7;
+        }else if (userPreferenceDto.getLevel() == 3){
+            drinkLevel = 15;
+        }else if (userPreferenceDto.getLevel() == 4){
+            drinkLevel = 25;
+        }else if (userPreferenceDto.getLevel() == 5){
+            drinkLevel = 40;
+        }
+
         List<Integer> input_data = new ArrayList<>();
         input_data.add(userPreferenceDto.getTasteSweet());
         input_data.add(userPreferenceDto.getTasteSour());
@@ -58,7 +72,7 @@ public class UserPreferenceService {
         input_data.add(userPreferenceDto.getTasteFlavor());
         input_data.add(userPreferenceDto.getTasteThroat());
         input_data.add(userPreferenceDto.getTasteBody());
-        input_data.add(userPreferenceDto.getLevel());
+        input_data.add(drinkLevel);
 
         String dish = userPreferenceDto.getDish();
         int[] dish_arr = null;

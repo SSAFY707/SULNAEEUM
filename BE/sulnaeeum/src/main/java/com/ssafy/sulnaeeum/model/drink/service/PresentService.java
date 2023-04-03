@@ -53,7 +53,19 @@ public class PresentService {
             input_data.add(data[i]);
         }
 
-        if(presentDto.getTasteSweet() != 0)
+        if(presentDto.getTasteSweet() != 0){
+            input_data.set(0, presentDto.getTasteSweet());
+        }if(presentDto.getTasteSour() != 0){
+            input_data.set(1, presentDto.getTasteSour());
+        }if(presentDto.getTasteRefresh() != 0){
+            input_data.set(2, presentDto.getTasteRefresh());
+        }if(presentDto.getTasteFlavor() != 0){
+            input_data.set(3, presentDto.getTasteFlavor());
+        }if(presentDto.getTasteThroat() != 0){
+            input_data.set(4, presentDto.getTasteThroat());
+        }if(presentDto.getTasteBody() != 0){
+            input_data.set(5, presentDto.getTasteBody());
+        }
 
         System.out.println(input_data);
 

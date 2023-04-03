@@ -104,4 +104,17 @@ public class UserController {
         String kakaoId = SecurityContextHolder.getContext().getAuthentication().getName();
         return new ResponseEntity<>(userService.getMine(kakaoId), HttpStatus.OK);
     }
+
+    /***
+     * [ 회원 취향의 전통주 추천]
+     ***/
+    @PostMapping("/recommend")
+    @Operation(summary = "유저 취향 조사", description = "유저 취향 조사")
+    public ResponseEntity<Map<String, Map<String, String>>> getRecommendDrink(@RequestBody UserPreferenceDto userPreferenceDto){
+
+        Map<String, Map<String, String>> recommend = userPreferenceService.recommendUserDrink(userPreferenceDto);
+
+        return new ResponseEntity<>(recommend, HttpStatus.OK);
+    }
+
 }
