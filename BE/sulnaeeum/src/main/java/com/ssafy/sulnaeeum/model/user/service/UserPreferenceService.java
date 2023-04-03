@@ -107,7 +107,7 @@ public class UserPreferenceService {
 
         System.out.println(params);
 
-        String requestUrl = "http://j8a707.p.ssafy.io:5000/recommend/contents";
+        String requestUrl = "http://j8a707.p.ssafy.io/flask/recommend/contents";
         JSONParser jsonParser = new JSONParser();
         JSONObject jsonObject = flaskUtil.requestFlask(requestUrl, params);
 
