@@ -1,12 +1,11 @@
 package com.ssafy.sulnaeeum.controller.drink;
 
-import com.ssafy.sulnaeeum.model.drink.dto.DrinkDetailPageDto;
-import com.ssafy.sulnaeeum.model.drink.dto.DrinkInfoDto;
-import com.ssafy.sulnaeeum.model.drink.dto.ReviewRequestDto;
-import com.ssafy.sulnaeeum.model.drink.dto.ReviewResponseDto;
+import com.ssafy.sulnaeeum.model.drink.dto.*;
 import com.ssafy.sulnaeeum.model.drink.service.DrinkService;
+import com.ssafy.sulnaeeum.model.drink.service.PresentService;
 import com.ssafy.sulnaeeum.model.drink.service.ReviewService;
 import com.ssafy.sulnaeeum.model.drink.service.LikeDrinkService;
+import com.ssafy.sulnaeeum.model.jubti.dto.PresentDto;
 import com.ssafy.sulnaeeum.model.jumak.dto.JumakInfoDto;
 import com.ssafy.sulnaeeum.model.jumak.service.JumakService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -37,6 +36,9 @@ public class DrinkController {
 
     @Autowired
     JumakService jumakService;
+
+    @Autowired
+    PresentService presentService;
 
     // =================================================================================================================
     // -----------------------------------------------   [ 회원 ]   -----------------------------------------------------
@@ -168,5 +170,14 @@ public class DrinkController {
     @GetMapping("/n/detail/{drinkId}")
     public ResponseEntity<DrinkDetailPageDto> getDrink(@PathVariable Long drinkId) {
         return new ResponseEntity<>(drinkService.getDrinkDetailPage(drinkId, null), HttpStatus.OK);
+    }
+
+    /***
+     * [ 선물 추천 ]
+     ***/
+    @Operation(summary = "전통주 상세 페이지", description = "전통주 상세 페이지 정보 모두 조회")
+    @PostMapping("/recommend/present")
+    public ResponseEntity<List<SimilarDrinkDto>> getDrink(@RequestBody PresentDto presentDto) {
+        return new ResponseEntity<>(presentService.getPresentDrink(presentDto), HttpStatus.OK);
     }
 }
