@@ -111,10 +111,10 @@ public class RankingService {
     }
 
     @Transactional
-    @Scheduled(cron = "0 0/1 13,14 * * *")
-//    @Scheduled(cron = "0 0 0/1 * * *")
+//    @Scheduled(cron = "0 0/1 15,16 * * *")
+    @Scheduled(cron = "0 0 0/1 * * *")
     public void jubtiRequest (){
-        String requestUrl = "http://j8a707.p.ssafy.io/flask/ranking";
+        String requestUrl = "https://j8a707.p.ssafy.io/flask/ranking";
         Map<String, List> params = null;
         List<List<Integer>> input_data = new ArrayList<>();
         List<JubtiResult> jubtiResultList = jubtiRepo.findAll();
@@ -205,6 +205,8 @@ public class RankingService {
             }
         }
 
+        System.out.println(male.get(0) + " : " + maleCnt + ", " + female.get(0) + " : " +  femaleCnt);
+
         for(int i = 0; i < 13; i++){
             male.set(i, male.get(i) / maleCnt);
             female.set(i, female.get(i) / femaleCnt);
@@ -242,6 +244,7 @@ public class RankingService {
                 String.class
         );
         String result = response.getBody();
+        System.out.println(result);
 
         setTopJubti(result);
     }
