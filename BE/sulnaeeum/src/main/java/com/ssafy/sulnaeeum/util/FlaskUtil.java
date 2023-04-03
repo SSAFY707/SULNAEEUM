@@ -1,5 +1,6 @@
 package com.ssafy.sulnaeeum.util;
 
+import lombok.extern.slf4j.Slf4j;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -14,6 +15,7 @@ import java.util.List;
 import java.util.Map;
 
 @Service
+@Slf4j
 public class FlaskUtil {
 
     public JSONObject requestFlask(String requestUrl, Map<String, List> params) {
@@ -39,7 +41,7 @@ public class FlaskUtil {
         } catch (ParseException e) {
             e.printStackTrace();
         }
-
+        log.info(jsonObject.toJSONString());
         return jsonObject;
     }
 }
