@@ -9,13 +9,14 @@ export const drinkLike = (drinkId: number) => {
     })
 }
 
-export const insertJumak = (data: JumakInsertType) => {
-    authAxios.post(`drink/jumak`, data
+export const insertJumak = async (data: JumakInsertType) => {
+    await authAxios.post(`drink/jumak`, data
     ).then((res)=>{
         console.log(res)
     }).catch((err)=>{
         console.log(err)
     })
+    return
 }
 
 export const likeJumak = (jumakId : number) => {
@@ -24,4 +25,15 @@ export const likeJumak = (jumakId : number) => {
     }).catch((err)=>{
         console.log(err)
     })
+}
+
+export const setRecomList = async () => {
+    let list = []
+    await authAxios.get(`drink/recommend`
+    ).then((res)=>{
+        list = res.data
+    }).catch((err)=>{
+        console.log(err)
+    })
+    return list
 }

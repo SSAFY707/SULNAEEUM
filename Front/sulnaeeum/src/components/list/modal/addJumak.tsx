@@ -3,11 +3,13 @@ import { CNU_CK } from '@/api/auth/jumak'
 import { Modal } from '@/components/common/modal'
 import Search from '@/components/common/search'
 import { toastError, toastOK } from '@/components/common/toast'
+import { useAppDispatch } from '@/hooks'
+import { getDrinkDetailForUser } from '@/store/drinkSlice'
 import React, { useState } from 'react'
 import DaumPostcodeEmbed from 'react-daum-postcode'
 import { IoClose } from 'react-icons/io5'
 
-export default function AddJumak(props: {modalOpen : any}) {
+export default function AddJumak(props: {drinkId : number, modalOpen : any}) {
 
     type DrinkSelType = {
         [index : string] : number | string,
@@ -15,7 +17,7 @@ export default function AddJumak(props: {modalOpen : any}) {
         drinkName : string
     }
 
-    const {modalOpen} = props
+    const {drinkId, modalOpen} = props
     const [isOpen, setIsOpen] = useState<boolean>(false)
     const [cnu, setCnu] = useState<string>('')
     const [next, setNext] = useState<boolean>(false)
@@ -25,7 +27,7 @@ export default function AddJumak(props: {modalOpen : any}) {
     const [jumakAdd, setJumakAdd] = useState<string>('주소를 입력해주세요.')
     const [detailAdd, setDetailAdd] = useState<string>('')
 
-
+    const dispatch = useAppDispatch()
 
     const addOpen = () => {
         setIsOpen(!isOpen)
@@ -42,7 +44,7 @@ export default function AddJumak(props: {modalOpen : any}) {
         }
     }
 
-    const addJumak = () => {
+    const addJumak = async () => {
         if(!jumakName) {
             toastError('상호명을 입력해주세요.', '📢', 'top-right')
             return
@@ -64,7 +66,8 @@ export default function AddJumak(props: {modalOpen : any}) {
             drink : sel
         }
         // console.log(data)
-        insertJumak(data)
+        await insertJumak(data)
+        dispatch(getDrinkDetailForUser(drinkId))
         modalOpen()
         toastOK('등록되었습니다.', '✨', 'top-right')
     }
