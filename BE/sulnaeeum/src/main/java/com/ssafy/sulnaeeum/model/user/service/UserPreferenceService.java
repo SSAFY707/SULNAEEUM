@@ -2,6 +2,12 @@ package com.ssafy.sulnaeeum.model.user.service;
 
 import com.ssafy.sulnaeeum.exception.CustomException;
 import com.ssafy.sulnaeeum.exception.CustomExceptionList;
+import com.ssafy.sulnaeeum.model.drink.dto.DrinkDto;
+import com.ssafy.sulnaeeum.model.drink.entity.Drink;
+import com.ssafy.sulnaeeum.model.drink.entity.Ingredient;
+import com.ssafy.sulnaeeum.model.drink.repo.DrinkRepo;
+import com.ssafy.sulnaeeum.model.drink.repo.IngredientRepo;
+import com.ssafy.sulnaeeum.model.ranking.dto.RankingDto;
 import com.ssafy.sulnaeeum.model.user.dto.UserPreferenceDto;
 import com.ssafy.sulnaeeum.model.user.entity.User;
 import com.ssafy.sulnaeeum.model.user.entity.UserPreference;
@@ -28,6 +34,8 @@ public class UserPreferenceService {
     private final UserPreferenceRepo userPreferenceRepo;
     private final UserRepo userRepository;
     private final FlaskUtil flaskUtil;
+    private final DrinkRepo drinkRepo;
+    private final IngredientRepo ingredientRepo;
 
     /***
      * 회원 가입 시 회원 취향을 저장
@@ -55,10 +63,21 @@ public class UserPreferenceService {
     }
 
     /***
+     * UserPreferenceDto 요청
+     ***/
+    public UserPreferenceDto getUserPreferenceDto(String kakaoId){
+        User user = userRepository.findByKakaoId(kakaoId).orElseThrow(() -> new CustomException(CustomExceptionList.MEMBER_NOT_FOUND));
+        UserPreference userPreference = userPreferenceRepo.findByUser(user).orElseThrow(() -> new CustomException(CustomExceptionList.MEMBER_NOT_FOUND));
+        UserPreferenceDto userPreferenceDto = new UserPreferenceDto(userPreference, user);
+
+        return userPreferenceDto;
+    }
+
+    /***
      * 회원 취향을 활용하여 Flask 에게 컨텐츠 기반 추천 API 요청
      ***/
     @Transactional
-    public Map<String, Map<String, String>> recommendUserDrink(UserPreferenceDto userPreferenceDto) {
+    public List<RankingDto> recommendUserDrink(UserPreferenceDto userPreferenceDto) {
 
         int drinkLevel = 0;
 
@@ -115,7 +134,7 @@ public class UserPreferenceService {
         System.out.println(jsonObject.get("0").toString());
         System.out.println(jsonObject.values());
 
-        Map<String, Map<String, String>> recommend = new HashMap<>();
+        List<RankingDto> recommend = new ArrayList<>();
 
         for(int i = 0; i < 5; i++){
             String key = Integer.toString(i);
@@ -129,20 +148,25 @@ public class UserPreferenceService {
                 e.printStackTrace();
             }
 
-            Map<String, String> value = new HashMap<>();
+            Long drinkId = (Long)jsonValue.get("drink_id");
 
-            String imgUrl = jsonValue.get("drink_image").toString().replace("\\", "");
-            System.out.println(imgUrl);
+            Drink drink = drinkRepo.findByDrinkId(drinkId).orElseThrow(() -> new CustomException(CustomExceptionList.MEMBER_NOT_FOUND));
+            DrinkDto drinkDto = drink.toDto();
+            List<Ingredient> ingredients = ingredientRepo.findByDrink(drink);
+            List<String> ingredientList = getIngredientName(ingredients);
+            RankingDto rankingDto = new RankingDto(drinkDto, ingredientList);
 
-            value.put("drink_amount", jsonValue.get("drink_amount").toString());
-            value.put("drink_name", jsonValue.get("drink_name").toString());
-            value.put("drink_level", jsonValue.get("drink_level").toString());
-            value.put("drink_id", jsonValue.get("drink_id").toString());
-            value.put("drink_image", imgUrl);
-
-            recommend.put(key, value);
+            recommend.add(rankingDto);
         }
 
         return recommend;
+    }
+
+    private List<String> getIngredientName(List<Ingredient> ingredients){
+        List<String> names = new ArrayList<>();
+
+        for(int i = 0; i < ingredients.size(); i++) names.add(ingredients.get(i).getIngredientType().getIngredientName());
+
+        return names;
     }
 }

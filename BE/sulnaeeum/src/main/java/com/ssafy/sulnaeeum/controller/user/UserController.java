@@ -2,10 +2,14 @@ package com.ssafy.sulnaeeum.controller.user;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.ssafy.sulnaeeum.jwt.JwtFilter;
+import com.ssafy.sulnaeeum.model.drink.dto.DrinkDto;
+import com.ssafy.sulnaeeum.model.ranking.dto.RankingDto;
 import com.ssafy.sulnaeeum.model.user.dto.KakaoLoginDto;
 import com.ssafy.sulnaeeum.model.user.dto.MineDto;
 import com.ssafy.sulnaeeum.model.user.dto.TokenDto;
 import com.ssafy.sulnaeeum.model.user.dto.UserPreferenceDto;
+import com.ssafy.sulnaeeum.model.user.entity.User;
+import com.ssafy.sulnaeeum.model.user.entity.UserPreference;
 import com.ssafy.sulnaeeum.model.user.service.KakaoLoginService;
 import com.ssafy.sulnaeeum.model.user.service.UserPreferenceService;
 import com.ssafy.sulnaeeum.model.user.service.UserService;
@@ -21,6 +25,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -84,13 +89,13 @@ public class UserController {
      ***/
     @PostMapping("/preference")
     @Operation(summary = "유저 취향 조사", description = "유저 취향 조사")
-    public ResponseEntity<Map<String, Map<String, String>>> preference(@RequestBody UserPreferenceDto userPreferenceDto){
+    public ResponseEntity<List<RankingDto>> preference(@RequestBody UserPreferenceDto userPreferenceDto){
 
         String kakaoId = SecurityContextHolder.getContext().getAuthentication().getName();
 
         userPreferenceService.preference(kakaoId, userPreferenceDto);
 
-        Map<String, Map<String, String>> recommend = userPreferenceService.recommendUserDrink(userPreferenceDto);
+        List<RankingDto> recommend = userPreferenceService.recommendUserDrink(userPreferenceDto);
 
         return new ResponseEntity<>(recommend, HttpStatus.OK);
     }
@@ -108,11 +113,14 @@ public class UserController {
     /***
      * [ 회원 취향의 전통주 추천]
      ***/
-    @PostMapping("/recommend")
+    @GetMapping("/recommend")
     @Operation(summary = "유저 취향 조사", description = "유저 취향 조사")
-    public ResponseEntity<Map<String, Map<String, String>>> getRecommendDrink(@RequestBody UserPreferenceDto userPreferenceDto){
+    public ResponseEntity<List<RankingDto>> getRecommendDrink(){
+        String kakaoId = SecurityContextHolder.getContext().getAuthentication().getName();
 
-        Map<String, Map<String, String>> recommend = userPreferenceService.recommendUserDrink(userPreferenceDto);
+        UserPreferenceDto userPreferenceDto = userPreferenceService.getUserPreferenceDto(kakaoId);
+
+        List<RankingDto> recommend = userPreferenceService.recommendUserDrink(userPreferenceDto);
 
         return new ResponseEntity<>(recommend, HttpStatus.OK);
     }
