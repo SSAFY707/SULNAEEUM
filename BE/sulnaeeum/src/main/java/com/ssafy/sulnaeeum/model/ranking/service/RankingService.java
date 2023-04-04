@@ -111,7 +111,7 @@ public class RankingService {
     }
 
     @Transactional
-    @Scheduled(cron = "0 0/1 12,13 * * *")
+    @Scheduled(cron = "0 0/1 14,15 * * *")
 //    @Scheduled(cron = "0 0 0/1 * * *")
     public void jubtiRequest (){
         String requestUrl = "https://j8a707.p.ssafy.io/flask/ranking";
@@ -232,6 +232,7 @@ public class RankingService {
 
         System.out.println(male.get(6) + " : " + maleCnt + ", " + female.get(6) + " : " +  femaleCnt);
 
+
         for(int i = 0; i < 13; i++){
             male.set(i, Math.round((float) (male.get(i) / (1.0*maleCnt))));
             female.set(i, Math.round((float) (female.get(i) / (1.0*femaleCnt))));
@@ -243,6 +244,12 @@ public class RankingService {
             total.set(i, total.get(i) / size);
         }
 
+        System.out.println(male.get(0) + " : " + maleCnt + ", " + female.get(0) + " : " +  femaleCnt);
+        System.out.println(male.get(1) + " : " + maleCnt + ", " + female.get(1) + " : " +  femaleCnt);
+        System.out.println(male.get(2) + " : " + maleCnt + ", " + female.get(2) + " : " +  femaleCnt);
+        System.out.println(male.get(3) + " : " + maleCnt + ", " + female.get(3) + " : " +  femaleCnt);
+        System.out.println(male.get(4) + " : " + maleCnt + ", " + female.get(4) + " : " +  femaleCnt);
+        System.out.println(male.get(5) + " : " + maleCnt + ", " + female.get(5) + " : " +  femaleCnt);
         System.out.println(male.get(6) + " : " + maleCnt + ", " + female.get(6) + " : " +  femaleCnt);
 
         input_data.add(male);
