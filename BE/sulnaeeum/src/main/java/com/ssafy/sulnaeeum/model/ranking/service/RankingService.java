@@ -10,7 +10,7 @@ import com.ssafy.sulnaeeum.model.drink.repo.IngredientRepo;
 import com.ssafy.sulnaeeum.model.jubti.entity.JubtiResult;
 import com.ssafy.sulnaeeum.model.jubti.repo.JubtiRepo;
 import com.ssafy.sulnaeeum.model.ranking.dto.JubtiTopDrinkDto;
-import com.ssafy.sulnaeeum.model.ranking.dto.RankingDto;
+import com.ssafy.sulnaeeum.model.ranking.dto.RecommendRankingDto;
 import com.ssafy.sulnaeeum.model.ranking.dto.TopDrinkListDto;
 import com.ssafy.sulnaeeum.model.ranking.entity.Ranking;
 import com.ssafy.sulnaeeum.model.ranking.repo.RankingRepo;
@@ -77,22 +77,22 @@ public class RankingService {
             System.out.println(femaleTopDrink.get(i).getDrinkId());
         }
 
-        List<RankingDto> femaleTopDrinkDto = new ArrayList<>();
-        List<RankingDto> maleTopDrinkDto = new ArrayList<>();
-        List<RankingDto> totalTopDrinkDto = new ArrayList<>();
+        List<RecommendRankingDto> femaleTopDrinkDto = new ArrayList<>();
+        List<RecommendRankingDto> maleTopDrinkDto = new ArrayList<>();
+        List<RecommendRankingDto> totalTopDrinkDto = new ArrayList<>();
 
         for (int i = 0; i < 10; i++) {
             List<Ingredient> ingredients = ingredientRepo.findByDrink(femaleTopDrink.get(i));
             List<String> ingredientNameList = getIngredientName(ingredients);
-            femaleTopDrinkDto.add(new RankingDto(femaleTopDrink.get(i).toDto(), ingredientNameList));
+            femaleTopDrinkDto.add(new RecommendRankingDto(femaleTopDrink.get(i).toDto(), ingredientNameList));
 
             ingredients = ingredientRepo.findByDrink(maleTopDrink.get(i));
             ingredientNameList = getIngredientName(ingredients);
-            maleTopDrinkDto.add(new RankingDto(maleTopDrink.get(i).toDto(), ingredientNameList));
+            maleTopDrinkDto.add(new RecommendRankingDto(maleTopDrink.get(i).toDto(), ingredientNameList));
 
             ingredients = ingredientRepo.findByDrink(totalTopDrink.get(i));
             ingredientNameList = getIngredientName(ingredients);
-            totalTopDrinkDto.add(new RankingDto(totalTopDrink.get(i).toDto(), ingredientNameList));
+            totalTopDrinkDto.add(new RecommendRankingDto(totalTopDrink.get(i).toDto(), ingredientNameList));
         }
 
         return JubtiTopDrinkDto.builder()
@@ -111,8 +111,8 @@ public class RankingService {
     }
 
     @Transactional
-//    @Scheduled(cron = "0 0/1 15,16 * * *")
-    @Scheduled(cron = "0 0 0/1 * * *")
+    @Scheduled(cron = "0 0/1 12,13 * * *")
+//    @Scheduled(cron = "0 0 0/1 * * *")
     public void jubtiRequest (){
         String requestUrl = "https://j8a707.p.ssafy.io/flask/ranking";
         Map<String, List> params = null;
