@@ -15,27 +15,27 @@ import java.util.List;
 @AllArgsConstructor
 public class JubtiTopDrinkDto {
     @Schema(description = "여성 상위 전통주")
-    private List<RankingDto> femaleTopDrink;
+    private List<RecommendRankingDto> femaleTopDrink;
 
     @Schema(description = "남성 상위 전통주")
-    private List<RankingDto> maleTopDrink;
+    private List<RecommendRankingDto> maleTopDrink;
 
     @Schema(description = "전체 상위 전통주")
-    private List<RankingDto> totalTopDrink;
+    private List<RecommendRankingDto> totalTopDrink;
 
 
 //    @Schema(description = "20대 상위 전통주")
-//    private List<RankingDto> twentiesTopDrink;
+//    private List<RecommendRankingDto> twentiesTopDrink;
 //
 //    @Schema(description = "30대 상위 전통주")
-//    private List<RankingDto> thirtiesTopDrink;
+//    private List<RecommendRankingDto> thirtiesTopDrink;
 //
 //    @Schema(description = "40대 상위 전통주")
-//    private List<RankingDto> fortiesTopDrink;
+//    private List<RecommendRankingDto> fortiesTopDrink;
 //
 //    @Schema(description = "50대 상위 전통주")
-//    private List<RankingDto> fiftiesTopDrink;
+//    private List<RecommendRankingDto> fiftiesTopDrink;
 //
 //    @Schema(description = "60대 상위 전통주")
-//    private List<RankingDto> sixtiesTopDrink;
+//    private List<RecommendRankingDto> sixtiesTopDrink;
 }

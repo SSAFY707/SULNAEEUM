@@ -2,15 +2,11 @@ package com.ssafy.sulnaeeum.controller.user;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.ssafy.sulnaeeum.jwt.JwtFilter;
-import com.ssafy.sulnaeeum.model.drink.dto.DrinkDto;
-import com.ssafy.sulnaeeum.model.ranking.dto.RankingDto;
-import com.ssafy.sulnaeeum.model.user.dto.KakaoLoginDto;
-import com.ssafy.sulnaeeum.model.user.dto.MineDto;
-import com.ssafy.sulnaeeum.model.user.dto.TokenDto;
-import com.ssafy.sulnaeeum.model.user.dto.UserPreferenceDto;
-import com.ssafy.sulnaeeum.model.user.entity.User;
-import com.ssafy.sulnaeeum.model.user.entity.UserPreference;
+import com.ssafy.sulnaeeum.model.drink.dto.SimilarDrinkDto;
+import com.ssafy.sulnaeeum.model.ranking.dto.RecommendRankingDto;
+import com.ssafy.sulnaeeum.model.user.dto.*;
 import com.ssafy.sulnaeeum.model.user.service.KakaoLoginService;
+import com.ssafy.sulnaeeum.model.user.service.PresentService;
 import com.ssafy.sulnaeeum.model.user.service.UserPreferenceService;
 import com.ssafy.sulnaeeum.model.user.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -27,7 +23,6 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 @RestController
 @RequestMapping("/api/user")
@@ -41,6 +36,8 @@ public class UserController {
     private final UserService userService;
     private final KakaoLoginService kakaoUserService;
     private final UserPreferenceService userPreferenceService;
+
+    private final PresentService presentService;
 
     /***
      * [KAKAO 회원가입 및 로그인]
@@ -90,13 +87,13 @@ public class UserController {
      ***/
     @PostMapping("/preference")
     @Operation(summary = "유저 취향 조사", description = "유저 취향 조사")
-    public ResponseEntity<List<RankingDto>> preference(@RequestBody UserPreferenceDto userPreferenceDto){
+    public ResponseEntity<List<RecommendRankingDto>> preference(@RequestBody UserPreferenceDto userPreferenceDto){
 
         String kakaoId = SecurityContextHolder.getContext().getAuthentication().getName();
 
         userPreferenceService.preference(kakaoId, userPreferenceDto);
 
-        List<RankingDto> recommend = userPreferenceService.recommendUserDrink(userPreferenceDto);
+        List<RecommendRankingDto> recommend = userPreferenceService.recommendUserDrink(userPreferenceDto);
 
         return new ResponseEntity<>(recommend, HttpStatus.OK);
     }
@@ -116,17 +113,26 @@ public class UserController {
      ***/
     @GetMapping("/recommend")
     @Operation(summary = "유저 취향 전통주 추천", description = "유저 취향을 가져와 전통주를 추천한다")
-    public ResponseEntity<List<RankingDto>> getRecommendDrink(){
+    public ResponseEntity<List<RecommendRankingDto>> getRecommendDrink(){
         String kakaoId = SecurityContextHolder.getContext().getAuthentication().getName();
 
         UserPreferenceDto userPreferenceDto = userPreferenceService.getUserPreferenceDto(kakaoId);
-        List<RankingDto> recommend = new ArrayList<>();;
+        List<RecommendRankingDto> recommend = new ArrayList<>();;
 
         if(userPreferenceDto != null){
             recommend = userPreferenceService.recommendUserDrink(userPreferenceDto);
         }
 
         return new ResponseEntity<>(recommend, HttpStatus.OK);
+    }
+
+    /***
+     * [ 선물 추천 ]
+     ***/
+    @Operation(summary = "전통주 상세 페이지", description = "전통주 상세 페이지 정보 모두 조회")
+    @PostMapping("/recommend/present")
+    public ResponseEntity<List<RecommendRankingDto>> getDrink(@RequestBody PresentDto presentDto) {
+        return new ResponseEntity<>(presentService.getPresentDrink(presentDto), HttpStatus.OK);
     }
 
 }
