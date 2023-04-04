@@ -79,12 +79,12 @@ export default function index() {
     authAxios.post('user/preference', payload
     ).then((res) => {
       console.log(res)
-      console.log(res.data[0].drink_name)
-      setResultName(res.data[0].drink_name)
-      setResultImg(res.data[0].drink_image)
-      setResultId(res.data[0].drink_id)
-      setResultAmount(res.data[0].drink_amount)
-      setResultLevel(res.data[0].drink_level)
+      console.log(res.data[0].drinkImage)
+      setResultName(res.data[0].drinkName)
+      setResultImg(res.data[0].drinkImg)
+      setResultId(res.data[0].drinkId)
+      setResultAmount(res.data[0].drinkAmount)
+      setResultLevel(res.data[0].drinkLevel)
 
 
 
