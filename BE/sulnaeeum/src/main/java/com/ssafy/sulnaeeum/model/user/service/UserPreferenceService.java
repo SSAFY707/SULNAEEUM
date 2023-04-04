@@ -7,7 +7,7 @@ import com.ssafy.sulnaeeum.model.drink.entity.Drink;
 import com.ssafy.sulnaeeum.model.drink.entity.Ingredient;
 import com.ssafy.sulnaeeum.model.drink.repo.DrinkRepo;
 import com.ssafy.sulnaeeum.model.drink.repo.IngredientRepo;
-import com.ssafy.sulnaeeum.model.ranking.dto.RankingDto;
+import com.ssafy.sulnaeeum.model.ranking.dto.RecommendRankingDto;
 import com.ssafy.sulnaeeum.model.user.dto.UserPreferenceDto;
 import com.ssafy.sulnaeeum.model.user.entity.User;
 import com.ssafy.sulnaeeum.model.user.entity.UserPreference;
@@ -80,7 +80,7 @@ public class UserPreferenceService {
      * 회원 취향을 활용하여 Flask 에게 컨텐츠 기반 추천 API 요청
      ***/
     @Transactional
-    public List<RankingDto> recommendUserDrink(UserPreferenceDto userPreferenceDto) {
+    public List<RecommendRankingDto> recommendUserDrink(UserPreferenceDto userPreferenceDto) {
 
         int drinkLevel = 0;
 
@@ -137,7 +137,7 @@ public class UserPreferenceService {
         System.out.println(jsonObject.get("0").toString());
         System.out.println(jsonObject.values());
 
-        List<RankingDto> recommend = new ArrayList<>();
+        List<RecommendRankingDto> recommend = new ArrayList<>();
 
         for(int i = 0; i < 5; i++){
             String key = Integer.toString(i);
@@ -157,7 +157,7 @@ public class UserPreferenceService {
             DrinkDto drinkDto = drink.toDto();
             List<Ingredient> ingredients = ingredientRepo.findByDrink(drink);
             List<String> ingredientList = getIngredientName(ingredients);
-            RankingDto rankingDto = new RankingDto(drinkDto, ingredientList);
+            RecommendRankingDto rankingDto = new RecommendRankingDto(drinkDto, ingredientList);
 
             recommend.add(rankingDto);
         }
