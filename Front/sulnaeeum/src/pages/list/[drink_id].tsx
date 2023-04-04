@@ -36,13 +36,13 @@ export default function Detail(props: {drinkId : number}) {
   
   return (
     <>
-      <div className={'bg-[url("/images/pattern1.png")] bg-no-repeat bg-[left_-17rem_bottom_20rem] h-[1500px]'}>
+      <div className={'bg-[url("/images/pattern1.png")] bg-no-repeat bg-[left_-17rem_bottom_80rem] h-[2500px]'}>
         <div className={'flex pt-[100px] justify-center'}>
           <BsArrowLeftCircle onClick={()=>{router.back()}} className={'text-[34px] text-[#655443] cursor-pointer mt-2 mr-4'} />
           <DrinkExplain />
           {drink.drinkDetailDto.like ?
-          <FaBookmark onClick={()=>like()} className={'text-[30px] text-[#655443] cursor-pointer mt-3 ml-4'} />:
-          <FaRegBookmark onClick={()=>like()} className={'text-[30px] text-[#655443] cursor-pointer mt-3 ml-4'}/>}
+          <FaBookmark onClick={()=>like()} className={'text-[22px] text-[#655443] cursor-pointer mt-4 ml-4'} />:
+          <FaRegBookmark onClick={()=>like()} className={'text-[22px] text-[#655443] cursor-pointer mt-4 ml-4'}/>}
         </div>
         <div className={'flex mt-10 pl-[35px] justify-center h-[500px]'}>
           <DrinkRelation />

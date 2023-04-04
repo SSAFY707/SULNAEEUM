@@ -9,6 +9,7 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { store } from "@/store";
 import Script from "next/script";
+import Footer from "@/components/common/footer";
 
 
 declare global {
@@ -37,6 +38,7 @@ export default function App({ Component, pageProps }: AppProps) {
         {/* <ChakraProvider> */}
           <NavBar />
           <Component {...pageProps} />
+          <Footer />
           <Script
             src='https://developers.kakao.com/sdk/js/kakao.js'
             onLoad={kakaoInit}

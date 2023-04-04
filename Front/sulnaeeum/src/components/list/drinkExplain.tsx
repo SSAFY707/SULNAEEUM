@@ -29,9 +29,9 @@ export const DrinkExplain = () => {
               <div className={'mr-4 text-[34px] font-preR'}>{detail.drinkName}</div>
               <div className={'pb-1'}>{detail.drinkLevel}% | {detail.drinkAmount}</div> 
             </div>
-            {login ? detail.clear ? <ClearTrue /> :
-            <div onClick={modalOpen}>
-              <ClearBtn />
+            {login ? detail.clear ? <div className={'text-zinc-400 mt-2'}>클리어 완료</div> :
+            <div onClick={modalOpen} className={'cursor-pointer mt-2'}>
+              클리어하기
             </div>
             : <ClearFalse />  
           }

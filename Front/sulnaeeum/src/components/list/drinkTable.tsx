@@ -81,7 +81,7 @@ export const DrinkList = (props: {drinkType: string, sortType : string}) => {
                 </div>
                 <div className={'w-full h-[46%] flex justify-center items-center mb-4'}><img className={'h-full'} src={item.drinkImage} /></div>
                 <div className={'flex justify-center items-center text-center text-[22px] font-preR group-hover:font-preM'}>{item.drinkName}</div>
-                <div className={'mb-4 text-center'}>{item.drinkLevel}% | {item.drinkAmount}</div>
+                <div className={'mb-6 text-center'}>{item.drinkLevel}% | {item.drinkAmount}</div>
                 {clearList.indexOf(item.drinkId) != -1 ? <ClearTrue /> : <ClearFalse />}
               </div>
             </div>
