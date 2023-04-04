@@ -237,6 +237,8 @@ def recommend_present_drink():
         if drink_price == "":
             continue
 
+        drink_price = drink_price.replace(",", "")
+
         if min_price > int(drink_price) or int(drink_price) > max_price:
             continue
 

@@ -67,7 +67,7 @@ public class UserPreferenceService {
      ***/
     public UserPreferenceDto getUserPreferenceDto(String kakaoId){
         User user = userRepository.findByKakaoId(kakaoId).orElseThrow(() -> new CustomException(CustomExceptionList.MEMBER_NOT_FOUND));
-        UserPreference userPreference = userPreferenceRepo.findByUser(user).get();
+        UserPreference userPreference = userPreferenceRepo.findByUser(user).orElse(null);
 
         if(userPreference == null) return null;
 
