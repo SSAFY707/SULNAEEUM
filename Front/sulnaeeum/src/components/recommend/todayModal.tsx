@@ -34,17 +34,17 @@ export default function todayModal(props: {
   }
 
   const getCheers = () => {
-    axios.get<todayCheers>('http://j8a707.p.ssafy.io:9090/api/today/n/cheers').then((response) => {
+    axios.get<todayCheers>('https://j8a707.p.ssafy.io/api/today/n/cheers').then((response) => {
       setCheers(response.data);
     });
   }
   const getDrink = () => {
-    axios.get<todayDrink>('http://j8a707.p.ssafy.io:9090/api/today/n/drink').then((response) => {
+    axios.get<todayDrink>('https://j8a707.p.ssafy.io/api/today/n/drink').then((response) => {
       setDrink(response.data);
     });
   }
   const getDish = () => {
-    axios.get<todayDish>('http://j8a707.p.ssafy.io:9090/api/today/n/dish').then((response) => {
+    axios.get<todayDish>('https://j8a707.p.ssafy.io/api/today/n/dish').then((response) => {
       setDish(response.data);
     });
   }
