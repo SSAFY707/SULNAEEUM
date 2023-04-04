@@ -25,6 +25,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -114,13 +115,16 @@ public class UserController {
      * [ 회원 취향의 전통주 추천]
      ***/
     @GetMapping("/recommend")
-    @Operation(summary = "유저 취향 조사", description = "유저 취향 조사")
+    @Operation(summary = "유저 취향 전통주 추천", description = "유저 취향을 가져와 전통주를 추천한다")
     public ResponseEntity<List<RankingDto>> getRecommendDrink(){
         String kakaoId = SecurityContextHolder.getContext().getAuthentication().getName();
 
         UserPreferenceDto userPreferenceDto = userPreferenceService.getUserPreferenceDto(kakaoId);
+        List<RankingDto> recommend = new ArrayList<>();;
 
-        List<RankingDto> recommend = userPreferenceService.recommendUserDrink(userPreferenceDto);
+        if(userPreferenceDto != null){
+            recommend = userPreferenceService.recommendUserDrink(userPreferenceDto);
+        }
 
         return new ResponseEntity<>(recommend, HttpStatus.OK);
     }
