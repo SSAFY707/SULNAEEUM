@@ -30,7 +30,7 @@ export const DrinkExplain = () => {
               <div className={'pb-1'}>{detail.drinkLevel}% | {detail.drinkAmount}</div> 
             </div>
             {login ? detail.clear ? <div className={'text-zinc-400 mt-2'}>클리어 완료</div> :
-            <div onClick={modalOpen} className={'cursor-pointer mt-2'}>
+            <div onClick={modalOpen} className={'cursor-pointer mt-2 hover:bg-zinc-200 py-2 px-4 rounded-full'}>
               클리어하기
             </div>
             : <ClearFalse />  

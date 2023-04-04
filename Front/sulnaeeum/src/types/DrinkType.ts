@@ -127,3 +127,19 @@ export type RecommendDrinkType = {
     drinkType : string,
     ingredientList : string[]
 }
+
+export type SubmitGiftType = {
+    [index : string] : string | number
+    sex : string,
+    age : string,
+    minPrice : number,
+    maxPrice : number,
+    minLevel : number,
+    maxLevel : number,
+    tasteSweet : number,
+    tasteSour : number,
+    tasteFlavor : number,
+    tasteRefresh : number,
+    tasteBody : number,
+    tasteThroat : number
+}

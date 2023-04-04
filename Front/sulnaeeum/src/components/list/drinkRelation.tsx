@@ -1,13 +1,15 @@
 import { useAppSelector } from '@/hooks'
 import { drinkDetail } from '@/store/drinkSlice'
 import { DrinkTasteType } from '@/types/DataTypes'
-import React from 'react'
+import React, { useState } from 'react'
 import DrinkChart from './RadarChart'
 import { RxInfoCircled } from 'react-icons/rx'
 import { HiMagnifyingGlass } from 'react-icons/hi2'
 import { useRouter } from 'next/dist/client/router'
 
 export default function DrinkRelation() {
+  const [tip, setTip] = useState<boolean>(false)
+  
   const drink = useAppSelector(drinkDetail)
   const detail = drink['drinkDetailDto']
   const similar = drink['similarDrinkDto']
@@ -37,8 +39,10 @@ export default function DrinkRelation() {
         </div>
         <div className={'flex w-[30%] flex-col items-center'}>
           <div className={'flex items-center mb-2'}>
-            <div className={'font-preM text-[20px] mr-2'}>맛 그래프</div>
-            <RxInfoCircled className={'text-[20px] text-zinc-400 cursor-pointer'}/>
+            <div className={'flex items-center font-preM text-[20px] mr-2'}>맛 그래프
+            <RxInfoCircled className={'peer text-[20px] ml-2 text-zinc-400 cursor-pointer'}/>
+            <div className={`absolute top-[500px] text-[16px] left-[850px] opacity-0 peer-hover:opacity-100 transition-opacity font-preEL bg-zinc-900/80 text-white py-1 px-4`}>회원 리뷰 기반의 보정된 데이터를 제공합니다.</div>
+            </div>
           </div>
             <img className={'w-full'} src="/images/pattern2.png" />
             <div className={'flex flex-col items-center w-full h-[300px] mt-8'}>

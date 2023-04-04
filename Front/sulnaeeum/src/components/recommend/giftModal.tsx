@@ -4,7 +4,13 @@ import { AiOutlineGift } from 'react-icons/ai'
 import { VscTriangleDown } from 'react-icons/vsc'
 import  { CgClose } from 'react-icons/cg';
 import { toastError } from '../common/toast';
+import { RecommendDrinkType } from '@/types/DrinkType';
+import { getGiftList } from '@/api/auth/drink';
+import { HiMagnifyingGlass } from 'react-icons/hi2';
+import { useRouter } from 'next/router';
 export const GiftModal = (props: {modalOpen : any}) => {
+    const router = useRouter()
+
     const {modalOpen} = props
     const [page, setPage] = useState<number>(1)
 
@@ -39,6 +45,8 @@ export const GiftModal = (props: {modalOpen : any}) => {
     const [rangeMaxLevel, setRangeMaxLevel] = useState(fixedMaxLevel);
     const [rangeMinPercentLevel, setRangeMinPercentLevel] = useState(0);
     const [rangeMaxPercentLevel, setRangeMaxPercentLevel] = useState(0);
+
+    const [giftList, setGiftList] = useState<RecommendDrinkType[]>([])
 
     const prcieRangeMinValueHandler = e => {
         setRangeMinValue(parseInt(e.target.value));
@@ -100,7 +108,19 @@ export const GiftModal = (props: {modalOpen : any}) => {
       setTaste(new_taste)
     }
 
-    const firstSubmit = () => {
+    const check = () => {
+      if(gender == '성별을 선택해주세요.'){
+        toastError("성별을 선택해주세요.", '✅', 'top-right')
+        return false
+      }
+      if(age == '연령대를 선택해주세요.'){
+        toastError("연령대를 선택해주세요.", '✅', 'top-right')
+        return false
+      }
+      return true
+    }
+
+    const submit = async () => {
       if(gender == '성별을 선택해주세요.'){
         toastError("성별을 선택해주세요.", '✅', 'top-right')
         return
@@ -109,22 +129,37 @@ export const GiftModal = (props: {modalOpen : any}) => {
         toastError("연령대를 선택해주세요.", '✅', 'top-right')
         return
       }
+      setPage(3)
+      const submitData = {
+        sex : gender,
+        age : age.slice(0,2),
+        tasteSweet : taste.tasteSweet,
+        tasteSour : taste.tasteSour,
+        tasteFlavor : taste.tasteFlavor,
+        tasteRefresh : taste.tasteRefresh,
+        tasteThroat : taste.tasteThroat,
+        tasteBody : taste.tasteBody,
+        minPrice : rangeMinValue,
+        maxPrice : rangeMaxValue,
+        minLevel : rangeMinLevel,
+        maxLevel : rangeMaxLevel
+      }
 
-    }
-
-    const addSubmit = () => {
-      
+      const list = await getGiftList(submitData)
+      setTimeout(()=>{
+        setGiftList(list)
+      }, 3000)
     }
 
     return (
         <>
-          <div className={`${page == 1? 'flex' : 'hidden'} flex-col items-center w-[600px] h-[510px] overflow-y-scroll scroll`}>
+          <div className={`${page == 1? 'flex' : 'hidden'} flex-col items-center w-[600px] h-[510px]`}>
               <div className={'flex w-full justify-end'}>
                   <button className={'relative top-[20px] right-[20px] text-[30px] text-zinc-400'} onClick={ () => modalOpen() }><CgClose/></button>
               </div>
               <div className={'text-[35px] font-preB mt-[7%] flex justify-center items-center '}><AiOutlineGift className={'mr-2'}/>전통주 선물하기</div>
               <div>선물 받는 분의 정보를 입력해주세요.</div>
-              <div className={'w-full mt-4 p-8 grid grid-cols-2 gap-x-4 gap-y-10'}>
+              <div className={'mt-4 w-[88%] py-8 grid grid-cols-2 gap-x-4 gap-y-10'}>
                   <div className={'flex flex-col'}>
                       <button onClick={()=>setOpenGender(!openGender)} className={'mb-1 h-[50px] bg-zinc-200/50 rounded px-4 flex justify-between items-center text-[18px]'}>
                           <div>{gender}</div>
@@ -150,12 +185,12 @@ export const GiftModal = (props: {modalOpen : any}) => {
                   </div>
               </div>
               <div className={'flex w-[88%] mt-6'}>추가 정보를 입력하면 더 정확한 결과를 받으실 수 있습니다.</div> 
-              <div onClick={()=>{setPage(2)}} className={'w-[88%] text-[18px] rounded h-[60px] flex justify-center items-center mt-2 cursor-pointer text-white bg-[#655442] hover:bg-[#5B4D3E]'}>(선택) 추가정보 입력하기</div>
-              <div onClick={()=>firstSubmit()} className={'w-[88%] text-[18px] border rounded h-[60px] flex justify-center items-center mt-2 cursor-pointer text-[#655442] border-[#655442] hover:bg-stone-200 hover:border-none'}>추가정보 없이 제출하기</div>
+              <div onClick={()=>{if(check())setPage(2)}} className={'w-[88%] text-[18px] rounded h-[60px] flex justify-center items-center mt-2 cursor-pointer text-white bg-[#655442] hover:bg-[#5B4D3E]'}>(선택) 추가정보 입력하기</div>
+              <div onClick={()=>submit()} className={'w-[88%] text-[18px] border rounded h-[60px] flex justify-center items-center mt-2 cursor-pointer text-[#655442] border-[#655442] hover:bg-stone-200 hover:border-none'}>추가정보 없이 제출하기</div>
           </div>
-          <div className={`${page == 2 ? 'flex' : 'hidden'} flex-col w-[600px] h-[820px] px-8 overflow-y-scroll scroll`}>
+          <div className={`${page == 2 ? 'flex' : 'hidden'} flex-col w-[600px] h-[870px] pt-6 px-12`}>
             <div className={'flex w-full justify-end'}>
-                <button className={'relative top-[20px] right-[-10px] text-[30px] text-zinc-400'} onClick={ () => modalOpen() }><CgClose/></button>
+                <button className={'relative top-[5px] right-[-20px] text-[30px] text-zinc-400'} onClick={ () => modalOpen() }><CgClose/></button>
             </div>
             <div className={'flex w-full justify-center items-center h-[60px] text-[24px] font-preM mb-4'}>추가 정보를 입력해주세요.</div> 
               <div className={"flex w-full pl-4 pb-2 text-[18px] font-preR"}>가격</div>
@@ -261,7 +296,36 @@ export const GiftModal = (props: {modalOpen : any}) => {
                 })}
               </div>
             </div>
-            <div className={'mt-10 flex justify-center items-center w-full h-[60px] rounded bg-[#655442] hover:bg-[#5B4D3E] text-white text-[18px] font-preR cursor-pointer'}>제출하고 선물추천 받기</div>
+            <div onClick={()=>submit()} className={'mt-12 flex justify-center items-center w-full h-[60px] rounded bg-[#655442] hover:bg-[#5B4D3E] text-white text-[18px] font-preR cursor-pointer'}>제출하고 선물추천 받기</div>
+          </div>
+          <div className={`${page == 3 ? 'flex' : 'hidden'} flex-col`}>
+            <div className={`${giftList.length == 0 ? 'flex' : 'hidden'} flex-col justify-center items-center w-[600px] h-[600px]`}>
+              <img src='/images/loading.gif' className='w-[600px]'></img>
+              <p className='font-preM text-[30px] text-[#AEA896]'>맞춤 선물을 추천중입니다...</p>
+            </div>
+            <div className={`${giftList.length != 0 ? 'flex' : 'hidden'} flex-col items-center w-[1500px] h-[700px]`}>
+            <div className={'flex w-full justify-end'}>
+                <button className={'relative top-[30px] right-[30px] text-[30px] text-zinc-400'} onClick={ () => modalOpen() }><CgClose/></button>
+            </div>
+                <div className={'font-preB text-[32px] mt-10'}>이런 선물은 어때요?</div>
+                <div className={'flex items-center'}><span className={'font-preM text-[20px] text-teal-500 mr-1'}>{age}, {gender}</span>에게 인기있는 맞춤형 전통주 리스트입니다.</div>
+                <div className={'flex'}>
+                  {giftList.slice(0,4).map((drink)=>{
+                    return (
+                      <div className={'flex flex-col items-center mt-12 pt-6 rounded shadow-[3px_3px_8px_rgba(0,0,0,0.2)] mx-4 w-[300px] h-[400px]'} key={drink.drinkId}>
+                        <div className={'font-preM text-[24px] mb-4'}>{drink.drinkName}</div>
+                        <img className={'h-[44%] mb-4'} src={drink.drinkImg} alt="" />
+                        <div className={'mb-1 font-preR text-[18px]'}>4,800원</div>
+                        <div>{drink.drinkLevel}% | {drink.drinkAmount} | {drink.drinkType}</div>
+                        <div onClick={()=>router.push(`/list/${drink.drinkId}`)} className={'mt-5 shadow cursor-pointer flex justify-center items-center py-2 px-4 bg-gradient-to-r from-teal-400 to-emerald-400 transition hover:-translate-y-0.5 duration-300 ease-in text-white rounded-full hover:font-preR hover:shadow-md hover:scale-105'}>
+                          <HiMagnifyingGlass className={'mr-2'} />
+                          더 자세히 알아보기
+                        </div>
+                      </div>
+                    )
+                  })}
+                </div>
+            </div>
           </div>
         </>
     )
