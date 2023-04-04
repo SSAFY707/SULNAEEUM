@@ -28,7 +28,7 @@ export default function index() {
 
   const timeSetting = () => {
     const date = new Date()
-    return `${date.getFullYear()}년 ${date.getMonth()+1}월 ${date.getDate()}일 ${date.getHours()}:${date.getMinutes()}`
+    return `${date.getFullYear()}년 ${date.getMonth()+1}월 ${date.getDate()}일 ${date.getHours()}시`
   }
   const router = useRouter()
   const [time, setTime] = useState(timeSetting())
