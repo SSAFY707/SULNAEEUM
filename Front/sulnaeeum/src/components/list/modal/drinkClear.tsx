@@ -82,7 +82,7 @@ export default function DrinkClear(props: {drinkName: string, drinkId : number ,
     }
   return (
     <div className={'flex flex-col items-center w-full h-full p-4'}>
-        <div className={'font-preM text-[28px] mt-4'}>{drinkName}에 대한 평가</div>
+        <div className={'font-preM text-[28px] mt-4 text-center'}>{drinkName}에 대한 평가</div>
         <hr className={'w-full mt-2 border border-1'} />
         <div className={'flex flex-col mt-4 items-center'}>
             <Rating size={rate? '50px' : '60px'} clickRadio={clickRadio}/>

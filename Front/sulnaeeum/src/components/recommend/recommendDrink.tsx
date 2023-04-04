@@ -58,16 +58,16 @@ export const ReconmendDrinkList = () => {
 
     return(
         <>
-            {list.length != 0 && list.map((item, index)=> {
+            {list.length != 0 && list.slice(0,4).map((item, index)=> {
                 return (
-                    <div key={index} className={"flex w-[345px] h-[510px] rounded-xl mx-7 bg-white drop-shadow-[3px_4px_5px_rgba(0,0,0,0.2)] hover:drop-shadow-[3px_5px_7px_rgba(0,0,0,0.4)]"}>
+                    <div key={index} className={"flex w-[360px] h-[510px] rounded-xl mx-3 bg-white drop-shadow-[3px_4px_5px_rgba(0,0,0,0.2)] hover:drop-shadow-[3px_5px_7px_rgba(0,0,0,0.4)]"}>
                     <div className={"flex flex-col items-center justify-center w-full"}>
                       <img className={"h-[240px] mb-4 relative"} src={item.drinkImg} alt="" />
                       <div className='flex w-full pl-8 pt-5'>
                         <div className={"flex flex-col"}>
                           <div className={"font-preM text-[26px]"}>{item.drinkName}</div>
                           <div>{item.drinkLevel}% | {item.drinkAmount}</div>
-                          <div>{item.ingredientList.map((i)=>`${i} `)}</div>
+                          <div className={'w-[270px]'} >{item.ingredientList.map((i)=>`${i} `)}</div>
                         </div>
                       </div>
                       <div className='flex w-full justify-end pr-8 pt-3'>
@@ -80,7 +80,7 @@ export const ReconmendDrinkList = () => {
             })}
             {list.length == 0 && defaultList.map((item, index)=> {
                 return (
-                  <div key={index} className={"flex w-[345px] h-[510px] rounded-xl mx-7 bg-white drop-shadow-[3px_4px_5px_rgba(0,0,0,0.2)] blur"}>
+                  <div key={index} className={"flex w-[345px] h-[510px] rounded-xl mx-7 bg-white drop-shadow-[3px_4px_5px_rgba(0,0,0,0.2)] blur-md"}>
                     <div className={"flex flex-col items-center justify-center w-full"}>
                       <img className={"h-[240px] mb-4 relative"} src={item.drinkImg} alt="" />
                       <div className='flex w-full pl-8 pt-5'>
@@ -98,10 +98,12 @@ export const ReconmendDrinkList = () => {
                   
                 )
             })}
-            <div className={'flex flex-col justify-center items-center absolute top-[400px] w-[400px] h-[240px] rounded-lg'}>
-              <div className={'font-preM text-[22px]'}>취향 조사 후 이용할 수 있습니다.</div>
-              <div className={'h-[60px] w-5/6 mt-4 flex justify-center items-center bg-[#655442] text-white text-[18px] hover:bg-[#5B4D3E] cursor-pointer rounded'}>취향조사 하러가기</div>
+            {list.length == 0 &&
+            <div className={'flex flex-col items-center absolute top-[370px] w-[500px] h-[240px] rounded-lg'}>
+              <div className={'font-preM text-[28px] text-center h-[120px] mt-[60px]'}>간단한 취향조사로 <br/> 나만의 전통주를 추천받으세요.</div>
+              <div onClick={()=>(router.push('/user/prefer'))} className={'h-[70px] w-[60%] flex justify-center items-center bg-gradient-to-r from-teal-400 to-emerald-400 hover:-translate-y-1 duration-[400ms] ease-in text-white text-[20px] drop-shadow-md cursor-pointer rounded-full'}>나만의 전통주 추천받기</div>
             </div>
+            }
         </>
     )
 }

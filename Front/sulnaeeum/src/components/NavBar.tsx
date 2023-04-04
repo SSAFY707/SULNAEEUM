@@ -70,7 +70,7 @@ function Navbar() {
   const btnRef = useRef();
 
   const menu: string[] = ["전통주", "지도", "랭킹", "추천", "전통주 유형검사"];
-  const url: string[] = ["/list?type=전체&sort=이름", "/map", "/rank", "/recommend", "/jubti"];
+  const url: string[] = ["/list?type=전체&sort=이름", "/map", "/rank", "/recommend?target=drink", "/jubti"];
 
   const menuTabs = [
     [
@@ -89,8 +89,8 @@ function Navbar() {
       {name: '랭킹', url: '/rank'}
     ],
     [
-      {name: '나만의 전통주', url: '/recommend'},
-      {name: '선물하기', url: '/recommend'},
+      {name: '나만의 전통주', url: '/recommend?target=drink'},
+      {name: '선물하기', url: '/recommend?target=gift'},
       {name: '랜덤 추천', url: '/recommend/today'},
     ],
     [
