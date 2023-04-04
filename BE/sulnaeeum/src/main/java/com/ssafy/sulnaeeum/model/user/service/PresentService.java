@@ -3,7 +3,6 @@ package com.ssafy.sulnaeeum.model.user.service;
 import com.ssafy.sulnaeeum.exception.CustomException;
 import com.ssafy.sulnaeeum.exception.CustomExceptionList;
 import com.ssafy.sulnaeeum.model.drink.dto.DrinkDto;
-import com.ssafy.sulnaeeum.model.drink.dto.SimilarDrinkDto;
 import com.ssafy.sulnaeeum.model.drink.entity.Drink;
 import com.ssafy.sulnaeeum.model.drink.entity.Ingredient;
 import com.ssafy.sulnaeeum.model.drink.repo.DrinkRepo;
