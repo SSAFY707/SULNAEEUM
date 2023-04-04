@@ -14,7 +14,8 @@ export default function Footer() {
     } 
 
   return (
-    <div className={'flex justify-between border-t h-[380px] bg-[#051525] items-center px-[260px]'}>
+  <>
+    <div className={'hidden md:flex justify-between border-t h-[380px] bg-[#051525] items-center px-[260px]'}>
         <img className={'h-1/2'} src="/images/footer_logo.png" />
         <div>
             <div className={'text-zinc-400/80 mb-6'}>About Service</div>
@@ -56,5 +57,6 @@ export default function Footer() {
             </div>
         </div>
     </div >
+  </>
   )
 }

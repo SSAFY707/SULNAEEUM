@@ -49,7 +49,7 @@ export default function index() {
             {
               tabs.map((tab, i)=>{
                 return (
-                  <div onClick={()=>{setIdx(tab.value)}} className={`cursor-pointer w-[120px] h-[50px] ml-2 flex justify-center items-center ${idx == tab.value ? 'font-preM' : 'text-[#b0b0b0]'} rounded-[30px] border-[1px] border-[#b0b0b0] `} key={i}>{tab.name}</div>
+                  <div onClick={()=>{setIdx(tab.value)}} className={`cursor-pointer w-[120px] h-[50px] ml-2 flex justify-center items-center ${idx == tab.value ? 'font-preM border-[#191919]' : 'text-[#b0b0b0] border-[#b0b0b0]'} rounded-[30px] border-[1px] `} key={i}>{tab.name}</div>
                 )
               })
             }

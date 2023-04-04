@@ -339,12 +339,12 @@ export default function Jubti() {
         </div>
       </div>
       <div className={'flex justify-center'}>
-        <div className={`flex ${(page == 0 || page == 5) && 'hidden'} font-preL justify-center items-center w-5/6 md:w-[400px] relative text-[20px] md:mt-10 md:text-xl h-[70px] bg-[#655442] hover:bg-[#504336] text-white rounded cursor-pointer`} onClick={() => { if (page == 5) { console.log(jubti()) } else move_page() }}>
+        <div className={`flex ${(page == 0 || page == 5) && 'hidden'} font-preL justify-center items-center w-5/6 md:w-[400px] relative text-[20px] md:mt-10 md:text-xl h-[70px] bg-[#655442] hover:bg-[#504336] text-white rounded cursor-pointer mb-[140px]`} onClick={() => { if (page == 5) { console.log(jubti()) } else move_page() }}>
           다음으로
         </div>
       </div>
       <div className={'flex justify-center'}>
-        <div onClick={() => jubti()} className={`flex ${page != 5 && 'hidden'} font-preL justify-center items-center w-5/6 md:w-[400px] relative mt-9 md:bottom-[-80px] text-[20px] md:text-xl h-[70px] bg-[#655442] hover:bg-[#504336] text-white rounded cursor-pointer`}>
+        <div onClick={() => jubti()} className={`flex ${page != 5 && 'hidden'} font-preL justify-center items-center w-5/6 md:w-[400px] relative mt-9 md:bottom-[-80px] text-[20px] md:text-xl h-[70px] bg-[#655442] hover:bg-[#504336] text-white rounded cursor-pointer mb-[240px]`}>
           결과 제출하기
         </div>
       </div>
