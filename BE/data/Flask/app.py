@@ -29,6 +29,9 @@ DRINK_DISH = "select dish_id from dish_drink where drink_id = %s"
 # 안주 대분류 select 구문
 DRINK_DISH_CATEGORY = "select dish_category from dish where dish_id = %s"
 
+# 술 가격 select 구문
+DRINK_PRICE = "select drink_price from drink where drink_id = %s"
+
 
 
 # ============================= 술 데이터 초기 설정 ============================
@@ -196,6 +199,69 @@ def recommend_drink():
     return find_drink_id_dic
 
 
+# 컨텐츠 기반 선물 추천 알고리즘
+# 요청 : 단, 신, 청, 향, 목, 바, 도, 안
+# 응답 : 아이디, 이름, 도수, 용량, 사진
+@app.route("/recommend/present", methods=["POST"])
+def recommend_present_drink():
+    parameter_dict = request.get_json()
+
+    input_data = parameter_dict["input_data"]
+    print(input_data)
+
+    max_level = input_data[13]
+    min_level = input_data[14]
+    max_price = input_data[15]
+    min_price = input_data[16]
+
+    input_data = input_data[0:13]
+    input_data.pop(6)
+    find_list = find_present_drink(input_data)
+
+    conn = db_connect()
+    cur = conn.cursor()
+
+    find_drink_id_dic = {}
+
+    cnt = 0
+    for i in range(len(find_list)):
+        drink_id = find_list[i][0]+1
+
+        this_drink_list = {}
+        this_drink_list['drink_id'] = drink_id
+
+        cur.execute(DRINK_PRICE, str(drink_id))
+        result = cur.fetchall()
+        drink_price = result[0][0]
+
+        if drink_price == "":
+            continue
+
+        if min_price > int(drink_price) or int(drink_price) > max_price:
+            continue
+
+        cur.execute(DRINK_LEVEL, str(drink_id))
+        result = cur.fetchall()
+        drink_level = result[0][0]
+
+        if min_level > int(drink_price) or int(drink_level) > max_level:
+            continue
+
+        # print(i+1, "위 : ", result, "(", drink_id, ") / 유사도 : ", find_list[i][1])
+        # print(result, "술 정보 : ", data_list[drink_id-1])
+
+        find_drink_id_dic[cnt] = this_drink_list
+        print(find_drink_id_dic[cnt])
+        cnt += 1
+
+        if cnt > 5:
+            break
+
+    conn.close()
+
+    return find_drink_id_dic
+
+
 # 유클리디안 거리 구하기
 def euclidean_distance(data, drink):   
     return np.sqrt(np.sum((data - drink) ** 2))
@@ -208,6 +274,28 @@ def find_drink(input_data):
 
     for i in range(629):
         X = np.array([input_data, data_list[i]])
+
+        t_user = X[0][:]
+        drink_data = X[1][:]
+        dis = euclidean_distance(t_user, drink_data)
+
+        dis_dic[i] = dis
+    
+    return sorted(dis_dic.items(), key = lambda item: item[1])
+
+
+# 선물 대상과 가장 유사한 5가지 술 찾기
+def find_present_drink(input_data):
+    # 거리 정보
+    dis_dic = {}
+
+    for i in range(629):
+        temp = data_list[i][6]
+        data_list[i].pop(6)
+
+        X = np.array([input_data, data_list[i]])
+
+        data_list[i].insert(6, temp)
 
         t_user = X[0][:]
         drink_data = X[1][:]
