@@ -1,6 +1,7 @@
 import { IoEarth } from 'react-icons/io5'
 import { HiMap } from 'react-icons/hi'
 import { FaRegBookmark, FaBookmark } from 'react-icons/fa'
+import { RiHome2Line, RiHome2Fill } from 'react-icons/ri'
 import React, { useState, useEffect } from 'react'
 import { Map, MapMarker } from 'react-kakao-maps-sdk'
 import { Modal } from '../common/modal'
@@ -88,7 +89,7 @@ export default function DrinkJumak() {
         </div>
         <div className={'flex justify-between items-end'}>
             <div className={'text-[20px] pl-2 font-preR'}><span className={'font-mj text-[40px] mr-2'}>{drink.drinkDetailDto.drinkName}</span>을(를) 판매하는 식당</div>
-            <div onClick={modalOpen} className={'flex justify-center items-center mb-4 mr-4 rounded text-white h-3/4 p-2 bg-[#78C3DC] hover:bg-[#60A5BC] cursor-pointer'}>판매처 등록하기</div>
+            <div onClick={modalOpen} className={'flex justify-center items-center mb-3 mr-3 rounded text-white h-3/4 p-2 bg-gradient-to-r from-teal-400 to-emerald-400 transition ease-in duration-300 hover:font-preR hover:scale-[103%] hover:-translate-y-0.5 cursor-pointer'}>판매처 등록하기</div>
         </div>
         <hr className={'border-[#D3D3D3] border-1 mb-10'} />
         <div className={'flex w-full h-[600px]'}>
@@ -118,8 +119,8 @@ export default function DrinkJumak() {
                             <div className={'flex justify-between'}>
                                 <div className={'font-preM text-[24px] mb-2'}>{v.name}</div>
                                 {myJumaks.indexOf(v.id) == -1 ?
-                                <FaRegBookmark onClick={()=>{like(v.id)}} className={'text-[20px] text-[#655442] cursor-pointer'}/>
-                                :<FaBookmark onClick={()=>{like(v.id)}} className={'text-[20px] text-[#655442] cursor-pointer'}/>
+                                <RiHome2Line onClick={()=>{like(v.id)}} className={'text-[24px] text-[#655442] cursor-pointer'}/>
+                                :<RiHome2Fill onClick={()=>{like(v.id)}} className={'text-[24px] text-[#655442] cursor-pointer'}/>
                                 }
                             </div>
                             <div className={'flex items-center'}><HiMap className={'mr-2'} />{v.address}</div>

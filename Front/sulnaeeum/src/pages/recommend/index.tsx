@@ -1,14 +1,22 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { AiOutlineGift } from 'react-icons/ai'
 import { ReconmendDrinkList } from '@/components/recommend/recommendDrink'
 import { Modal } from '@/components/common/modal';
 import {GiftModal} from '@/components/recommend/giftModal'
 
-export default function index() {
+export default function index(props: {target : string}) {
+  const {target} = props
   const [open, setOpen] = useState(false)
   const modalOpen = () => {
     setOpen(!open)
   }
+
+  useEffect(()=>{
+    if (target == 'gift') {
+      const t = document.querySelector('#gift')
+      window.scrollTo({top: (t?.scrollHeight as number + 100), behavior: 'smooth'})
+    }
+  })
   return (
     <>
       <div>
@@ -33,14 +41,14 @@ export default function index() {
         </div>
       </div>
 
-      <div className="flex flex-col items-center w-screen h-[700px] mt-[70px] mb-20">
+      <div className="flex flex-col items-center w-screen h-[700px] mt-[70px] mb-20" id='gift'>
         <div className={'flex justify-between w-8/12  items-center mt-40 h-[200px]'}>
    
           <div className={"flex flex-col w-full pt-[150px]"}>
             <div className={'text-[35px] font-preB'}>맞춤형 선물 서비스</div>
             <div className={'text-[22px] mt-4'}>선물 받는 분의 정보를 입력하면<br></br><span className={'font-preR'}>맞춤형 전통주 선물 리스트</span>를 알려드려요.</div>
             <div className={'flex w-full'}>
-              <div onClick={modalOpen} className={"flex justify-center items-center w-[260px] rounded mt-[50px] py-2 text-[26px] font-preR hover:font-preM cursor-pointer bg-zinc-200 hover:bg-zinc-300"}>
+              <div onClick={modalOpen} className={"flex justify-center items-center w-[220px] rounded mt-6 py-2 text-[22px] font-preR hover:font-preM cursor-pointer bg-zinc-200 hover:bg-zinc-300"}>
                 <AiOutlineGift className={'mr-4'}/>전통주 선물하기
               </div>
             </div>
@@ -74,4 +82,13 @@ export default function index() {
       </div>
     </>
   )
+}
+
+export async function getServerSideProps(context : any) {
+  const target = context.query.target
+  return {
+    props: {
+      target: target,
+    }
+  }
 }

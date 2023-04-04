@@ -115,3 +115,31 @@ export type MarkerType = {
     address: string,
     url : string
 }
+
+// 나만의 전통주 추천을 받아오는 리스트
+export type RecommendDrinkType = {
+    [index: string] : number | string | string[],
+    drinkId : number,
+    drinkLevel : number,
+    drinkName : string,
+    drinkImg : string,
+    drinkAmount : string,
+    drinkType : string,
+    ingredientList : string[]
+}
+
+export type SubmitGiftType = {
+    [index : string] : string | number
+    sex : string,
+    age : string,
+    minPrice : number,
+    maxPrice : number,
+    minLevel : number,
+    maxLevel : number,
+    tasteSweet : number,
+    tasteSour : number,
+    tasteFlavor : number,
+    tasteRefresh : number,
+    tasteBody : number,
+    tasteThroat : number
+}
