@@ -51,20 +51,6 @@ export default function index() {
 
 
 
-
-  // const [payload, setPayload] = useState<PayloadType>({
-  //   tasteSour: 0,
-  //   tasteSweet: 0,
-  //   tasteFlavor: 0,
-  //   tasteRefresh: 0,
-  //   tasteBody: 0,
-  //   tasteThroat: 0,
-  //   level: 0,
-  //   dish: "",
-  //   weight: "",
-  // })
-
-
   const sendData = () => {
 
     type ResultType = {
@@ -90,16 +76,15 @@ export default function index() {
 
     console.log(payload)
 
-    console.log('sendData() 실행')
     authAxios.post('user/preference', payload
     ).then((res) => {
       console.log(res)
-      console.log(res.data[0].drink_name)
-      setResultName(res.data[0].drink_name)
-      setResultImg(res.data[0].drink_image)
-      setResultId(res.data[0].drink_id)
-      setResultAmount(res.data[0].drink_amount)
-      setResultLevel(res.data[0].drink_level)
+      console.log(res.data[0].drinkImage)
+      setResultName(res.data[0].drinkName)
+      setResultImg(res.data[0].drinkImg)
+      setResultId(res.data[0].drinkId)
+      setResultAmount(res.data[0].drinkAmount)
+      setResultLevel(res.data[0].drinkLevel)
 
 
 
@@ -174,7 +159,7 @@ export default function index() {
                   </div>
                 </div>
               </div>
-              <div onClick={() => { setPage(page + 1) }} className={'flex justify-center items-center mt-[70px] w-full h-[60px] text-[22px] text-white font-preL bg-[#847260] hover:bg-[#655442] cursor-pointer rounded'}>시작하기</div>
+              <div onClick={() => { setPage(page + 1) }} className={'flex justify-center items-center mt-[70px] w-full h-[60px] text-[22px] text-white font-preL bg-[#847260] hover:bg-[#655442] cursor-pointer rounded'}>내 취향정보 입력하기</div>
             </div>
           </div>
 
@@ -197,7 +182,7 @@ export default function index() {
                     return (
                       <div key={index} onClick={() => {
                         setGender(g.value as string)
-                      }} className={`w-full h-[50px] flex justify-center items-center cursor-pointer border rounded ${gender === g.value ? 'bg-[#847260] text-white' : ''}`} >{g.name}</div>
+                      }} className={`w-full h-[50px] flex justify-center items-center cursor-pointer border rounded ${gender === g.value ? 'bg-[#847260] text-white' : 'hover:bg-gray-200'}`} >{g.name}</div>
                     )
                   })}
                 </div>
@@ -210,7 +195,7 @@ export default function index() {
                       <div key={index} onClick={() => {
                         setAge(a.value as string)
                       }}
-                        className={`w-full h-[50px] flex justify-center items-center cursor-pointer border rounded ${age === a.value ? 'bg-[#847260] text-white' : ''}`} >{a.name}</div>
+                        className={`w-full h-[50px] flex justify-center items-center cursor-pointer border rounded ${age === a.value ? 'bg-[#847260] text-white' : 'hover:bg-gray-200'}`} >{a.name}</div>
                     )
                   })}
                 </div>
@@ -563,14 +548,14 @@ export default function index() {
             </div>
             <div onClick={() => {
               setPage(page + 1)
-              console.log('setPage 실행후')
+
               sendData()
               setTimeout(() => {
-                console.log('setTimeout() 실행')
+
                 setPage(page + 2)
 
               }
-                , 2400);
+                , 3400);
             }} className={`flex justify-center items-center text-white font-preL rounded w-5/6 h-[60px] text-[20px] ${weight && level ? 'bg-[#847260] text-white hover:cursor-pointer' : 'bg-[#E4E4E7] '} `}>추천받기</div>
           </div>
 
@@ -580,8 +565,8 @@ export default function index() {
             <div className={'h-2/3 w-[440px] p-2'}>
               <div className='w-full h-[180px] outline-1 outline-black mt-[20px]'>
                 <div className='flex flex-col justify-between items-center w-full h-[300px] mt-[160px]'>
-                  <img src='/images/loading.gif' className='w-[740px]'></img>
-                  <p className='font-bold text-[28px] text-[#272727]'>전통주 알고리즘 분석중...</p>
+                  <img src='/images/loading2.gif' className='w-[740px]'></img>
+                  <p className='font-bold text-[28px] text-[#847260]'>전통주 취향 분석중...</p>
                 </div>
               </div>
 
@@ -593,13 +578,13 @@ export default function index() {
           <div className={`${page != 8 && 'hidden'} flex flex-col items-center w-[500px] h-[650px] rounded-xl bg-white`}>
             <div className={'h-2/3 w-[440px] p-2'}>
               <div className='flex flex-col justify-center items-center w-full h-[460px] mt-[10px]'>
-                <div className={'font-preB text-[30px] mb-4 mt-[40px]'}>당신을 위한 전통주</div>
+                <div className={'font-preB text-[30px] mb-4 mt-[40px]'}>취향 분석 결과</div>
                 <div className='flex flex-col justify-between items-center w-full h-[400px] mt-[4px] rounded-[8px]'>
                   <div className='flex justify-center w-[180px] h-[240px] mt-[4px]'>
                     <img src={resultImg} alt="이미지" className='h-full object-cover' />
                   </div>
                   <p className='mt-[30px] text-[26px] font-bold'>{resultName}</p>
-                  <p className='text-[22px]'>{Number(resultLevel) * 3}° ㅣ {resultAmount}</p>
+                  <p className='text-[22px]'>{Number(resultLevel)}° ㅣ {resultAmount}</p>
                 </div>
               </div>
 

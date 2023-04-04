@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import style from '@/pages/map/map.module.css'
 import Brewery from './Brewery';
 import Festival from './Festival';
@@ -11,9 +11,7 @@ import Program from './Program';
 export default function Right(props: any) {
 
   const { tab, setTab, res, mode, fest } = props
-  // console.log('==========================')
-  // console.log(data)
-  // console.log('==========================')
+
 
   let tabContents = <Brewery mode={mode} res={res} tab={tab}></Brewery>
 
@@ -28,48 +26,23 @@ export default function Right(props: any) {
 
   return (<>
 
-    <div className={`${style.right_box} ${style.layout}`} id="right_box">
+    <div className={`${style.right_box} ${style.layout} ${tab != '' ? 'inline' : 'hidden'} `} id="right_box">
       <div className='flex justify-between h-[54px] mb-[14px]'>
-        <div id='brewery' className={`${style.tab_box} ${style.selected_tab} ${style.hover_cursor}`}
+        <div id='brewery' className={`${style.tab_box} ${style.hover_cursor} border-[#CFCAC7] border-solid ${tab === '양조장' ? "border border-solid border-[#CFCAC7] " : "border-b"}`}
           onClick={() => {
             setTab('양조장')
-            const removeList: any = document.getElementsByClassName('map_tab_box__6t4lt')
-            const target: any = document.getElementById('brewery')
-
-            for (let i = 0; i < removeList.length; i++) {
-              removeList[i].style.border = 'none'
-              removeList[i].style.borderBottom = '1px solid #CFCAC7'
-            }
-            target.style.border = '1px solid #CFCAC7'
 
           }}
         ><h3>양조장</h3></div>
-        <div id='festival' className={`${style.tab_box} ${style.hover_cursor}`}
+        <div id='festival' className={`${style.tab_box} ${style.hover_cursor} border-[#CFCAC7] border-solid ${tab === '전통주 축제' ? "border border-solid border-[#CFCAC7] " : "border-b"}`}
           onClick={(event) => {
             setTab('전통주 축제')
-            const removeList: any = document.getElementsByClassName('map_tab_box__6t4lt')
-            const target: any = document.getElementById('festival')
-
-
-            for (let i = 0; i < removeList.length; i++) {
-              removeList[i].style.border = 'none'
-              removeList[i].style.borderBottom = '1px solid #CFCAC7'
-            }
-            target.style.border = '1px solid #CFCAC7'
 
           }}><h3>전통주 축제</h3></div>
-        <div id='program' className={`${style.tab_box} ${style.hover_cursor}`}
+        <div id='program' className={`${style.tab_box} ${style.hover_cursor} border-[#CFCAC7] border-solid ${tab === '체험 프로그램' ? "border border-solid border-[#CFCAC7] " : "border-b"}`}
           onClick={() => {
             setTab('체험 프로그램')
-            const removeList: any = document.getElementsByClassName('map_tab_box__6t4lt')
-            const target: any = document.getElementById('program')
 
-
-            for (let i = 0; i < removeList.length; i++) {
-              removeList[i].style.border = 'none'
-              removeList[i].style.borderBottom = '1px solid #CFCAC7'
-            }
-            target.style.border = '1px solid #CFCAC7'
           }}
         ><h3>체험 프로그램</h3></div>
       </div>

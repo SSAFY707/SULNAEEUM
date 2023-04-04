@@ -173,7 +173,7 @@
     margin-left: 100px;
     width: 560px;
     height: 800px;
-    display: none;
+    /* display: none; */
 }
 
 .tab_box {

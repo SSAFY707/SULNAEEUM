@@ -9,16 +9,6 @@ export default function index() {
   const modalOpen = () => {
     setOpen(!open)
   }
-
-  const image5: string[] = [
-    "/main/part5/main5_1s.png",
-    "/main/part5/main5_2s.png",
-    "/main/part5/main5_3s.png",
-    "/main/part5/main5_4s.png",
-  ];
-
-
-
   return (
     <>
       <div>

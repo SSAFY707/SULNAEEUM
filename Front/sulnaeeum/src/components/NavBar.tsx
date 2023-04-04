@@ -16,6 +16,7 @@ import { RiHome2Line } from 'react-icons/ri'
 import { MdLogout } from 'react-icons/md'
 import { IoWineOutline } from 'react-icons/io5'
 import { IoMdWine } from 'react-icons/io'
+import { toastError } from "./common/toast";
 
 
 
@@ -77,7 +78,7 @@ function Navbar() {
   const menuTabs = [
     [
       {name: '탁주', url: '/list?type=탁주&sort=이름'},
-      {name: '약주/청주', url: '/list?type=약주/청주&sort=이름'},
+      {name: '약주/청주', url: '/list?type=약주%2F청주&sort=이름'},
       {name: '과실주', url: '/list?type=과실주&sort=이름'},
       {name: '증류주', url: '/list?type=증류주&sort=이름'},
       {name: '기타', url: '/list?type=기타&sort=이름'},
@@ -98,8 +99,17 @@ function Navbar() {
     [
       {name: '검사하기', url: '/jubti'}
     ],
-
   ]
+
+  const move = (event, name : string, url : string) => {
+    event.stopPropagation()
+    if ((name == '랭킹' || name == '나만의 전통주' || name == '선물하기' || name == '추천') && !login) {
+      toastError('로그인이 필요한 기능입니다.', '🚨', 'top-right')
+      return
+    }
+    router.push(url)
+  }
+
 
   return (
     <nav className="fixed z-50">
@@ -148,7 +158,7 @@ function Navbar() {
         >
           {menu.map((v, i) => {
             return (
-              <Link href={url[i]} key={i}>
+              <div onClick={(e)=>move(e, v, url[i])} key={i}>
                 <div className="hover:border-b-2 hover:border-[#B58269] text-neutral-600 hover:font-preEB font-preM w-[110px] pt-[9px] h-[42px] text-center">
                   {v}
                   {hover == "On" ? (
@@ -157,7 +167,7 @@ function Navbar() {
                         return (
                           // 각 페이지 URL 넣어야함
                           <div
-                            onClick={(e)=>{e.preventDefault(); router.push(tab.url)}}
+                            onClick={(e)=>{e.preventDefault(); move(e, tab.name, tab.url)}}
                             key={idx}
                           >
                             <li className="hover:font-preB text-neutral-500 font-preR text-[16px] mt-[17px] cursor-pointer">
@@ -171,7 +181,7 @@ function Navbar() {
                     ""
                   )}
                 </div>
-              </Link>
+              </div>
             );
           })}
         </li>
@@ -185,11 +195,11 @@ function Navbar() {
                 <div className={"h-[38px] w-[38px] rounded-full overflow-hidden"}>
                   <img src={img} className={"w-full h-full object-cover"}/>  
                 </div>
-                <div className={'hidden group-hover:flex flex-col absolute w-[160px] h-[200px] right-[40px] top-[60px] rounded shadow-lg'}>
-                  <div className="flex items-center pl-5 text-[16px] hover:bg-gray-100 rounded-[4px] h-[40px] cursor-pointer"><BiUser className={"text-zinc-500 mr-3"} /> 마이페이지</div> 
-                  <div className="flex items-center pl-5 text-[16px] hover:bg-gray-100 rounded-[4px] h-[40px] cursor-pointer"><FaRegBookmark className={"text-zinc-500 mr-3"} />찜 목록</div> 
-                  <div className="flex items-center pl-5 text-[16px] hover:bg-gray-100 rounded-[4px] h-[40px] cursor-pointer"><IoMdWine className={"text-zinc-500 mr-3"} />클리어한 술 </div> 
-                  <div className="flex items-center pl-5 text-[16px] hover:bg-gray-100 rounded-[4px] h-[40px] cursor-pointer"><RiHome2Line className={"text-zinc-500 mr-3"}/>찜한 가게</div> 
+                <div className={'hidden bg-white group-hover:flex flex-col absolute w-[160px] h-[200px] right-[40px] top-[60px] rounded shadow-lg'}>
+                  <div onClick={()=>{router.push('/user/profile')}} className="flex items-center pl-5 text-[16px] hover:bg-gray-100 rounded-[4px] h-[40px] cursor-pointer"><BiUser className={"text-zinc-500 mr-3"} /> 마이페이지</div> 
+                  <div onClick={()=>{router.push('/user/detail/1')}} className="flex items-center pl-5 text-[16px] hover:bg-gray-100 rounded-[4px] h-[40px] cursor-pointer"><FaRegBookmark className={"text-zinc-500 mr-3"} />찜 목록</div> 
+                  <div onClick={()=>{router.push('/user/detail/0')}} className="flex items-center pl-5 text-[16px] hover:bg-gray-100 rounded-[4px] h-[40px] cursor-pointer"><IoMdWine className={"text-zinc-500 mr-3"} />클리어한 술 </div> 
+                  <div onClick={()=>{router.push('/user/detail/2')}} className="flex items-center pl-5 text-[16px] hover:bg-gray-100 rounded-[4px] h-[40px] cursor-pointer"><RiHome2Line className={"text-zinc-500 mr-3"}/>찜한 가게</div> 
                   <div className="flex items-center pl-5 text-[16px] hover:bg-gray-100 rounded-[4px] h-[40px] cursor-pointer" onClick={kakaoLogout}><MdLogout className={'text-zinc-500 mr-3'} />로그아웃</div> 
                 </div>
               </div>
