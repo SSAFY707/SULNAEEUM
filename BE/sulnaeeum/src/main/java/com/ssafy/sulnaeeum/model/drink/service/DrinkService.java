@@ -238,7 +238,7 @@ public class DrinkService {
         // Flask 요청 후 반환받기
         String requestUrl = "https://j8a707.p.ssafy.io/flask/recommend/similar";
         JSONObject jsonObject = flaskUtil.requestFlask(requestUrl, params);
-        SimilarDrinkDto similarDrinkDto = new SimilarDrinkDto((JSONObject)jsonObject.get("1"));
+        SimilarDrinkDto similarDrinkDto = new SimilarDrinkDto((JSONObject)jsonObject.get("0"));
 
         return similarDrinkDto;
     }
