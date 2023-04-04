@@ -34,7 +34,8 @@ public class PresentService {
 
     @Transactional
     public List<RecommendRankingDto> getPresentDrink(PresentDto presentDto){
-        String requestUrl = "https://j8a707.p.ssafy.io/flask/recommend/contents";
+        String requestUrl = "https://j8a707.p.ssafy.io/flask/recommend/present";
+//        String requestUrl = "http://localhost:5000/recommend/present";
         Map<String, List> params = new HashMap<>();
         List<Integer> input_data = new ArrayList<>();
 
@@ -83,6 +84,11 @@ public class PresentService {
         }if(presentDto.getTasteBody() != 0){
             input_data.set(5, presentDto.getTasteBody());
         }
+
+        input_data.add(presentDto.getMaxLevel());
+        input_data.add(presentDto.getMinLevel());
+        input_data.add(presentDto.getMaxPrice());
+        input_data.add(presentDto.getMinPrice());
 
         System.out.println(input_data);
 
