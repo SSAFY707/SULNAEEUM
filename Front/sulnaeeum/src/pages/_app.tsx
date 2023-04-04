@@ -35,7 +35,7 @@ export default function App({ Component, pageProps }: AppProps) {
         <title>SULNAEEUM | 술내음</title>
       </Head>
       <Provider store={store}>
-        {/* <ChakraProvider> */}
+        <ChakraProvider>
           <NavBar />
           <Component {...pageProps} />
           <Footer />
@@ -44,7 +44,7 @@ export default function App({ Component, pageProps }: AppProps) {
             onLoad={kakaoInit}
           ></Script>
           <ToastContainer />
-        {/* </ChakraProvider> */}
+        </ChakraProvider>
       </Provider>
     </>
   );
