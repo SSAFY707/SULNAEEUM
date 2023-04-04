@@ -26,7 +26,7 @@ export default function today() {
 
 
   return (
-    <div className="flex justify-center ">
+    <div className="flex justify-center h-[1000px]">
       <div className="absolute top-[120px] text-[18px] font-preL text-[#494949]">
         random recommendation service
       </div>

@@ -9,6 +9,7 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { store } from "@/store";
 import Script from "next/script";
+import Footer from "@/components/common/footer";
 
 
 declare global {
@@ -34,15 +35,16 @@ export default function App({ Component, pageProps }: AppProps) {
         <title>SULNAEEUM | 술내음</title>
       </Head>
       <Provider store={store}>
-        <ChakraProvider>
+        {/* <ChakraProvider> */}
           <NavBar />
           <Component {...pageProps} />
+          <Footer />
           <Script
             src='https://developers.kakao.com/sdk/js/kakao.js'
             onLoad={kakaoInit}
           ></Script>
           <ToastContainer />
-        </ChakraProvider>
+        {/* </ChakraProvider> */}
       </Provider>
     </>
   );

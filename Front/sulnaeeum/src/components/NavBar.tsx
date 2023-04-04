@@ -5,16 +5,13 @@ import Image from "next/image";
 import { useState, useEffect } from "react";
 import { useDisclosure } from "@chakra-ui/react";
 import { useRef } from "react";
-import { Axios } from "axios";
 import { defaultAxios, authAxios } from "@/api/common";
 import NavSearch from "./common/navSearch";
 import { useRouter } from 'next/router'
-import { FaUserAlt, FaRegBookmark, FaWineBottle } from 'react-icons/fa'
-import { AiOutlineUser } from 'react-icons/ai'
+import { FaRegBookmark } from 'react-icons/fa'
 import { BiUser } from 'react-icons/bi'
 import { RiHome2Line } from 'react-icons/ri'
 import { MdLogout } from 'react-icons/md'
-import { IoWineOutline } from 'react-icons/io5'
 import { IoMdWine } from 'react-icons/io'
 import { toastError } from "./common/toast";
 
@@ -73,7 +70,7 @@ function Navbar() {
   const btnRef = useRef();
 
   const menu: string[] = ["전통주", "지도", "랭킹", "추천", "전통주 유형검사"];
-  const url: string[] = ["/list?type=전체&sort=이름", "/map", "/rank", "/recommend", "/jubti"];
+  const url: string[] = ["/list?type=전체&sort=이름", "/map", "/rank", "/recommend?target=drink", "/jubti"];
 
   const menuTabs = [
     [
@@ -92,8 +89,8 @@ function Navbar() {
       {name: '랭킹', url: '/rank'}
     ],
     [
-      {name: '나만의 전통주', url: '/recommend'},
-      {name: '선물하기', url: '/recommend'},
+      {name: '나만의 전통주', url: '/recommend?target=drink'},
+      {name: '선물하기', url: '/recommend?target=gift'},
       {name: '랜덤 추천', url: '/recommend/today'},
     ],
     [
@@ -159,7 +156,7 @@ function Navbar() {
           {menu.map((v, i) => {
             return (
               <div onClick={(e)=>move(e, v, url[i])} key={i}>
-                <div className="hover:border-b-2 hover:border-[#B58269] text-neutral-600 hover:font-preEB font-preM w-[110px] pt-[9px] h-[42px] text-center">
+                <div className="hover:border-b-2 hover:border-[#B58269] cursor-pointer text-neutral-600 hover:font-preEB font-preM w-[110px] pt-[9px] h-[42px] text-center">
                   {v}
                   {hover == "On" ? (
                     <ul className="items-center text-center pt-[18px]">

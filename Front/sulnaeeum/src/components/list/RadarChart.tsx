@@ -17,7 +17,7 @@ export default function f(props: {drink: DrinkTasteType}) {
         <RadarChart cx="50%" cy="50%" outerRadius="80%" data={data}>
           <PolarGrid />
           <PolarAngleAxis dataKey="subject" className={''}/>
-          <Radar style={{border: '2px'}} name="Mike" dataKey="value" stroke="#78C3DC" fill="#78C3DC" fillOpacity={0.5} />
+          <Radar style={{border: '2px'}} name="Mike" dataKey="value" stroke="#2DD4BF" fill="#2DD4BF" fillOpacity={0.4} />
         </RadarChart>
       </ResponsiveContainer>
     );
