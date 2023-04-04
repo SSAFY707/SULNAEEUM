@@ -111,8 +111,8 @@ public class RankingService {
     }
 
     @Transactional
-//    @Scheduled(cron = "0 0/1 14,15 * * *")
-    @Scheduled(cron = "0 0 0/1 * * *")
+    @Scheduled(cron = "0 0/30 18,19,20 * * *")
+//    @Scheduled(cron = "0 0 0/1 * * *")
     public void jubtiTopRequest (){
         String requestUrl = "https://j8a707.p.ssafy.io/flask/ranking";
         Map<String, List> params = null;
