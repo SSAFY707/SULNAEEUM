@@ -36,6 +36,7 @@ public class UserDto {
     @Schema(description = "finish")
     private boolean finish;
 
+
     // 생성자 (List<Entity> -> List<DTO> 변환을 위함)
     public UserDto(User user) {
         this.userId = user.getUserId();

@@ -18,4 +18,7 @@ public interface MyJumakRepo extends JpaRepository<MyJumak, Long> {
 
     @Query(value = "select jumak_id from my_jumak where jumak_id in (select jumak_id from drink_jumak where drink_id = ?1) and user_id = ?2", nativeQuery = true)
     List<Long> findLikeJumakId(Long drinkId, Long userId);
+
+    @Query(value = "select count(*) from my_jumak where user_id = ?1", nativeQuery = true)
+    int findCntByUser(Long userId);
 }

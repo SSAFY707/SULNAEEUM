@@ -1,6 +1,7 @@
 package com.ssafy.sulnaeeum.model.user.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.ssafy.sulnaeeum.model.mypage.dto.MyInfoDto;
 import com.ssafy.sulnaeeum.model.user.dto.UserDto;
 import lombok.*;
 
@@ -76,6 +77,18 @@ public class User {
     // Entity -> DTO 변환
     public UserDto toDto() {
         return UserDto.builder()
+                .userId(this.userId)
+                .kakaoId(this.kakaoId)
+                .nickname(this.nickname)
+                .age(this.age)
+                .sex(this.sex)
+                .img(this.img)
+                .ranking(this.ranking)
+                .finish(this.finish).build();
+    }
+
+    public MyInfoDto toMyInfoDto() {
+        return MyInfoDto.builder()
                 .userId(this.userId)
                 .kakaoId(this.kakaoId)
                 .nickname(this.nickname)
