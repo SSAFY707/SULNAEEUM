@@ -52,10 +52,9 @@ public class MyJumakService {
 
             List<DrinkJumak> drinkJumaks = drinkJumakRepo.findByJumakId(myJumak.getJumak().getJumakId());
             log.info(myJumak.getJumak().getJumakId().toString());
-            log.info(drinkJumaks.size()+"f");
 
             for(int i=0;i<3;i++){
-                log.info(i+" ");
+                if(drinkJumaks.size()<=i) break;
                 storeDrink.add(drinkJumaks.get(i).getDrink().getDrinkName());
                 storeDrinkImage.add(drinkJumaks.get(i).getDrink().getDrinkImage());
                 storeDrinkType.add(drinkJumaks.get(i).getDrink().getDrinkType().getDrinkTypeName());
