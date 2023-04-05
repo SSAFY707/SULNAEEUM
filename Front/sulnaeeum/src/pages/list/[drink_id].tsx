@@ -41,8 +41,8 @@ export default function Detail(props: {drinkId : number}) {
           <BsArrowLeftCircle onClick={()=>{router.back()}} className={'text-[34px] text-[#655443] cursor-pointer mt-2 mr-4'} />
           <DrinkExplain />
           {drink.drinkDetailDto.like ?
-          <FaBookmark onClick={()=>like()} className={'text-[22px] text-[#051525] cursor-pointer mt-5 ml-4'} />:
-          <FaRegBookmark onClick={()=>like()} className={'text-[22px] text-[#051525] cursor-pointer mt-5 ml-4'}/>}
+          <FaBookmark onClick={()=>like()} className={'text-[22px] text-[#8FAADC] cursor-pointer mt-5 ml-4'} />:
+          <FaRegBookmark onClick={()=>like()} className={'text-[22px] text-[#8FAADC] cursor-pointer mt-5 ml-4'}/>}
         </div>
         <div className={'flex mt-10 pl-[35px] justify-center h-[500px]'}>
           <DrinkRelation />

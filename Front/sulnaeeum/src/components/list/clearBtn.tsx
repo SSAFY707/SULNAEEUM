@@ -6,8 +6,8 @@ export const ClearBtn = () => {
 
 export const ClearTrue = () => {
     return (
-        <div className={"flex justify-center items-center bg-gradient-to-r from-indigo-900 to-blue-800 p-[1px] rounded-full font-preEL text-[18px] w-[70px] h-[30px]"}>
-            <div className={"flex justify-center items-center w-full h-full bg-white rounded-full text-indigo-800"}>clear</div>
+        <div className={"flex justify-center items-center bg-[#8FAADC] p-[1px] rounded-full font-preEL text-[18px] w-[70px] h-[30px]"}>
+            <div className={"flex justify-center items-center w-full h-full bg-white rounded-full text-[#8FAADC]"}>clear</div>
         </div>
     )
 }

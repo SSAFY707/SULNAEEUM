@@ -307,8 +307,8 @@ export const GiftModal = (props: {modalOpen : any}) => {
             <div className={'flex w-full justify-end'}>
                 <button className={'relative top-[30px] right-[30px] text-[30px] text-zinc-400'} onClick={ () => modalOpen() }><CgClose/></button>
             </div>
-                <div className={'font-preB text-[32px] mt-10'}>이런 선물은 어때요?</div>
-                <div className={'flex items-center'}><span className={'font-preM text-[20px] text-teal-500 mr-1'}>{age}, {gender}</span>에게 인기있는 맞춤형 전통주 리스트입니다.</div>
+                <div className={'font-preB text-[36px] mt-10'}>이런 선물은 어때요?</div>
+                <div className={'flex items-center text-[18px]'}><span className={'font-preM text-[22px] text-[#8FAADC] mr-1'}>{age}, {gender}</span>에게 인기있는 맞춤형 전통주 리스트입니다.</div>
                 <div className={'flex'}>
                   {giftList.slice(0,4).map((drink)=>{
                     return (
@@ -317,7 +317,7 @@ export const GiftModal = (props: {modalOpen : any}) => {
                         <img className={'h-[44%] mb-4'} src={drink.drinkImg}/>
                         <div className={'mb-1 font-preR text-[18px]'}>{drink.drinkPrice} 원</div>
                         <div>{drink.drinkLevel}% | {drink.drinkAmount} | {drink.drinkType}</div>
-                        <div onClick={()=>router.push(`/list/${drink.drinkId}`)} className={'mt-5 shadow cursor-pointer flex justify-center items-center py-2 px-4 bg-gradient-to-r from-teal-400 to-emerald-400 transition hover:-translate-y-0.5 duration-300 ease-in text-white rounded-full hover:font-preR hover:shadow-md hover:scale-105'}>
+                        <div onClick={()=>router.push(`/list/${drink.drinkId}`)} className={'mt-5 shadow cursor-pointer flex justify-center items-center py-2 px-4 bg-gradient-to-r from-[#8FAADC] to-[#8FAADC]/70 transition hover:-translate-y-0.5 duration-300 ease-in text-white rounded-full hover:font-preR hover:shadow-md hover:scale-105'}>
                           <HiMagnifyingGlass className={'mr-2'} />
                           더 자세히 알아보기
                         </div>

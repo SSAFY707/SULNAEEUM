@@ -2,7 +2,7 @@ import { DrinkDetailType, DrinkTasteType } from '@/types/DataTypes';
 import React from 'react';
 import { Radar, RadarChart, PolarGrid, PolarAngleAxis, ResponsiveContainer } from 'recharts';
 
-export default function f(props: {drink: DrinkTasteType}) {
+export default function (props: {drink: DrinkTasteType}) {
     const {drink} = props
     const data = [
       { subject: '청량함', value: (drink.tasteRefresh + 1) * 4 },
@@ -23,7 +23,7 @@ export default function f(props: {drink: DrinkTasteType}) {
         <RadarChart cx="50%" cy="50%" outerRadius="80%" data={data}>
           <PolarGrid />
           <PolarAngleAxis dataKey="subject" className={''}/>
-          <Radar style={{border: '2px'}} name="Mike" dataKey="value" stroke="#214262" fill="#214262" fillOpacity={0.3} />
+          <Radar style={{border: '2px'}} name="Mike" dataKey="value" stroke="#8FAADC" fill="#8FAADC" fillOpacity={0.4} />
         </RadarChart>
       </ResponsiveContainer>
     );

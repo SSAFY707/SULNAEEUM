@@ -24,7 +24,7 @@ export const DrinkExplain = () => {
         <Modal w='500px' h='auto' open={open} modalOpen={modalOpen}>
           <DrinkClear drinkId={detail.drinkId} drinkName={detail.drinkName} modalOpen={modalOpen}/>
         </Modal>
-        <div className={'flex justify-between items-center pl-8 pr-4'}>
+        <div className={'flex justify-between items-center pl-8 pr-1'}>
             <div className={'flex items-end text-[16px] font-preEL'}>
               <div className={'mr-4 text-[34px] font-preR'}>{detail.drinkName}</div>
               <div className={'pb-1'}>{detail.drinkLevel}% | {detail.drinkAmount}</div> 
