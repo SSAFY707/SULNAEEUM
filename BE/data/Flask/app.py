@@ -204,7 +204,7 @@ def cal_level(level):
         return 45
 
 # 랭킹 API
-@app.route("/rabbit/ranking", methods=["POST"])
+@app.route("/rabbit/ranking", methods=["GET"])
 def rabbit_ranking():
     parameter_dict = request.get_json()
     print(parameter_dict)
