@@ -106,7 +106,7 @@ public class LikeDrinkService {
     public ClearDrinkListDto getClearDrink (String kakaoId) {
 
         User user = userRepo.findByKakaoId(kakaoId).orElseThrow(() -> new CustomException(CustomExceptionList.MEMBER_NOT_FOUND));
-        List<Review> clearDrinks = reviewRepo.findAllByDrinkId(user.getUserId());
+        List<Review> clearDrinks = reviewRepo.findAllMyReview(user.getUserId());
 
         List<MyPageDrinkDto> clearDrinkList = new ArrayList<>();
         for (Review clearDrink : clearDrinks) {
