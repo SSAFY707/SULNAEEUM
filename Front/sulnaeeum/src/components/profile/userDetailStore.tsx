@@ -19,8 +19,8 @@ export default function userDetailStore() {
   return (
     <>
       <div>
-        <div className="flex">
-          <div className=" ml-[160px] w-[330px]">
+        <div className="flex mb-2">
+          <div className=" ml-[160px] w-[250px]">
             <div>전통주명</div>
           </div>
           <div className="flex justify-around w-[200px]">
@@ -32,7 +32,7 @@ export default function userDetailStore() {
           {store.length !== 0 && store.map((v, i) => {
             return (
               <div>
-                <UserDetailStoreList key={i} userData={v}></UserDetailStoreList>
+                <UserDetailStoreList key={v.storeId} idx={i+1} userData={v}></UserDetailStoreList>
               </div>
             );
           })}
