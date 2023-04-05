@@ -13,7 +13,7 @@ def main():
 
     def callback(ch, method, properties, body):
         print("Message is Arrived %r" % body)
-        response = requests.post("https://j8a707.p.ssafy.io/flask/rabbit/ranking", body)
+        response = requests.get("https://j8a707.p.ssafy.io/flask/rabbit/ranking")
         print(response)
 
 
