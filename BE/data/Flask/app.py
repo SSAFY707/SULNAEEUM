@@ -155,7 +155,7 @@ make_drink_data()
 
 # ============================= RabbitMQ API ============================
 
-# Test API
+# 랭킹 API
 @app.route("/test", methods=["GET"])
 def test():
     print("test 성공 !")
