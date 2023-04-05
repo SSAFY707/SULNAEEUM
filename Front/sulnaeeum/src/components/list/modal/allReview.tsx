@@ -78,7 +78,7 @@ export default function AllReview(props: {modalOpen : any}) {
                 </div>
                 <div>{itsMine.content}</div>
               </div>:
-            <div className='text-[18px]'>등록된 리뷰가 없습니다.</div>}
+            <div className='text-[18px] ml-8'>등록된 리뷰가 없습니다.</div>}
           </div>
         </div>
         <div onClick={modalOpen} className={'flex items-center w-full cursor-pointer justify-center text-[18px]'}>

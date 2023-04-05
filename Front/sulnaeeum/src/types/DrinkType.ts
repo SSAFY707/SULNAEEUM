@@ -115,3 +115,45 @@ export type MarkerType = {
     address: string,
     url : string
 }
+
+// 나만의 전통주 추천을 받아오는 리스트
+export type RecommendDrinkType = {
+    [index: string] : number | string | string[],
+    drinkId : number,
+    drinkLevel : number,
+    drinkName : string,
+    drinkImg : string,
+    drinkAmount : string,
+    drinkType : string,
+    ingredientList : string[]
+}
+
+// 선물 추천을 위한 data
+export type SubmitGiftType = {
+    [index : string] : string | number
+    sex : string,
+    age : string,
+    minPrice : number,
+    maxPrice : number,
+    minLevel : number,
+    maxLevel : number,
+    tasteSweet : number,
+    tasteSour : number,
+    tasteFlavor : number,
+    tasteRefresh : number,
+    tasteBody : number,
+    tasteThroat : number
+}
+
+// 선물 추천 전통주 리스트 타입
+export type GiftDrinkType = {
+    [index : string] : string | number | string[],
+    drinkId : number,
+    drinkName : string,
+    drinkImg : string,
+    drinkPrice : string,
+    drinkLevel : number,
+    drinkAmount : string,
+    drinkType : string,
+    ingredientList : string[]
+}

@@ -50,7 +50,7 @@ export default function Home() {
       <Head>
         <title>SULNAEEUM | 술내음</title>
       </Head>
-      <div className="h-[4900px] overflow-hidden scroll-smooth">
+      <div className="h-[6400px] overflow-hidden scroll-smooth">
         {/* <div className="text-red-600 fixed z-30 right-1/2 top-1/2">
           <p>Scroll Value : {scroll}</p>
           <p>translateY :{translateY}</p>

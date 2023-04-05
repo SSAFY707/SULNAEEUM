@@ -10,7 +10,33 @@ import Right from '@/components/map/Right';
 
 
 
-export default function index() {
+export default function index(props: { tabData: string }) {
+
+
+  const { tabData } = props
+  const [tab, setTab] = useState('양조장');
+  const [selected, setSelected] = useState(0);
+  const [mode, setMode] = useState(1)
+
+  const [title, setTitle] = useState('전국 전통주 지도')
+
+  const datas = [
+    { id: 1, src: 'images/map/경기도', },
+    { id: 2, src: 'images/map/강원도', },
+    { id: 3, src: 'images/map/충청도', },
+    { id: 4, src: 'images/map/전라도', },
+    { id: 5, src: 'images/map/경상도', },
+    { id: 6, src: 'images/map/제주도', },
+  ]
+
+  console.log('tabData >>>>>>>>')
+  console.log(tabData)
+
+  useEffect(() => {
+    loadData();
+    setTab(tabData)
+  }, [tabData])
+
 
 
 
@@ -56,15 +82,232 @@ export default function index() {
     listDto: listDtoType,
   }
 
-  const [res, setRes] = useState<dataType[]>([])
+  const [res, setRes] = useState<dataType[]>([
+    {
+      "mapId": 1,
+      "listDto": {
+        "breweryDtoList": [
+          {
+            "breweryId": 3,
+            "mapDto": {
+              "mapId": 1,
+              "mapName": "경기도"
+            },
+            "breweryName": "그린영농조합",
+            "breweryLocation": "경기도 안산시 단원구 뻐꾹산길 107",
+            "breweryUrl": "http://www.grandcoteau.co.kr",
+            "contact": "032-886-9873",
+            "breweryImg": "https://sulnaeeum.s3.ap-northeast-2.amazonaws.com/brewery/3.jpg",
+            "drinkTypeList": [
+              "과실주"
+            ]
+          },
+          {
+            "breweryId": 10,
+            "mapDto": {
+              "mapId": 1,
+              "mapName": "경기도"
+            },
+            "breweryName": "밝은세상영농조합",
+            "breweryLocation": "경기도 평택시 포승읍 충열길 37",
+            "breweryUrl": "http://www.tigercalyx.com/",
+            "contact": "031-683-0981",
+            "breweryImg": "https://sulnaeeum.s3.ap-northeast-2.amazonaws.com/brewery/10.jpg",
+            "drinkTypeList": [
+              "탁주",
+              "증류주"
+            ]
+          },
+          {
+            "breweryId": 11,
+            "mapDto": {
+              "mapId": 1,
+              "mapName": "경기도"
+            },
+            "breweryName": "배상면주가",
+            "breweryLocation": "경기도 포천시 화현면 화현리 512",
+            "breweryUrl": "http://www.sansawon.co.kr",
+            "contact": "031-531-9300",
+            "breweryImg": "https://sulnaeeum.s3.ap-northeast-2.amazonaws.com/brewery/11.jpg",
+            "drinkTypeList": [
+              "탁주",
+              "약주/청주",
+              "증류주"
+            ]
+          },
+          {
+            "breweryId": 12,
+            "mapDto": {
+              "mapId": 1,
+              "mapName": "경기도"
+            },
+            "breweryName": "배혜정도가",
+            "breweryLocation": "경기도 화성시 정남면 서봉로 835",
+            "breweryUrl": "http://www.baedoga.co.kr/",
+            "contact": "031-354-9376",
+            "breweryImg": "https://sulnaeeum.s3.ap-northeast-2.amazonaws.com/brewery/12.jpg",
+            "drinkTypeList": [
+              "탁주",
+              "증류주"
+            ]
+          },
+          {
+            "breweryId": 13,
+            "mapDto": {
+              "mapId": 1,
+              "mapName": "경기도"
+            },
+            "breweryName": "산머루농원",
+            "breweryLocation": "경기 파주시 적성면 객현리 67-1",
+            "breweryUrl": "http://www.sanmeoru.com",
+            "contact": "031-958-4558",
+            "breweryImg": "https://sulnaeeum.s3.ap-northeast-2.amazonaws.com/brewery/13.jpg",
+            "drinkTypeList": [
+              "과실주"
+            ]
+          },
+          {
+            "breweryId": 25,
+            "mapDto": {
+              "mapId": 1,
+              "mapName": "경기도"
+            },
+            "breweryName": "좋은술",
+            "breweryLocation": "경기 평택시 오성면 숙성뜰길 108",
+            "breweryUrl": "https://jsul.modoo.at/",
+            "contact": "031-681-8929",
+            "breweryImg": "https://sulnaeeum.s3.ap-northeast-2.amazonaws.com/brewery/25.jpg",
+            "drinkTypeList": [
+              "탁주",
+              "약주/청주",
+              "증류주"
+            ]
+          },
+          {
+            "breweryId": 31,
+            "mapDto": {
+              "mapId": 1,
+              "mapName": "경기도"
+            },
+            "breweryName": "복순도가",
+            "breweryLocation": "울산광역시 울주군 상북면 향산동길 50",
+            "breweryUrl": "https://boksoon.com/shopinfo/space.html",
+            "contact": "1577-6746",
+            "breweryImg": "https://sulnaeeum.s3.ap-northeast-2.amazonaws.com/brewery/31.jpg",
+            "drinkTypeList": [
+              "탁주"
+            ]
+          }
+        ],
+        "programDtoList": [
+          {
+            "programId": 3,
+            "mapDto": {
+              "mapId": 1,
+              "mapName": "경기도"
+            },
+            "programName": "양조장 투어",
+            "programLocation": "그랑꼬또 와이너리",
+            "alwaysVisit": true,
+            "reserveVisit": true,
+            "programUrl": "http://www.grandcoteau.co.kr",
+            "content": "와인의 역사,매너,한국의 음식문화와 와인 등 강의/와인 시음(3종, 4종)",
+            "programImg": "https://sulnaeeum.s3.ap-northeast-2.amazonaws.com/program/3.jpg"
+          },
+          {
+            "programId": 10,
+            "mapDto": {
+              "mapId": 1,
+              "mapName": "경기도"
+            },
+            "programName": "담금주 체험",
+            "programLocation": "밝은세상영농조합",
+            "alwaysVisit": false,
+            "reserveVisit": true,
+            "programUrl": "http://www.tigercalyx.com/",
+            "content": "양조장의 증류주로 만들어보는 다양한 플레이보의 담금주 만들기",
+            "programImg": "https://sulnaeeum.s3.ap-northeast-2.amazonaws.com/program/10.jpg"
+          },
+          {
+            "programId": 11,
+            "mapDto": {
+              "mapId": 1,
+              "mapName": "경기도"
+            },
+            "programName": "과실주 빚기",
+            "programLocation": "산사원 1층 가양주교실",
+            "alwaysVisit": true,
+            "reserveVisit": false,
+            "programUrl": "http://www.sansawon.co.kr",
+            "content": "제철 과실로 빚는 술 빚기 체험",
+            "programImg": "https://sulnaeeum.s3.ap-northeast-2.amazonaws.com/program/11.jpg"
+          },
+          {
+            "programId": 12,
+            "mapDto": {
+              "mapId": 1,
+              "mapName": "경기도"
+            },
+            "programName": "견학",
+            "programLocation": "배혜정도가",
+            "alwaysVisit": false,
+            "reserveVisit": true,
+            "programUrl": "http://www.baedoga.co.kr/",
+            "content": "일반인 대상 탁주 제조 및 증류주 제조 공장 동시 견학 프로그램",
+            "programImg": "https://sulnaeeum.s3.ap-northeast-2.amazonaws.com/program/12.jpg"
+          },
+          {
+            "programId": 13,
+            "mapDto": {
+              "mapId": 1,
+              "mapName": "경기도"
+            },
+            "programName": "나만의 와인",
+            "programLocation": "산머루 농원",
+            "alwaysVisit": false,
+            "reserveVisit": true,
+            "programUrl": "http://www.sanmeoru.com",
+            "content": "생산되어 있는 머루와인을 본인의 병에 담아가기",
+            "programImg": "https://sulnaeeum.s3.ap-northeast-2.amazonaws.com/program/13.jpg"
+          },
+          {
+            "programId": 15,
+            "mapDto": {
+              "mapId": 1,
+              "mapName": "경기도"
+            },
+            "programName": "체험 및 견학",
+            "programLocation": "술샘",
+            "alwaysVisit": true,
+            "reserveVisit": false,
+            "programUrl": "http://www.sulseam.com",
+            "content": "전통주강의, 간단체험, 제조장 견학, 시음",
+            "programImg": "https://sulnaeeum.s3.ap-northeast-2.amazonaws.com/program/15.jpg"
+          },
+          {
+            "programId": 24,
+            "mapDto": {
+              "mapId": 1,
+              "mapName": "경기도"
+            },
+            "programName": "찾아가는 양조장 술빚기",
+            "programLocation": "좋은술",
+            "alwaysVisit": true,
+            "reserveVisit": true,
+            "programUrl": "https://jsul.modoo.at/",
+            "content": "3~4명이 한 조를 이루어 술을 빚습니다. 빚은 술은 4리터 투명 페트병에 담아 집으로 가져가서 발효시키면 됩니다. 발효 후 채주하면 3~4병이 나옵니다. 막걸리로 바로 잡수셔도 되고, 냉장고에 넣었다가 맑은 술로 잡수셔도 됩니다. 결혼식이나 부모님 칠순 잔치 등에 축하주 또는 답례품으로 활용할 수도 있습니다.",
+            "programImg": "https://sulnaeeum.s3.ap-northeast-2.amazonaws.com/program/24.jpg"
+          }
+        ]
+      }
+    },
+
+  ])
 
 
 
   useEffect(() => {
     loadData();
-    console.log('tab data: >>>>>')
-
-
   }, [])
 
   const loadData = async () => {
@@ -72,28 +315,13 @@ export default function index() {
     const url = 'https://j8a707.p.ssafy.io/api/map/n'
     const res = await fetch('https://j8a707.p.ssafy.io/api/map/n')
     const jsonRes = await res.json()
-
+    console.log(jsonRes)
     setRes(jsonRes)
 
   }
 
 
-  const [tab, setTab] = useState('양조장');
 
-  const [selected, setSelected] = useState(0);
-
-  const [mode, setMode] = useState(1)
-
-  const [title, setTitle] = useState('전국 전통주 지도')
-
-  const datas = [
-    { id: 1, src: 'images/map/경기도', },
-    { id: 2, src: 'images/map/강원도', },
-    { id: 3, src: 'images/map/충청도', },
-    { id: 4, src: 'images/map/전라도', },
-    { id: 5, src: 'images/map/경상도', },
-    { id: 6, src: 'images/map/제주도', },
-  ]
 
 
 
@@ -172,27 +400,33 @@ export default function index() {
       <div className={style.container}>
         <Title title={title}></Title>
 
-
-        {/* {data.map((v, index) => {
-          return <>
-            <h1 key={index}>{v.mapId}</h1>
-            <h1>{v.listDto.breweryDtoList[0].breweryName}</h1>
-          </>
-        })} */}
         <div className='mt-[60px] flex justify-center'>
           <div className={style.map_box} id="map_box">
             <Map1 datas={datas}></Map1>
-            <Map2 setMode={setMode} datas={datas} setTitle={setTitle} selected={selected} setSelected={setSelected}></Map2>
+            <Map2 setTab={setTab} setMode={setMode} datas={datas} setTitle={setTitle} selected={selected} setSelected={setSelected}></Map2>
           </div>
           <Right fest={fest} mode={mode} res={res} tab={tab} setTab={setTab}></Right>
         </div>
         <img className={`${style.mark_box}`} src="images/mark.png" alt='문양'></img>
 
 
-
       </div>
+      <div className={'h-[100px]'}></div>
     </>
 
   )
+}
+
+export async function getServerSideProps(context: any) {
+  let tab = ''
+  if (context.query.tab) {
+    tab = context.query.tab
+  }
+
+  return {
+    props: {
+      tabData: tab
+    }
+  }
 }
 

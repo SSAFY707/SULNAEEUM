@@ -7,16 +7,18 @@ module.exports = {
     extend: {
       colors: {
         fontD: '#191919',
-        fontED: '#333333'
+        fontED: '#333333',
+        lightb : '#8FAADC'
       },
       keyframes: {
         jump: {
           from: { top: '0px' },
           to: { top: '-4px' }
-        }
+        },
       },
       animation: {
-        jump: 'jump 0.4s ease-in-out Infinite Alternate'
+        jump: 'jump 0.4s ease-in-out Infinite Alternate',
+        flow: 'flow 0.5s ease-in'
       },
       fontFamily: {
         star : ['star'],

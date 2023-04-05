@@ -2,6 +2,10 @@ export type ObjStringType = {
   [index: string]: string;
 };
 
+export type ObjNumberType = {
+  [index : string] : number
+}
+
 export type JubtiType = {
   [index: string]: string | number;
   age: string;

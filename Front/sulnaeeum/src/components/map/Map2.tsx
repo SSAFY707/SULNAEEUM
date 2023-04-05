@@ -8,7 +8,7 @@ export default function Map2(props: any) {
 
 
 
-  const { datas, setTitle, selected, setSelected, setMode } = props
+  const { setTab, datas, setTitle, selected, setSelected, setMode } = props
 
 
 
@@ -46,9 +46,11 @@ export default function Map2(props: any) {
                 if (region == null) {
                   setTitle('전국 전통주 지도')
                   setMode(1)
+                  setTab('양조장')
                 } else if (region == 1) {
                   setTitle('경기도')
                   setMode(1)
+
                 } else if (region == 2) {
                   setTitle('강원도')
                   setMode(2)

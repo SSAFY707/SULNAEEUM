@@ -86,7 +86,7 @@ export default function todayModal(props: {
           <ModalHeader >{todayType}</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
-            <div className="w-[460px] h-[300px]  flex-col flex  b items-center">
+            <div className="w-[460px] h-[300px]  flex-col flex b items-center">
               <div className=" w-[200px] h-[50px] b flex justify-center">
               <div className=" mr-[15px]">
                 <Image src="/images/recommend/congratulations.png" alt="" width={50} height={50} ></Image>
@@ -104,7 +104,7 @@ export default function todayModal(props: {
                       <div className="absolute top-[180px] text-[45px] font-preB ">                   
                       {cheers.todayName}
                       </div>
-                      <div className="absolute  top-[250px] text-[25px] font-preR w-[300px]flex justify-center">
+                      <div className="absolute top-[250px] text-[25px] font-preR w-[300px]flex justify-center">
                       {cheers.todayContent}!
                       </div>
                   </div>
