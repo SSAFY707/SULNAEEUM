@@ -2,6 +2,7 @@ package com.ssafy.sulnaeeum.controller.user;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.ssafy.sulnaeeum.jwt.JwtFilter;
+import com.ssafy.sulnaeeum.model.drink.dto.DrinkDetailDto;
 import com.ssafy.sulnaeeum.model.drink.dto.SimilarDrinkDto;
 import com.ssafy.sulnaeeum.model.ranking.dto.RecommendRankingDto;
 import com.ssafy.sulnaeeum.model.user.dto.*;
@@ -87,13 +88,13 @@ public class UserController {
      ***/
     @PostMapping("/preference")
     @Operation(summary = "유저 취향 조사", description = "유저 취향 조사")
-    public ResponseEntity<List<RecommendRankingDto>> preference(@RequestBody UserPreferenceDto userPreferenceDto){
+    public ResponseEntity<List<DrinkDetailDto>> preference(@RequestBody UserPreferenceDto userPreferenceDto){
 
         String kakaoId = SecurityContextHolder.getContext().getAuthentication().getName();
 
         userPreferenceService.preference(kakaoId, userPreferenceDto);
 
-        List<RecommendRankingDto> recommend = userPreferenceService.recommendUserDrink(userPreferenceDto);
+        List<DrinkDetailDto> recommend = userPreferenceService.recommendUserDrink(userPreferenceDto);
 
         return new ResponseEntity<>(recommend, HttpStatus.OK);
     }
@@ -113,11 +114,11 @@ public class UserController {
      ***/
     @GetMapping("/recommend")
     @Operation(summary = "유저 취향 전통주 추천", description = "유저 취향을 가져와 전통주를 추천한다")
-    public ResponseEntity<List<RecommendRankingDto>> getRecommendDrink(){
+    public ResponseEntity<List<DrinkDetailDto>> getRecommendDrink(){
         String kakaoId = SecurityContextHolder.getContext().getAuthentication().getName();
 
         UserPreferenceDto userPreferenceDto = userPreferenceService.getUserPreferenceDto(kakaoId);
-        List<RecommendRankingDto> recommend = new ArrayList<>();;
+        List<DrinkDetailDto> recommend = new ArrayList<>();;
 
         if(userPreferenceDto != null){
             recommend = userPreferenceService.recommendUserDrink(userPreferenceDto);
