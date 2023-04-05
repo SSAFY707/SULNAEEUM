@@ -17,13 +17,13 @@ export default function Result (props: any) {
   return (
     <>
     <div className={'scroll font-preL'}>
-        <div className={'flex flex-col items-center mb-14 md:flex-row md:items-start md:mb-1'}>
+        <div className={'flex flex-col items-center mb-16 md:flex-row md:items-start md:mb-1'}>
             <div className={'flex md:hidden flex-col items-center pt-16 h-[360px] w-full'} style={{backgroundColor : result.color}}>
                 <div className={'mt-4 text-[20px] font-preR text-[#333333]'}>{result.summary}</div>
                 <div className={'text-[30px] font-preM  text-[#191919]'}>{result.name}</div>
                 <img className={'mt-6 h-[220px]'} src={`/images/jubti/drink/${result.name}.png`} alt="" />
             </div>
-            <div className={'hidden md:flex flex-col items-center h-[400px] w-2/5 mt-20 ml-20'}>
+            <div className={'hidden md:flex flex-col items-center h-[400px] w-2/5 mt-24 ml-20'}>
                 <div className={'w-[200px] h-[200px] rounded-full z-[-10] absolute top-[100px]'} style={{backgroundColor : result.color}}></div>
                 <img className={'mt-6 h-[220px]'} src={`/images/jubti/drink/${result.name}.png`} alt="" />
                 <div className={'text-[30px] font-preM mt-4'}>{result.name}</div>

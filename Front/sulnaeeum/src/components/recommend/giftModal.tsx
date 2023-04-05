@@ -4,7 +4,7 @@ import { AiOutlineGift } from 'react-icons/ai'
 import { VscTriangleDown } from 'react-icons/vsc'
 import  { CgClose } from 'react-icons/cg';
 import { toastError } from '../common/toast';
-import { RecommendDrinkType } from '@/types/DrinkType';
+import { GiftDrinkType, RecommendDrinkType } from '@/types/DrinkType';
 import { getGiftList } from '@/api/auth/drink';
 import { HiMagnifyingGlass } from 'react-icons/hi2';
 import { useRouter } from 'next/router';
@@ -46,7 +46,7 @@ export const GiftModal = (props: {modalOpen : any}) => {
     const [rangeMinPercentLevel, setRangeMinPercentLevel] = useState(0);
     const [rangeMaxPercentLevel, setRangeMaxPercentLevel] = useState(0);
 
-    const [giftList, setGiftList] = useState<RecommendDrinkType[]>([])
+    const [giftList, setGiftList] = useState<GiftDrinkType[]>([])
 
     const prcieRangeMinValueHandler = e => {
         setRangeMinValue(parseInt(e.target.value));
@@ -314,8 +314,8 @@ export const GiftModal = (props: {modalOpen : any}) => {
                     return (
                       <div className={'flex flex-col items-center mt-12 pt-6 rounded shadow-[3px_3px_8px_rgba(0,0,0,0.2)] mx-4 w-[300px] h-[400px]'} key={drink.drinkId}>
                         <div className={'font-preM text-[24px] mb-4'}>{drink.drinkName}</div>
-                        <img className={'h-[44%] mb-4'} src={drink.drinkImg} alt="" />
-                        <div className={'mb-1 font-preR text-[18px]'}>4,800원</div>
+                        <img className={'h-[44%] mb-4'} src={drink.drinkImg}/>
+                        <div className={'mb-1 font-preR text-[18px]'}>{drink.drinkPrice} 원</div>
                         <div>{drink.drinkLevel}% | {drink.drinkAmount} | {drink.drinkType}</div>
                         <div onClick={()=>router.push(`/list/${drink.drinkId}`)} className={'mt-5 shadow cursor-pointer flex justify-center items-center py-2 px-4 bg-gradient-to-r from-teal-400 to-emerald-400 transition hover:-translate-y-0.5 duration-300 ease-in text-white rounded-full hover:font-preR hover:shadow-md hover:scale-105'}>
                           <HiMagnifyingGlass className={'mr-2'} />
