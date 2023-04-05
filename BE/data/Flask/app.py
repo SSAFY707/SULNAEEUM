@@ -206,9 +206,6 @@ def cal_level(level):
 # 랭킹 API
 @app.route("/rabbit/ranking", methods=["GET"])
 def rabbit_ranking():
-    parameter_dict = request.get_json()
-    print(parameter_dict)
-
     conn = db_connect()
     cur = conn.cursor()
 
