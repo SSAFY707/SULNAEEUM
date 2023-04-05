@@ -89,16 +89,7 @@ export type tasteType = {
 
 
 export interface UserClear {
-  drinkId: number;
-  drinkName: string;
-  drinkImage: string;
-  drinkAmount: string;
-  drinkLevel: string;
-  drinkType: string;
-}
-
-export interface UserPreferenceDrink {
-  [index: string]: string | number;
+  [index : string] : number | string;
   drinkId: number;
   drinkName: string;
   drinkImage: string;
@@ -108,6 +99,7 @@ export interface UserPreferenceDrink {
 }
 
 export interface UserPreferenceStore {
+  [index : string] : number | string | string[];
   storeId: number;
   storeName: string;
   storeImage: string;

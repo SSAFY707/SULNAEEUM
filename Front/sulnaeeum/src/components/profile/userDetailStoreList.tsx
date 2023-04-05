@@ -19,7 +19,7 @@ export default function userDetailStoreList(props: {userData:UserPreferenceStore
               {userData.storeDrink.map((v, i) => { 
                   return (
                       <div className='flex'>
-                              <Image className="w-[30px] h-[73px] " src={userData.storeDrinkImage[i]} alt="" width={40} height={30} ></Image>
+                              <img className="w-[30px] h-[73px] " src={userData.storeDrinkImage[i]} alt="" width={40} height={30} ></img>
                         <div className='flex flex-col justify-center ml-[10px]'>
                             <div className="text-[20px]">{v}</div>
                             <div className="font-preM text-[#393939]">{userData.storeDrinkType[i]}</div>

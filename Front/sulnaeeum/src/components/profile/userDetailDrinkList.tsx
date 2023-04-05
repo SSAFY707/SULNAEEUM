@@ -13,7 +13,7 @@ export default function userDetailDrinkList(props: { userData: UserClear }) {
         <div className="text-center items-center flex text-[25px] pr-[90px]">
           {userData.drinkId}
         </div>
-        <Image src={userData.drinkImage} alt="" width={32} height={5}></Image>
+        <img src={userData.drinkImage} alt="" width={32} height={5}></img>
         <div className="items-center flex pl-[23px] text-[21px] ">
           <div className="font-preM w-[300px] text-[#393939]">{userData.drinkName}</div>
         </div>

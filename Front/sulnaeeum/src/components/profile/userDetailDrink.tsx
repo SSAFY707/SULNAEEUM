@@ -1,12 +1,23 @@
 import React, { useEffect, useState } from "react";
 import UserDetailDrinkList from "./userDetailDrinkList";
-import { UserClear, UserPreferenceDrink } from "@/types/DataTypes";
+import { UserClear } from "@/types/DataTypes";
+import { getMyClearDrink, getMyLikeDrink } from "@/api/auth/mypage";
 
-export default function userDetailDrink(props: {
-  userData: UserClear[];
-  idx: number;
-}) {
-  const { idx, userData } = props;
+export default function userDetailDrink(props: { idx: number }) {
+  const { idx } = props;
+
+  const [userData, setUserData] = useState<UserClear[]>([])
+  const dataSetting = async () => {
+    if (idx == 0){
+      setUserData(await getMyClearDrink())
+    } else {
+      setUserData(await getMyLikeDrink())
+    }
+  }
+
+  useEffect(()=>{
+    dataSetting()
+  }, [])
 
   return (
     //0번 1번일 경우
@@ -22,8 +33,8 @@ export default function userDetailDrink(props: {
             <div>종류</div>
           </div>
         </div>
-        <div className="scoll overflow-y-scroll w-[1180px] h-[650px]">
-          {userData.map((v, i) => {
+        <div className="scoll overflow-y-scroll scroll w-[1180px] h-[650px]">
+          {userData?.length != 0 && userData.map((v, i) => {
             return (
               <UserDetailDrinkList key={i} userData={v}></UserDetailDrinkList>
             );

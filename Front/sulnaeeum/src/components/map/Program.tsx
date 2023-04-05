@@ -21,13 +21,13 @@ export default function Program(props: any) {
                   <span className='text-[16px]'>{v.programLocation}</span>
                 </div>
                 <div className='h-[34px] '>
-                  <span className='text-[18px]'>{v.alwaysVisit == 1 ? '상시 방문' : ''}, {v.reserveVisit == 1 ? '예약 방문' : ''} </span>
+                  <span className='text-[18px]'>{v.alwaysVisit == 1 ? '상시 방문' : ''} {v.alwaysVisit == 1 && v.reserveVisit == 1 && ','} {v.reserveVisit == 1 ? '예약 방문' : ''} </span>
                 </div>
                 <div className='h-[130px] '>
                   <span className='text-[18px]'>{v.content.substr(0, 90)}</span>
                 </div>
                 <a href={v.programUrl} target='_blank'>
-                  <div className='cursor-pointer ml-[160px] text-white w-[140px] py-2 px-8 rounded-[4px] bg-[#5CABB7] hover:bg-[#3C97A5]'>더 알아보기</div>
+                  <div className='cursor-pointer ml-[160px] text-white w-[140px] py-2 px-8 rounded-[4px] bg-gradient-to-r from-[#8FAADC] to-[#8FAADC]/80 hover:from-[#809ED4] hover:to-[#809ED4]/70'>더 알아보기</div>
                 </a>
               </div>
             </div>

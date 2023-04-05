@@ -10,6 +10,7 @@ import { useAppDispatch, useAppSelector } from '@/hooks'
 import { FaRegBookmark, FaBookmark } from 'react-icons/fa'
 import { setDrinkLikeInDetail } from '@/store/drinkSlice'
 import { drinkLike } from '@/api/auth'
+import { toastError } from '@/components/common/toast'
 
 export default function Detail(props: {drinkId : number}) {
   const { drinkId } = props
@@ -28,8 +29,12 @@ export default function Detail(props: {drinkId : number}) {
       dispatch(getDrinkDetail(drinkId))
     }
   },[drinkId, dispatch])
-
+  
   const like = () => {
+    const isLogin = sessionStorage.getItem('isLogin')
+    if(!isLogin) {
+      toastError('로그인이 필요한 기능입니다.', '🚨', 'top-right')
+    }
     dispatch(setDrinkLikeInDetail())
     drinkLike(drinkId)
   }
