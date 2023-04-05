@@ -153,6 +153,14 @@ make_drink_data()
 
 
 
+# ============================= RabbitMQ API ============================
+
+# Test API
+@app.route("/test", methods=["GET"])
+def test():
+    print("test 성공 !")
+    return "ok"
+
 
 
 # ============================= 추천 API ============================
