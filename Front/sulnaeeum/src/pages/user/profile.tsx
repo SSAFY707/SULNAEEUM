@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Link from "next/link";
 import Head from "next/head";
 import Image from "next/image";
 import { Divider } from "@chakra-ui/react";
 import UserTabBtn from "@/components/profile/userTabBtn";
 import UserTextMining from "@/components/profile/userTextMining";
+import { useAppDispatch, useAppSelector } from "@/hooks";
+import { getTextMining, getUser, textMining, user } from "@/store/userSlice";
 
 export default function profile() {
   // API 통신해서 사용자 가져오기 => Slice에서 가져오면 될 거 같음..?
@@ -18,33 +20,35 @@ export default function profile() {
     "내가 찜 한 전통주 가게",
   ];
   // API 통신해서 menuData에 담아두기 => Slice에서 가져오면 될 거 같음..?
-  const menuData: string[] = ["100병", "100병", "100곳"];
+  const menuData: string[] = [ 'clearDrinkCnt', 'likeDrinkCnt', 'likeJumakCnt'];
   const tabInfo = {
     menuName,
     menuData,
   };
+  const userInfo = useAppSelector(user)
+
+  const dispatch = useAppDispatch()
+
+  useEffect(() => { 
+    dispatch(getUser())
+  },[])
 
   return (
     <>
-      <Head>
-        <title>SULNAEEUM | 술내음</title>
-      </Head>
       <div className="w-screen h-screen bg-gray-200 flex justify-center">
         <div className="w-[1200px] h-[700px] mt-[165px] rounded-lg ">
           {/* 사용자 정보 */}
           <div className="absolute w-[312px] h-[700px] rounded-lg bg-white  flex flex-col items-center ">
             <img
               className="absolute z-10 top-[75px] w-[160px] h-[160px] object-cover rounded-full shadow-sm "
-              src="/images/profile/sample_profile.jpg"
+              src={ userInfo.img}
               alt=""
             ></img>
             <span className="absolute z-10 top-[245px] font-preB text-[23px] text-[#414141]">
-              오하늘 우아악
+              {userInfo.nickname}
             </span>
-            <span className="absolute z-10 top-[275px] font-preL text-[15px] text-[#414141]">
-              ssafy1234@ssafy.com
-            </span>
-            <div className="absolute z-10 top-[320px] w-[200px] h-[90px] flex justify-between">
+
+            <div className="absolute z-10 top-[280px] w-[200px] h-[90px] flex justify-between">
               <div className="absolute z-10 w-[80px] h-[90px] bg-white flex flex-col justify-center items-center">
                 <div className=" text-[#7F7F7F]">성별</div>
                 <div className="font-preB text-[20px] text-[#414141]">여자</div>
@@ -71,10 +75,10 @@ export default function profile() {
           </div>
           {/* 사용자 찜 정보 */}
           <div className="absolute w-[870px] h-[215px] rounded-lg left-[690px] top-[650px] flex justify-between ">
-            {menuName.map((menuName, idx) => {
+            {[0,1,2].map((i) => {
               return (
-                <Link href={`/user/detail/${idx}`}>
-                  <UserTabBtn tabInfo={tabInfo} id={idx + 1}></UserTabBtn>
+                <Link href={`/user/detail/${i}`}>
+                  <UserTabBtn menuName={menuName[i]} menuData={userInfo[menuData[i]]} id={i+1}></UserTabBtn>
                 </Link>
               );
             })}

@@ -136,3 +136,23 @@ export type todayDish = {
   todayId: number;
   todayDish: string;
 }
+
+export type UserType = {
+  userId: number
+  kakaoId: string,
+  nickname: string,
+  age: number|null,
+  sex: number|null,
+  img: string,
+  ranking: number,
+  finish: boolean
+}
+
+export type TextType = {
+  text: string,
+  value : number,
+}
+
+export type TextMinigType = {
+  'words': TextType[]
+}
