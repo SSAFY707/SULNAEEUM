@@ -156,7 +156,7 @@ function Navbar() {
           {menu.map((v, i) => {
             return (
               <div onClick={(e)=>move(e, v, url[i])} key={i}>
-                <div className="hover:border-b-2 hover:border-[#B58269] cursor-pointer text-neutral-600 hover:font-preEB font-preM w-[110px] pt-[9px] h-[42px] text-center">
+                <div className="hover:border-b-2 hover:border-[#A19991] cursor-pointer text-neutral-600 hover:font-preEB font-preM w-[110px] pt-[9px] h-[42px] text-center">
                   {v}
                   {hover == "On" ? (
                     <ul className="items-center text-center pt-[18px]">

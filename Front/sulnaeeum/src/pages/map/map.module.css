@@ -164,8 +164,9 @@
 
 .mark_box {
     position: absolute;
+    z-index: -10;
     left: -200px;
-    bottom: -100px;
+    bottom: 200px;
     width: 600px;
 }
 
