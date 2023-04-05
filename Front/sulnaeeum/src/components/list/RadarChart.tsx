@@ -11,6 +11,12 @@ export default function f(props: {drink: DrinkTasteType}) {
       { subject: '바디감', value: (drink.tasteBody + 1) * 4 },
       { subject: '목넘김', value: (drink.tasteThroat + 1) * 4 },
       { subject: '단맛', value: (drink.tasteSweet + 1) * 4 },
+      // { subject: '청량함', value: 0 },
+      // { subject: '신맛', value: 0 },
+      // { subject: '향', value: 0 },
+      // { subject: '바디감', value: 0 },
+      // { subject: '목넘김', value: 0 },
+      // { subject: '단맛', value: 0 },
     ];
     return (
       <ResponsiveContainer width="100%" height="100%">
