@@ -39,7 +39,7 @@ public class UserPreferenceService {
     private final FlaskUtil flaskUtil;
     private final DrinkRepo drinkRepo;
     private final DrinkService drinkService;
-    IngredientTypeRepo ingredientTypeRepo;
+    private final IngredientTypeRepo ingredientTypeRepo;
 
     /***
      * 회원 가입 시 회원 취향을 저장
@@ -161,11 +161,21 @@ public class UserPreferenceService {
             DrinkDetailDto drinkDetailDto = drink.toDrinkDetailDto();
 
             drinkService.findTaste(drinkId, drinkDetailDto);
-//            drinkDetailDto.setIngredient(ingredientTypeRepo.findIngredientName(drinkId));
+
+//            List<Ingredient> ingredients = ingredientRepo
+            drinkDetailDto.setIngredient(ingredientTypeRepo.findIngredientName(drinkId));
 
             recommend.add(drinkDetailDto);
         }
 
         return recommend;
+    }
+
+    private List<String> getIngredientName(List<Ingredient> ingredients){
+        List<String> names = new ArrayList<>();
+
+        for(int i = 0; i < ingredients.size(); i++) names.add(ingredients.get(i).getIngredientType().getIngredientName());
+
+        return names;
     }
 }
