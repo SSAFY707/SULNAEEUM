@@ -101,7 +101,8 @@ export const ReconmendDrinkList = () => {
             {list.length == 0 &&
             <div className={'flex flex-col items-center absolute top-[370px] w-[500px] h-[240px] rounded-lg'}>
               <div className={'font-preB text-zinc-500 text-[30px] text-center h-[120px] mt-[50px]'}>간단한 취향조사로 <br/> 나만의 전통주를 추천받으세요.</div>
-              <div onClick={()=>(router.push('/user/prefer'))} className={'h-[70px] w-[60%] flex justify-center items-center bg-gradient-to-r from-teal-400 to-emerald-400 hover:-translate-y-1 duration-[300ms] ease-in text-white text-[20px] drop-shadow-md cursor-pointer rounded-full'}>나만의 전통주 추천받기</div>
+              {/* <div onClick={()=>(router.push('/user/prefer'))} className={'h-[70px] w-[60%] flex justify-center items-center bg-gradient-to-r from-teal-400 to-emerald-400 hover:-translate-y-1 duration-[300ms] ease-in text-white text-[20px] drop-shadow-md cursor-pointer rounded-full'}>나만의 전통주 추천받기</div> */}
+              <div onClick={()=>(router.push('/user/prefer'))} className={'h-[70px] w-[60%] flex justify-center items-center bg-gradient-to-r from-[#8FAADC] to-[#8FAADC]/60 hover:-translate-y-1 duration-[300ms] ease-in text-white text-[20px] drop-shadow-md cursor-pointer rounded-full'}>나만의 전통주 추천받기</div>
             </div>
             }
         </>

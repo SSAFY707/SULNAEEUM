@@ -49,7 +49,7 @@ export default function index(props: {target : string}) {
             <div className={'text-[22px] mt-4'}>선물 받는 분의 정보를 입력하면<br></br><span className={'font-preR'}>맞춤형 전통주 선물 리스트</span>를 알려드려요.</div>
             <div className={'flex w-full'}>
               <div onClick={modalOpen} className={"flex justify-center items-center w-[220px] rounded mt-6 py-2 text-[22px] font-preR hover:font-preM cursor-pointer bg-zinc-200 hover:bg-zinc-300"}>
-                <AiOutlineGift className={'mr-4'}/>전통주 선물하기
+                <AiOutlineGift className={'mr-2'}/>전통주 선물하기
               </div>
             </div>
           </div>

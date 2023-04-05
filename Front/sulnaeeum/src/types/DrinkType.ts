@@ -128,6 +128,7 @@ export type RecommendDrinkType = {
     ingredientList : string[]
 }
 
+// 선물 추천을 위한 data
 export type SubmitGiftType = {
     [index : string] : string | number
     sex : string,
@@ -142,4 +143,17 @@ export type SubmitGiftType = {
     tasteRefresh : number,
     tasteBody : number,
     tasteThroat : number
+}
+
+// 선물 추천 전통주 리스트 타입
+export type GiftDrinkType = {
+    [index : string] : string | number | string[],
+    drinkId : number,
+    drinkName : string,
+    drinkImg : string,
+    drinkPrice : string,
+    drinkLevel : number,
+    drinkAmount : string,
+    drinkType : string,
+    ingredientList : string[]
 }

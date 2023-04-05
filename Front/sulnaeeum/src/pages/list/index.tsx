@@ -35,7 +35,7 @@ export default function List(props: {type: string, sort: string}) {
               return (<div onClick={()=>{setSort(item)}} key={index} className={`mx-2 cursor-pointer ${sort == sortArr[index] ? 'text-[18px] font-preM text-[#665442]' : 'text-[16px] font-preL'}`}>{item}순</div>)
             })}
           </div>
-          <div className={'h-[750px] overflow-y-scroll bg-[#F5F5F5]/70 scroll'}>
+          <div className={'h-[750px] overflow-y-scroll bg-[#F5F5F5]/60 scroll'}>
             <DrinkList drinkType={type} sortType={sort}></DrinkList>
           </div>
         </div>

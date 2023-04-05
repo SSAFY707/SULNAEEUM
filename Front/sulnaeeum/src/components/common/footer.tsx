@@ -14,11 +14,12 @@ export default function Footer() {
     } 
 
   return (
-    <div className={'flex justify-between border-t h-[380px] bg-[#333333] items-center px-[260px]'}>
+  <>
+    <div className={'hidden md:flex justify-between shadow-[0px_-5px_20px_#CECECE80] h-[380px] bg-white items-center px-[260px]'}>
         <img className={'h-1/2'} src="/images/footer_logo.png" />
         <div>
             <div className={'text-zinc-400/80 mb-6'}>About Service</div>
-            <div className={'text-[18px] font-preM mb-6 text-zinc-300'}>
+            <div className={'text-[18px] font-preM mb-6 text-zinc-800'}>
                 '술내음'은 우리 술을 알리고,<br />
                 사용자의 취향을 반영한 전통주를 추천해주는<br />
                 사용자 맞춤 전통주 서비스입니다.
@@ -56,5 +57,6 @@ export default function Footer() {
             </div>
         </div>
     </div >
+  </>
   )
 }

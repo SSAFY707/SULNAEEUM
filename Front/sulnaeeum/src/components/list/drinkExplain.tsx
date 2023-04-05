@@ -24,16 +24,15 @@ export const DrinkExplain = () => {
         <Modal w='500px' h='auto' open={open} modalOpen={modalOpen}>
           <DrinkClear drinkId={detail.drinkId} drinkName={detail.drinkName} modalOpen={modalOpen}/>
         </Modal>
-        <div className={'flex justify-between items-center pl-8 pr-4'}>
+        <div className={'flex justify-between items-center pl-8 pr-1'}>
             <div className={'flex items-end text-[16px] font-preEL'}>
               <div className={'mr-4 text-[34px] font-preR'}>{detail.drinkName}</div>
               <div className={'pb-1'}>{detail.drinkLevel}% | {detail.drinkAmount}</div> 
             </div>
-            {login ? detail.clear ? <div className={'text-zinc-400 mt-2'}>클리어 완료</div> :
+            {login && detail.clear ? <div className={'text-zinc-400 mt-2'}>클리어 완료</div> :
             <div onClick={modalOpen} className={'cursor-pointer mt-2 hover:bg-zinc-200 py-2 px-4 rounded-full'}>
               클리어하기
-            </div>
-            : <ClearFalse />  
+            </div>  
           }
         </div>
         <hr className={'border-xs border-zinc-300 mt-2 mb-10'} />

@@ -89,7 +89,7 @@ export default function DrinkJumak() {
         </div>
         <div className={'flex justify-between items-end'}>
             <div className={'text-[20px] pl-2 font-preR'}><span className={'font-mj text-[40px] mr-2'}>{drink.drinkDetailDto.drinkName}</span>을(를) 판매하는 식당</div>
-            <div onClick={modalOpen} className={'flex justify-center items-center mb-3 mr-3 rounded text-white h-3/4 p-2 bg-gradient-to-r from-teal-400 to-emerald-400 transition ease-in duration-300 hover:font-preR hover:scale-[103%] hover:-translate-y-0.5 cursor-pointer'}>판매처 등록하기</div>
+            <div onClick={modalOpen} className={'flex justify-center items-center mb-3 mr-3 rounded-full px-4 text-white h-3/4 p-2 bg-gradient-to-r from-[#8FAADC] to-[#8FAADC]/80 transition ease-in duration-300 hover:font-preR hover:scale-[103%] hover:-translate-y-0.5 cursor-pointer'}>판매처 등록하기</div>
         </div>
         <hr className={'border-[#D3D3D3] border-1 mb-10'} />
         <div className={'flex w-full h-[600px]'}>

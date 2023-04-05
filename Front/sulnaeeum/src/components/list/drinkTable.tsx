@@ -73,7 +73,7 @@ export const DrinkList = (props: {drinkType: string, sortType : string}) => {
             <div key={index} className={'flex w-full justify-center items-center h-[360px]'}>
               <div onClick={()=>move(item.drinkId)} className={'group flex flex-col items-center bg-white p-4 cursor-pointer w-[95%] h-[350px] border rounded-xl hover:w-full hover:h-[360px] shadow-sm hover:shadow-lg'}>
                 <div className={'w-full flex justify-end h-[28px]'}>
-                  <div onClick={(event)=>like(event, item.drinkId)} className={'h-full w-[40px] flex justify-center tcursor-pointer text-[20px] text-[#655422] hover:text-[24px]'}>
+                  <div onClick={(event)=>like(event, item.drinkId)} className={'h-full w-[40px] flex justify-center tcursor-pointer text-[20px] text-[#A19991] hover:text-[24px]'}>
                   {likeList.indexOf(item.drinkId) != -1 ? 
                   <FaBookmark /> : 
                   <FaRegBookmark />}
