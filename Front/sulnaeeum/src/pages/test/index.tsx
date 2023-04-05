@@ -9,6 +9,7 @@ import {
   ModalBody,
   ModalCloseButton,
 } from '@chakra-ui/react'
+import MyGraph from '@/components/common/myGraph'
 
 export default function index() {
   // const { isOpen, onOpen, onClose } = useDisclosure()
@@ -17,25 +18,12 @@ export default function index() {
     setOpen(!open)
   }
   return (<>
-    <div className='absolute top-[100px]'>준비중입니다.
-    <button onClick={modalOpen}>Trigger modal</button>
-      <Modal w='500px' h='400px' open={open} modalOpen={modalOpen}>
-        <div>이건 테스트 모달 입니당!</div>
-      </Modal>
-
-{/* <Modal onClose={onClose} isOpen={isOpen} isCentered>
-  <ModalOverlay />
-  <ModalContent>
-    <ModalHeader>Modal Title</ModalHeader>
-    <ModalCloseButton />
-    <ModalBody>
-      <Lorem count={2} />
-    </ModalBody>
-    <ModalFooter>
-      <Button onClick={onClose}>Close</Button>
-    </ModalFooter>
-  </ModalContent>
-</Modal> */}
+    <div className='h-[200px] bg-sky-200'>
+      
+      준비중입니다.
+    </div>
+    <div className='h-[800px] p-40'>
+    <MyGraph />
     </div>
   </>
   )
