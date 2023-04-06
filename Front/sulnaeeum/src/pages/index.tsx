@@ -96,9 +96,9 @@ export default function Home() {
             width={1900}
             height={0}
           /> */}
-          <div className=" absolute z-40 top-[689px] left-[-110px] ">
+          <div className=" absolute z-40 top-[630px] left-[-110px] ">
             <Image
-              src="/main/part1/요고7.png"
+              src="/main/part1/main1_txt2.png"
               alt=""
               width={2700}
               height={0}
