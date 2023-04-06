@@ -41,16 +41,19 @@ public class MypageService {
         int likeJumakCnt = myJumakRepo.findCntByUser(user.getUserId());
         int clearDrinkCnt = reviewRepo.findCntByUser(user.getUserId());
 
-        UserPreference userPreference = userPreferenceRepo.findByUser(user).orElse(null);
-        UserPreferenceDto userPreferenceDto = userPreference.toDto();
-        userPreferenceDto.setAge(user.getAge());
-        userPreferenceDto.setSex(user.getSex());
-
         MyInfoDto myInfoDto = user.toMyInfoDto();
         myInfoDto.setLikeDrinkCnt(likeDrinkCnt);
         myInfoDto.setLikeJumakCnt(likeJumakCnt);
         myInfoDto.setClearDrinkCnt(clearDrinkCnt);
-        myInfoDto.setUserPreferenceDto(userPreferenceDto);
+
+        UserPreference userPreference = userPreferenceRepo.findByUser(user).orElse(null);
+        myInfoDto.setUserPreferenceDto(null);
+        if(userPreference!=null){
+            UserPreferenceDto userPreferenceDto = userPreference.toDto();
+            userPreferenceDto.setAge(user.getAge());
+            userPreferenceDto.setSex(user.getSex());
+            myInfoDto.setUserPreferenceDto(userPreferenceDto);
+        }
 
         return myInfoDto;
     }
