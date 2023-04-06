@@ -273,7 +273,7 @@ def rabbit_ranking():
     print(jubti_female_point)
     print(jubti_total_point)
 
-    input_data = [[]]
+    input_data = []
     input_data.append(jubti_total_point)
     input_data.append(jubti_male_point)
     input_data.append(jubti_female_point)
