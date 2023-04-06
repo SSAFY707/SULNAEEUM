@@ -76,7 +76,23 @@ a {
     font-family: 'mjB';
     src: url("../assets/fonts/NanumMyeongjoBold.ttf");
 }
+@font-face {
+    font-family: 'gwt';
+    src: url("../assets/fonts/강원교육튼튼.ttf");
+}
 
+@font-face {
+    font-family: 'sbB';
+    src: url("../assets/fonts/SB 어그로 B.ttf");
+}
+@font-face {
+    font-family: 'sbL';
+    src: url("../assets/fonts/SB 어그로 L.ttf");
+}
+@font-face {
+    font-family: 'sbM';
+    src: url("../assets/fonts/SB 어그로 M.ttf");
+}
 .scroll::-webkit-scrollbar {
     width: 10px;
 }

@@ -1,13 +1,14 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import Head from "next/head";
 import Image from "next/image";
 import { Divider } from "@chakra-ui/react";
 import UserTabBtn from "@/components/profile/userTabBtn";
-import UserTextMining from "@/components/profile/userTextMining";
 import WordCloud from "@/components/profile/WordCloud";
 import { useAppDispatch, useAppSelector } from "@/hooks";
-import { getTextMining, getUser, textMining, user } from "@/store/userSlice";
+import { getUser, textMining, user } from "@/store/userSlice";
+import { TextType } from "@/types/DataTypes";
+import { authAxios } from "@/api/common";
 
 export default function profile() {
   // API 통신해서 사용자 가져오기 => Slice에서 가져오면 될 거 같음..?
@@ -15,33 +16,33 @@ export default function profile() {
     name: string;
   }
 
-  const data = [
-    { text: "김나현", value: 20 },
-    { text: "오하늘", value: 12 },
-    { text: "A707", value: 50 },
-    { text: "기트", value: 12 },
-    { text: "술내음", value: 7 },
-    { text: "전통주", value: 20 },
-    { text: "왁왁", value: 30 },
-    { text: "운동해", value: 75 },
-    { text: "도꺠비술", value: 12 },
-    { text: "주비티아이", value: 70 },
-    { text: "증류주", value: 23 },
-    { text: "탁주", value: 3 },
-    { text: "삼성", value: 50 },
-    { text: "맥", value: 40 },
-    { text: "원규", value: 15 },
-    { text: "미희", value: 30 },
-    { text: "설희", value: 100 },
-    { text: "성훈", value: 50 },
-    { text: "하늘", value: 80 },
-    { text: "캡처", value: 7 },
-    { text: "지라", value: 20 },
-    { text: "카공", value: 10 },
-    { text: "막걸리", value: 5 },
-    { text: "술눼음", value: 12 },
-    { text: "메롱", value: 7 },
-  ];
+  // const data = [
+  //   { text: "김나현", value: 20 },
+  //   { text: "오하늘", value: 12 },
+  //   { text: "A707", value: 50 },
+  //   { text: "기트", value: 12 },
+  //   { text: "술내음", value: 7 },
+  //   { text: "전통주", value: 20 },
+  //   { text: "왁왁", value: 30 },
+  //   { text: "운동해", value: 75 },
+  //   { text: "도꺠비술", value: 12 },
+  //   { text: "주비티아이", value: 70 },
+  //   { text: "증류주", value: 23 },
+  //   { text: "탁주", value: 3 },
+  //   { text: "삼성", value: 50 },
+  //   { text: "맥", value: 40 },
+  //   { text: "원규", value: 15 },
+  //   { text: "미희", value: 30 },
+  //   { text: "설희", value: 100 },
+  //   { text: "성훈", value: 50 },
+  //   { text: "하늘", value: 80 },
+  //   { text: "캡처", value: 7 },
+  //   { text: "지라", value: 20 },
+  //   { text: "카공", value: 10 },
+  //   { text: "막걸리", value: 5 },
+  //   { text: "술눼음", value: 12 },
+  //   { text: "메롱", value: 7 },
+  // ];
   const menuName: string[] = [
     "내가 클리어 한 전통주",
     "내가 찜 한 전통주",
@@ -56,11 +57,24 @@ export default function profile() {
   const userInfo = useAppSelector(user);
   const textMiningInfo = useAppSelector(textMining);
 
+  const[texts, setTexts] = useState<TextType[]>([])
+
+  const getTextMining = async () => {
+    authAxios.get(`mypage/textmining`
+    ).then((res) => {
+      setTexts(res.data.words)
+    })
+  }
+
+  useEffect(() => {
+    getTextMining()
+  },[])
+
   const dispatch = useAppDispatch();
 
   useEffect(() => {
     dispatch(getUser());
-    dispatch(getTextMining());
+    // dispatch(getTextMining());
   }, []);
 
   return (
@@ -94,13 +108,14 @@ export default function profile() {
           </div>
           {/* 텍스트 마이닝 */}
           <div className="absolute w-[870px] h-[468px] rounded-lg left-[690px] bg-white ">
-            <div className="absolute top-[30px] text-[25px] text-[#414141] font-preEB w-[800px] h-[420px] left-[40px] ">
+            <div className="abosolute w-[195px] h-[71.5px] border-b-2 ml-[35px]"></div>
+            <div className="absolute top-[30px] text-[25px] text-[#414141] font-preM  w-[800px] h-[420px] left-[40px] ">
               나의 맞춤형 키워드
               <div className="absolute w-[800px] h-[365px] flex justify-center items-center ">
                 <WordCloud
-                  data={textMiningInfo["words"]}
+                  data={texts}
                   width={700}
-                  height={350}
+                  height={330}
                 />
               </div>
             </div>

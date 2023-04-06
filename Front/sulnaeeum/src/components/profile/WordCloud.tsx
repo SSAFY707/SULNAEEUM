@@ -17,10 +17,15 @@ const WordCloud: React.FC<WordCloudProps> = ({ data, width, height }) => {
     const layout = cloud()
       .size([width, height])
       .words(data)
-      .padding(8)
-      .rotate(() => ~~(Math.random() * 2) * 90)
-      .font("preBl")
-      .fontSize((d) => d["value"])
+      .padding(4.5)
+      .rotate(() => ~~(Math.random() * 360) )
+      .font("sbM")
+      .fontSize((d) => {
+        if (d['value'] < 10) {
+          return 25
+        }
+        return d['value'] * 3
+      })
       .on("end", draw);
     layout.start();
   }, [data, width, height]);
@@ -36,7 +41,7 @@ const WordCloud: React.FC<WordCloudProps> = ({ data, width, height }) => {
       .data(words)
       .join("text")
       .style("font-size", (d) => `${d.size}px`)
-      .style("font-family", "preBl")
+      .style("font-family", "sbM")
       .style("fill", () => d3.schemeCategory10[Math.floor(Math.random() * 10)])
       .attr("text-anchor", "middle")
       .attr("transform", (d) => `translate(${d.x}, ${d.y})rotate(${d.rotate})`)
