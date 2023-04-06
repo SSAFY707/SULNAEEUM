@@ -1,20 +1,23 @@
 import React from "react";
-import {
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalFooter,
-  ModalBody,
-  ModalCloseButton,
-} from "@chakra-ui/react";
+// import {
+//   Modal,
+//   ModalOverlay,
+//   ModalContent,
+//   ModalHeader,
+//   ModalFooter,
+//   ModalBody,
+//   ModalCloseButton,
+// } from "@chakra-ui/react";
 import { Button } from "@chakra-ui/react";
 import { useDisclosure } from "@chakra-ui/react";
+import  { CgClose } from 'react-icons/cg';
 import Image from "next/image";
 import { todayCheers, todayDrink, todayDish } from "@/types/DataTypes";
 import { useState, useEffect } from "react";
 import axios from "axios";
-// import { Modal } from '@/components/common/modal'
+import { Modal } from '@/components/common/modal'
+import { defaultAxios } from "@/api/common";
+import { useRouter } from "next/router";
 
 export default function todayModal(props: {
   idx : number
@@ -24,34 +27,49 @@ export default function todayModal(props: {
 }) {
   
   const { image, todayType,todayText ,idx} = props;
-  const { isOpen, onOpen, onClose } = useDisclosure();
+  // const { isOpen, onOpen, onClose } = useDisclosure();
   const [cheers, setCheers] = useState<todayCheers>({todayContent:'',todayId:0,todayName:''});
   const [drink, setDrink] = useState<todayDrink>({todayAmount:'',todayDrink:'',todayId:0,todayImage:'',todayLevel:0,todayType:''});
   const [dish, setDish] = useState<todayDish>({todayId:0, todayDish:''});
   const [open, setOpen] = useState<boolean>(false)
+  const [ing, setIng] = useState<boolean>(false)
+
+  const router = useRouter()
+
   const modalOpen = () => { 
     setOpen(!open)
   }
 
-  const getCheers = () => {
-    axios.get<todayCheers>('https://j8a707.p.ssafy.io/api/today/n/cheers').then((response) => {
-      setCheers(response.data);
-    });
+  const name = ['건배사', '전통주', '안주']
+
+  const getCheers = async () => {
+    await defaultAxios.get('today/n/cheers'
+    ).then((res)=>setCheers(res.data))
   }
-  const getDrink = () => {
-    axios.get<todayDrink>('https://j8a707.p.ssafy.io/api/today/n/drink').then((response) => {
-      setDrink(response.data);
-    });
+  
+  const getDrink = async () => {
+    await defaultAxios.get('today/n/drink'
+    ).then((res)=>setDrink(res.data))
   }
-  const getDish = () => {
-    axios.get<todayDish>('https://j8a707.p.ssafy.io/api/today/n/dish').then((response) => {
-      setDish(response.data);
-    });
+  
+  const getDish = async () => {
+    await defaultAxios.get('today/n/dish'
+    ).then((res)=>setDish(res.data))
   }
 
-  useEffect(() => {
-    idx == 0 ? getCheers() : idx == 1 ? getDrink() : getDish();
-  }, []);
+  const getRandom = async () => {
+    setIng(false)
+    if(idx == 0){
+      await getCheers()
+    }else if(idx == 1){
+      await getDrink()
+    }else{
+      await getDish()
+    }
+    setTimeout(()=>{
+      setIng(true)
+    },2000)
+  }
 
   return (
     <div>
@@ -59,8 +77,8 @@ export default function todayModal(props: {
       <div
         className="w-[350px] h-[350px] bg-white rounded-lg hover:w-[360px] hover:h-[360px] hover:cursor-pointer shadow-lg"
           onClick={() => { 
-            onOpen();
-            idx == 0 ? getCheers() : idx == 1 ? getDrink() : getDish();
+            modalOpen();
+            getRandom();
           }}
         >
           <div className="absolute mt-[50px]">
@@ -73,14 +91,75 @@ export default function todayModal(props: {
             <div className="w-[250px] h-[100px] ml-[50px] mt-[10px] ">
               {todayText.map((v, i) => { 
                 return (
-                  <span className="leading-relaxed font-preR text-[16px] text-[#7F7F7F]" key={i}>{v}    </span>
+                  <span className="leading-relaxed font-preR text-[16px] text-[#7F7F7F]" key={i}>{v}</span>
                 )
               })}
             </div>
           </div>
       </div>
     </div>
-      <Modal onClose={onClose} size="lg" isOpen={isOpen} isCentered>
+    <Modal w="500px" h="400px" open={open} modalOpen={modalOpen}>
+      <div className={'flex w-full justify-end'}>
+          <button className={'relative top-[30px] right-[30px] text-[30px] text-zinc-400'} onClick={ () => modalOpen() }><CgClose/></button>
+      </div>
+      {!ing &&
+        <>
+          <img className={"w-1/2 mt-12"} src="/images/randomLoading.gif" />
+          <div className={"mb-2 font-preB text-[28px]"}>
+            당신을 위한 오늘의 <span className={"text-[28px] font-preB text-[#809ED4]"}>{name[idx]}</span> 입니다
+          </div>
+          <div className={"font-preM text-[24px] text-[#9A9A9A]"}>
+            랜덤 추천을 기다려 주세요
+          </div>
+        </>
+      }
+      {ing &&
+        <div className={"flex flex-col items-center w-full h-full"}>
+          <div className={"w-full mt-6 mb-4 flex justify-center font-preM text-[24px]"}>술내음이 추천하는 <span className={"text-[#809ED4] font-preB ml-1"}>{name[idx]}</span>입니다.</div>
+          <img className={"w-[450px] mb-2"} src="/images/pattern2.png" alt="" />
+          {idx == 0 && 
+            <div className=" flex flex-col justify-center items-center h-[170px]">
+                <div className="text-[56px] font-star ">                   
+                {cheers.todayName}
+                </div>
+                <div className="text-[20px] font-preR w-full flex justify-center">
+                {cheers.todayContent}!
+                </div>
+            </div>
+          }
+          {idx == 1 && 
+            <div className="flex justify-center items-center h-[170px] w-full">
+              <div className={"w-[40%] mr-[10%] flex justify-end"}>
+                <img className={"h-[130px] object-cover"} src={drink.todayImage} />
+              </div>
+              <div className={"w-1/2"}>
+                <div className="text-[24px] font-preB flex">
+                {drink.todayDrink}
+                </div>
+                <div className="text-[16px] font-preR flex">
+                {drink.todayLevel}% | {drink.todayAmount} | {drink.todayType}
+                </div>
+                <div onClick={()=>router.push(`/list/${drink.todayId}`)} className={"w-[100px] mt-3 flex justify-center items-center bg-zinc-200 hover:bg-zinc-300 cursor-pointer rounded py-1 px-3"}>더 알아보기</div>
+              </div>
+            </div>
+          }
+          {idx == 2 && 
+            <div className=" flex flex-col items-center justify-center h-[170px]">
+                <div className="text-[56px] font-star">                   
+                {dish.todayDish}
+                </div>
+                <div className="text-[20px] font-preR w-full flex justify-center">
+                어떠세요?
+                </div>
+            </div>
+          }
+          <div className={"w-full mt-4 flex justify-center"}>
+            <div onClick={()=>{getRandom();}} className={"flex justify-center items-center px-4 py-2 rounded-full bg-gradient-to-r from-[#8FAADC] to-[#8FAADC]/70 text-white cursor-pointer transition duration-300 ease-in hover:from-[#809ED4] hover:to-[#809ED4]/70 font-preR"}>다시 추천받기</div>
+          </div>
+        </div> 
+      }
+    </Modal>
+      {/* <Modal onClose={onClose} size="lg" isOpen={isOpen} isCentered>
         <ModalOverlay />
         <ModalContent>
           <ModalHeader >{todayType}</ModalHeader>
@@ -145,7 +224,7 @@ export default function todayModal(props: {
             <Button colorScheme='orange' className="ml-[15px]" onClick={onClose}>확인</Button>
           </ModalFooter>
         </ModalContent>
-      </Modal>
+      </Modal> */}
     </div>
   );
 }

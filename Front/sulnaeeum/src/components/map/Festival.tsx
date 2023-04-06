@@ -15,7 +15,7 @@ export default function Festival(props: any) {
             <h1 className='mt-[110px] text-center text-[32px]'>{fest[mode].fest_name}</h1>
             <p className='text-center'>({fest[mode].start_date.substr(2, 8).replace(/-/g, '.')} ~ {fest[mode].end_date.substr(2, 8).replace(/-/g, '.')})</p>
             <div className='h-[50px] mt-[20px] text-center'>{fest[mode].location}</div>
-            <a href={fest[mode].url} className='rounded-[2px] mt-[20px] ml-[36px] w-[210px] h-[44px] flex justify-center items-center text-white bg-[#5CABB7] hover:bg-[#3C97A5]' target="_blank">
+            <a href={fest[mode].url} className='rounded-[2px] mt-[20px] ml-[36px] w-[210px] h-[44px] flex justify-center items-center text-white bg-gradient-to-r from-[#8FAADC] to-[#8FAADC]/80 hover:from-[#809ED4] hover:to-[#809ED4]/70' target="_blank">
               <p>축제 바로가기</p>
             </a>
 

@@ -300,8 +300,8 @@ export const GiftModal = (props: {modalOpen : any}) => {
           </div>
           <div className={`${page == 3 ? 'flex' : 'hidden'} flex-col`}>
             <div className={`${giftList.length == 0 ? 'flex' : 'hidden'} flex-col justify-center items-center w-[600px] h-[600px]`}>
-              <img src='/images/loading.gif' className='w-[600px]'></img>
-              <p className='font-preM text-[30px] text-[#AEA896]'>맞춤 선물을 추천중입니다...</p>
+              <img src='/images/loading3.gif' className='w-[400px]'></img>
+              <p className='font-preM mt-10 text-[28px]'>맞춤 선물을 추천중입니다...</p>
             </div>
             <div className={`${giftList.length != 0 ? 'flex' : 'hidden'} flex-col items-center w-[1500px] h-[700px]`}>
             <div className={'flex w-full justify-end'}>

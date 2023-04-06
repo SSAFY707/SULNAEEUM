@@ -396,7 +396,7 @@ export default function index(props: { tabData: string }) {
 
   return (
     <>
-      <div className='w-screen h-[50px] bg-red-600'></div>
+      <div className='w-screen h-[10px] bg-red-600'></div>
       <div className={style.container}>
         <Title title={title}></Title>
 
@@ -407,7 +407,8 @@ export default function index(props: { tabData: string }) {
           </div>
           <Right fest={fest} mode={mode} res={res} tab={tab} setTab={setTab}></Right>
         </div>
-        <img className={`${style.mark_box}`} src="images/mark.png" alt='문양'></img>
+        <img className={`${style.mark_box}`} src="images/pattern1.png" alt='문양'></img>
+        {/* <img className={'absolute top-[-400px] right-[-400px] z-[-10]'} src="images/pattern1.png" alt='문양'></img> */}
 
 
       </div>
