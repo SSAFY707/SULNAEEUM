@@ -2,15 +2,14 @@ package com.ssafy.sulnaeeum.model.drink.service;
 
 import com.ssafy.sulnaeeum.exception.CustomException;
 import com.ssafy.sulnaeeum.exception.CustomExceptionList;
-import com.ssafy.sulnaeeum.model.drink.dto.DrinkDto;
-import com.ssafy.sulnaeeum.model.drink.dto.MyDrinkDto;
-import com.ssafy.sulnaeeum.model.drink.dto.ReviewRequestDto;
-import com.ssafy.sulnaeeum.model.drink.dto.ReviewResponseDto;
+import com.ssafy.sulnaeeum.model.drink.dto.*;
 import com.ssafy.sulnaeeum.model.drink.entity.Drink;
 import com.ssafy.sulnaeeum.model.drink.entity.Review;
+import com.ssafy.sulnaeeum.model.drink.entity.Taste;
 import com.ssafy.sulnaeeum.model.drink.repo.DrinkRepo;
 import com.ssafy.sulnaeeum.model.drink.repo.ReviewRepo;
 import com.ssafy.sulnaeeum.model.drink.repo.MyDrinkRepo;
+import com.ssafy.sulnaeeum.model.drink.repo.TasteRepo;
 import com.ssafy.sulnaeeum.model.user.dto.UserDto;
 import com.ssafy.sulnaeeum.model.user.entity.User;
 import com.ssafy.sulnaeeum.model.user.repo.UserRepo;
@@ -43,6 +42,9 @@ public class ReviewService {
 
     @Autowired
     UserService userService;
+
+    @Autowired
+    TasteRepo tasteRepo;
 
     // 리뷰 작성 or 수정 (전통주 클리어)
     @Transactional
@@ -85,6 +87,8 @@ public class ReviewService {
             cntReview(true, drinkId);
         }
         reviewRepo.save(resultReview);
+
+        setTastePoint(resultReview);
 
         // 랭킹 갱신
         updateRanking();
@@ -205,5 +209,116 @@ public class ReviewService {
     public List<ReviewResponseDto> getAllReview(Long drinkId) {
         List<Review> reviewList = reviewRepo.findAllByDrinkId(drinkId);
         return reviewList.stream().map(ReviewResponseDto::new).collect(Collectors.toList());
+    }
+
+    @Transactional
+    public void setTastePoint(Review resultReview){
+        Drink drink = resultReview.getDrink();
+        Long drinkId = drink.getDrinkId();
+
+        int sweet = drink.getSweetScore() + resultReview.getSweetScore();
+        int sour = drink.getSourScore() + resultReview.getSourScore();
+        int throat = drink.getThroatScore() + resultReview.getThroatScore();
+        int body = drink.getBodyScore() + resultReview.getBodyScore();
+        int refresh = drink.getRefreshScore() + resultReview.getRefreshScore();
+        int flavor = drink.getFlavorScore() + resultReview.getFlavorScore();
+
+        Taste tasteSweet = tasteRepo.findSweetByDrinkId(drinkId);
+        Taste tasteSour = tasteRepo.findSourByDrinkId(drinkId);
+        Taste tasteBody = tasteRepo.findBodyByDrinkId(drinkId);
+        Taste tasteRefresh = tasteRepo.findRefreshByDrinkId(drinkId);
+        Taste tasteFlavor = tasteRepo.findFlavorByDrinkId(drinkId);
+        Taste tasteThroat = tasteRepo.findThroatByDrinkId(drinkId);
+
+
+        if(sweet == -5){
+            int sweetPoint = tasteSweet.getScore() - 1;
+            if(sweetPoint > 0){
+                tasteSweet.setScore(sweetPoint);
+                drink.setSweetScore(0);
+            }
+        }else if(sweet == 5){
+            int sweetPoint = tasteSweet.getScore() + 1;
+            if(sweetPoint < 6){
+                tasteSweet.setScore(sweetPoint);
+                drink.setSweetScore(0);
+            }
+        }
+        if(sour == -5){
+            int sourPoint = tasteSour.getScore() - 1;
+            if(sourPoint > 0){
+                tasteSour.setScore(sourPoint);
+                drink.setSourScore(0);
+            }
+        }else if(sour == 5){
+            int sourPoint = tasteSour.getScore() + 1;
+            if(sourPoint < 6){
+                tasteSour.setScore(sourPoint);
+                drink.setSourScore(0);
+            }
+        }
+
+        if(throat == -5){
+            int throatPoint = tasteThroat.getScore() - 1;
+            if(throatPoint > 0){
+                tasteThroat.setScore(throatPoint);
+                drink.setThroatScore(0);
+            }
+        }else if(throat == 5){
+            int throatPoint = tasteThroat.getScore() + 1;
+            if(throatPoint < 6){
+                tasteThroat.setScore(throatPoint);
+                drink.setThroatScore(0);
+            }
+        }
+
+        if(body == -5){
+            int bodyPoint = tasteBody.getScore() - 1;
+            if(bodyPoint > 0){
+                tasteBody.setScore(bodyPoint);
+                drink.setBodyScore(0);
+            }
+        }else if(body == 5){
+            int bodyPoint = tasteBody.getScore() + 1;
+            if(bodyPoint < 6){
+                tasteBody.setScore(bodyPoint);
+                drink.setBodyScore(0);
+            }
+        }
+
+        if(refresh == -5){
+            int refreshPoint = tasteRefresh.getScore() - 1;
+            if(refreshPoint > 0){
+                tasteRefresh.setScore(refreshPoint);
+                drink.setRefreshScore(0);
+            }
+        }else if(refresh == 5){
+            int refreshPoint = tasteRefresh.getScore() + 1;
+            if(refreshPoint < 6){
+                tasteRefresh.setScore(refreshPoint);
+                drink.setRefreshScore(0);
+            }
+        }
+
+        if(flavor == -5){
+            int flavorPoint = tasteFlavor.getScore() - 1;
+            if(flavorPoint > 0){
+                tasteFlavor.setScore(flavorPoint);
+                drink.setFlavorScore(0);
+            }
+        }else if(flavor == 5){
+            int flavorPoint = tasteFlavor.getScore() + 1;
+            if(flavorPoint < 6){
+                tasteFlavor.setScore(flavorPoint);
+                drink.setFlavorScore(0);
+            }
+        }
+
+        tasteRepo.save(tasteSweet);
+        tasteRepo.save(tasteSour);
+        tasteRepo.save(tasteBody);
+        tasteRepo.save(tasteThroat);
+        tasteRepo.save(tasteRefresh);
+        tasteRepo.save(tasteFlavor);
     }
 }
