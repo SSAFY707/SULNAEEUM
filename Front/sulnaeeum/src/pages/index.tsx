@@ -5,6 +5,7 @@ import styles from "./styles.module.css";
 import { useEffect, useState } from "react";
 import { Button } from "@chakra-ui/react";
 import { AiOutlineArrowRight } from "react-icons/ai";
+import { useRouter } from 'next/router'
 
 export default function Home() {
   const scroll = useScroll();
@@ -13,6 +14,7 @@ export default function Home() {
   const [scrollY, setScrollY] = useState(0);
   const imageX = scrollY / 5 > 166 ? 166 : scrollY / 5;
   const [isVisible, setIsVisible] = useState(false);
+  const router = useRouter()
 
   const image5: string[] = [
     "/main/part5/main5_1s.png",
@@ -131,6 +133,7 @@ export default function Home() {
             </div>
             <div className="absolute left-[420px] top-[410px]">
               <Button
+                onClick={()=>{router.push(`/list?type=전체&sort=이름`)}}
                 size="lg"
                 fontFamily={"preT"}
                 bg="#969696"
