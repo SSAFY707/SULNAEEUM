@@ -122,10 +122,10 @@ export type RecommendDrinkType = {
     drinkId : number,
     drinkLevel : number,
     drinkName : string,
-    drinkImg : string,
+    drinkImage : string,
     drinkAmount : string,
     drinkType : string,
-    ingredientList : string[]
+    ingredient : string[]
 }
 
 // 선물 추천을 위한 data

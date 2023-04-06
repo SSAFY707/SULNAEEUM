@@ -1,8 +1,6 @@
-import { useAppDispatch, useAppSelector } from '@/hooks'
 import { HiMagnifyingGlass } from 'react-icons/hi2'
 import { useRouter } from 'next/dist/client/router'
 import { useEffect, useState } from 'react'
-import { setRecomList } from '@/api/auth'
 import { RecommendDrinkType } from '@/types/DrinkType'
 import { getRecommendDrinkList } from '@/api/auth/drink'
 
@@ -20,39 +18,39 @@ export const ReconmendDrinkList = () => {
     const defaultList : RecommendDrinkType[] = [
       {
         drinkId : 0,
-        drinkImg : "/images/jubti/drink/단홍.png",
+        drinkImage : "/images/jubti/drink/단홍.png",
         drinkName : "단홍",
         drinkType : '과실주',
         drinkLevel : 5,
         drinkAmount : "300ml",
-        ingredientList : ['벌꿀', '정제수', '즙']
+        ingredient : ['벌꿀', '정제수', '즙']
       },
       {
         drinkId : 0,
-        drinkImg : "/images/jubti/drink/뱅꼬레 더감.png",
+        drinkImage : "/images/jubti/drink/뱅꼬레 더감.png",
         drinkType : '약주',
         drinkName : "뱅꼬레 더감",
         drinkLevel : 5,
         drinkAmount : "300ml",
-        ingredientList : ['효모', '누룩' ,'정제수', '감']
+        ingredient : ['효모', '누룩' ,'정제수', '감']
       },
       {
         drinkId : 0,
-        drinkImg : "/images/jubti/drink/남산애 레드와인.png",
+        drinkImage : "/images/jubti/drink/남산애 레드와인.png",
         drinkName : "남산애 레드와인",
         drinkType: '기타',
         drinkLevel : 15,
         drinkAmount : "700ml",
-        ingredientList : ['포도', '정제수']
+        ingredient : ['포도', '정제수']
       },
       {
         drinkId : 0,
-        drinkImg : "/images/jubti/drink/도깨비술 11.png",
+        drinkImage : "/images/jubti/drink/도깨비술 11.png",
         drinkName : "도깨비술 11",
         drinkType : '탁주',
         drinkLevel : 19,
         drinkAmount : "220ml",
-        ingredientList : ['국내산 쌀', '정제수', '효모']
+        ingredient : ['국내산 쌀', '정제수', '효모']
       },
   ];
 
@@ -60,18 +58,18 @@ export const ReconmendDrinkList = () => {
         <>
             {list.length != 0 && list.slice(0,4).map((item, index)=> {
                 return (
-                    <div key={index} className={"flex w-[360px] h-[510px] rounded-xl mx-3 bg-white drop-shadow-[3px_4px_5px_rgba(0,0,0,0.2)] hover:drop-shadow-[3px_5px_7px_rgba(0,0,0,0.4)]"}>
+                    <div onClick={()=>{router.push(`/list/${item.drinkId}`)}} key={index} className={"group cursor-pointer flex w-[360px] h-[510px] rounded-xl mx-3 bg-white drop-shadow-[3px_4px_5px_rgba(0,0,0,0.2)] hover:drop-shadow-[3px_5px_7px_rgba(0,0,0,0.4)]"}>
                     <div className={"flex flex-col items-center justify-center w-full"}>
-                      <img className={"h-[240px] mb-4 relative"} src={item.drinkImg} alt="" />
+                      <img className={"h-[240px] mb-4 relative"} src={item.drinkImage} alt="" />
                       <div className='flex w-full pl-8 pt-5'>
                         <div className={"flex flex-col"}>
                           <div className={"font-preM text-[26px]"}>{item.drinkName}</div>
                           <div>{item.drinkLevel}% | {item.drinkAmount}</div>
-                          <div className={'w-[270px]'} >{item.ingredientList.map((i)=>`${i} `)}</div>
+                          <div className={'w-[270px]'} >{item.ingredient.map((i)=>`${i} `)}</div>
                         </div>
                       </div>
                       <div className='flex w-full justify-end pr-8 pt-3'>
-                        <div onClick={()=>{router.push(`/list/${item.drinkId}`)}} className={"flex justify-center items-center rounded-full mt-3 px-4 py-2 text-[15px] cursor-pointer bg-zinc-200 hover:bg-zinc-300"}><HiMagnifyingGlass className={'mr-2'} />자세히 보러가기</div>
+                        <div className={"flex justify-center items-center rounded-full mt-3 px-4 py-2 text-[15px] cursor-pointer bg-zinc-200 group-hover:bg-zinc-300"}><HiMagnifyingGlass className={'mr-2'} />자세히 보러가기</div>
                       </div> 
                     </div>
                   </div>
@@ -82,12 +80,12 @@ export const ReconmendDrinkList = () => {
                 return (
                   <div key={index} className={"flex w-[345px] h-[510px] rounded-xl mx-7 bg-white drop-shadow-[3px_4px_5px_rgba(0,0,0,0.2)] blur-md"}>
                     <div className={"flex flex-col items-center justify-center w-full"}>
-                      <img className={"h-[240px] mb-4 relative"} src={item.drinkImg} alt="" />
+                      <img className={"h-[240px] mb-4 relative"} src={item.drinkImage} alt="" />
                       <div className='flex w-full pl-8 pt-5'>
                         <div className={"flex flex-col"}>
                           <div className={"font-preM text-[26px]"}>{item.drinkName}</div>
                           <div>{item.drinkLevel}% | {item.drinkAmount}</div>
-                          <div>{item.ingredientList.map((i)=>`${i} `)}</div>
+                          <div>{item.ingredient.map((i)=>`${i} `)}</div>
                         </div>
                       </div>
                       <div className='flex w-full justify-end pr-8 pt-3'>

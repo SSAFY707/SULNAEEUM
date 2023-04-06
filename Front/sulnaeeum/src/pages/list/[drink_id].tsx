@@ -34,6 +34,7 @@ export default function Detail(props: {drinkId : number}) {
     const isLogin = sessionStorage.getItem('isLogin')
     if(!isLogin) {
       toastError('로그인이 필요한 기능입니다.', '🚨', 'top-right')
+      return
     }
     dispatch(setDrinkLikeInDetail())
     drinkLike(drinkId)

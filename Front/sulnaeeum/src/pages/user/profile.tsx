@@ -109,19 +109,20 @@ export default function profile() {
                 </div>
               }
             </div>
-            <div onClick={()=>router.push(`/user/prefer`)} className={"absolute bottom-[30px] h-[60px] w-5/6 font-preR texte-[18px] flex justify-center items-center rounded-full px-4 py-2 text-white bg-gradient-to-r from-[#8FAADC] to-[#8FAADC]/70 hover:from-[#809ED4] hover:to-[#809ED4]/70 cursor-pointer transition duration-500 ease-in hover:scale-[102%] hover:font-preM"}>취향조사 하러가기</div>
+            <div onClick={()=>router.push(`/user/prefer`)} className={"absolute bottom-[30px] h-[50px] w-5/6 font-preR texte-[18px] flex justify-center items-center rounded-full px-4 py-2 text-white bg-gradient-to-r from-gray-400/60 to-gray-400/50 hover:gray-400/70 hover:to-gray-400/50 cursor-pointer transition duration-500 ease-in hover:scale-[102%] hover:font-preM"}>취향조사 하러가기</div>
 
           </div>
           {/* 텍스트 마이닝 */}
           <div className="absolute w-[870px] h-[468px] rounded-lg left-[740px] bg-white ">
-            <div className="abosolute w-[195px] h-[71.5px] border-b-2 ml-[35px]"></div>
-            <div className="absolute top-[30px] text-[25px] text-[#414141] font-preM  w-[800px] h-[420px] left-[40px] ">
-              나의 맞춤형 키워드
+            {/* <div className="abosolute w-[195px] h-[71.5px] border-b-2 ml-[35px]"></div> */}
+            <div className="absolute top-[30px] text-[#414141] font-preM  w-[800px] h-[420px] left-[40px] ">
+              <div className={"font-preB text-[24px]"}>나의 맞춤형 키워드</div>
+              <div>{userInfo.nickname}님께서 찜 및 클리어 한 전통주의 맞춤 키워드입니다.</div>
               <div className="absolute w-[800px] h-[365px] flex justify-center items-center ">
                 <WordCloud
                   data={texts}
-                  width={700}
-                  height={330}
+                  width={660}
+                  height={300}
                 />
               </div>
             </div>
