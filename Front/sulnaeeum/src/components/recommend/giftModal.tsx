@@ -30,7 +30,7 @@ export const GiftModal = (props: {modalOpen : any}) => {
 
     const [taste, setTaste] = useState<DrinkTasteType>(initTaste)
 
-    const fixedMinPrice = 0;
+    const fixedMinPrice = 1000;
     const fixedMaxPrice = 400000;
     const priceGap = 1000;
     const [rangeMinValue, setRangeMinValue] = useState(fixedMinPrice); 
@@ -38,7 +38,7 @@ export const GiftModal = (props: {modalOpen : any}) => {
     const [rangeMinPercent, setRangeMinPercent] = useState(0);
     const [rangeMaxPercent, setRangeMaxPercent] = useState(0);
 
-    const fixedMinLevel = 1;
+    const fixedMinLevel = 4;
     const fixedMaxLevel = 56;
     const levelGap = 1;
     const [rangeMinLevel, setRangeMinLevel] = useState(fixedMinLevel); 
