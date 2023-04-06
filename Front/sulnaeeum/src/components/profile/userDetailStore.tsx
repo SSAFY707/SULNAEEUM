@@ -31,11 +31,16 @@ export default function userDetailStore() {
           <div></div>
           {store.length !== 0 && store.map((v, i) => {
             return (
-              <div>
+              <div key={i}>
                 <UserDetailStoreList key={v.storeId} idx={i+1} userData={v}></UserDetailStoreList>
               </div>
             );
           })}
+          {store.length == 0 && 
+            <div className={"ml-6 mt-6 text-[20px]"}>
+              찜한 전통주 식당이 없습니다.
+            </div>
+          }
         </div>
       </div>
     </>
