@@ -2,14 +2,16 @@ import pika
 import requests
 
 HOST_NAME = "j8a707.p.ssafy.io"
+
 QUEUE_NAME = "sulnaeeum.queue"
 
 
 def main():
     connection = pika.BlockingConnection(pika.ConnectionParameters(host=HOST_NAME))
+    # connection = pika.BlockingConnection(pika.URLParameters('amqp://guest:guest@j8a707.p.ssafy.io:5672'))
     channel = connection.channel()
 
-    channel.queue_declare(queue=QUEUE_NAME)
+    channel.queue_declare(queue=QUEUE_NAME, durable=True)
 
     def callback(ch, method, properties, body):
         print("Message is Arrived %r" % body)
