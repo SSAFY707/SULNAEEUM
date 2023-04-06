@@ -170,4 +170,13 @@ public class DrinkController {
     public ResponseEntity<DrinkDetailPageDto> getDrink(@PathVariable Long drinkId) {
         return new ResponseEntity<>(drinkService.getDrinkDetailPage(drinkId, null), HttpStatus.OK);
     }
+
+    /***
+     * [ 전통주 키워드 검색 성능 테스트용 메소드 ]
+     ***/
+    @Operation(summary = "전통주 키워드 검색 성능 테스트용 메소드", description = "LIKE 쿼리 이용한 전통주 키워드 검색")
+    @GetMapping("/n/search/{keyword}")
+    public ResponseEntity<List<DrinkSearchDto>> searchKeywordTest(@PathVariable String keyword) {
+        return new ResponseEntity<>(drinkService.searchDrinkTest(keyword), HttpStatus.OK);
+    }
 }
