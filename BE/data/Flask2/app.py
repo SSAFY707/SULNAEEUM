@@ -554,4 +554,4 @@ def ranking(input_data):
 
 if __name__ == "__main__":
 #     init_scheduler()
-    app.run(host="0.0.0.0", port=int("5000"), debug=True)
+    app.run(host="0.0.0.0", port=int("5002"), debug=True)
