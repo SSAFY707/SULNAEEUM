@@ -1,5 +1,6 @@
 package com.ssafy.sulnaeeum.model.mypage.dto;
 
+import com.ssafy.sulnaeeum.model.user.dto.UserPreferenceDto;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
 
@@ -42,4 +43,7 @@ public class MyInfoDto {
 
     @Schema(description = "clearDrinkCnt")
     private int clearDrinkCnt;
+
+    @Schema(description = "유저 취향 조사")
+    private UserPreferenceDto userPreferenceDto;
 }
