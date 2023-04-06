@@ -39,6 +39,15 @@ export default function userDetailDrink(props: { idx: number }) {
               <UserDetailDrinkList key={v.drinkId} userData={v} idx={i+1}></UserDetailDrinkList>
             );
           })}
+          {userData.length == 0 &&
+            <div className={"ml-6 mt-6 text-[20px]"}>
+            { idx == 0 ?
+              '클리어한 전통주가 없습니다'
+              :
+              '찜한 전통주가 없습니다.'
+            }
+          </div>
+          }
         </div>
       </div>
     </>
