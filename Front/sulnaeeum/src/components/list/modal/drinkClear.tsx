@@ -3,7 +3,7 @@ import { Rating } from '@/components/common/Rating'
 import { toastError, toastOK } from '@/components/common/toast'
 import { useAppDispatch } from '@/hooks'
 import { useRouter } from 'next/dist/client/router'
-import { getDrinkDetailForUser } from '@/store/drinkSlice'
+import { getDrinkDetailForUser, getMyReview } from '@/store/drinkSlice'
 import { tasteType } from '@/types/DataTypes'
 import { ReviewWriteType } from '@/types/DrinkType'
 import React, { useState } from 'react'
@@ -76,6 +76,7 @@ export default function DrinkClear(props: {drinkName: string, drinkId : number ,
         }
         
         await clearDrink(drinkId, review)
+        dispatch(getMyReview(drinkId))
         dispatch(getDrinkDetailForUser(drinkId))
         modalOpen()
         toastOK('리뷰가 등록되었습니다.', '✨', 'top-center')
