@@ -42,10 +42,10 @@ export default function index() {
           <div className={'ml-8'}>
             <div className={'font-preM'}>Traditional Liquor Ranking</div>
             <div className={'text-[34px] font-preB pb-[10px]'}>전통주 랭킹</div>
-            <div>한 시간에 한 번 갱신되는 전통주 랭킹입니다.</div>
+            <div>실시간으로 갱신되는 전통주 랭킹입니다.</div>
             <div>유저의 리뷰와 酒BTI 결과를 통해 업데이트되는 인기 전통주를 만나보세요.</div>
           </div>
-          <div className={"flex items-start"}>
+          <div className={"flex items-end pt-[130px]"}>
             {
               tabs.map((tab, i)=>{
                 return (
@@ -55,12 +55,12 @@ export default function index() {
             }
           </div>
         </div>
-        <div className={"flex flex-col justify-end w-full mr-[30%]"}>
+        {/* <div className={"flex flex-col justify-end w-full mr-[30%]"}>
               <div className="flex justify-end text-[13px] ">마지막 업데이트 시간</div>
               <div className="flex justify-end font-preM pl-[-50px]">{time}</div>
-        </div>
+        </div> */}
         <div className={"flex flex-col items-center w-[70%] h-auto mb-20 mt-[30px]"}>
-            <div className={"w-full pt-[70px] flex justify-center"}>
+            <div className={"w-full pt-[90px] flex justify-center"}>
               {rankingList[idx].slice(0,3).map((r, i)=>{
                 return (
                   <div key={i} className={"flex justify-center w-[300px] h-[400px] rounded-xl mx-10 bg-white drop-shadow-[3px_4px_5px_rgba(0,0,0,0.2)] hover:drop-shadow-[3px_5px_7px_rgba(0,0,0,0.4)]"}>
