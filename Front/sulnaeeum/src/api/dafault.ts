@@ -3,8 +3,7 @@ import { defaultAxios } from "./common";
 
 export const sendJubti = (data : JubtiType) => {
     defaultAxios.post(`jubti/n/save`, data
-    ).then((res)=>{
-        console.log(res)
+    ).then(()=>{
     }).catch((err)=>{
         console.log(err)
     })

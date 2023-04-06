@@ -26,7 +26,7 @@ export const getGiftList = async (data : SubmitGiftType) => {
     await authAxios.post(`user/recommend/present`, data
     ).then((res)=>{
         list = res.data
-        console.log(res)
+        // console.log(res)
     }).catch((err)=>{
         console.log(err)
     })

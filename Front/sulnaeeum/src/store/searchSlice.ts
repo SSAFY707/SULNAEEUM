@@ -39,7 +39,6 @@ const searchSlice = createSlice({
     extraReducers: (builder) => {
         builder.addCase(getSearchResult.fulfilled, (state, action)=>{
             state.searchResult = action.payload
-            // console.log(state.searchResult)
         })
         
     }

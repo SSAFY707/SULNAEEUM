@@ -177,7 +177,6 @@ export async function getServerSideProps(context : any) {
         bad_color : info[target.bad].color,
         explain: explain[mbti],
     }
-    // console.log(data)
 
     return {
         props: {

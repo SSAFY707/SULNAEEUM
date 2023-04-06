@@ -62,12 +62,8 @@ export default function index() {
       weight: weight
     }
 
-    console.log(payload)
-
     authAxios.post('user/preference', payload
     ).then((res) => {
-      console.log(res)
-      console.log(res.data[0].drinkImage)
       setResultName(res.data[0].drinkName)
       setResultImg(res.data[0].drinkImage)
       setResultId(res.data[0].drinkId)

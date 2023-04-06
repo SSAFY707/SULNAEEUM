@@ -153,26 +153,21 @@ const drinkSlice = createSlice({
     extraReducers: (builder) => {
         builder.addCase(getDrinkList.fulfilled, (state, action)=>{
             state.drinkList = action.payload
-            // console.log(state.drinkList, '리스트 가져오기 성공!')
         })
         builder.addCase(getDrinkDetail.fulfilled, (state, action)=>{
             state.drink = action.payload
-            // console.log(state.drink, '성공!')
         })
         builder.addCase(getDrinkDetailForUser.fulfilled, (state, action)=>{
             state.drink = action.payload
-            // console.log(state.drink, '성공!')
         })
         builder.addCase(getMyDrink.fulfilled, (state, action)=>{
             state.myDrink = action.payload
-            // console.log(state.myDrink)
         })
         builder.addCase(getMyReview.fulfilled, (state, action)=>{
             state.myReview = action.payload
         })
         builder.addCase(getMyJumakLike.fulfilled, (state, action)=>{
             state.myLikeJumak = action.payload
-            // console.log(action.payload, '내 찜 주막 리스트 가져옴')
         })
     }
 })

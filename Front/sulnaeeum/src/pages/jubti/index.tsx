@@ -189,7 +189,7 @@ export default function Jubti() {
     }
     arr.map((a) => { mbti += check(a, data[a] as number) })
     const drink = mbti_to_drink[mbti]
-    console.log(drink)
+    // console.log(drink)
     router.push(`/jubti/result/${drink}`)
   }
 

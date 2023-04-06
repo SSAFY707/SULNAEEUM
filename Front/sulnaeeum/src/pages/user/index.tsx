@@ -17,7 +17,6 @@ export default function index() {
           window.Kakao.Auth.authorize({
             redirectUri: 'https://localhost:3000/user/kakao/callback'
           });
-          console.log('redirect>>>>')
         })}>
           <img
             src="//k.kakaocdn.net/14/dn/btroDszwNrM/I6efHub1SN5KCJqLm1Ovx1/o.jpg"

@@ -18,10 +18,8 @@ export default function callback(props: { code: string }) {
 
   useEffect(() => {
     (async () => {
-      console.log('fetch 실행>>>')
       const data = await (await fetch(`https://j8a707.p.ssafy.io/api/user/kakao/login?code=${code}`)).json()
       if (data.tokenDto != null) {
-        console.log(data)
         sessionStorage.setItem('accessToken', data.tokenDto.accessToken)
         sessionStorage.setItem('isLogin', 'true')
         sessionStorage.setItem('name', data.nickname)

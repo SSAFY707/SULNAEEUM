@@ -65,7 +65,6 @@ export default function AddJumak(props: {drinkId : number, modalOpen : any}) {
             jumakUrl : jumakUrl,
             drink : sel
         }
-        // console.log(data)
         await insertJumak(data)
         dispatch(getDrinkDetailForUser(drinkId))
         modalOpen()
@@ -88,7 +87,6 @@ export default function AddJumak(props: {drinkId : number, modalOpen : any}) {
             drinkId: drinkId,
             drinkName: drinkName
         }
-        // console.log(data)
         const newArr = jumakDrink
         newArr.push(data)
         setJumakDrink([...newArr])

@@ -29,9 +29,6 @@ export default function index(props: { tabData: string }) {
     { id: 6, src: 'images/map/제주도', },
   ]
 
-  console.log('tabData >>>>>>>>')
-  console.log(tabData)
-
   useEffect(() => {
     loadData();
     setTab(tabData)
@@ -315,7 +312,6 @@ export default function index(props: { tabData: string }) {
     const url = 'https://j8a707.p.ssafy.io/api/map/n'
     const res = await fetch('https://j8a707.p.ssafy.io/api/map/n')
     const jsonRes = await res.json()
-    console.log(jsonRes)
     setRes(jsonRes)
 
   }

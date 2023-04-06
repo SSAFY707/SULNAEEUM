@@ -35,7 +35,6 @@ const userSlice = createSlice({
     extraReducers: (builder) => { 
         builder.addCase(getUser.fulfilled, (state, action) => { 
             state.user = action.payload
-            console.log("유저 데이터 가져오기 성공!!!")
         })
     }
 })
