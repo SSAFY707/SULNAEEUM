@@ -243,7 +243,10 @@ public class ReviewService {
                 tasteSweet.setScore(sweetPoint);
                 drink.setSweetScore(0);
             }
+        }else{
+            drink.setSweetScore(sweet);
         }
+
         if(sour == -5){
             int sourPoint = tasteSour.getScore() - 1;
             if(sourPoint > 0){
@@ -256,6 +259,8 @@ public class ReviewService {
                 tasteSour.setScore(sourPoint);
                 drink.setSourScore(0);
             }
+        }else{
+            drink.setSourScore(sour);
         }
 
         if(throat == -5){
@@ -270,6 +275,8 @@ public class ReviewService {
                 tasteThroat.setScore(throatPoint);
                 drink.setThroatScore(0);
             }
+        }else{
+            drink.setThroatScore(throat);
         }
 
         if(body == -5){
@@ -284,6 +291,8 @@ public class ReviewService {
                 tasteBody.setScore(bodyPoint);
                 drink.setBodyScore(0);
             }
+        }else{
+            drink.setBodyScore(body);
         }
 
         if(refresh == -5){
@@ -298,6 +307,8 @@ public class ReviewService {
                 tasteRefresh.setScore(refreshPoint);
                 drink.setRefreshScore(0);
             }
+        }else{
+            drink.setRefreshScore(refresh);
         }
 
         if(flavor == -5){
@@ -312,6 +323,8 @@ public class ReviewService {
                 tasteFlavor.setScore(flavorPoint);
                 drink.setFlavorScore(0);
             }
+        }else{
+            drink.setFlavorScore(flavor);
         }
 
         tasteRepo.save(tasteSweet);
@@ -320,5 +333,6 @@ public class ReviewService {
         tasteRepo.save(tasteThroat);
         tasteRepo.save(tasteRefresh);
         tasteRepo.save(tasteFlavor);
+        drinkRepo.save(drink);
     }
 }
