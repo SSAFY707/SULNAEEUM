@@ -137,7 +137,11 @@ export type UserType = {
   sex: number|null,
   img: string,
   ranking: number,
-  finish: boolean
+  finish: boolean,
+  likeDrinkCnt : number,
+  likeJumakCnt : number,
+  clearDrinkCnt : number,
+  userPreferenceDto : null | UserPreferenceType
 }
 
 export type TextType = {
@@ -147,4 +151,18 @@ export type TextType = {
 
 export type TextMinigType = {
   'words': TextType[]
+}
+
+export type UserPreferenceType = {
+  age : string,
+  sex : string,
+  tasteSour: number,
+  tasteSweet: number,
+  tasteFlavor: number,
+  tasteRefresh: number,
+  tasteBody: number,
+  tasteThroat: number,
+  level: number,
+  dish: string,
+  weight: string,
 }

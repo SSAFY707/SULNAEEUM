@@ -1,14 +1,16 @@
+import { tasteType } from '@/types/DataTypes'
 import React from 'react'
 
-export default function MyGraph() {
-    const taste = {
-        tasteSweet : 1,
-        tasteSour : 2,
-        tasteRefresh : 4,
-        tasteBody : 3,
-        tasteFlavor : 5,
-        tasteThroat : 1
-    }
+export default function MyGraph(props :{ taste : tasteType}) {
+    const {taste} = props
+    // const taste = {
+    //     tasteSweet : 1,
+    //     tasteSour : 2,
+    //     tasteRefresh : 4,
+    //     tasteBody : 3,
+    //     tasteFlavor : 5,
+    //     tasteThroat : 1
+    // }
     
     const tasteInfo = {
         tasteSweet : ['정보없음', '약함', '조금약함', '보통', '조금강함', '강함'],
@@ -21,62 +23,62 @@ export default function MyGraph() {
   return (
     <div className={'flex flex-col'}>
         <div className={'flex items-center mb-3'}>
-            <div className={'w-[60px] font-preM'}>단맛</div>
-            <div className={'w-[340px] text-[12px] bg-[#F0F0F0] rounded-full'}>
+            <div className={'w-[50px] text-[14px] font-preM'}>단맛</div>
+            <div className={'w-[300px] text-[10px] bg-[#F0F0F0] rounded-full'}>
                 {taste.tasteSweet == 0 ?
                 <div className={'px-4 py-1'}>정보없음</div>
                 :
-                <div style={{width : `${taste.tasteSweet * 20}%`}} className={`text-white bg-gradient-to-l from-[#6E8DC8] to-[#6E8DC8]/70 px-3 py-1 flex justify-end rounded-full`}>{tasteInfo.tasteSweet[taste.tasteSweet]}</div>
+                <div style={{width : `${taste.tasteSweet * 20}%`}} className={`text-white bg-gradient-to-l from-[#809ED4] to-[#809ED4]/70 px-3 py-1 flex justify-end rounded-full`}>{tasteInfo.tasteSweet[taste.tasteSweet]}</div>
                 }
             </div>
         </div>
         <div className={'flex items-center mb-3'}>
-            <div className={'w-[60px] font-preM'}>신맛</div>
-            <div className={'w-[340px] text-[12px] bg-[#F0F0F0] rounded-full'}>
+            <div className={'w-[50px] text-[14px] font-preM'}>신맛</div>
+            <div className={'w-[300px] text-[10px] bg-[#F0F0F0] rounded-full'}>
                 {taste.tasteSour == 0 ?
                 <div className={'px-4 py-1'}>정보없음</div>
                 :
-                <div style={{width : `${taste.tasteSour * 20}%`}} className={`text-white bg-gradient-to-l from-[#6E8DC8] to-[#6E8DC8]/70 px-3 py-1 flex justify-end rounded-full`}>{tasteInfo.tasteSour[taste.tasteSour]}</div>
+                <div style={{width : `${taste.tasteSour * 20}%`}} className={`text-white bg-gradient-to-l from-[#809ED4] to-[#809ED4]/70 px-3 py-1 flex justify-end rounded-full`}>{tasteInfo.tasteSour[taste.tasteSour]}</div>
                 }
             </div>
         </div>
         <div className={'flex items-center mb-3'}>
-            <div className={'w-[60px] font-preM'}>청량감</div>
-            <div className={'w-[340px] text-[12px] bg-[#F0F0F0] rounded-full'}>
+            <div className={'w-[50px] text-[14px] font-preM'}>청량감</div>
+            <div className={'w-[300px] text-[10px] bg-[#F0F0F0] rounded-full'}>
                 {taste.tasteRefresh == 0 ?
                 <div className={'px-4 py-1'}>정보없음</div>
                 :
-                <div style={{width : `${taste.tasteRefresh * 20}%`}} className={`text-white bg-gradient-to-l from-[#6E8DC8] to-[#6E8DC8]/70 px-3 py-1 flex justify-end rounded-full`}>{tasteInfo.tasteRefresh[taste.tasteRefresh]}</div>
+                <div style={{width : `${taste.tasteRefresh * 20}%`}} className={`text-white bg-gradient-to-l from-[#809ED4] to-[#809ED4]/70 px-3 py-1 flex justify-end rounded-full`}>{tasteInfo.tasteRefresh[taste.tasteRefresh]}</div>
                 }
             </div>
         </div>
         <div className={'flex items-center mb-3'}>
-            <div className={'w-[60px] font-preM'}>바디감</div>
-            <div className={'w-[340px] text-[12px] bg-[#F0F0F0] rounded-full'}>
+            <div className={'w-[50px] text-[14px] font-preM'}>바디감</div>
+            <div className={'w-[300px] text-[10px] bg-[#F0F0F0] rounded-full'}>
                 {taste.tasteBody == 0 ?
                 <div className={'px-4 py-1'}>정보없음</div>
                 :
-                <div style={{width : `${taste.tasteBody * 20}%`}} className={`text-white bg-gradient-to-l from-[#6E8DC8] to-[#6E8DC8]/70 px-3 py-1 flex justify-end rounded-full`}>{tasteInfo.tasteBody[taste.tasteBody]}</div>
+                <div style={{width : `${taste.tasteBody * 20}%`}} className={`text-white bg-gradient-to-l from-[#809ED4] to-[#809ED4]/70 px-3 py-1 flex justify-end rounded-full`}>{tasteInfo.tasteBody[taste.tasteBody]}</div>
                 }
             </div>
         </div>
         <div className={'flex items-center mb-3'}>
-            <div className={'w-[60px] font-preM'}>향</div>
-            <div className={'w-[340px] text-[12px] bg-[#F0F0F0] rounded-full'}>
+            <div className={'w-[50px] text-[14px] font-preM'}>향</div>
+            <div className={'w-[300px] text-[10px] bg-[#F0F0F0] rounded-full'}>
                 {taste.tasteFlavor == 0 ?
                 <div className={'px-4 py-1'}>정보없음</div>
                 :
-                <div style={{width : `${taste.tasteFlavor * 20}%`}} className={`text-white bg-gradient-to-l from-[#6E8DC8] to-[#6E8DC8]/70 px-3 py-1 flex justify-end rounded-full`}>{tasteInfo.tasteFlavor[taste.tasteFlavor]}</div>
+                <div style={{width : `${taste.tasteFlavor * 20}%`}} className={`text-white bg-gradient-to-l from-[#809ED4] to-[#809ED4]/70 px-3 py-1 flex justify-end rounded-full`}>{tasteInfo.tasteFlavor[taste.tasteFlavor]}</div>
                 }
             </div>
         </div>
         <div className={'flex items-center mb-3'}>
-            <div className={'w-[60px] font-preM'}>목넘김</div>
-            <div className={'w-[340px] text-[12px] bg-[#F0F0F0] rounded-full'}>
+            <div className={'w-[50px] text-[14px] font-preM'}>목넘김</div>
+            <div className={'w-[300px] text-[10px] bg-[#F0F0F0] rounded-full'}>
                 {taste.tasteThroat == 0 ?
                 <div className={'px-4 py-1'}>정보없음</div>
                 :
-                <div style={{width : `${taste.tasteThroat * 20}%`}} className={`text-white bg-gradient-to-l from-[#6E8DC8] to-[#6E8DC8]/70 px-3 py-1 flex justify-end rounded-full`}>{tasteInfo.tasteThroat[taste.tasteThroat]}</div>
+                <div style={{width : `${taste.tasteThroat * 20}%`}} className={`text-white bg-gradient-to-l from-[#809ED4] to-[#809ED4]/70 px-3 py-1 flex justify-end rounded-full`}>{tasteInfo.tasteThroat[taste.tasteThroat]}</div>
                 }
             </div>
         </div>

@@ -5,33 +5,12 @@ import { MdLocalDining } from 'react-icons/md'
 import { GiWineBottle } from 'react-icons/gi'
 import { authAxios } from '@/api/common'
 import RadarChart from '@/components/list/RadarChart'
-import { DrinkTasteType } from '@/types/DataTypes';
-
-type PayloadType = {
-  tasteSour: number,
-  tasteSweet: number,
-  tasteFlavor: number,
-  tasteRefresh: number,
-  tasteBody: number,
-  tasteThroat: number,
-  level: number,
-  dish: string,
-  weight: string,
-}
-
-
-
-
-
-
+import { DrinkTasteType, UserPreferenceType } from '@/types/DataTypes';
 
 
 export default function index() {
 
-
-
-
-  const [gender, setGender] = useState<string>();
+  const [gender, setGender] = useState<string>('');
   const [age, setAge] = useState<string>('');
   const [tasteSour, setTasteSour] = useState<number>(0);
   const [tasteSweet, setTasteSweet] = useState<number>(0);
@@ -69,7 +48,9 @@ export default function index() {
 
 
 
-    let payload: PayloadType = {
+    let payload: UserPreferenceType = {
+      age : age,
+      sex : gender,
       tasteSour: tasteSour,
       tasteSweet: tasteSweet,
       tasteFlavor: tasteFlavor,
@@ -80,8 +61,6 @@ export default function index() {
       dish: dish,
       weight: weight
     }
-
-
 
     console.log(payload)
 
@@ -103,10 +82,6 @@ export default function index() {
         tasteThroat: res.data[0].tasteThroat,
         tasteFlavor: res.data[0].tasteFlavor,
       })
-
-
-
-
 
     }).catch((err) => {
       console.log(err)

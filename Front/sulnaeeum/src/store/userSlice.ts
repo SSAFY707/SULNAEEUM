@@ -13,7 +13,11 @@ const initUser: UserType = {
         "sex": null,
         "img": "",
         "ranking": 0,
-        "finish": false
+        "finish": false,
+        'clearDrinkCnt' : 0,
+        'likeDrinkCnt' : 0,
+        'likeJumakCnt' : 0,
+        'userPreferenceDto' : null
 }
 const initTextMining: TextMinigType = { 
     "words": []
