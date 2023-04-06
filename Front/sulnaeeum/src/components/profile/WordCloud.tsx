@@ -18,13 +18,15 @@ const WordCloud: React.FC<WordCloudProps> = ({ data, width, height }) => {
       .size([width, height])
       .words(data)
       .padding(4.5)
-      .rotate(() => ~~(Math.random() * 360) )
+      .rotate(() => 0 )
       .font("sbM")
       .fontSize((d) => {
-        if (d['value'] < 10) {
+        if (d['value'] < 5) {
+          return 15
+        } else if (d['value'] < 10){
           return 25
         }
-        return d['value'] * 3
+        return d['value'] * 4
       })
       .on("end", draw);
     layout.start();
