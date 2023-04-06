@@ -1,5 +1,6 @@
 package com.ssafy.sulnaeeum.model.user.entity;
 
+import com.ssafy.sulnaeeum.model.user.dto.UserPreferenceDto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -61,5 +62,18 @@ public class UserPreference {
         this.level = level;
         this.dish = dish;
         this.weight = weight;
+    }
+
+    public UserPreferenceDto toDto(){
+        return UserPreferenceDto.builder()
+                .tasteSour(this.tasteSour)
+                .tasteSweet(this.tasteSweet)
+                .tasteFlavor(this.tasteFlavor)
+                .tasteRefresh(this.tasteRefresh)
+                .tasteBody(this.tasteBody)
+                .tasteThroat(this.tasteThroat)
+                .level(this.level)
+                .dish(this.dish)
+                .weight(this.weight).build();
     }
 }
