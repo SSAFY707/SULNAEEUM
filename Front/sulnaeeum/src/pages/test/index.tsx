@@ -9,7 +9,6 @@ import {
   ModalBody,
   ModalCloseButton,
 } from '@chakra-ui/react'
-import MyGraph from '@/components/common/myGraph'
 
 export default function index() {
   // const { isOpen, onOpen, onClose } = useDisclosure()
@@ -23,7 +22,6 @@ export default function index() {
       준비중입니다.
     </div>
     <div className='h-[800px] p-40'>
-    <MyGraph />
     </div>
   </>
   )
