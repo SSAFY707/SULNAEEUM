@@ -242,4 +242,10 @@ public class DrinkService {
 
         return similarDrinkDto;
     }
+
+    // LIKE 키워드 검색 성능 테스트용
+    @Transactional
+    public List<DrinkSearchDto> searchDrinkTest(String keyword) {
+        return drinkRepo.searchKeywordTest(keyword).stream().map(DrinkSearchDto::new).collect(Collectors.toList());
+    }
 }

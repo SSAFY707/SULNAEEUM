@@ -77,4 +77,10 @@ public interface DrinkRepo extends JpaRepository<Drink, Integer> {
 
     @Query(value = "select * from drink inner join ranking on drink.drink_id = ranking.total", nativeQuery = true)
     List<Drink> findTotal();
+
+    /***
+     * LIKE 키워드 검색 성능 테스트를 위함
+     */
+    @Query(value = "select * from drink where drink_name like %?1%", nativeQuery = true)
+    List<Drink> searchKeywordTest(String keyword);
 }
