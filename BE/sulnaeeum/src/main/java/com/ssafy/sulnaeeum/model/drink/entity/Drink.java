@@ -3,6 +3,7 @@ package com.ssafy.sulnaeeum.model.drink.entity;
 import com.ssafy.sulnaeeum.model.drink.dto.DrinkDetailDto;
 import com.ssafy.sulnaeeum.model.drink.dto.DrinkDto;
 import com.ssafy.sulnaeeum.model.drink.dto.MyPageDrinkDto;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;
@@ -52,6 +53,24 @@ public class Drink {
     private int reviewCnt; // 리뷰 개수
 
     private double avgScore; // 평점 평균
+
+    @Schema(description = "단 맛 점수")
+    private int sweetScore;
+
+    @Schema(description = "신 맛 점수")
+    private int sourScore;
+
+    @Schema(description = "향 점수")
+    private int flavorScore;
+
+    @Schema(description = "목넘김 점수")
+    private int throatScore;
+
+    @Schema(description = "바디감 점수")
+    private int bodyScore;
+
+    @Schema(description = "청량감 점수")
+    private int refreshScore;
 
     // Entity -> DTO 변환
     public DrinkDto toDto() {
