@@ -64,7 +64,6 @@ export default function Home() {
             isScrolled ? "absolute z-30" : "fixed"
           }  z-20 overflow-hidden left-[-30px] ml-[-180px] mt-[-50px]`}
           style={{
-
             top: `${isScrolled ? "1250px" : "10px"}`,
             left: `${-imageX * 14}px`,
           }}
@@ -82,12 +81,18 @@ export default function Home() {
             isScrolled ? " absolute z-10 top-[1230px]" : "fixed"
           }`}
         >
-
-         <video className="absolute top-[190px]" width="1920" height="4500" muted autoPlay loop>
+          <video
+            className="absolute top-[190px]"
+            width="1920"
+            height="4500"
+            muted
+            autoPlay
+            loop
+          >
             <source src="/main/part1/배경화면_최종.mp4" type="video/mp4" />
           </video>
-          
-        {/* <img className=" z-20 absolute top-[0px] w-[1920px] h-[1080px]" src="/main/part1/메인페이지_배경.png" alt=""></img> */}
+
+          {/* <img className=" z-20 absolute top-[0px] w-[1920px] h-[1080px]" src="/main/part1/메인페이지_배경.png" alt=""></img> */}
 
           {/* <Image
             className={`z-20 absolute top-[-150px]`}
@@ -96,16 +101,21 @@ export default function Home() {
             width={1900}
             height={0}
           /> */}
-          <div className=" absolute z-40 top-[630px] left-[-110px] ">
+          <div className=" absolute z-40 top-[650px] left-[-110px] ">
             <Image
               src="/main/part1/main1_txt2.png"
               alt=""
               width={2700}
               height={0}
             />
-            <div className="absolute left-[1025px] top-[140px]">
-          <Image src="/main/part1/white_scroll.gif" alt=" " width={80} height={80}></Image>
-          </div>
+            <div className="absolute left-[1025px] top-[170px]">
+              <Image
+                src="/main/part1/scroll.gif"
+                alt=" "
+                width={80}
+                height={80}
+              ></Image>
+            </div>
           </div>
         </div>
         {/* 한국 전통주 정의 */}
@@ -181,14 +191,18 @@ export default function Home() {
             ></Image>
             <div className="">
               <Image
-                className={`${scroll>2100?styles.opacity4:styles.hide} absolute opacity-5 z-0`}
+                className={`${
+                  scroll > 2100 ? styles.opacity4 : styles.hide
+                } absolute opacity-5 z-0`}
                 src="/main/part2/main2_3.png"
                 alt=""
                 width={400}
                 height={0}
               />
               <Image
-                className={`${scroll>2100?styles.opacity4:styles.hide} absolute top-[500px] left-[1200px] opacity-5 z-0`}
+                className={`${
+                  scroll > 2100 ? styles.opacity4 : styles.hide
+                } absolute top-[500px] left-[1200px] opacity-5 z-0`}
                 src="/main/part2/main2_3.png"
                 alt=""
                 width={300}
@@ -220,8 +234,9 @@ export default function Home() {
               return (
                 <Image
                   key={i}
-                  className={`${scroll > 3050 ? styles.show1 : styles.hide} ${styles.part3
-                    } mr-[30px] drop-shadow-[3px_10px_10px_rgba(0,0,0,0.12)]`}
+                  className={`${scroll > 3050 ? styles.show1 : styles.hide} ${
+                    styles.part3
+                  } mr-[30px] drop-shadow-[3px_10px_10px_rgba(0,0,0,0.12)]`}
                   src={v}
                   alt=""
                   width={300}
