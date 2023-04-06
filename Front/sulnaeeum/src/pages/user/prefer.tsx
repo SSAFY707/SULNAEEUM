@@ -4,7 +4,8 @@ import { FaPercent } from 'react-icons/fa'
 import { MdLocalDining } from 'react-icons/md'
 import { GiWineBottle } from 'react-icons/gi'
 import { authAxios } from '@/api/common'
-
+import RadarChart from '@/components/list/RadarChart'
+import { DrinkTasteType } from '@/types/DataTypes';
 
 type PayloadType = {
   tasteSour: number,
@@ -47,6 +48,14 @@ export default function index() {
   const [resultId, setResultId] = useState<string>('아이디초기값')
   const [resultAmount, setResultAmount] = useState<string>('용량초기값')
   const [resultLevel, setResultLevel] = useState<string>('도수초기값')
+  const [drinkTaste, setDrinkTaste] = useState<DrinkTasteType>({
+    tasteRefresh: 2,
+    tasteBody: 5,
+    tasteSweet: 3,
+    tasteSour: 1,
+    tasteThroat: 4,
+    tasteFlavor: 2,
+  });
 
 
 
@@ -81,10 +90,19 @@ export default function index() {
       console.log(res)
       console.log(res.data[0].drinkImage)
       setResultName(res.data[0].drinkName)
-      setResultImg(res.data[0].drinkImg)
+      setResultImg(res.data[0].drinkImage)
       setResultId(res.data[0].drinkId)
       setResultAmount(res.data[0].drinkAmount)
       setResultLevel(res.data[0].drinkLevel)
+
+      setDrinkTaste({
+        tasteRefresh: res.data[0].tasteRefresh,
+        tasteBody: res.data[0].tasteBody,
+        tasteSweet: res.data[0].tasteSweet,
+        tasteSour: res.data[0].tasteSour,
+        tasteThroat: res.data[0].tasteThroat,
+        tasteFlavor: res.data[0].tasteFlavor,
+      })
 
 
 
@@ -140,16 +158,21 @@ export default function index() {
 
   return (
     <>
-      <div className={"bg-[url('/images/login_back.png')] bg-cover w-full h-full"}>
-        <div className={'w-full h-[936px] flex justify-center items-center'}>
-          <div className={`${page != 0 && 'hidden'} flex flex-col items-center w-[500px] h-[650px] rounded-xl bg-white/90`}>
+      {/* <div className={"bg-[url('/images/login_back.png')] bg-cover w-full h-full"}> */}
+      <div className={"flex justify-center bg-cover w-full h-full"}>
+        <div className={'w-[800px] h-[936px] flex justify-center items-center'}>
+          <div className={`${page != 0 && 'hidden'} flex flex-col items-center w-[600px] h-[700px] rounded-xl bg-white/90`}>
             <div className={'w-[400px] h-full mt-20 flex flex-col items-center'}>
               <div className={'w-[400px] h-3/5 flex flex-col items-center'}>
                 <div className='flex w-full h-[200px] space-x-4  items-center justify-center'>
-                  {session.img && <img src={session.img} alt='프로필사진' className='w-[70px] h-[70px] rounded-full object-cover'></img>}
-                  <div className={'font-preB text-[34px] my-8'}>{session.name}님 환영합니다.</div>
+                  {session.img && <img src={session.img} alt='프로필사진' className='w-[80px] h-[80px] rounded-full object-cover'></img>}
+                  <div>
+                    <span className={'font-preB text-[32px]'}>{session.name}</span>
+                    <span className={'font-preL text-[32px]'}>&nbsp;님,</span>
+                    <div className={'font-preL text-[26px]'}>술내음에 오신걸 환영합니다.</div>
+                  </div>
                 </div>
-                <div className='flex  flex-col w-full h-[1000px] items-center'>
+                <div className='flex  flex-col w-full h-[1000px] items-center mt-[20px]'>
                   <div className='flex justify-between items-center'>
                     <img className='w-[140px]' src="/main/part5/main5_3s.png" alt='이미지'></img>
                   </div>
@@ -164,8 +187,8 @@ export default function index() {
           </div>
 
           {/* 1페이지 */}
-          <div className={`${page != 1 && 'hidden'} flex flex-col items-center w-[500px] h-[650px] rounded-xl bg-white/90`}>
-            <div className={'w-5/6 mt-10 mb-6'}>
+          <div className={`${page != 1 && 'hidden'} flex flex-col items-center w-[580px] h-[700px] rounded-xl bg-white/90`}>
+            <div className={'w-[470px] mt-10 mb-6'}>
               <div className='flex items-center w-full h-[30px] mb-[10px]'>
                 <MdArrowBackIosNew className='hover:cursor-pointer' onClick={() => { setPage(page - 1) }} ></MdArrowBackIosNew>
                 <div className={'font-preM ml-[8px]'}>{page}/6 단계</div>
@@ -201,12 +224,12 @@ export default function index() {
                 </div>
               </div>
             </div>
-            <div onClick={() => { setPage(page + 1) }} className={`flex justify-center items-center text-white font-preL rounded w-5/6 h-[60px] text-[20px] ${gender && age ? 'bg-[#847260] text-white hover:cursor-pointer' : 'bg-[#E4E4E7] '} `}>다음 단계</div>
+            <div onClick={() => { setPage(page + 1) }} className={`flex justify-center items-center text-white font-preL rounded w-[470px] h-[60px] text-[20px] ${gender && age ? 'bg-[#847260] text-white hover:cursor-pointer' : 'bg-[#E4E4E7] '} `}>다음 단계</div>
           </div>
 
           {/* 2페이지 */}
-          <div className={`${page != 2 && 'hidden'} flex flex-col items-center w-[500px] h-[650px] rounded-xl bg-white/90`}>
-            <div className={'w-5/6 mt-10 mb-6'}>
+          <div className={`${page != 2 && 'hidden'} flex flex-col items-center w-[580px] h-[700px] rounded-xl bg-white/90`}>
+            <div className={'w-[470px] mt-10 mb-6'}>
               <div className='flex items-center w-full h-[30px] mb-[10px]'>
                 <MdArrowBackIosNew className='hover:cursor-pointer' onClick={() => { setPage(page - 1) }} ></MdArrowBackIosNew>
                 <div className={'font-preM ml-[8px]'}>{page}/6 단계</div>
@@ -215,7 +238,7 @@ export default function index() {
                 <div className={'w-2/6 h-full bg-[#655442] rounded-2xl'}></div>
               </div>
             </div>
-            <div className={'h-2/3 w-[440px] p-2'}>
+            <div className={'h-2/3 w-[470px] p-2'}>
 
               <div className='w-full h-[180px] outline-1 outline-black mt-[20px]'>
                 <div className={'font-preR text-[24px] mb-4'}>단맛의 정도</div>
@@ -275,12 +298,12 @@ export default function index() {
                 </div>
               </div>
             </div>
-            <div onClick={() => { setPage(page + 1) }} className={`flex justify-center items-center text-white font-preL rounded w-5/6 h-[60px] text-[20px] ${tasteSweet && tasteSour ? 'bg-[#847260] text-white hover:cursor-pointer' : 'bg-[#E4E4E7] '} `}>다음 단계</div>
+            <div onClick={() => { setPage(page + 1) }} className={`flex justify-center items-center text-white font-preL rounded w-[470px] h-[60px] text-[20px] ${tasteSweet && tasteSour ? 'bg-[#847260] text-white hover:cursor-pointer' : 'bg-[#E4E4E7] '} `}>다음 단계</div>
           </div>
 
           {/* 3페이지 */}
-          <div className={`${page != 3 && 'hidden'} flex flex-col items-center w-[500px] h-[650px] rounded-xl bg-white/90`}>
-            <div className={'w-5/6 mt-10 mb-6'}>
+          <div className={`${page != 3 && 'hidden'} flex flex-col items-center w-[580px] h-[700px] rounded-xl bg-white/90`}>
+            <div className={'w-[470px] mt-10 mb-6'}>
               <div className='flex items-center w-full h-[30px] mb-[10px]'>
                 <MdArrowBackIosNew className='hover:cursor-pointer' onClick={() => { setPage(page - 1) }} ></MdArrowBackIosNew>
                 <div className={'font-preM ml-[8px]'}>{page}/6 단계</div>
@@ -289,7 +312,7 @@ export default function index() {
                 <div className={'w-3/6 h-full bg-[#655442] rounded-2xl'}></div>
               </div>
             </div>
-            <div className={'h-2/3 w-[440px] p-2'}>
+            <div className={'h-2/3 w-[470px] p-2'}>
 
               <div className='w-full h-[180px] outline-1 outline-black mt-[20px]'>
                 <div className={'font-preR text-[24px] mb-4'}>향의 강도</div>
@@ -349,14 +372,14 @@ export default function index() {
                 </div>
               </div>
             </div>
-            <div onClick={() => { setPage(page + 1) }} className={`flex justify-center items-center text-white font-preL rounded w-5/6 h-[60px] text-[20px] ${tasteFlavor && tasteRefresh ? 'bg-[#847260] text-white hover:cursor-pointer' : 'bg-[#E4E4E7] '} `}>다음 단계</div>
+            <div onClick={() => { setPage(page + 1) }} className={`flex justify-center items-center text-white font-preL rounded w-[470px] h-[60px] text-[20px] ${tasteFlavor && tasteRefresh ? 'bg-[#847260] text-white hover:cursor-pointer' : 'bg-[#E4E4E7] '} `}>다음 단계</div>
           </div>
 
 
 
           {/* 4페이지 */}
-          <div className={`${page != 4 && 'hidden'} flex flex-col items-center w-[500px] h-[650px] rounded-xl bg-white/90`}>
-            <div className={'w-5/6 mt-10 mb-6'}>
+          <div className={`${page != 4 && 'hidden'} flex flex-col items-center w-[580px] h-[700px] rounded-xl bg-white/90`}>
+            <div className={'w-[470px] mt-10 mb-6'}>
               <div className='flex items-center w-full h-[30px] mb-[10px]'>
                 <MdArrowBackIosNew className='hover:cursor-pointer' onClick={() => { setPage(page - 1) }} ></MdArrowBackIosNew>
                 <div className={'font-preM ml-[8px]'}>{page}/6 단계</div>
@@ -365,7 +388,7 @@ export default function index() {
                 <div className={'w-4/6 h-full bg-[#655442] rounded-2xl'}></div>
               </div>
             </div>
-            <div className={'h-2/3 w-[440px] p-2'}>
+            <div className={'h-2/3 w-[470px] p-2'}>
 
               <div className='w-full h-[180px] outline-1 outline-black mt-[20px]'>
                 <div className={'font-preR text-[24px] mb-4'}>바디감</div>
@@ -425,13 +448,13 @@ export default function index() {
                 </div>
               </div>
             </div>
-            <div onClick={() => { setPage(page + 1) }} className={`flex justify-center items-center text-white font-preL rounded w-5/6 h-[60px] text-[20px] ${tasteBody && tasteThroat ? 'bg-[#847260] text-white hover:cursor-pointer' : 'bg-[#E4E4E7] '} `}>다음 단계</div>
+            <div onClick={() => { setPage(page + 1) }} className={`flex justify-center items-center text-white font-preL rounded w-[470px] h-[60px] text-[20px] ${tasteBody && tasteThroat ? 'bg-[#847260] text-white hover:cursor-pointer' : 'bg-[#E4E4E7] '} `}>다음 단계</div>
           </div>
 
 
           {/* 5페이지 */}
-          <div className={`${page != 5 && 'hidden'} flex flex-col items-center w-[500px] h-[650px] rounded-xl bg-white/90`}>
-            <div className={'w-5/6 mt-10 mb-6'}>
+          <div className={`${page != 5 && 'hidden'} flex flex-col items-center w-[580px] h-[700px] rounded-xl bg-white/90`}>
+            <div className={'w-[470px] mt-10 mb-6'}>
               <div className='flex items-center w-full h-[30px] mb-[10px]'>
                 <MdArrowBackIosNew className='hover:cursor-pointer' onClick={() => { setPage(page - 1) }} ></MdArrowBackIosNew>
                 <div className={'font-preM ml-[8px]'}>{page}/6 단계</div>
@@ -440,7 +463,7 @@ export default function index() {
                 <div className={'w-5/6 h-full bg-[#655442] rounded-2xl'}></div>
               </div>
             </div>
-            <div className={'h-2/3 w-[440px] p-2'}>
+            <div className={'h-2/3 w-[470px] p-2'}>
 
               <div className='w-full h-[180px] outline-1 outline-black mt-[40px]'>
                 <div className={'font-preR text-[24px] mb-4'}>가장 좋아하는 안주를 골라보세요</div>
@@ -448,41 +471,41 @@ export default function index() {
                   <div onClick={() => {
                     setDish("전/무침")
                   }}
-                    className={`flex justify-center items-center w-[130px] h-[100px] rounded-[4px] hover:cursor-pointer ${dish === "전/무침" ? 'bg-[#847260] text-white hover:bg-[#847260]' : 'bg-gray-100  hover:text-white hover:bg-cover hover:bg-[url("/images/dish/dish1.png")]'}`}>전/무침</div>
+                    className={`flex justify-center items-center w-[136px] h-[100px] rounded-[4px] hover:cursor-pointer ${dish === "전/무침" ? 'bg-[#847260] text-white hover:bg-[#847260]' : 'bg-gray-100  hover:text-white hover:bg-cover hover:bg-[url("/images/dish/dish1.png")]'}`}>전/무침</div>
                   <div onClick={() => {
                     setDish("탕/전골")
                   }}
-                    className={`flex justify-center items-center w-[130px] h-[100px] rounded-[4px] hover:cursor-pointer ${dish === "탕/전골" ? 'bg-[#847260] text-white hover:bg-[#847260]' : 'bg-gray-100 hover:bg-gray-200 hover:text-white hover:bg-cover hover:bg-[url("/images/dish/dish2.png")]'}`}>탕/전골</div>
+                    className={`flex justify-center items-center w-[136px] h-[100px] rounded-[4px] hover:cursor-pointer ${dish === "탕/전골" ? 'bg-[#847260] text-white hover:bg-[#847260]' : 'bg-gray-100 hover:bg-gray-200 hover:text-white hover:bg-cover hover:bg-[url("/images/dish/dish2.png")]'}`}>탕/전골</div>
                   <div
                     onClick={() => {
                       setDish("육류")
                     }}
-                    className={`flex justify-center items-center w-[130px] h-[100px] rounded-[4px] hover:cursor-pointer ${dish === "육류" ? 'bg-[#847260] text-white hover:bg-[#847260]' : 'bg-gray-100 hover:bg-gray-200 hover:text-white hover:bg-cover hover:bg-[url("/images/dish/dish3.png")]'}`}>육류</div>
+                    className={`flex justify-center items-center w-[136px] h-[100px] rounded-[4px] hover:cursor-pointer ${dish === "육류" ? 'bg-[#847260] text-white hover:bg-[#847260]' : 'bg-gray-100 hover:bg-gray-200 hover:text-white hover:bg-cover hover:bg-[url("/images/dish/dish3.png")]'}`}>육류</div>
                 </div>
                 <div className='flex justify-between items-center w-full h-[100px] mt-[20px]'>
                   <div onClick={() => {
                     setDish("해산물")
                   }}
-                    className={`flex justify-center items-center w-[130px] h-[100px] rounded-[4px] hover:cursor-pointer ${dish === "해산물" ? 'bg-[#847260] text-white hover:bg-[#847260]' : 'bg-gray-100 hover:bg-gray-200 hover:text-white hover:bg-cover hover:bg-[url("/images/dish/dish4.png")]'}`}>해산물</div>
+                    className={`flex justify-center items-center w-[136px] h-[100px] rounded-[4px] hover:cursor-pointer ${dish === "해산물" ? 'bg-[#847260] text-white hover:bg-[#847260]' : 'bg-gray-100 hover:bg-gray-200 hover:text-white hover:bg-cover hover:bg-[url("/images/dish/dish4.png")]'}`}>해산물</div>
                   <div onClick={() => {
                     setDish("디저트")
                   }}
-                    className={`flex justify-center items-center w-[130px] h-[100px] rounded-[4px] hover:cursor-pointer ${dish === "디저트" ? 'bg-[#847260] text-white hover:bg-[#847260]' : 'bg-gray-100 hover:bg-gray-200 hover:text-white hover:bg-cover hover:bg-[url("/images/dish/dish5.png")]'}`}>디저트</div>
+                    className={`flex justify-center items-center w-[136px] h-[100px] rounded-[4px] hover:cursor-pointer ${dish === "디저트" ? 'bg-[#847260] text-white hover:bg-[#847260]' : 'bg-gray-100 hover:bg-gray-200 hover:text-white hover:bg-cover hover:bg-[url("/images/dish/dish5.png")]'}`}>디저트</div>
                   <div
                     onClick={() => {
                       setDish("양식")
                     }}
-                    className={`flex justify-center items-center w-[130px] h-[100px] rounded-[4px] hover:cursor-pointer ${dish === "양식" ? 'bg-[#847260] text-white hover:bg-[#847260]' : 'bg-gray-100 hover:bg-gray-200 hover:text-white hover:bg-cover hover:bg-[url("/images/dish/dish6.png")]'}`}>양식</div>
+                    className={`flex justify-center items-center w-[136px] h-[100px] rounded-[4px] hover:cursor-pointer ${dish === "양식" ? 'bg-[#847260] text-white hover:bg-[#847260]' : 'bg-gray-100 hover:bg-gray-200 hover:text-white hover:bg-cover hover:bg-[url("/images/dish/dish6.png")]'}`}>양식</div>
                 </div>
               </div>
             </div>
-            <div onClick={() => { setPage(page + 1) }} className={`flex justify-center items-center text-white font-preL rounded w-5/6 h-[60px] text-[20px] ${dish ? 'bg-[#847260] text-white hover:cursor-pointer' : 'bg-[#E4E4E7] '} `}>다음 단계</div>
+            <div onClick={() => { setPage(page + 1) }} className={`flex justify-center items-center text-white font-preL rounded w-[470px] h-[60px] text-[20px] ${dish ? 'bg-[#847260] text-white hover:cursor-pointer' : 'bg-[#E4E4E7] '} `}>다음 단계</div>
           </div>
 
 
           {/* 6페이지 */}
-          <div className={`${page != 6 && 'hidden'} flex flex-col items-center w-[500px] h-[650px] rounded-xl bg-white/90`}>
-            <div className={'w-5/6 mt-10 mb-6'}>
+          <div className={`${page != 6 && 'hidden'} flex flex-col items-center w-[580px] h-[700px] rounded-xl bg-white/90`}>
+            <div className={'w-[470px] mt-10 mb-6'}>
               <div className='flex items-center w-full h-[30px] mb-[10px]'>
                 <MdArrowBackIosNew className='hover:cursor-pointer' onClick={() => { setPage(page - 1) }} ></MdArrowBackIosNew>
                 <div className={'font-preM ml-[8px]'}>{page}/6 단계</div>
@@ -491,34 +514,34 @@ export default function index() {
                 <div className={'w-6/6 h-full bg-[#655442] rounded-2xl'}></div>
               </div>
             </div>
-            <div className={'h-2/3 w-[440px] p-2'}>
+            <div className={'h-2/3 w-[470px] p-2'}>
 
               <div className='w-full h-[180px] outline-1 outline-black mt-[20px]'>
-                <div className={'font-preR text-[24px] mb-4'}>알콜 도수는 어떤가요?</div>
+                <div className={'font-preR text-[24px] mb-4'}>선호하는 알콜 도수는?</div>
                 <div className='flex justify-between items-center w-full h-[100px]'>
                   <div onClick={() => {
                     setLevel(1)
                   }}
-                    className={`flex justify-center items-center w-[80px] h-[60px] rounded-[4px] hover:cursor-pointer ${level === 1 ? 'bg-[#847260] text-white hover:bg-[#847260]' : 'bg-gray-100 hover:bg-gray-200'}`}>1% ~ 5%</div>
+                    className={`flex justify-center items-center w-[86px] h-[60px] rounded-[4px] hover:cursor-pointer ${level === 1 ? 'bg-[#847260] text-white hover:bg-[#847260]' : 'bg-gray-100 hover:bg-gray-200'}`}>1 ~ 5</div>
                   <div onClick={() => {
                     setLevel(2)
                   }}
-                    className={`flex justify-center items-center w-[80px] h-[60px] rounded-[4px] hover:cursor-pointer ${level === 2 ? 'bg-[#847260] text-white hover:bg-[#847260]' : 'bg-gray-100 hover:bg-gray-200'}`}>6% ~ 10%</div>
+                    className={`flex justify-center items-center w-[86px] h-[60px] rounded-[4px] hover:cursor-pointer ${level === 2 ? 'bg-[#847260] text-white hover:bg-[#847260]' : 'bg-gray-100 hover:bg-gray-200'}`}>6 ~ 10</div>
                   <div
                     onClick={() => {
                       setLevel(3)
                     }}
-                    className={`flex justify-center items-center w-[80px] h-[60px] rounded-[4px] hover:cursor-pointer ${level === 3 ? 'bg-[#847260] text-white hover:bg-[#847260]' : 'bg-gray-100 hover:bg-gray-200'}`}>11% ~ 20%</div>
+                    className={`flex justify-center items-center w-[86px] h-[60px] rounded-[4px] hover:cursor-pointer ${level === 3 ? 'bg-[#847260] text-white hover:bg-[#847260]' : 'bg-gray-100 hover:bg-gray-200'}`}>11 ~ 20</div>
                   <div
                     onClick={() => {
                       setLevel(4)
                     }}
-                    className={`flex justify-center items-center w-[80px] h-[60px] rounded-[4px] hover:cursor-pointer ${level === 4 ? 'bg-[#847260] text-white hover:bg-[#847260]' : 'bg-gray-100 hover:bg-gray-200'}`}>21% ~ 30%</div>
+                    className={`flex justify-center items-center w-[86px] h-[60px] rounded-[4px] hover:cursor-pointer ${level === 4 ? 'bg-[#847260] text-white hover:bg-[#847260]' : 'bg-gray-100 hover:bg-gray-200'}`}>21 ~ 30</div>
                   <div
                     onClick={() => {
                       setLevel(5)
                     }}
-                    className={`flex justify-center items-center w-[80px] h-[60px] rounded-[4px] hover:cursor-pointer ${level === 5 ? 'bg-[#847260] text-white hover:bg-[#847260]' : 'bg-gray-100 hover:bg-gray-200'}`}>31% 이상</div>
+                    className={`flex justify-center items-center w-[86px] h-[60px] rounded-[4px] hover:cursor-pointer ${level === 5 ? 'bg-[#847260] text-white hover:bg-[#847260]' : 'bg-gray-100 hover:bg-gray-200'}`}>31 이상</div>
                 </div>
               </div>
 
@@ -555,18 +578,19 @@ export default function index() {
                 setPage(page + 2)
 
               }
-                , 3400);
-            }} className={`flex justify-center items-center text-white font-preL rounded w-5/6 h-[60px] text-[20px] ${weight && level ? 'bg-[#847260] text-white hover:cursor-pointer' : 'bg-[#E4E4E7] '} `}>추천받기</div>
+                , 4000);
+            }} className={`flex justify-center items-center text-white font-preL rounded w-[470px] h-[60px] text-[20px] ${weight && level ? 'bg-[#847260] text-white hover:cursor-pointer' : 'bg-[#E4E4E7] '} `}>추천받기</div>
           </div>
 
 
           {/* 7페이지 */}
-          <div className={`${page != 7 && 'hidden'} flex flex-col items-center w-[500px] h-[650px] rounded-xl bg-white/90`}>
-            <div className={'h-2/3 w-[440px] p-2'}>
+          <div className={`${page != 7 && 'hidden'} flex flex-col items-center w-[700px] h-[700px] rounded-xl bg-white/90`}>
+            <div className={'h-2/3 w-[470px] p-2'}>
               <div className='w-full h-[180px] outline-1 outline-black mt-[20px]'>
                 <div className='flex flex-col justify-between items-center w-full h-[300px] mt-[160px]'>
-                  <img src='/images/loading2.gif' className='w-[740px]'></img>
-                  <p className='font-bold text-[28px] text-[#847260]'>전통주 취향 분석중...</p>
+                  <img src='/images/loading4.gif' className='w-full'></img>
+                  <p className='font-bold text-[28px] text-[#191919]'>{session.name}님의</p>
+                  <p className='font-medium text-[28px] text-[#191919]'>취향을 분석중입니다.</p>
                 </div>
               </div>
 
@@ -575,16 +599,26 @@ export default function index() {
           </div>
 
           {/* 8페이지 */}
-          <div className={`${page != 8 && 'hidden'} flex flex-col items-center w-[500px] h-[650px] rounded-xl bg-white`}>
-            <div className={'h-2/3 w-[440px] p-2'}>
-              <div className='flex flex-col justify-center items-center w-full h-[460px] mt-[10px]'>
-                <div className={'font-preB text-[30px] mb-4 mt-[40px]'}>취향 분석 결과</div>
-                <div className='flex flex-col justify-between items-center w-full h-[400px] mt-[4px] rounded-[8px]'>
-                  <div className='flex justify-center w-[180px] h-[240px] mt-[4px]'>
-                    <img src={resultImg} alt="이미지" className='h-full object-cover' />
+          <div className={`${page != 8 && 'hidden'} flex flex-col items-center w-[580px] h-[700px] rounded-xl bg-white/90`}>
+            <div className={'h-2/3 w-[470px] p-2'}>
+              <div className='flex flex-col justify-center items-center w-full h-[460px] mt-[60px]'>
+                <div className='flex w-full h-[200px] space-x-4  items-center justify-center'>
+                  {session.img && <img src={session.img} alt='프로필사진' className='w-[60px] h-[60px] rounded-full object-cover'></img>}
+                  <div>
+                    <span className={'font-preB text-[30px]'}>{session.name}</span>
+                    <span className={'font-preL text-[30px]'}>님의</span>
+                    <span className={'font-preB text-[30px]'}>&nbsp;취향 분석 결과</span>
                   </div>
-                  <p className='mt-[30px] text-[26px] font-bold'>{resultName}</p>
-                  <p className='text-[22px]'>{Number(resultLevel)}° ㅣ {resultAmount}</p>
+                </div>
+                <div className='flex flex-col justify-between items-center w-full h-[400px] mt-[60px] rounded-[8px]'>
+                  <div className='flex justify-around w-[440px] h-[240px] mt-[4px]'>
+                    <img src={resultImg} alt="이미지" className='h-[240px] object-scale-down' />
+                    <div className='flex justify-center items-center w-[200px]'>
+                      <RadarChart drink={drinkTaste}></RadarChart>
+                    </div>
+                  </div>
+                  <p className='mt-[40px] font-preB text-[28px] font-bold'>{resultName}</p>
+                  <p className='mt-[10px] font-preL text-[20px]'>{Number(resultLevel)}% ㅣ {resultAmount}</p>
                 </div>
               </div>
 
@@ -592,7 +626,7 @@ export default function index() {
             <div onClick={() => {
               location.href = `/list/${resultId}`
             }
-            } className={`flex justify-center items-center text-white font-preL rounded w-5/6 h-[60px] text-[20px] mt-[90px] bg-[#847260] text-white hover:cursor-pointer`}>더 알아보기</div>
+            } className={`flex justify-center items-center text-white font-preL rounded w-[400px] h-[60px] text-[20px] mt-[130px] bg-gradient-to-r from-[#8FAADC] to-[#8FAADC]/70 hover:bg-gradient-to-r hover:from-[#809ED4] hover:to-[#809ED4]/70 hover:cursor-pointer `}>{resultName} 더 알아보러가기</div>
           </div>
 
 
