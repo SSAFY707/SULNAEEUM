@@ -50,8 +50,8 @@ export default function callback(props: { code: string }) {
   return (<>
     <div className='flex flex-col w-screen h-screen justify-center items-center'>
       <div className='flex flex-col justify-center items-center w-[700px] h-[700px] rounded-[14px]'>
-        <img src='/images/loading4.gif' className='w-[600px]'></img>
-        <p className='font-normal text-[30px] text-[#AEA896]'>Loading...</p>
+        <img src='/images/loading3.gif' className='w-[600px]'></img>
+        <p className='font-preB text-[30px] text-[#666666]'>술내음 페이지로 이동중입니다.</p>
       </div>
     </div>
   </>
