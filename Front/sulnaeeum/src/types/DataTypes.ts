@@ -89,16 +89,7 @@ export type tasteType = {
 
 
 export interface UserClear {
-  drinkId: number;
-  drinkName: string;
-  drinkImage: string;
-  drinkAmount: string;
-  drinkLevel: string;
-  drinkType: string;
-}
-
-export interface UserPreferenceDrink {
-  [index: string]: string | number;
+  [index : string] : number | string;
   drinkId: number;
   drinkName: string;
   drinkImage: string;
@@ -108,6 +99,7 @@ export interface UserPreferenceDrink {
 }
 
 export interface UserPreferenceStore {
+  [index : string] : number | string | string[];
   storeId: number;
   storeName: string;
   storeImage: string;
@@ -135,4 +127,42 @@ export type todayDrink = {
 export type todayDish = { 
   todayId: number;
   todayDish: string;
+}
+
+export type UserType = {
+  userId: number
+  kakaoId: string,
+  nickname: string,
+  age: number|null,
+  sex: number|null,
+  img: string,
+  ranking: number,
+  finish: boolean,
+  likeDrinkCnt : number,
+  likeJumakCnt : number,
+  clearDrinkCnt : number,
+  userPreferenceDto : null | UserPreferenceType
+}
+
+export type TextType = {
+  text: string,
+  value : number,
+}
+
+export type TextMinigType = {
+  'words': TextType[]
+}
+
+export type UserPreferenceType = {
+  age : string,
+  sex : string,
+  tasteSour: number,
+  tasteSweet: number,
+  tasteFlavor: number,
+  tasteRefresh: number,
+  tasteBody: number,
+  tasteThroat: number,
+  level: number,
+  dish: string,
+  weight: string,
 }

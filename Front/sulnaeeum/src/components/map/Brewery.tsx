@@ -1,10 +1,12 @@
 import React from 'react'
 import style from '@/pages/map/map.module.css'
+import { useRouter } from 'next/router'
 
 
 export default function Brewery(props: any) {
 
   const { tab, mode, res } = props
+  const router = useRouter()
 
   return (<>
     <div className='w-[584px] scroll h-[680px] overflow-y-scroll'>
@@ -31,7 +33,7 @@ export default function Brewery(props: any) {
                       <p>{v.contact}</p>
                       <div className='flex '>{v.drinkTypeList.map((i: any, index: number) => {
                         return <>
-                          <div key={index} className='cursor-pointer hover:bg-gray-300 py-1 px-4 mr-[14px] rounded-[20px] bg-gray-200 border'>#{i}</div>
+                          <div onClick={(e)=>{e.preventDefault(); router.push(`/list?type=${i}&sort=이름`)}} key={index} className='cursor-pointer hover:bg-gray-300 py-1 px-4 mr-[14px] rounded-[20px] bg-gray-200 border'>#{i}</div>
                         </>
                       })}</div>
                     </div>

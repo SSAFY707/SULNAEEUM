@@ -2,8 +2,9 @@ import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import UserDetailDrink from "@/components/profile/userDetailDrink";
 import UserDetailStore from "@/components/profile/userDetailStore";
-import { UserClear } from "@/types/DataTypes";
+import { UserClear, UserPreferenceStore } from "@/types/DataTypes";
 import { AiOutlineArrowLeft } from "react-icons/ai";
+import { getMyLikeStore } from "@/api/auth/mypage";
 
 export default function Detail(props: { idx: number }) {
   const { idx } = props;
@@ -79,7 +80,6 @@ export default function Detail(props: { idx: number }) {
       drinkType: "탁주",
     },
   ];
-
   const userPreferenceDrink: any = [
     {
       drinkId: 1,
@@ -232,14 +232,13 @@ export default function Detail(props: { idx: number }) {
         {
           // idx==0,
           idx == 0 ? (
-            <UserDetailDrink userData={userClear} idx={idx}></UserDetailDrink>
+            <UserDetailDrink idx={idx}></UserDetailDrink>
           ) : idx == 1 ? (
             <UserDetailDrink
-              userData={userPreferenceDrink}
               idx={idx}
             ></UserDetailDrink>
           ) : (
-            <UserDetailStore userData={userPreferenceStore}></UserDetailStore>
+            <UserDetailStore></UserDetailStore>
           )
         }
       </div>

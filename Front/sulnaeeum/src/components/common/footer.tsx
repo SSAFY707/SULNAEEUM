@@ -15,7 +15,7 @@ export default function Footer() {
 
   return (
   <>
-    <div className={'hidden md:flex justify-between shadow-[0px_-5px_20px_#CECECE80] h-[380px] bg-white items-center px-[260px]'}>
+    <div className={'hidden md:flex justify-between shadow-[0px_-5px_10px_#CECECE70] h-[380px] bg-white items-center px-[260px]'}>
         <img className={'h-1/2'} src="/images/footer_logo.png" />
         <div>
             <div className={'text-zinc-400/80 mb-6'}>About Service</div>
