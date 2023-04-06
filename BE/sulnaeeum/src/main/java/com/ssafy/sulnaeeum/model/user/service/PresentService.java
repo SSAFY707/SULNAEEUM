@@ -1,9 +1,16 @@
-package com.ssafy.sulnaeeum.model.drink.service;
+package com.ssafy.sulnaeeum.model.user.service;
 
-import com.ssafy.sulnaeeum.model.drink.dto.SimilarDrinkDto;
+import com.ssafy.sulnaeeum.exception.CustomException;
+import com.ssafy.sulnaeeum.exception.CustomExceptionList;
+import com.ssafy.sulnaeeum.model.drink.dto.DrinkDto;
+import com.ssafy.sulnaeeum.model.drink.entity.Drink;
+import com.ssafy.sulnaeeum.model.drink.entity.Ingredient;
+import com.ssafy.sulnaeeum.model.drink.repo.DrinkRepo;
+import com.ssafy.sulnaeeum.model.drink.repo.IngredientRepo;
 import com.ssafy.sulnaeeum.model.jubti.entity.JubtiResult;
 import com.ssafy.sulnaeeum.model.jubti.repo.JubtiRepo;
-import com.ssafy.sulnaeeum.model.jubti.dto.PresentDto;
+import com.ssafy.sulnaeeum.model.ranking.dto.RecommendRankingDto;
+import com.ssafy.sulnaeeum.model.user.dto.PresentDto;
 import com.ssafy.sulnaeeum.util.FlaskUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -22,15 +29,26 @@ public class PresentService {
 
     private final JubtiRepo jubtiRepo;
     private final FlaskUtil flaskUtil;
+    private final DrinkRepo drinkRepo;
+    private final IngredientRepo ingredientRepo;
 
     @Transactional
-    public List<SimilarDrinkDto> getPresentDrink(PresentDto presentDto){
-        String requestUrl = "http://j8a707.p.ssafy.io:5000/recommend/contents";
+    public List<RecommendRankingDto> getPresentDrink(PresentDto presentDto){
+        String requestUrl = "https://j8a707.p.ssafy.io/flask/recommend/present";
+//        String requestUrl = "http://localhost:5000/recommend/present";
         Map<String, List> params = new HashMap<>();
         List<Integer> input_data = new ArrayList<>();
 
         String sex = presentDto.getSex();
-        String age = presentDto.getAge();
+        int ageNum = presentDto.getAge();
+
+        String age = "";
+
+        if(20 <= ageNum && ageNum < 30) age = "20s";
+        else if(30 <= ageNum && ageNum < 40) age = "30s";
+        else if(40 <= ageNum && ageNum < 50) age = "40s";
+        else if(50 <= ageNum && ageNum < 60) age = "50s";
+        else age = "60s";
 
         System.out.println(sex + " " + age);
         List<JubtiResult> jubtiResultList = jubtiRepo.findPresent(sex, age);
@@ -67,6 +85,11 @@ public class PresentService {
             input_data.set(5, presentDto.getTasteBody());
         }
 
+        input_data.add(presentDto.getMaxLevel());
+        input_data.add(presentDto.getMinLevel());
+        input_data.add(presentDto.getMaxPrice());
+        input_data.add(presentDto.getMinPrice());
+
         System.out.println(input_data);
 
         params.put("input_data", input_data);
@@ -78,7 +101,7 @@ public class PresentService {
         System.out.println(jsonObject.get("0").toString());
         System.out.println(jsonObject.values());
 
-        List<SimilarDrinkDto> recommend = new ArrayList<>();
+        List<RecommendRankingDto> recommend = new ArrayList<>();
 
         for(int i = 0; i < 5; i++){
             String key = Integer.toString(i);
@@ -91,11 +114,25 @@ public class PresentService {
             } catch (ParseException e) {
                 e.printStackTrace();
             }
+            Long drinkId = (Long)jsonValue.get("drink_id");
 
-            SimilarDrinkDto similarDrinkDto = new SimilarDrinkDto(jsonValue);
-            recommend.add(similarDrinkDto);
+            Drink drink = drinkRepo.findByDrinkId(drinkId).orElseThrow(() -> new CustomException(CustomExceptionList.MEMBER_NOT_FOUND));
+            DrinkDto drinkDto = drink.toDto();
+            List<Ingredient> ingredients = ingredientRepo.findByDrink(drink);
+            List<String> ingredientList = getIngredientName(ingredients);
+            RecommendRankingDto rankingDto = new RecommendRankingDto(drinkDto, ingredientList);
+
+            recommend.add(rankingDto);
         }
 
         return recommend;
+    }
+
+    private List<String> getIngredientName(List<Ingredient> ingredients){
+        List<String> names = new ArrayList<>();
+
+        for(int i = 0; i < ingredients.size(); i++) names.add(ingredients.get(i).getIngredientType().getIngredientName());
+
+        return names;
     }
 }

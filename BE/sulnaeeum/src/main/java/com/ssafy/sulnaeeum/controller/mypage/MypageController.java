@@ -5,6 +5,7 @@ import com.ssafy.sulnaeeum.model.drink.dto.LikeDrinkListDto;
 import com.ssafy.sulnaeeum.model.drink.service.LikeDrinkService;
 import com.ssafy.sulnaeeum.model.jumak.dto.LikeJumakListDto;
 import com.ssafy.sulnaeeum.model.jumak.service.MyJumakService;
+import com.ssafy.sulnaeeum.model.mypage.dto.MyInfoDto;
 import com.ssafy.sulnaeeum.model.mypage.dto.Words;
 import com.ssafy.sulnaeeum.model.mypage.service.MypageService;
 import com.ssafy.sulnaeeum.model.user.dto.UserDto;
@@ -40,13 +41,13 @@ public class MypageController {
      ***/
     @Operation(summary = "프로필 조회", description = "프로필 조회")
     @GetMapping("/info")
-    public ResponseEntity<UserDto> getInfo() {
+    public ResponseEntity<MyInfoDto> getInfo() {
 
         String kakaoId = SecurityContextHolder.getContext().getAuthentication().getName();
 
-        UserDto userDto = mypageService.getInfo(kakaoId);
+        MyInfoDto myInfoDto = mypageService.getInfo(kakaoId);
 
-        return new ResponseEntity<>(userDto, HttpStatus.OK);
+        return new ResponseEntity<>(myInfoDto, HttpStatus.OK);
     }
 
     /***

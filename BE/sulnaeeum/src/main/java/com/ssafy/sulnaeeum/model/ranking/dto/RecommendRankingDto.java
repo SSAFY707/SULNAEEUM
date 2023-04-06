@@ -14,7 +14,7 @@ import java.util.List;
 @SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
-public class RankingDto {
+public class RecommendRankingDto {
     @Schema(description = "전통주 아이디")
     private Long drinkId;
 
@@ -33,16 +33,20 @@ public class RankingDto {
     @Schema(description = "전통주 종류")
     private String drinkType;
 
+    @Schema(description = "전통주 가격")
+    private String drinkPrice;
+
     @Schema(description = "전통주 재료")
     private List<String> ingredientList;
 
-    public RankingDto(DrinkDto drinkDto, List<String> ingredientList){
+    public RecommendRankingDto(DrinkDto drinkDto, List<String> ingredientList){
         this.drinkId = drinkDto.getDrinkId();
         this.drinkLevel = drinkDto.getDrinkLevel();
         this.drinkName = drinkDto.getDrinkName();
         this.drinkImg = drinkDto.getDrinkImage();
         this.drinkAmount = drinkDto.getDrinkAmount();
         this.drinkType = drinkDto.getDrinkTypeDto().getDrinkTypeName();
+        this.drinkPrice = drinkDto.getDrinkPrice();
         this.ingredientList = ingredientList;
     }
 }

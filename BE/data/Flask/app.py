@@ -8,6 +8,10 @@ app = Flask(__name__)
 # 술 데이터
 data_list = {}
 
+
+# ============================= SQL문 ============================
+
+
 # 술 검색
 DRINK_INFO = "select drink_name, drink_amount, drink_level, drink_image from drink where drink_id = %s"
 
@@ -28,6 +32,39 @@ DRINK_DISH = "select dish_id from dish_drink where drink_id = %s"
 
 # 안주 대분류 select 구문
 DRINK_DISH_CATEGORY = "select dish_category from dish where dish_id = %s"
+
+# 술 가격 select 구문
+DRINK_PRICE = "select drink_price from drink where drink_id = %s"
+
+# jubti_result 구하기
+JUBTI_RESULT = "select male, female from jubti_result"
+
+# jubti_result 남,여 사용자 수 구하기
+JUBTI_COUNT_SEX = "select count(*) from jubti_result where sex = %s"
+
+# jubti_result 사용자 평균 구하기
+JUBTI_AVG = "select avg(taste_sweet), avg(taste_sour), avg(taste_refresh), avg(taste_flavor), avg(taste_throat), avg(taste_body) from jubti_result"
+
+# jubti_result 남,여 사용자 평균 구하기
+JUBTI_AVG_SEX = "select avg(taste_sweet), avg(taste_sour), avg(taste_refresh), avg(taste_flavor), avg(taste_throat), avg(taste_body) from jubti_result where sex = %s"
+
+# jubti_result 나이별 사용자 평균 구하기
+JUBTI_AVG_AGE = "select avg(taste_sweet), avg(taste_sour), avg(taste_refresh), avg(taste_flavor), avg(taste_throat), avg(taste_body) from jubti_result where age = %s"
+
+# jubti_result 남,여 도수 확인
+JUBTI_LEVEL_SEX = "select level from jubti_result where sex = %s"
+
+# jubti_result 나이별 도수 확인
+JUBTI_LEVEL_AGE = "select level from jubti_result where age = %s"
+
+# 전체 랭킹 업데이트
+RANKING_TOTAL_UPDATE = "update ranking set total = %s where ranking_id = %s"
+
+# 남성 랭킹 업데이트
+RANKING_MALE_UPDATE = "update ranking set male = %s where ranking_id = %s"
+
+# 여성 랭킹 업데이트
+RANKING_FEMALE_UPDATE = "update ranking set male = %s where ranking_id = %s"
 
 
 
@@ -150,6 +187,102 @@ make_drink_data()
 
 
 
+# ============================= RabbitMQ API ============================
+
+
+# 술 도수 계산
+def cal_level(level):
+    if level == 1:
+        return 4
+    elif level == 2:
+        return 7
+    elif level == 3:
+        return 15
+    elif level == 4:
+        return 25
+    else:
+        return 45
+
+# 랭킹 API
+@app.route("/rabbit/ranking", methods=["GET"])
+def rabbit_ranking():
+    conn = db_connect()
+    cur = conn.cursor()
+
+
+    cur.execute(JUBTI_COUNT_SEX, "남성")
+    jubti_male_size = cur.fetchall()[0][0]
+    print("남자 수", jubti_male_size)
+
+    cur.execute(JUBTI_COUNT_SEX, "여성")
+    jubti_female_size = cur.fetchall()[0][0]
+    print("여자 수", jubti_female_size)
+
+    jubti_total_size = len(JUBTI_RESULT)
+
+    jubti_male_point = []
+    jubti_female_point = []
+    jubti_total_point = []
+
+
+    cur.execute(JUBTI_AVG)
+    result_total = cur.fetchall()[0]
+
+    for total in result_total:
+        jubti_total_point.append(round(total))
+
+
+    cur.execute(JUBTI_AVG_SEX, "남성")
+    result_male = cur.fetchall()[0]
+
+    for male in result_male:
+        jubti_male_point.append(round(male))
+
+
+    cur.execute(JUBTI_AVG_SEX, "여성")
+    result_female = cur.fetchall()[0]
+
+    for female in result_female:
+        jubti_female_point.append(round(female))
+
+
+    cur.execute(JUBTI_LEVEL_SEX, "남성")
+    level_male = cur.fetchall()
+
+    cur.execute(JUBTI_LEVEL_SEX, "여성")
+    level_female = cur.fetchall()
+
+    m_level_sum = 0
+    for male in level_male:
+        m_level_sum += cal_level(male[0])
+
+    f_level_sum = 0
+    for female in level_female:
+        f_level_sum += cal_level(female[0])
+
+    jubti_male_point.append(round(m_level_sum / jubti_male_size))
+    jubti_female_point.append(round(f_level_sum / jubti_female_size))
+    jubti_total_point.append(round((m_level_sum + f_level_sum) / jubti_total_size))
+
+    for i in range(6):
+        jubti_male_point.append(0)
+        jubti_female_point.append(0)
+        jubti_total_point.append(0)
+
+    print(jubti_male_point)
+    print(jubti_female_point)
+    print(jubti_total_point)
+
+    input_data = []
+    input_data.append(jubti_total_point)
+    input_data.append(jubti_male_point)
+    input_data.append(jubti_female_point)
+    ranking(input_data)
+
+    conn.close()
+
+    return "ok"
+
 
 
 # ============================= 추천 API ============================
@@ -196,6 +329,71 @@ def recommend_drink():
     return find_drink_id_dic
 
 
+# 컨텐츠 기반 선물 추천 알고리즘
+# 요청 : 단, 신, 청, 향, 목, 바, 도, 안
+# 응답 : 아이디, 이름, 도수, 용량, 사진
+@app.route("/recommend/present", methods=["POST"])
+def recommend_present_drink():
+    parameter_dict = request.get_json()
+
+    input_data = parameter_dict["input_data"]
+    print(input_data)
+
+    max_level = input_data[13]
+    min_level = input_data[14]
+    max_price = input_data[15]
+    min_price = input_data[16]
+
+    input_data = input_data[0:13]
+    input_data.pop(6)
+    find_list = find_present_drink(input_data)
+
+    conn = db_connect()
+    cur = conn.cursor()
+
+    find_drink_id_dic = {}
+
+    cnt = 0
+    for i in range(len(find_list)):
+        drink_id = find_list[i][0]+1
+
+        this_drink_list = {}
+        this_drink_list['drink_id'] = drink_id
+
+        cur.execute(DRINK_PRICE, str(drink_id))
+        result = cur.fetchall()
+        drink_price = result[0][0]
+
+        if drink_price == "":
+            continue
+
+        drink_price = drink_price.replace(",", "")
+
+        if min_price > int(drink_price) or int(drink_price) > max_price:
+            continue
+
+        cur.execute(DRINK_LEVEL, str(drink_id))
+        result = cur.fetchall()
+        drink_level = result[0][0]
+
+        if min_level > int(drink_price) or int(drink_level) > max_level:
+            continue
+
+        # print(i+1, "위 : ", result, "(", drink_id, ") / 유사도 : ", find_list[i][1])
+        # print(result, "술 정보 : ", data_list[drink_id-1])
+
+        find_drink_id_dic[cnt] = this_drink_list
+        print(find_drink_id_dic[cnt])
+        cnt += 1
+
+        if cnt > 5:
+            break
+
+    conn.close()
+
+    return find_drink_id_dic
+
+
 # 유클리디안 거리 구하기
 def euclidean_distance(data, drink):   
     return np.sqrt(np.sum((data - drink) ** 2))
@@ -208,6 +406,28 @@ def find_drink(input_data):
 
     for i in range(629):
         X = np.array([input_data, data_list[i]])
+
+        t_user = X[0][:]
+        drink_data = X[1][:]
+        dis = euclidean_distance(t_user, drink_data)
+
+        dis_dic[i] = dis
+    
+    return sorted(dis_dic.items(), key = lambda item: item[1])
+
+
+# 선물 대상과 가장 유사한 5가지 술 찾기
+def find_present_drink(input_data):
+    # 거리 정보
+    dis_dic = {}
+
+    for i in range(629):
+        temp = data_list[i][6]
+        data_list[i].pop(6)
+
+        X = np.array([input_data, data_list[i]])
+
+        data_list[i].insert(6, temp)
 
         t_user = X[0][:]
         drink_data = X[1][:]
@@ -260,19 +480,18 @@ def recommend_similar_drink():
         find_drink_id_dic[i] = this_drink_list
         print(find_drink_id_dic[i])
 
-    conn.close()
+    if not 0 in find_drink_id_dic.keys():
+        find_drink_id_dic[0] = find_drink_id_dic[1]
 
+    conn.close()
     return find_drink_id_dic
 
 
 # JuBTI 기반 랭킹 정렬 함수
 # 요청 : 단, 신, 청, 향, 목, 바, 도, 안
 # 응답 : 아이디, 이름, 도수, 용량, 사진
-@app.route("/ranking", methods=["POST"])
-def ranking():
-    parameter_dict = request.get_json()
-    input_data = parameter_dict["input_data"]
-
+# @app.route("/ranking", methods=["POST"])
+def ranking(input_data):
     data_size = len(input_data)
 
     find_drink_id_dic = {}
@@ -292,30 +511,6 @@ def ranking():
             this_drink_list = {}
             this_drink_list['drink_id'] = drink_id 
 
-            cur.execute(DRINK_INFO, str(drink_id))
-            result = cur.fetchall()
-
-            this_drink_list['drink_name'] = result[0][0]
-            this_drink_list['drink_amount'] = result[0][1]
-            this_drink_list['drink_level'] = result[0][2]
-            this_drink_list['drink_image'] = result[0][3] 
-
-            cur.execute(DRINK_INGREDIENT_ID, str(drink_id))
-            ingredient_result_list = cur.fetchall()
-
-            ingredient_list = []            
-
-            for ingredient_result in ingredient_result_list:
-                ingredient_id = ingredient_result[0]
-                
-                cur.execute(DRINK_INGREDIENT, str(ingredient_id))
-                ingredient = cur.fetchall()[0][0]
-
-                ingredient_list.append(ingredient)
-            
-            # print(ingredient_list)                                                                                                                                                                                   
-            this_drink_list['drink_ingredient'] = ingredient_list
-
             # print(i+1, "위 : ", result, "(", drink_id, ") / 유사도 : ", find_list[i][1])
             # print(result, "술 정보 : ", data_list[drink_id-1])
 
@@ -324,7 +519,23 @@ def ranking():
     print(find_drink_id_dic.keys())
     for i in find_drink_id_dic:
         print(find_drink_id_dic[i])
- 
+        this_data = find_drink_id_dic[i]
+        for k in range(10):
+            this_id = this_data[k]['drink_id']
+
+            if i == 0:
+                cur.execute(RANKING_TOTAL_UPDATE, (str(this_id), str(k+1)))
+                print("update total", k+1, " drink : ", this_id)
+            
+            elif i == 1:
+                cur.execute(RANKING_MALE_UPDATE, (str(this_id), str(k)))
+                print("update male", k+1, " drink : ", this_id)
+            
+            elif i == 2:
+                cur.execute(RANKING_FEMALE_UPDATE, (str(this_id), str(k)))
+                print("update female", k+1, " drink : ", this_id)
+    
+    
     conn.close()
 
     return find_drink_id_dic

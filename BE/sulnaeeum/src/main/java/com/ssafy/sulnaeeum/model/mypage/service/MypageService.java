@@ -4,10 +4,14 @@ import com.ssafy.sulnaeeum.exception.CustomException;
 import com.ssafy.sulnaeeum.exception.CustomExceptionList;
 import com.ssafy.sulnaeeum.model.drink.entity.*;
 import com.ssafy.sulnaeeum.model.drink.repo.*;
+import com.ssafy.sulnaeeum.model.jumak.repo.MyJumakRepo;
+import com.ssafy.sulnaeeum.model.mypage.dto.MyInfoDto;
 import com.ssafy.sulnaeeum.model.mypage.dto.Word;
 import com.ssafy.sulnaeeum.model.mypage.dto.Words;
-import com.ssafy.sulnaeeum.model.user.dto.UserDto;
+import com.ssafy.sulnaeeum.model.user.dto.UserPreferenceDto;
 import com.ssafy.sulnaeeum.model.user.entity.User;
+import com.ssafy.sulnaeeum.model.user.entity.UserPreference;
+import com.ssafy.sulnaeeum.model.user.repo.UserPreferenceRepo;
 import com.ssafy.sulnaeeum.model.user.repo.UserRepo;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -26,13 +30,32 @@ public class MypageService {
     private final TasteRepo tasteRepo;
     private final DishDrinkRepo drinkRepo;
     private final IngredientRepo ingredientRepo;
+    private final MyJumakRepo myJumakRepo;
+    private final UserPreferenceRepo userPreferenceRepo;
     Map<String, Double> counting;
 
-    public UserDto getInfo(String kakaoId) {
+    public MyInfoDto getInfo(String kakaoId) {
 
         User user = userRepository.findByKakaoId(kakaoId).orElseThrow(() -> new CustomException(CustomExceptionList.MEMBER_NOT_FOUND));
+        int likeDrinkCnt = likeDrinkRepo.findCntByUser(user.getUserId());
+        int likeJumakCnt = myJumakRepo.findCntByUser(user.getUserId());
+        int clearDrinkCnt = reviewRepo.findCntByUser(user.getUserId());
 
-        return user.toDto();
+        MyInfoDto myInfoDto = user.toMyInfoDto();
+        myInfoDto.setLikeDrinkCnt(likeDrinkCnt);
+        myInfoDto.setLikeJumakCnt(likeJumakCnt);
+        myInfoDto.setClearDrinkCnt(clearDrinkCnt);
+
+        UserPreference userPreference = userPreferenceRepo.findByUser(user).orElse(null);
+        myInfoDto.setUserPreferenceDto(null);
+        if(userPreference!=null){
+            UserPreferenceDto userPreferenceDto = userPreference.toDto();
+            userPreferenceDto.setAge(user.getAge());
+            userPreferenceDto.setSex(user.getSex());
+            myInfoDto.setUserPreferenceDto(userPreferenceDto);
+        }
+
+        return myInfoDto;
     }
 
     @Transactional

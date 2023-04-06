@@ -10,7 +10,7 @@ import com.ssafy.sulnaeeum.model.drink.repo.IngredientRepo;
 import com.ssafy.sulnaeeum.model.jubti.entity.JubtiResult;
 import com.ssafy.sulnaeeum.model.jubti.repo.JubtiRepo;
 import com.ssafy.sulnaeeum.model.ranking.dto.JubtiTopDrinkDto;
-import com.ssafy.sulnaeeum.model.ranking.dto.RankingDto;
+import com.ssafy.sulnaeeum.model.ranking.dto.RecommendRankingDto;
 import com.ssafy.sulnaeeum.model.ranking.dto.TopDrinkListDto;
 import com.ssafy.sulnaeeum.model.ranking.entity.Ranking;
 import com.ssafy.sulnaeeum.model.ranking.repo.RankingRepo;
@@ -77,22 +77,22 @@ public class RankingService {
             System.out.println(femaleTopDrink.get(i).getDrinkId());
         }
 
-        List<RankingDto> femaleTopDrinkDto = new ArrayList<>();
-        List<RankingDto> maleTopDrinkDto = new ArrayList<>();
-        List<RankingDto> totalTopDrinkDto = new ArrayList<>();
+        List<RecommendRankingDto> femaleTopDrinkDto = new ArrayList<>();
+        List<RecommendRankingDto> maleTopDrinkDto = new ArrayList<>();
+        List<RecommendRankingDto> totalTopDrinkDto = new ArrayList<>();
 
         for (int i = 0; i < 10; i++) {
             List<Ingredient> ingredients = ingredientRepo.findByDrink(femaleTopDrink.get(i));
             List<String> ingredientNameList = getIngredientName(ingredients);
-            femaleTopDrinkDto.add(new RankingDto(femaleTopDrink.get(i).toDto(), ingredientNameList));
+            femaleTopDrinkDto.add(new RecommendRankingDto(femaleTopDrink.get(i).toDto(), ingredientNameList));
 
             ingredients = ingredientRepo.findByDrink(maleTopDrink.get(i));
             ingredientNameList = getIngredientName(ingredients);
-            maleTopDrinkDto.add(new RankingDto(maleTopDrink.get(i).toDto(), ingredientNameList));
+            maleTopDrinkDto.add(new RecommendRankingDto(maleTopDrink.get(i).toDto(), ingredientNameList));
 
             ingredients = ingredientRepo.findByDrink(totalTopDrink.get(i));
             ingredientNameList = getIngredientName(ingredients);
-            totalTopDrinkDto.add(new RankingDto(totalTopDrink.get(i).toDto(), ingredientNameList));
+            totalTopDrinkDto.add(new RecommendRankingDto(totalTopDrink.get(i).toDto(), ingredientNameList));
         }
 
         return JubtiTopDrinkDto.builder()
@@ -111,10 +111,10 @@ public class RankingService {
     }
 
     @Transactional
-//    @Scheduled(cron = "0 0/5 13,14 * * *")
-    @Scheduled(cron = "0 0 0/1 * * *")
-    public void jubtiRequest (){
-        String requestUrl = "http://j8a707.p.ssafy.io:5000/ranking";
+//    @Scheduled(cron = "0 0/30 * * * *")
+//    @Scheduled(cron = "0 0 0/1 * * *")
+    public void jubtiTopRequest (){
+        String requestUrl = "https://j8a707.p.ssafy.io/flask/ranking";
         Map<String, List> params = null;
         List<List<Integer>> input_data = new ArrayList<>();
         List<JubtiResult> jubtiResultList = jubtiRepo.findAll();
@@ -165,55 +165,92 @@ public class RankingService {
                 dish_arr = new int[] {0, 0, 0, 0, 0, 3};
             }
 
+            int drinkLevel = 0;
+            if(jubti.getLevel() == 1){
+                drinkLevel= 4;
+            }else if (jubti.getLevel() == 2){
+                drinkLevel = 7;
+            }else if (jubti.getLevel() == 3){
+                drinkLevel = 15;
+            }else if (jubti.getLevel() == 4){
+                drinkLevel = 25;
+            }else if (jubti.getLevel() == 5){
+                drinkLevel = 40;
+            }
+
             input.add(jubti.getTasteSweet());
             input.add(jubti.getTasteSour());
             input.add(jubti.getTasteRefresh());
             input.add(jubti.getTasteFlavor());
             input.add(jubti.getTasteThroat());
             input.add(jubti.getTasteBody());
-            input.add(jubti.getLevel());
+            input.add(drinkLevel);
 
             for(int j = 0; j < 6; j++) input.add(dish_arr[j]);
 
             for(int j = 0; j < 13; j++){
                 if(jubti.getSex().equals("남성")){
                     male.set(j, input.get(j) + male.get(j));
-                    maleCnt++;
                 }else{
                     female.set(j, input.get(j) + female.get(j));
-                    femaleCnt++;
                 }
+
                 if(jubti.getAge().equals("20s")){
                     twenties.set(j, input.get(j) + twenties.get(j));
-                    twentiesCnt++;
                 }else if(jubti.getAge().equals("30s")){
                     thirties.set(j, input.get(j) + thirties.get(j));
-                    thirtiesCnt++;
                 }else if(jubti.getAge().equals("40s")){
                     forties.set(j, input.get(j) + forties.get(j));
-                    fortiesCnt++;
                 }else if(jubti.getAge().equals("50s")){
                     fifties.set(j, input.get(j) + fifties.get(j));
-                    fiftiesCnt++;
                 }else {
                     sixties.set(j, input.get(j) + sixties.get(j));
-                    sixtiesCnt++;
                 }
 
                 total.set(j, input.get(j) + total.get(j));
             }
+
+            if(jubti.getSex().equals("남성")){
+                maleCnt++;
+            }else{
+                femaleCnt++;
+            }
+
+
+            if(jubti.getAge().equals("20s")){
+                twentiesCnt++;
+            }else if(jubti.getAge().equals("30s")){
+                thirtiesCnt++;
+            }else if(jubti.getAge().equals("40s")){
+                fortiesCnt++;
+            }else if(jubti.getAge().equals("50s")){
+                fiftiesCnt++;
+            }else {
+                sixtiesCnt++;
+            }
         }
 
+        System.out.println(male.get(6) + " : " + maleCnt + ", " + female.get(6) + " : " +  femaleCnt);
+
+
         for(int i = 0; i < 13; i++){
-            male.set(i, male.get(i) / maleCnt);
-            female.set(i, female.get(i) / femaleCnt);
-            twenties.set(i, twenties.get(i) / twentiesCnt);
-            thirties.set(i, thirties.get(i) / thirtiesCnt);
-            forties.set(i, forties.get(i) / fortiesCnt);
-            fifties.set(i, fifties.get(i) / fiftiesCnt);
-            sixties.set(i, sixties.get(i) / sixtiesCnt);
+            male.set(i, Math.round((float) (male.get(i) / (1.0*maleCnt))));
+            female.set(i, Math.round((float) (female.get(i) / (1.0*femaleCnt))));
+            twenties.set(i, Math.round((float)(twenties.get(i) / (1.0*twentiesCnt))));
+            thirties.set(i, Math.round((float)(thirties.get(i) / (1.0*thirtiesCnt))));
+            forties.set(i, Math.round((float)(forties.get(i) / (1.0*fortiesCnt))));
+            fifties.set(i, Math.round((float)(fifties.get(i) / (1.0*fiftiesCnt))));
+            sixties.set(i, Math.round((float)(sixties.get(i) / (1.0*sixtiesCnt))));
             total.set(i, total.get(i) / size);
         }
+
+        System.out.println(male.get(0) + " : " + maleCnt + ", " + female.get(0) + " : " +  femaleCnt);
+        System.out.println(male.get(1) + " : " + maleCnt + ", " + female.get(1) + " : " +  femaleCnt);
+        System.out.println(male.get(2) + " : " + maleCnt + ", " + female.get(2) + " : " +  femaleCnt);
+        System.out.println(male.get(3) + " : " + maleCnt + ", " + female.get(3) + " : " +  femaleCnt);
+        System.out.println(male.get(4) + " : " + maleCnt + ", " + female.get(4) + " : " +  femaleCnt);
+        System.out.println(male.get(5) + " : " + maleCnt + ", " + female.get(5) + " : " +  femaleCnt);
+        System.out.println(male.get(6) + " : " + maleCnt + ", " + female.get(6) + " : " +  femaleCnt);
 
         input_data.add(male);
         input_data.add(female);
@@ -241,6 +278,7 @@ public class RankingService {
                 String.class
         );
         String result = response.getBody();
+        System.out.println(result);
 
         setTopJubti(result);
     }

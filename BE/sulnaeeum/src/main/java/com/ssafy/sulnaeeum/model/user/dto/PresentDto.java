@@ -1,4 +1,4 @@
-package com.ssafy.sulnaeeum.model.jubti.dto;
+package com.ssafy.sulnaeeum.model.user.dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
@@ -30,11 +30,20 @@ public class PresentDto {
     @Schema(description = "목넘김")
     private int tasteThroat; // 목넘김
 
+    @Schema(description = "최대 도수")
+    private int maxLevel; // 도수
+
+    @Schema(description = "최소 도수")
+    private int minLevel; // 도수
+
     @Schema(description = "도수")
-    private int level; // 도수
+    private int maxPrice; // 도수
+
+    @Schema(description = "도수")
+    private int minPrice; // 도수
 
     @Schema(description = "연령대")
-    private String age;
+    private int age;
 
     @Schema(description = "성별")
     private String sex;
