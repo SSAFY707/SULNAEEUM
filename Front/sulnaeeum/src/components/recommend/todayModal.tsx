@@ -17,6 +17,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { Modal } from '@/components/common/modal'
 import { defaultAxios } from "@/api/common";
+import { useRouter } from "next/router";
 
 export default function todayModal(props: {
   idx : number
@@ -32,6 +33,8 @@ export default function todayModal(props: {
   const [dish, setDish] = useState<todayDish>({todayId:0, todayDish:''});
   const [open, setOpen] = useState<boolean>(false)
   const [ing, setIng] = useState<boolean>(false)
+
+  const router = useRouter()
 
   const modalOpen = () => { 
     setOpen(!open)
@@ -100,14 +103,22 @@ export default function todayModal(props: {
           <button className={'relative top-[30px] right-[30px] text-[30px] text-zinc-400'} onClick={ () => modalOpen() }><CgClose/></button>
       </div>
       {!ing &&
-        <img src="/images/randomLoading.gif" />
+        <>
+          <img className={"w-1/2 mt-12"} src="/images/randomLoading.gif" />
+          <div className={"mb-2 font-preB text-[28px]"}>
+            당신을 위한 오늘의 <span className={"text-[28px] font-preB text-[#809ED4]"}>{name[idx]}</span> 입니다
+          </div>
+          <div className={"font-preM text-[24px] text-[#9A9A9A]"}>
+            랜덤 추천을 기다려 주세요
+          </div>
+        </>
       }
       {ing &&
         <div className={"flex flex-col items-center w-full h-full"}>
-          <div className={"w-full mt-6 mb-4 flex justify-center font-preM text-[22px]"}>술내음이 추천하는 <span className={"text-[#809ED4] font-preB ml-1"}>{name[idx]}</span>입니다.</div>
-          <img className={"w-[450px] mb-10"} src="/images/pattern2.png" alt="" />
+          <div className={"w-full mt-6 mb-4 flex justify-center font-preM text-[24px]"}>술내음이 추천하는 <span className={"text-[#809ED4] font-preB ml-1"}>{name[idx]}</span>입니다.</div>
+          <img className={"w-[450px] mb-2"} src="/images/pattern2.png" alt="" />
           {idx == 0 && 
-            <div className=" flex flex-col items-center h-[160px]">
+            <div className=" flex flex-col justify-center items-center h-[170px]">
                 <div className="text-[56px] font-star ">                   
                 {cheers.todayName}
                 </div>
@@ -117,23 +128,23 @@ export default function todayModal(props: {
             </div>
           }
           {idx == 1 && 
-            <div className="flex justify-center h-[160px] w-full">
-              <div className={"w-[24%] p-4 flex justify-center"}>
-                <img className={"h-[120px] object-cover"} src={drink.todayImage} alt="" />
+            <div className="flex justify-center items-center h-[170px] w-full">
+              <div className={"w-[40%] mr-[10%] flex justify-end"}>
+                <img className={"h-[130px] object-cover"} src={drink.todayImage} />
               </div>
-              <div className={"ml-8 w-[50%]"}>
+              <div className={"w-1/2"}>
                 <div className="text-[24px] font-preB flex">
                 {drink.todayDrink}
                 </div>
                 <div className="text-[16px] font-preR flex">
                 {drink.todayLevel}% | {drink.todayAmount} | {drink.todayType}
                 </div>
-                <div className={"w-1/2 mt-6 flex justify-center items-center bg-zinc-200 hover:bg-zinc-300 cursor-pointer rounded py-1 px-3"}>더 알아보기</div>
+                <div onClick={()=>router.push(`/list/${drink.todayId}`)} className={"w-[100px] mt-3 flex justify-center items-center bg-zinc-200 hover:bg-zinc-300 cursor-pointer rounded py-1 px-3"}>더 알아보기</div>
               </div>
             </div>
           }
           {idx == 2 && 
-            <div className=" flex flex-col items-center h-[160px]">
+            <div className=" flex flex-col items-center justify-center h-[170px]">
                 <div className="text-[56px] font-star">                   
                 {dish.todayDish}
                 </div>
@@ -142,7 +153,7 @@ export default function todayModal(props: {
                 </div>
             </div>
           }
-          <div className={"w-full flex justify-center"}>
+          <div className={"w-full mt-4 flex justify-center"}>
             <div onClick={()=>{getRandom();}} className={"flex justify-center items-center px-4 py-2 rounded-full bg-gradient-to-r from-[#8FAADC] to-[#8FAADC]/70 text-white cursor-pointer transition duration-300 ease-in hover:from-[#809ED4] hover:to-[#809ED4]/70 font-preR"}>다시 추천받기</div>
           </div>
         </div> 

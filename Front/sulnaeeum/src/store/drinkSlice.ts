@@ -1,6 +1,6 @@
 import { authAxios, defaultAxios } from "@/api/common";
 import { toastOK } from "@/components/common/toast";
-import { useAppDispatch } from "@/hooks";
+// import { useAppDispatch } from "@/hooks";
 import { DrinkDetailType, DrinkListType, Mine, ReviewResType, ReviewWriteType } from "@/types/DrinkType";
 import { createAsyncThunk ,createSlice } from "@reduxjs/toolkit";
 import { RootState } from ".";
@@ -172,6 +172,7 @@ const drinkSlice = createSlice({
         })
         builder.addCase(getMyJumakLike.fulfilled, (state, action)=>{
             state.myLikeJumak = action.payload
+            // console.log(action.payload, '내 찜 주막 리스트 가져옴')
         })
     }
 })

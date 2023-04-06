@@ -81,25 +81,32 @@ export default function Home() {
         {/*전통주 배경화면 */}
         <div
           className={` w-[4000px] h-[300px] ${
-            isScrolled ? " absolute z-10 top-[1250px]" : "fixed"
+            isScrolled ? " absolute z-10 top-[1230px]" : "fixed"
           }`}
         >
-          <Image
-            className={`z-20`}
-            src="/main/part1/main_1.jpg"
+
+         <video className="absolute top-[190px]" width="1920" height="4500" muted autoPlay loop>
+            <source src="/main/part1/배경화면_최종.mp4" type="video/mp4" />
+          </video>
+          
+        {/* <img className=" z-20 absolute top-[0px] w-[1920px] h-[1080px]" src="/main/part1/메인페이지_배경.png" alt=""></img> */}
+
+          {/* <Image
+            className={`z-20 absolute top-[-150px]`}
+            src="/main/part1/note18_RE.jpg"
             alt=""
-            width={1920}
+            width={1900}
             height={0}
-          />
-          <div className=" absolute z-40 top-[640px] left-[-110px]">
+          /> */}
+          <div className=" absolute z-40 top-[689px] left-[-110px] ">
             <Image
-              src="/main/part1/main1_txt2.png"
+              src="/main/part1/요고7.png"
               alt=""
               width={2700}
               height={0}
             />
-            <div className="absolute left-[1025px] top-[175px]">
-          <Image src="/main/part1/scroll.gif" alt=" " width={80} height={80}></Image>
+            <div className="absolute left-[1025px] top-[140px]">
+          <Image src="/main/part1/white_scroll.gif" alt=" " width={80} height={80}></Image>
           </div>
           </div>
         </div>

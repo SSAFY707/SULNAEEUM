@@ -122,7 +122,7 @@ function Navbar() {
             ></Image>
 
             <div className={`${hover == "On" ? "" : "hidden"}`}>
-              <Image className={` absolute z-20 top-[100px] left-[130px] opacity-[0.04]`} src="/main/part2/main2_3.png" alt="" width={130} height={130}></Image>
+              <Image className={` absolute z-20 top-[100px] left-[130px]`} src="/images/pattern3.png" alt="" width={130} height={130}></Image>
               <Image
                 className={`${styles.slowDown} absolute z-10 left-[200px] top-[50px]`}
                 src="/logo/술.png"

@@ -44,7 +44,7 @@ export default function AllReview(props: {modalOpen : any}) {
             {reviews.length != 0 && 
             reviews.map((v, i)=>{
               return (
-                <div className={'w-11/12 ml-4 p-4 mb-6 bg-zinc-100/70 rounded-lg'} key={i}>
+                <div className={'w-[620px] ml-4 p-4 mb-6 bg-zinc-100/70 rounded-lg'} key={i}>
                   <div className={'flex items-center mb-2'}>
                     <div className={'h-[40px] w-[40px] rounded-full overflow-hidden mr-4'}>
                         <img className={'h-full w-full object-cover'} src={v.userImg} />
@@ -66,7 +66,7 @@ export default function AllReview(props: {modalOpen : any}) {
           </div>
           <div className={`${!mine && 'hidden'} pl-5 h-[500px]`}>
             {itsMine ? 
-              <div className={'w-11/12 ml-4 p-4 mb-6 bg-zinc-100/70 rounded-lg'} >
+              <div className={'w-[620px] ml-4 p-4 mb-6 bg-zinc-100/70 rounded-lg'} >
                 <div className={'flex items-center mb-2'}>
                   <div className={'h-[40px] w-[40px] rounded-full overflow-hidden mr-4'}>
                       <img className={'h-full w-full object-cover'} src={itsMine.userImg} />

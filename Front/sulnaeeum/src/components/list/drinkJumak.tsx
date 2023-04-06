@@ -76,8 +76,8 @@ export default function DrinkJumak() {
             toastError('로그인이 필요한 기능입니다.', '🚨', 'top-right')
             return
         }
-        dispatch(setJumakLike(jumakId))
         likeJumak(jumakId)
+        dispatch(setJumakLike(jumakId))
     } 
     
   return (
