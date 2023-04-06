@@ -3,14 +3,6 @@ import React from 'react'
 
 export default function MyGraph(props :{ taste : tasteType}) {
     const {taste} = props
-    // const taste = {
-    //     tasteSweet : 1,
-    //     tasteSour : 2,
-    //     tasteRefresh : 4,
-    //     tasteBody : 3,
-    //     tasteFlavor : 5,
-    //     tasteThroat : 1
-    // }
     
     const tasteInfo = {
         tasteSweet : ['정보없음', '약함', '조금약함', '보통', '조금강함', '강함'],

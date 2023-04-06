@@ -1,12 +1,9 @@
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
-import Head from "next/head";
-import Image from "next/image";
-import { Divider } from "@chakra-ui/react";
 import UserTabBtn from "@/components/profile/userTabBtn";
 import WordCloud from "@/components/profile/WordCloud";
 import { useAppDispatch, useAppSelector } from "@/hooks";
-import { getUser, textMining, user } from "@/store/userSlice";
+import { getUser, user } from "@/store/userSlice";
 import { TextType, tasteType } from "@/types/DataTypes";
 import { authAxios } from "@/api/common";
 import MyGraph from "@/components/common/myGraph";
