@@ -35,7 +35,7 @@ public class RabbitmqConfig {
 
     @Bean
     Queue queue() {
-        return new Queue("sulnaeeum.queue", false);
+        return new Queue("sulnaeeum.queue", true);
     }
 
     @Bean
