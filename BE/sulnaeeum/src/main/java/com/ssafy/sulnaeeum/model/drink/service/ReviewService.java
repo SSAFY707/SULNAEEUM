@@ -88,7 +88,7 @@ public class ReviewService {
         }
         reviewRepo.save(resultReview);
 
-        setTastePoint(resultReview);
+//        setTastePoint(resultReview);
 
         // 랭킹 갱신
         updateRanking();
@@ -162,9 +162,10 @@ public class ReviewService {
         if(drink.isEmpty()) {
             throw new CustomException(CustomExceptionList.ROW_NOT_FOUND);
         }
-
+        System.out.println("결과: " + result);
         DrinkDto drinkDto = drink.get().toDto();
         drinkDto.setAvgScore(result);
+        System.out.println("결과: " + drinkDto.toEntity().getAvgScore());
         drinkRepo.save(drinkDto.toEntity());
     }
 
