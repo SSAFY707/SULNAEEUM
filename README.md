@@ -55,13 +55,13 @@
 |---|---|
 |<img src="https://user-images.githubusercontent.com/59721896/231935159-46048a19-0043-452e-888d-6c55705fab6b.gif">|<img src="https://user-images.githubusercontent.com/59721896/231935775-97f354b5-db19-4e7c-9a2d-abdd117f7f57.gif">|
 |`메인 화면` 서비스 소개|`전통주 검색` ElasticSearch|
-|<img src="https://user-images.githubusercontent.com/59721896/231935357-de6b71b9-3abd-4c48-a9ef-a331122d917e.gif">|<img src="https://user-images.githubusercontent.com/59721896/231935568-cbac6858-ebcf-4d61-ba4b-de33c6f4ca33.gif">|
-|`전통주 페이지` 카테고리, 정렬|`전통주 상세 페이지` 안주 및 비슷한 술 추천, 맛 보정, 리뷰, 식당|
-|<img src="https://user-images.githubusercontent.com/59721896/231936088-17f12ae7-d212-415a-8757-428b86fb4e6a.gif">|<img src="https://user-images.githubusercontent.com/59721896/231936706-23cf8a4a-e88f-404f-8615-8d3105496635.gif">|
-|`전통주 지도` 양조장, 축제, 체험 프로그램|`나만의 전통주 추천`|
-|<img src="https://user-images.githubusercontent.com/59721896/231937468-0da87f48-26e0-42bb-88cf-b923964c755c.gif">|<img src="https://user-images.githubusercontent.com/59721896/231937512-ffdbcfc1-e79a-4934-95e6-b553bc4ae5d8.gif">|
+|<img src="https://user-images.githubusercontent.com/59721896/231935357-de6b71b9-3abd-4c48-a9ef-a331122d917e.gif">|<img src="https://user-images.githubusercontent.com/59721896/231945641-3333531f-9df2-4673-90c6-1a55564385da.gif">|
+|`전통주 페이지` 카테고리, 정렬|`전통주 상세 페이지` 안주, 비슷한 술, 맛 보정, 리뷰, 식당|
+|<img src="https://user-images.githubusercontent.com/59721896/231936088-17f12ae7-d212-415a-8757-428b86fb4e6a.gif">|<img src="https://user-images.githubusercontent.com/59721896/231944103-8e13e8b7-17d0-4a2a-b4fe-c91b7eb4cf8f.gif">|
+|`전통주 지도` 양조장, 축제, 체험 프로그램|`나만의 전통주 추천` |
+|<img src="https://user-images.githubusercontent.com/59721896/231945138-9474580a-7229-4828-9a50-86ac5cefc0f6.gif">|<img src="https://user-images.githubusercontent.com/59721896/231937512-ffdbcfc1-e79a-4934-95e6-b553bc4ae5d8.gif">|
 |`맞춤 선물 추천` 酒bti 검사 결과 기반 선물 추천|`랜덤 추천` 건배사, 술, 안주|
-|<img src="https://user-images.githubusercontent.com/59721896/231938058-36f11cd5-b41c-4a4b-9df4-44ee278aa1ed.gif">|<img src="https://user-images.githubusercontent.com/59721896/231938231-bb724d4e-be27-4df5-b8e3-7e24074b3de8.gif">|
+|<img src="https://user-images.githubusercontent.com/59721896/231947919-54fccaf0-7753-4a95-842c-ae28c9300db0.gif">|<img src="https://user-images.githubusercontent.com/59721896/231947930-a1ca2e7b-dca1-47ab-b033-542abd4690c1.gif">|
 |`전통주 유형 검사(酒bti)` 서비스 유입, 유저 데이터 수집|`마이페이지` 텍스트 마이닝, 내가 클리어했거나 찜한 전통주 및 식당 |
 
 <br>
